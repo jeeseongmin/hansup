@@ -5,6 +5,8 @@ router.route("/").get((req, res) => {
 	const data = {
 		lastname: "Hello,",
 		firstname: "world!!!",
+		secondname: "name",
+		thirdname: "third",
 	};
 	res.json(data);
 });
