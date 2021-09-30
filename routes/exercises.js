@@ -3,7 +3,7 @@ const router = require("express").Router();
 
 router.route("/").get((req, res) => {
 	const data = {
-		lastname: "Hello,",
+		lastname: "Helloooo,",
 		firstname: "world",
 	};
 	res.json(data);
