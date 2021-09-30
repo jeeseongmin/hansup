@@ -8,7 +8,7 @@ const Home = () => {
 		axios
 			.get("/data")
 			.then((result) => {
-				setData(result);
+				setData(result.data);
 				console.log(result);
 			})
 			.catch((err) => {

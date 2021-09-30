@@ -1,5 +1,33 @@
 # Pohang Hansup Restaurant
 
+## Get Started
+
+### Install (fetch or pull)
+
+1. at root folder ('/')
+
+   `npm install`
+
+2. at clinet folder ('/client')
+
+   `npm install`
+
+3. Open two terminals
+
+   1. at root folder
+
+      `nodemon start`
+
+   2. at client folder
+
+      `npm start`
+
+   Then, it appears as follows.
+
+   ![image](https://user-images.githubusercontent.com/47960777/135401523-4fe1a81f-dbd0-48f9-bd0e-17d25e53bfe0.png)
+
+   If it does not appear as above, NPM installation is wrong.
+
 ## Project URL
 
 - hansup (not yet)
