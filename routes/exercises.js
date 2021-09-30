@@ -6,7 +6,7 @@ router.route("/").get((req, res) => {
 		lastname: "Hello,",
 		firstname: "world!!!",
 		secondname: "name",
-		thirdname: "third",
+		thirdname: "name",		
 	};
 	res.json(data);
 });
