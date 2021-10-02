@@ -5,21 +5,17 @@ const Home = () => {
 	const [data, setData] = useState({});
 	useEffect(() => {
 		console.log("Home");
-		axios
-			.get("/data")
-			.then((result) => {
-				setData(result.data);
-				console.log(result);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
+		// axios
+		// 	.get("/data")
+		// 	.then((result) => {
+		// 		setData(result.data);
+		// 		console.log(result);
+		// 	})
+		// 	.catch((err) => {
+		// 		console.log(err);
+		// 	});
 	}, []);
-	return (
-		<div>
-			{data.lastname} {data.firstname}
-		</div>
-	);
+	return <div class="">Home</div>;
 };
 
 export default Home;
