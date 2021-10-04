@@ -7,6 +7,7 @@ import Submenu from "components/navs/Submenu";
 const Nav = styled.div`
 	width: 100%;
 	position: relative;
+	position: fixed;
 `;
 
 const NavContainer = styled.div`
@@ -87,7 +88,6 @@ const Logo = styled.div`
 const MenuContainer = styled.div`
 	display: inline-flex;
 	height: 4rem;
-	border: 1px solid blue;
 	@media screen and (max-width: 1200px) {
 		display: none;
 	}
@@ -113,8 +113,12 @@ const Navbar = () => {
 		}
 	};
 
+	const onMouseOut = (e) => {
+		// console.log("out", e);
+		setMenu(0);
+	};
+
 	const onMouseOver = (e) => {
-		console.log(e.target.innerText);
 		if (e.target.innerText === "회사소개") {
 			setMenu(1);
 		} else if (e.target.innerText === "한숲사업") {
@@ -133,7 +137,6 @@ const Navbar = () => {
 	useEffect(() => {
 		if (menu === 0) return;
 		function handleClick(e) {
-			// console.log(e.target.innerText, subRef.current);
 			if (subRef.current === null) {
 				return;
 			} else if (!subRef.current.contains(e.target)) {
@@ -142,11 +145,11 @@ const Navbar = () => {
 		}
 		window.addEventListener("mouseover", handleClick);
 
-		return () => window.removeEventListener("click", handleClick);
+		return () => window.removeEventListener("mouseover", handleClick);
 	}, [menu]);
 
 	return (
-		<Nav ref={subRef}>
+		<Nav ref={subRef} onMouseLeave={onMouseOut}>
 			<NavContainer onMouseOver={onMouseOver}>
 				<Logo>
 					<Link to="#">
