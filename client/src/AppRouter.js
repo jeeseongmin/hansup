@@ -8,9 +8,12 @@ const App = () => {
 	return (
 		<>
 			<Navbar />
-			<Switch>
-				<Route exact path="/" component={Home} />
-			</Switch>
+			<div class="pt-16 border border-black h-full w-full">
+				<Switch>
+					<Route exact path="/" component={Home} />
+				</Switch>
+			</div>
+			<Footer />
 		</>
 	);
 };
