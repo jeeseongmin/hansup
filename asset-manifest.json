@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/hansup/static/css/main.f386ace7.chunk.css",
+    "main.js": "/hansup/static/js/main.a714f368.chunk.js",
+    "main.js.map": "/hansup/static/js/main.a714f368.chunk.js.map",
+    "runtime-main.js": "/hansup/static/js/runtime-main.8be3c210.js",
+    "runtime-main.js.map": "/hansup/static/js/runtime-main.8be3c210.js.map",
+    "static/js/2.628e8dd2.chunk.js": "/hansup/static/js/2.628e8dd2.chunk.js",
+    "static/js/2.628e8dd2.chunk.js.map": "/hansup/static/js/2.628e8dd2.chunk.js.map",
+    "index.html": "/hansup/index.html",
+    "static/css/main.f386ace7.chunk.css.map": "/hansup/static/css/main.f386ace7.chunk.css.map",
+    "static/js/2.628e8dd2.chunk.js.LICENSE.txt": "/hansup/static/js/2.628e8dd2.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8be3c210.js",
+    "static/js/2.628e8dd2.chunk.js",
+    "static/css/main.f386ace7.chunk.css",
+    "static/js/main.a714f368.chunk.js"
+  ]
+}
