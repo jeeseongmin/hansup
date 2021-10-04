@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 import Menu from "components/navs/Menu";
 import Submenu from "components/navs/Submenu";
+import logoImg from "image/logo.png";
 const Nav = styled.div`
 	width: 100%;
-	position: relative;
 	position: fixed;
+	height: 4rem;
 `;
 
 const NavContainer = styled.div`
@@ -152,8 +153,8 @@ const Navbar = () => {
 		<Nav ref={subRef} onMouseLeave={onMouseOut}>
 			<NavContainer onMouseOver={onMouseOver}>
 				<Logo>
-					<Link to="#">
-						<img src="/image/logo.png" class="object-cover h-8" alt="logo" />
+					<Link to="/">
+						<img src={logoImg} class="object-cover h-8" alt="logo" />
 					</Link>
 				</Logo>
 				<MenuContainer>
@@ -161,35 +162,35 @@ const Navbar = () => {
 						toggleMenu={toggleMenu}
 						menu={1}
 						title={"회사소개"}
-						url={"#"}
+						url={"/intro"}
 						current={menu}
 					/>
 					<Menu
 						toggleMenu={toggleMenu}
 						menu={2}
 						title={"한숲사업"}
-						url={"#"}
+						url={"/business"}
 						current={menu}
 					/>
 					<Menu
 						toggleMenu={toggleMenu}
 						menu={3}
 						title={"주문안내"}
-						url={"#"}
+						url={"/order"}
 						current={menu}
 					/>
 					<Menu
 						toggleMenu={toggleMenu}
 						menu={4}
 						title={"커뮤니티"}
-						url={"#"}
+						url={"/community"}
 						current={menu}
 					/>
 					<Menu
 						toggleMenu={toggleMenu}
 						menu={5}
-						title={"협력사업"}
-						url={"#"}
+						title={"협력기업"}
+						url={"/organization"}
 						current={menu}
 					/>
 					<Menu
