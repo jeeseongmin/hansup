@@ -33,9 +33,10 @@ const MenuButton = styled(Link)`
 `;
 const Title = styled.span`
 	padding: 1rem 0px;
-	border-top: 1px solid #6c4d3f;
-
-	border-bottom: 1px solid rgba(#d3d3d3, 0, 0, 0.5);
+	/* border-top: 1px solid #6c4d3f; */
+	/* border-bottom: 1px solid rgba(#d3d3d3, 0, 0, 0.5); */
+	border-top: 4px solid #6c4d3f;
+	border-bottom: 4px solid transparent;
 
 	${(props) =>
 		props.current === props.menu &&
