@@ -1,25 +1,7 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 
 const Home = () => {
-	const [data, setData] = useState({});
-	useEffect(() => {
-		console.log("Home");
-		axios
-			.get("/data")
-			.then((result) => {
-				setData(result.data);
-				console.log(result);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	}, []);
-	return (
-		<div>
-			{data.lastname} {data.firstname}
-		</div>
-	);
+	return <div class="w-full h-full">예찬이 작업해보기</div>;
 };
 
 export default Home;
