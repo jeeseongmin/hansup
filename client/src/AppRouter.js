@@ -1,29 +1,33 @@
+import Layout from "components/Layout";
 import React from "react";
-import { Switch, Route, Link } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
+import Business from "routes/business/Index";
+import Community from "routes/community/Index";
+import Enterprise from "routes/enterprise/Index";
 import Home from "routes/Home";
-import Navbar from "components/navs/Navbar";
-import Footer from "components/footer/Footer";
-import Intro from "routes/Intro";
-import Business from "routes/Business";
-import Community from "routes/Community";
-import Order from "routes/Order";
-import Organization from "routes/Organization";
+import Intro from "routes/intro/Index";
+import Manager from "routes/manager/Index";
+import Order from "routes/order/Index";
 
 const App = () => {
 	return (
-		<div class="h-full w-full flex flex-col">
-			<Navbar />
-			<div class="pt-16 h-full w-full">
-				<Switch>
-					<Route exact path="/" component={Home} />
-					<Route exact path="/intro" component={Intro} />
-					<Route exact path="/business" component={Business} />
-					<Route exact path="/community" component={Community} />
-					<Route exact path="/order" component={Order} />
-					<Route exact path="/organization" component={Organization} />
-				</Switch>
-			</div>
-			<Footer />
+		<div
+			id="scrollRef"
+			class="h-screen w-full flex flex-col overflow-y-scroll scrollbar-hide relative"
+		>
+			<>
+				<Layout>
+					<Switch>
+						<Route exact path="/" component={Home} />
+						<Route path="/intro/:submenu" component={Intro} />
+						<Route path="/business/:submenu" component={Business} />
+						<Route path="/community/:submenu" component={Community} />
+						<Route path="/order/:type/:submenu" component={Order} />
+						<Route path="/enterprise/:submenu" component={Enterprise} />
+						<Route path="/manager/:submenu" component={Manager} />
+					</Switch>
+				</Layout>
+			</>
 		</div>
 	);
 };

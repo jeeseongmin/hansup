@@ -9,6 +9,7 @@ const Nav = styled.div`
 	width: 100%;
 	position: fixed;
 	height: 4rem;
+	z-index: 40;
 `;
 
 const NavContainer = styled.div`
@@ -48,7 +49,7 @@ const SubContainer = styled.div`
 	background-color: #6c4d3f;
 
 	/* margin-right: 3rem; */
-	border-top: 1px solid #d3d3d3;
+	border-top: 1px solid transparent;
 	transition: all 0.3s ease;
 
 	${(props) =>
@@ -58,6 +59,7 @@ const SubContainer = styled.div`
 			height: 4rem;
 			transition: all 0.3s ease;
 			background-color: #6c4d3f;
+			border-top: 1px solid #d3d3d3;
 		`};
 
 	// 기본 사이즈
@@ -128,7 +130,7 @@ const Navbar = () => {
 			setMenu(3);
 		} else if (e.target.innerText === "커뮤니티") {
 			setMenu(4);
-		} else if (e.target.innerText === "협력사업") {
+		} else if (e.target.innerText === "협력기업") {
 			setMenu(5);
 		} else if (menu === 0) {
 			setMenu(1);
@@ -162,50 +164,50 @@ const Navbar = () => {
 						toggleMenu={toggleMenu}
 						menu={1}
 						title={"회사소개"}
-						url={"/intro"}
+						url={"/intro/introduction"}
 						current={menu}
 					/>
 					<Menu
 						toggleMenu={toggleMenu}
 						menu={2}
 						title={"한숲사업"}
-						url={"/business"}
+						url={"/business/restaurant"}
 						current={menu}
 					/>
 					<Menu
 						toggleMenu={toggleMenu}
 						menu={3}
 						title={"주문안내"}
-						url={"/order"}
+						url={"/order/catering/menu"}
 						current={menu}
 					/>
 					<Menu
 						toggleMenu={toggleMenu}
 						menu={4}
 						title={"커뮤니티"}
-						url={"/community"}
+						url={"/community/notice"}
 						current={menu}
 					/>
 					<Menu
 						toggleMenu={toggleMenu}
 						menu={5}
 						title={"협력기업"}
-						url={"/organization"}
+						url={"/enterprise/hansup"}
 						current={menu}
 					/>
 					<Menu
-						toggleMenu={toggleMenu}
-						menu={5}
-						title={"협력사업"}
-						url={"#"}
+						// toggleMenu={toggleMenu}
+						menu={6}
+						title={"관리자"}
+						url={"/manager/schedule"}
 						current={menu}
-						empty={true}
+						// empty={true}
 					/>
 				</MenuContainer>
 			</NavContainer>
 			<SubContainer num={menu} id="check">
 				<Logo>
-					<Link to="#">
+					<Link to="/">
 						<img
 							src="/image/logo.png"
 							class="object-cover h-8 invisible"
@@ -216,20 +218,40 @@ const Navbar = () => {
 
 				{menu === 1 && (
 					<MenuContainer>
-						<Submenu title={"인사말"} url={"#"} empty={false} />
-						<Submenu title={"한숲 이야기"} url={"#"} empty={false} />
-						<Submenu title={"한숲의 역사"} url={"#"} empty={false} />
-						<Submenu title={"오시는 길"} url={"#"} empty={false} />
-						<Submenu title={"회사소개"} url={"#"} empty={false} />
+						<Submenu
+							title={"인사말"}
+							url={"/intro/introduction"}
+							empty={false}
+						/>
+						<Submenu title={"한숲 이야기"} url={"/intro/story"} empty={false} />
+						<Submenu
+							title={"한숲의 역사"}
+							url={"/intro/history"}
+							empty={false}
+						/>
+						<Submenu title={"오시는 길"} url={"/intro/guide"} empty={false} />
+						<Submenu title={""} url={"#"} empty={true} />
 						<Submenu title={""} url={"#"} empty={true} />
 					</MenuContainer>
 				)}
 				{menu === 2 && (
 					<MenuContainer>
 						<Submenu title={""} url={"#"} empty={true} />
-						<Submenu title={"수화식당"} url={"#"} empty={false} />
-						<Submenu title={"케이터링"} url={"#"} empty={false} />
-						<Submenu title={"도시락 사업"} url={"#"} empty={false} />
+						<Submenu
+							title={"수화식당"}
+							url={"/business/restaurant"}
+							empty={false}
+						/>
+						<Submenu
+							title={"케이터링"}
+							url={"/business/catering"}
+							empty={false}
+						/>
+						<Submenu
+							title={"도시락 사업"}
+							url={"/business/box"}
+							empty={false}
+						/>
 						<Submenu title={""} url={"#"} empty={true} />
 						<Submenu title={""} url={"#"} empty={true} />
 					</MenuContainer>
@@ -238,9 +260,21 @@ const Navbar = () => {
 					<MenuContainer>
 						<Submenu title={""} url={"#"} empty={true} />
 						<Submenu title={""} url={"#"} empty={true} />
-						<Submenu title={"케이터링 메뉴"} url={"#"} empty={false} />
-						<Submenu title={"케이터링 안내"} url={"#"} empty={false} />
-						<Submenu title={"주문하기"} url={"#"} empty={false} />
+						<Submenu
+							title={"케이터링 메뉴"}
+							url={"/order/catering/menu"}
+							empty={false}
+						/>
+						<Submenu
+							title={"케이터링 안내"}
+							url={"/order/catering/intro"}
+							empty={false}
+						/>
+						<Submenu
+							title={"주문하기"}
+							url={"/order/catering/ordering"}
+							empty={false}
+						/>
 						<Submenu title={""} url={"#"} empty={true} />
 					</MenuContainer>
 				)}
@@ -249,9 +283,17 @@ const Navbar = () => {
 						<Submenu title={""} url={"#"} empty={true} />
 						<Submenu title={""} url={"#"} empty={true} />
 						<Submenu title={""} url={"#"} empty={true} />
-						<Submenu title={"공지사항"} url={"#"} empty={false} />
-						<Submenu title={"리뷰"} url={"#"} empty={false} />
-						<Submenu title={"고객의 소리"} url={"#"} empty={false} />
+						<Submenu
+							title={"공지사항"}
+							url={"/community/notice"}
+							empty={false}
+						/>
+						<Submenu title={"리뷰"} url={"/community/review"} empty={false} />
+						<Submenu
+							title={"고객의 소리"}
+							url={"/community/voice"}
+							empty={false}
+						/>
 					</MenuContainer>
 				)}
 				{menu === 5 && (
@@ -260,7 +302,11 @@ const Navbar = () => {
 						<Submenu title={""} url={"#"} empty={true} />
 						<Submenu title={""} url={"#"} empty={true} />
 						<Submenu title={""} url={"#"} empty={true} />
-						<Submenu title={"한숲맛이야기"} url={"#"} empty={false} />
+						<Submenu
+							title={"한숲맛이야기"}
+							url={"/enterprise/hansup"}
+							empty={false}
+						/>
 						<Submenu title={""} url={"#"} empty={true} />
 					</MenuContainer>
 				)}
