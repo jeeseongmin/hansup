@@ -1,17 +1,16 @@
-import React from 'react'
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
-const HomeButton = ({text}) => {
+const HomeButton = ({ text }) => {
+	return (
+		<div class="py-6 cursor-pointer px-8 mb-3 transition delay-50 duration-300 w-full relative text-white font-bold bg-opacity-80 bg-hansupBrown hover:bg-white hover:text-hansupBrown">
+			{text}
+			<div class="absolute top-7 right-10">
+				<FontAwesomeIcon icon={faArrowRight} className="float-right" />
+			</div>
+		</div>
+	);
+};
 
-    return (
-        <div class='py-6 px-8 mb-3 w-full relative text-white font-bold bg-opacity-80 bg-hansupBrown hover:bg-white hover:text-hansupBrown'>            
-            {text}
-            <div class="absolute top-7 right-10">
-                <FontAwesomeIcon icon={faArrowRight} className="float-right" />                                                             
-            </div>                                            
-        </div>
-    )
-}
-
-export default HomeButton
+export default HomeButton;
