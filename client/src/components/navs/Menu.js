@@ -15,6 +15,7 @@ const MenuButton = styled(Link)`
 	padding: 1rem 0px;
 	/* border-top: 1px solid #6c4d3f;
 	border-bottom: 1px solid rgba(#d3d3d3, 0, 0, 0.5); */
+
 	${(props) =>
 		props.empty &&
 		css`
@@ -37,7 +38,18 @@ const Title = styled.span`
 	/* border-bottom: 1px solid rgba(#d3d3d3, 0, 0, 0.5); */
 	border-top: 4px solid #6c4d3f;
 	border-bottom: 4px solid transparent;
-
+	${(props) =>
+		props.menu === 6 &&
+		css`
+			background-color: white;
+			color: #6c4d3f;
+			border-color: white;
+			padding-left: 1.5rem;
+			padding-right: 1.5rem;
+			padding-top: 0.25rem;
+			padding-bottom: 0.25rem;
+			border-radius: 25px;
+		`}
 	${(props) =>
 		props.current === props.menu &&
 		css`
@@ -47,8 +59,18 @@ const Title = styled.span`
 		`};
 `;
 const Menu = ({ title, url, menu, current, empty }) => {
+	const goPage = () => {
+		window.scrollTo(0, 0);
+		document.getElementById("scrollRef").scrollTo(0, 0);
+	};
 	return (
-		<MenuButton current={current} menu={menu} to={url} empty={empty}>
+		<MenuButton
+			current={current}
+			menu={menu}
+			to={url}
+			empty={empty}
+			onClick={goPage}
+		>
 			<Title current={current} menu={menu}>
 				{title}
 			</Title>
