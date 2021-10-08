@@ -5,17 +5,20 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
-				'hansupBrown': '#6C4D3F',
-				'homePink': '#FCF4ED',
-				'homeGray': '#F1F0EC',
+				hansupBrown: "#6C4D3F",
+				homePink: "#FCF4ED",
+				homeGray: "#F1F0EC",
 			},
 			width: {
-			    '3/10': '30%',
-			
-			}
+				"3/10": "30%",
+			},
 		},
 	},
 	variants: {
 		extend: {},
 	},
+	plugins: [
+		require("tailwind-scrollbar-hide"),
+		// ...
+	],
 };
