@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 // import "components/navs/nav.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styled, { css } from "styled-components";
 import Menu from "components/navs/Menu";
 import Submenu from "components/navs/Submenu";
@@ -102,9 +102,11 @@ const MenuContainer = styled.div`
 	}
 `;
 
-const Navbar = () => {
+const Navbar = ({ currentMenu }) => {
+	const location = useLocation();
 	const subRef = useRef();
 	const [menu, setMenu] = useState(0);
+	const [current, setCurrent] = useState(0);
 
 	const toggleMenu = (e, num) => {
 		if (menu === 0) {
@@ -166,6 +168,7 @@ const Navbar = () => {
 						title={"회사소개"}
 						url={"/intro/introduction"}
 						current={menu}
+						currentMenu={currentMenu}
 					/>
 					<Menu
 						toggleMenu={toggleMenu}
@@ -173,6 +176,7 @@ const Navbar = () => {
 						title={"한숲사업"}
 						url={"/business/restaurant"}
 						current={menu}
+						currentMenu={currentMenu}
 					/>
 					<Menu
 						toggleMenu={toggleMenu}
@@ -180,6 +184,7 @@ const Navbar = () => {
 						title={"주문안내"}
 						url={"/order/catering/menu"}
 						current={menu}
+						currentMenu={currentMenu}
 					/>
 					<Menu
 						toggleMenu={toggleMenu}
@@ -187,6 +192,7 @@ const Navbar = () => {
 						title={"커뮤니티"}
 						url={"/community/notice"}
 						current={menu}
+						currentMenu={currentMenu}
 					/>
 					<Menu
 						toggleMenu={toggleMenu}
@@ -194,6 +200,7 @@ const Navbar = () => {
 						title={"협력기업"}
 						url={"/enterprise/hansup"}
 						current={menu}
+						currentMenu={currentMenu}
 					/>
 					<Menu
 						// toggleMenu={toggleMenu}
@@ -201,6 +208,8 @@ const Navbar = () => {
 						title={"관리자"}
 						url={"/manager/schedule"}
 						current={menu}
+						currentMenu={currentMenu}
+
 						// empty={true}
 					/>
 				</MenuContainer>

@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useRef } from "react";
+import React from "react";
 // import "components/navs/nav.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 const MenuButton = styled(Link)`
@@ -12,7 +12,7 @@ const MenuButton = styled(Link)`
 	align-items: center;
 	font-size: 1rem;
 	font-weight: 500;
-	padding: 1rem 0px;
+	padding: 1rem 0;
 	/* border-top: 1px solid #6c4d3f;
 	border-bottom: 1px solid rgba(#d3d3d3, 0, 0, 0.5); */
 
@@ -63,6 +63,7 @@ const Menu = ({ title, url, menu, current, empty }) => {
 		window.scrollTo(0, 0);
 		document.getElementById("scrollRef").scrollTo(0, 0);
 	};
+
 	return (
 		<MenuButton
 			current={current}
