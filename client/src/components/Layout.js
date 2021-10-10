@@ -34,9 +34,10 @@ const Layout = ({ children }) => {
 			setTitle("회사소개");
 		}
 	}, [location.pathname]);
+
 	return (
 		<div>
-			<Navbar />
+			<Navbar currentMenu={menu} />
 			<div class="pt-16 h-full w-full ">
 				<TitleBlock text={title} />
 				<SubmenuBlock menu={menu} />
