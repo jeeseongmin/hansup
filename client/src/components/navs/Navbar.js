@@ -25,7 +25,6 @@ const NavContainer = styled.div`
 	// 기본 사이즈
 	@media screen and (max-width: 1200px) {
 		padding: 0 0rem 0 3rem;
-		border: 1px solid red;
 	}
 	//
 	@media screen and (max-width: 768px) {
