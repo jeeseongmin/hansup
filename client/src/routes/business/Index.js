@@ -6,7 +6,7 @@ import Restaurant from "routes/business/Restaurant";
 
 const Index = () => {
 	return (
-		<div class="w-full h-full">
+		<div class="w-full h-auto">
 			<switch>
 				<Route exact path="/business/restaurant" component={Restaurant} />
 				<Route exact path="/business/catering" component={Catering} />
