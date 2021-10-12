@@ -13,7 +13,7 @@ const App = () => {
 	return (
 		<div
 			id="scrollRef"
-			class="h-screen w-full flex flex-col overflow-y-scroll scrollbar-hide relative"
+			class="h-screen select-none w-full flex flex-col overflow-y-scroll scrollbar-hide relative"
 		>
 			<>
 				<Layout>

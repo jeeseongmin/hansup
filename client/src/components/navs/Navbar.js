@@ -10,6 +10,10 @@ const Nav = styled.div`
 	position: fixed;
 	height: 4rem;
 	z-index: 40;
+	--tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+		0 4px 6px -2px rgba(0, 0, 0, 0.05);
+	box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+		var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 `;
 
 const NavContainer = styled.div`
@@ -77,6 +81,7 @@ const SubContainer = styled.div`
 	//
 	@media screen and (max-width: 768px) {
 		padding: 0 2rem;
+		border-top: 1px solid transparent;
 	}
 	// 모바일 iPhone
 	@media screen and (max-width: 480px) {
