@@ -79,7 +79,7 @@ const Restaurant = () => {
 				<div class="mb-16">
 					<MenuTitle>파스타 Pasta & 필라프 Pilau</MenuTitle>
 					<Line></Line>
-					<div class="w-full grid grid-cols-4 gap-5">
+					<div class="w-full grid grid-cols-2 lg:grid-cols-4 gap-5">
 						<FoodMenuBlock
 							url={Example}
 							title={"아라비아따 파스타"}
@@ -105,7 +105,7 @@ const Restaurant = () => {
 				<div class="mb-16">
 					<MenuTitle>피자 Pizza</MenuTitle>
 					<Line></Line>
-					<div class="w-full grid grid-cols-4 gap-5">
+					<div class="w-full grid grid-cols-2 lg:grid-cols-4 gap-5">
 						<FoodMenuBlock
 							url={Example}
 							title={"아라비아따 파스타"}
@@ -126,7 +126,7 @@ const Restaurant = () => {
 				<div class="mb-16">
 					<MenuTitle>한식메뉴 Korean Menu</MenuTitle>
 					<Line></Line>
-					<div class="w-full grid grid-cols-4 gap-5">
+					<div class="w-full grid grid-cols-2 lg:grid-cols-4 gap-5">
 						<FoodMenuBlock
 							url={Example}
 							title={"아라비아따 파스타"}
@@ -162,7 +162,7 @@ const Restaurant = () => {
 				<div class="mb-16">
 					<MenuTitle>음료 Drink & 주류 Beer</MenuTitle>
 					<Line></Line>
-					<div class="w-full grid grid-cols-4 gap-5">
+					<div class="w-full grid grid-cols-2 lg:grid-cols-4 gap-5">
 						<FoodMenuBlock
 							url={Example}
 							title={"아라비아따 파스타"}

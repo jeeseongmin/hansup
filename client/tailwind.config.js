@@ -12,6 +12,9 @@ module.exports = {
 			width: {
 				"3/10": "30%",
 			},
+			transitionProperty: {
+				width: "width",
+			},
 		},
 	},
 	variants: {
