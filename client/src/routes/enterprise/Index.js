@@ -4,7 +4,7 @@ import Hansup from "routes/enterprise/Hansup";
 
 const Index = () => {
 	return (
-		<div class="w-full h-full">
+		<div class="w-full h-auto">
 			<switch>
 				<Route exact path="/enterprise/hansup" component={Hansup} />
 			</switch>

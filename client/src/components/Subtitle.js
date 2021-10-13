@@ -4,7 +4,9 @@ import styled, { css } from "styled-components";
 const Div = styled.div`
 	background-color: #6c4d3f;
 	color: white;
-	width: 100%;
+	width: auto;
+	padding-left: 1.5rem;
+	padding-right: 1.5rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
