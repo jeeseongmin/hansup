@@ -6,7 +6,7 @@ import Voice from "routes/community/Voice";
 
 const Index = () => {
 	return (
-		<div class="w-full h-full">
+		<div class="w-full h-auto">
 			<switch>
 				<Route exact path="/community/notice" component={Notice} />
 				<Route exact path="/community/review" component={Review} />

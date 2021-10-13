@@ -36,7 +36,7 @@ const NavContainer = styled.div`
 	}
 	// 모바일 iPhone
 	@media screen and (max-width: 480px) {
-		padding: 0 0rem;
+		padding: 0 2rem;
 	}
 `;
 const SubContainer = styled.div`
