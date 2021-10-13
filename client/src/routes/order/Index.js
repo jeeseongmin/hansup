@@ -6,7 +6,7 @@ import CateringOrdering from "routes/order/catering/Ordering";
 
 const Index = () => {
 	return (
-		<div class="w-full h-full">
+		<div class="w-full h-auto">
 			<switch>
 				<Route exact path="/order/catering/menu" component={CateringMenu} />
 				<Route exact path="/order/catering/intro" component={CateringIntro} />

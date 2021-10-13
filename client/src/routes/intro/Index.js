@@ -7,7 +7,7 @@ import Story from "routes/intro/Story";
 
 const Index = () => {
 	return (
-		<div class="w-full h-full border border-black">
+		<div class="w-full h-auto">
 			<switch>
 				<Route exact path="/intro/introduction" component={Introduction} />
 				<Route exact path="/intro/story" component={Story} />

@@ -1,37 +1,15 @@
-import React from "react";
+import Description from "components/Description";
+import ImageLabel from "components/ImageLabel";
 import Subtitle from "components/Subtitle";
 import CateringIntro from "image/catering-intro.png";
-import styled, { css } from "styled-components";
-import ImageLabel from "components/ImageLabel";
+import React from "react";
+import PageLayout from "components/Layout/PageLayout";
+import ContentLayout from "components/Layout/ContentLayout";
 
-const Description = styled.div`
-	background-color: #f1f0ec;
-	color: #6c4d3f;
-	height: 100%;
-	padding: 2rem;
-	flex: 1 1 0%;
-	display: flex;
-	flex-direction: column;
-
-	// 기본 사이즈
-	@media screen and (max-width: 1200px) {
-	}
-	//
-	@media screen and (max-width: 768px) {
-		width: 100%;
-		justify-content: space-between;
-	}
-	// 모바일 iPhone
-	@media screen and (max-width: 480px) {
-	}
-`;
 const Catering = () => {
 	return (
-		<div class="flex flex-col pt-12">
-			<div class="px-8 lg:px-40 w-full flex flex-col mb-8">
-				<div class="w-24 mb-6">
-					<Subtitle subtitle={"케이터링"} />
-				</div>
+		<PageLayout>
+			<ContentLayout subtitle={"케이터링"}>
 				<div class="flex w-full h-auto lg:h-96 flex-col lg:flex-row items-center mb-4 ">
 					<div class="w-full lg:w-3/5 px-12 lg:pl-0 lg:pr-12 h-full mb-4 lg:mb-0 flex justify-start items-start ">
 						<img
@@ -41,7 +19,7 @@ const Catering = () => {
 						/>
 					</div>
 					<Description>
-						<div class="h-1/2 text-md lg:text-lg mb-4 lg:mb-0">
+						<div class="p-8 h-1/2 text-md lg:text-lg mb-4 lg:mb-0">
 							여러 행사에 빠질 수 없는 것이 바로 음식! 한숲푸드는 행사, 기념일에
 							고객님께서 더 풍성하고 행복하게 보내도록 맛난 케이터링 서비스를
 							제공합니다!<br></br>
@@ -51,7 +29,8 @@ const Catering = () => {
 						</div>
 					</Description>
 				</div>
-			</div>
+			</ContentLayout>
+
 			<div class="px-8 lg:px-40 w-full flex flex-col">
 				<ImageLabel
 					text={"케이터링 메뉴"}
@@ -69,7 +48,7 @@ const Catering = () => {
 					url={"/order/catering/ordering"}
 				/>
 			</div>
-		</div>
+		</PageLayout>
 	);
 };
 
