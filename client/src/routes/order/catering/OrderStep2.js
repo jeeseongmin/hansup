@@ -11,24 +11,28 @@ import orderList from "routes/order/catering/data/orderList";
 import OrderListLayout from "components/Layout/OrderListLayout";
 
 const OrderStep2 = () => {
+	const onSubmit = (e) => {
+		e.preventDefault();
+	};
+
 	return (
 		<div class="w-full flex flex-col justify-center items-center">
-			<form class="w-full">
-				{[0, 1, 2].map((element, index) => {
+			<form class="w-full mb-8" onSubmit={onSubmit}>
+				{[0, 1, 2, 3].map((element, index) => {
 					return (
 						<OrderListLayout
 							key={orderList[element]}
 							info={orderList[element]}
 							col={5}
+							type={"select"}
 						/>
 					);
 				})}{" "}
-				{/* <InfoBlock title={"메인메뉴 (택 4)"}>
-					{<OrderListLayout subtitle={"메인메뉴 (택 4)"}></OrderListLayout>}
-				</InfoBlock>
-				<InfoBlock title={"식사메뉴 (택 4)"}></InfoBlock>
-				<InfoBlock title={"국 (택 1)"}></InfoBlock>
-				<InfoBlock title={"디저트 (택 5)"}></InfoBlock> */}
+				<div class="w-full flex justify-center items-center">
+					<div class="w-full md:w-2/3 lg:w-1/2 h-12">
+						<SubmitButton text={"다음"} onSubmit={(e) => onSubmit(e)} />
+					</div>
+				</div>
 			</form>
 		</div>
 	);

@@ -3,10 +3,11 @@ import PageLayout from "components/Layout/PageLayout";
 import ContentLayout from "components/Layout/ContentLayout";
 import CateringMenu from "image/order-catering-img1.png";
 import MenuListLayout from "components/Layout/MenuListLayout";
-import menuList from "routes/order/catering/data/menuList";
+import orderList from "routes/order/catering/data/orderList";
 import ImageLabel from "components/ImageLabel";
 import CateringImg2 from "image/order-catering-img2.png";
 import CateringImg3 from "image/order-catering-img3.png";
+import OrderListLayout from "components/Layout/OrderListLayout";
 
 const Menu = () => {
 	return (
@@ -21,12 +22,13 @@ const Menu = () => {
 				</div>
 			</ContentLayout>
 			<ContentLayout subtitle={"케이터링 이달의 메뉴"}>
-				{[0, 1, 2].map((element, index) => {
+				{[0, 1, 2, 3].map((element, index) => {
 					return (
-						<MenuListLayout
-							key={menuList[element]}
-							info={menuList[element]}
+						<OrderListLayout
+							key={orderList[element]}
+							info={orderList[element]}
 							col={5}
+							type={"view"}
 						/>
 					);
 				})}{" "}
