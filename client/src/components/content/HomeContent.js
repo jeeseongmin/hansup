@@ -1,5 +1,5 @@
 import React from 'react'
-import HomeButton from 'components/button/HomeButton'
+import HomeButton from 'components/Button/HomeButton'
 
 const HomeContent = ({image, title, text, color, reverse}) => {
 

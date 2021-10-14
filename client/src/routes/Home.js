@@ -1,6 +1,6 @@
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import HomeButton from "components/button/HomeButton";
+import HomeButton from "components/Button/HomeButton";
 import HomeContent from "components/content/HomeContent";
 import Background from "image/homeBack.png";
 import Catering from "image/homeCatering.png";
