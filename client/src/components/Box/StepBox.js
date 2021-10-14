@@ -6,7 +6,7 @@ import styled, { css } from "styled-components";
 const StepDiv = styled.div`
 	background-color: none;
 	border: 1px solid #d3d3d3;
-	z-index: 50;
+	z-index: 30;
 	color: #d3d3d3;
 	width: auto;
 	padding-left: 1.5rem;
@@ -30,7 +30,7 @@ const StepDiv = styled.div`
 `;
 
 const ArrowBox = styled.div`
-	z-index: 40;
+	z-index: 20;
 	position: absolute;
 	height: 1rem;
 	width: 1rem;

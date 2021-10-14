@@ -14,7 +14,7 @@ const Line = styled.div`
 	width: 100%;
 	border-top: 1px solid #6c4d3f;
 `;
-const OrderListLayout = ({ info, col }) => {
+const OrderListLayout = ({ info, col, type }) => {
 	const colStyle = "grid-cols-" + col;
 	return (
 		<div class="mb-16">
@@ -27,6 +27,7 @@ const OrderListLayout = ({ info, col }) => {
 							url={Example}
 							title={element.name}
 							price={element.price + "원"}
+							type={type}
 						/>
 					);
 				})}

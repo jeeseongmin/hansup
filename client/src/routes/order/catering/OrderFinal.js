@@ -7,15 +7,19 @@ import InfoBlock from "components/Block/InfoBlock";
 import InputBox from "components/Box/InputBox";
 import SubmitButton from "components/Button/SubmitButton";
 import RadioButton from "components/Button/RadioButton";
+import Description from "components/Description";
 
-const OrderStep3 = () => {
+const OrderFinal = () => {
 	const [selected, setSelected] = useState(false);
 	const [selected2, setSelected2] = useState(false);
 	const onSubmit = () => {};
 	const onChange = () => {};
 	return (
 		<div class="w-full flex flex-col justify-center items-center">
-			<div class="h-full px-6 py-8 w-full md:w-2/3 lg:w-1/2 border border-gray-200 shadow-lg">
+			<h1 class="text-4xl font-bold text-hansupBrown mb-16">
+				예약이 완료되었습니다!
+			</h1>
+			<div class="mb-16 h-full px-6 py-8 w-full md:w-2/3 lg:w-1/2 border border-gray-200 shadow-lg">
 				<InfoBlock title={"예약자 정보 확인"}>
 					<div class="flex flex-col -mt-4">
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-center border-b-2 border-gray-200">
@@ -109,85 +113,36 @@ const OrderStep3 = () => {
 					</div>
 				</InfoBlock>
 				<InfoBlock title={"결제"}>
-					<div class="flex flex-col ">
-						<div class="flex flex-col mb-4">
-							<p class="text-lg mb-4">결제수단</p>
-							<input
-								type="text"
-								class="px-2 text-lg border-2 border-gray-300 outline-none w-full h-12 flex justify-center items-center"
-							/>
+					<div class="flex flex-col -mt-4">
+						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start border-b-2 border-gray-200">
+							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
+								결제수단
+							</div>
+							<div class="w-full md:flex-1 text-xl">결제수단 1</div>
 						</div>
-						<div
-							class={
-								"flex py-4 flex-row justify-between items-center " +
-								(selected ? "border-b-2 border-gray-200" : "mb-12")
-							}
-						>
-							<p class="text-lg h-full flex justify-center items-center ">
+
+						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start">
+							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								현금영수증
-							</p>
-							<div class="h-full flex flex-row items-center">
-								<div class="mr-3">
-									<RadioButton
-										text={"미신청"}
-										setSelected={setSelected}
-										current={selected}
-										clicked={false}
-									/>
-								</div>
-								<div>
-									<RadioButton
-										text={"신청"}
-										setSelected={setSelected}
-										current={selected}
-										clicked={true}
-									/>
-								</div>
 							</div>
-						</div>
-						<div
-							class={
-								"py-4 w-full h-full mb-12 flex flex-col transition delay-100 duration-200  " +
-								(selected ? "block" : "hidden")
-							}
-						>
-							<div class="flex flex-col h-auto">
-								<div class="w-full h-8">
-									<RadioButton
-										text={"개인소득공제용"}
-										setSelected={setSelected2}
-										current={selected2}
-										clicked={false}
-									/>
-								</div>
-								<div class="h-12 pl-8 my-2">
-									<InputBox
-										value={""}
-										placeholder="휴대폰 번호"
-										type=""
-										onChange={onChange}
-									/>
-								</div>
-							</div>
-							<div class="flex flex-col">
-								<div class="w-fuill h-8">
-									<RadioButton
-										text={"사업자증빙용"}
-										setSelected={setSelected2}
-										current={selected2}
-										clicked={true}
-									/>
-								</div>
-							</div>
-						</div>
-						<div class="w-full h-12 -mb-8">
-							<SubmitButton text={"결제"} onSubmit={(e) => onSubmit(e)} />
+							<div class="w-full md:flex-1 text-xl">없음</div>
 						</div>
 					</div>
 				</InfoBlock>
+			</div>
+			<p class="font-bold text-hansupBrown text-xl text-center mb-2 leading-8">
+				예약과 관련해서 문의있으시면,<br class="block md:hidden"></br> 하단의
+				번호로 연락주세요!
+			</p>
+			<div class="h-full py-8 w-full md:w-2/3 lg:w-auto">
+				<Description>
+					<div class="flex justify-center items-center font-bold px-0 md:px-36 py-4 text-xl">
+						010-1111-2222
+					</div>
+				</Description>
 			</div>
 		</div>
 	);
 };
 
-export default OrderStep3;
+export default OrderFinal;
