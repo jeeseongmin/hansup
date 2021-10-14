@@ -22,7 +22,7 @@ const StepDiv = styled.div`
 	transition: all 0.3s ease;
 
 	${(props) =>
-		props.step === props.selected &&
+		props.step === props.current &&
 		css`
 			background-color: #6c4d3f;
 			color: white;
@@ -40,24 +40,18 @@ const ArrowBox = styled.div`
 	background-color: none;
 
 	${(props) =>
-		props.step === props.selected &&
+		props.step === props.current &&
 		css`
 			background-color: #6c4d3f;
 		`};
 `;
 
-const StepBox = ({ selected, step, text, setSelected }) => {
+const StepBox = ({ step, current, text, setStep }) => {
 	return (
-		<StepDiv selected={selected} step={step} onClick={() => setSelected(step)}>
-			<span class="z-50">{text}</span>
-			{/* <ArrowBox selected={selected} step={1}/> */}
-			<ArrowBox selected={selected} step={step} />
-			{/* <div
-				class={
-					"z-40 transition ease-out -bottom-2 absolute h-4 w-4 transform rotate-45 " +
-					(selected === step ? "bg-hansupBrown" : " bg-none")
-				}
-			></div> */}
+		<StepDiv step={step} current={current} onClick={() => setStep(current)}>
+			<span class="z-30">{text}</span>
+			{/* <ArrowBox step={step} step={1}/> */}
+			<ArrowBox step={step} current={current} />
 		</StepDiv>
 	);
 };

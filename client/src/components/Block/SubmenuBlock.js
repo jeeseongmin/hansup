@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import SubmenuButton from "components/button/SubmenuButton";
+import SubmenuButton from "components/Button/SubmenuButton";
 const SubmenuBlock = ({ menu }) => {
 	const submenuArr = [
 		["인사말", "한숲의 이야기", "한숲의 역사", "오시는 길"],

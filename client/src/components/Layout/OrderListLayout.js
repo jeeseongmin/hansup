@@ -1,7 +1,7 @@
-import FoodMenuBlock from "components/Block/FoodMenuBlock";
-import Example from "image/example.png";
 import React from "react";
 import styled from "styled-components";
+import CateringMenuBlock from "components/Block/CateringMenuBlock";
+import Example from "image/example.png";
 
 const MenuTitle = styled.div`
 	color: #6c4d3f;
@@ -14,7 +14,7 @@ const Line = styled.div`
 	width: 100%;
 	border-top: 1px solid #6c4d3f;
 `;
-const MenuListLayout = ({ info, col }) => {
+const OrderListLayout = ({ info, col }) => {
 	const colStyle = "grid-cols-" + col;
 	return (
 		<div class="mb-16">
@@ -23,7 +23,7 @@ const MenuListLayout = ({ info, col }) => {
 			<div class={"w-full grid grid-cols-2 gap-5 lg:" + colStyle}>
 				{info.menu.map((element, index) => {
 					return (
-						<FoodMenuBlock
+						<CateringMenuBlock
 							url={Example}
 							title={element.name}
 							price={element.price + "원"}
@@ -35,4 +35,4 @@ const MenuListLayout = ({ info, col }) => {
 	);
 };
 
-export default MenuListLayout;
+export default OrderListLayout;
