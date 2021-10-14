@@ -64,7 +64,11 @@ const Restaurant = () => {
 			<ContentLayout subtitle={"수화식당 메뉴"}>
 				{[0, 1, 2, 3].map((element, index) => {
 					return (
-						<MenuListLayout key={menuList[element]} info={menuList[element]} />
+						<MenuListLayout
+							key={menuList[element]}
+							info={menuList[element]}
+							col={4}
+						/>
 					);
 				})}
 			</ContentLayout>
