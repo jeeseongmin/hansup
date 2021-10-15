@@ -19,7 +19,11 @@ const SubmenuBlock = ({ menu }) => {
 			"/order/catering/intro",
 			"/order/catering/ordering",
 		],
-		["/community/notice", "/community/review", "/community/voice"],
+		[
+			"/community/notice/list",
+			"/community/review/list",
+			"/community/voice/main",
+		],
 		["/enterprise/hansup"],
 		["/manager/schedule", "/manager/menu"],
 		[""],
