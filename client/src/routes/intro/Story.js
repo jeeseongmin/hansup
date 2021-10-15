@@ -28,7 +28,7 @@ const Story = () => {
 							</b>
 						</div>
 					</div>
-					<div class="w-full h-96 hidden lg:grid row-end-1 grid-cols-2 gap-8 mb-16">
+					<div class="w-full h-auto hidden lg:grid grid-cols-2 gap-8 mb-16">
 						<div class="h-full text-lg leading-loose text-justify">
 							우리 중에는 선천적으로 청각장애인도 있으며, 후천적으로 청각장애를 갖게 된 이들도 있습니다. 선천이든 후천이든 우리 모두 즐겁게 일하는 법을 압니다. 식자재를 받아 준비하고, 손님을 맞이하며, 서빙을 하고, 설거지합니다. 
 							<br></br>
@@ -37,12 +37,8 @@ const Story = () => {
 								비장애인들과 함께 소통하고 웃고, 우리가 만든 맛있는 음식을 함께 나눌 수 있다는 것, 사회인으로 우리가 한 역할을 맡을 수 있다는 것, 이것만으로도 우린 즐겁습니다.
 							</b>
 						</div>
-						<div>
-							<img
-								src={StoryImg1}
-								class="w-full h-full object-cover"
-								alt="img1"
-							/>
+						<div class="h-full w-full">
+							<img src={StoryImg1} class="h-full object-cover" alt="img1" />
 						</div>
 					</div>
 					{/* 반응형 & 원본 */}
@@ -64,7 +60,7 @@ const Story = () => {
 							 우리가 가진 장점을 펼치기도 전에 차단될 때가 더욱 많았습니다.
 						</div>
 					</div>
-					<div class="w-full h-96 hidden lg:grid grid-cols-2 gap-8 mb-16">
+					<div class="w-full h-auto hidden lg:grid grid-cols-2 gap-8 mb-16">
 						<div>
 							<img
 								src={StoryImg2}
@@ -105,7 +101,7 @@ const Story = () => {
 							하지만 놀랍게도 식당을 잘 돌아갑니다.
 						</div>
 					</div>
-					<div class="w-full h-96 hidden lg:grid grid-cols-2 gap-8 mb-16">
+					<div class="w-full h-auto hidden lg:grid grid-cols-2 gap-8 mb-16">
 						<div class="h-full text-lg leading-loose text-justify">
 							특히 청각장애인 여성들은 거의 사회생활을 경험하지 못한 채 농업 혹은 무직의 삶으로 
 							<b>
