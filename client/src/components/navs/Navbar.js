@@ -194,7 +194,7 @@ const Navbar = ({ currentMenu }) => {
 						toggleMenu={toggleMenu}
 						menu={4}
 						title={"커뮤니티"}
-						url={"/community/notice"}
+						url={"/community/notice/list"}
 						current={menu}
 						currentMenu={currentMenu}
 					/>
@@ -298,13 +298,17 @@ const Navbar = ({ currentMenu }) => {
 						<Submenu title={""} url={"#"} empty={true} />
 						<Submenu
 							title={"공지사항"}
-							url={"/community/notice"}
+							url={"/community/notice/list"}
 							empty={false}
 						/>
-						<Submenu title={"리뷰"} url={"/community/review"} empty={false} />
+						<Submenu
+							title={"리뷰"}
+							url={"/community/review/list"}
+							empty={false}
+						/>
 						<Submenu
 							title={"고객의 소리"}
-							url={"/community/voice"}
+							url={"/community/voice/main"}
 							empty={false}
 						/>
 					</MenuContainer>
