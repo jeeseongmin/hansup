@@ -29,7 +29,11 @@ const OrderStep1 = ({ person, setPerson, schedule, setSchedule, onChange }) => {
 			"-" +
 			(date.getMonth() + 1).toString().padStart(2, "0") +
 			"-" +
-			date.getDate().toString().padStart(2, "0")
+			date.getDate().toString().padStart(2, "0") +
+			" " +
+			date.getHours().toString().padStart(2, "0") +
+			":" +
+			date.getMinutes().toString().padStart(2, "0")
 		);
 	};
 	const DateInput = ({ value, onClick }) => {
@@ -96,13 +100,6 @@ const OrderStep1 = ({ person, setPerson, schedule, setSchedule, onChange }) => {
 						<div class="h-12 mb-4 flex flex-row justify-between items-center">
 							<div class="w-1/4 text-xl">날짜</div>
 							<div class="flex-1 h-full flex justify-between items-center">
-								{/* <DatePickerComponent
-									placeholder="Enter Date"
-									value={date}
-									min={startdate}
-									max={enddate}
-								></DatePickerComponent> */}
-								{/* <div class="w-full h-full px-4 outline-none border-2 border-gray-200 focus:border-hansupBrown transition delay-100 duration-200"></div> */}
 								<div class="flex-1 h-12 px-4 outline-none border-2 border-gray-200 focus:border-hansupBrown transition delay-100 duration-200 flex items-center">
 									{dateToString(date)}
 								</div>
@@ -110,12 +107,13 @@ const OrderStep1 = ({ person, setPerson, schedule, setSchedule, onChange }) => {
 									<DatePicker
 										selected={date}
 										onChange={(date) => onChange2(date)}
+										showTimeSelect
 										customInput={<DateInput />}
 									/>
 								</div>
 							</div>
 						</div>
-						<div class="h-12 mb-4 flex flex-row justify-between items-center">
+						{/* <div class="h-12 mb-4 flex flex-row justify-between items-center">
 							<div class="w-1/4 text-xl">시간</div>
 							<div class="flex-1 h-full grid grid-cols-2 gap-2">
 								<InputBox
@@ -131,7 +129,7 @@ const OrderStep1 = ({ person, setPerson, schedule, setSchedule, onChange }) => {
 									onChange={onChange}
 								/>
 							</div>
-						</div>
+						</div> */}
 						<div class="h-12 mb-4 flex flex-row justify-between items-center">
 							<div class="w-1/4 text-xl">수령방식</div>
 							<div class="flex-1 h-full grid grid-cols-2">
