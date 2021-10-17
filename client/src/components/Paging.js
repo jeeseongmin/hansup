@@ -50,8 +50,8 @@ const Paging = (props) => {
 				class={
 					"mr-2 w-8 h-8 transition delay-50 duration-300 flex justify-center items-center cursor-pointer " +
 					(page === current
-						? "text-white border-2 border-purple-700 bg-purple-700  "
-						: "border border-gray-300 text-gray-300 hover:bg-purple-300 hover:text-purple-500")
+						? "text-white border-2 border-hansupBrown bg-hansupBrown  "
+						: "border border-gray-300 text-gray-300 hover:bg-hansupBrown hover:text-white")
 				}
 			>
 				{current}
