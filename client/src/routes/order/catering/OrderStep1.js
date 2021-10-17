@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import PageLayout from "components/Layout/PageLayout";
 import ContentLayout from "components/Layout/ContentLayout";
 import styled, { css } from "styled-components";
@@ -6,9 +6,42 @@ import StepBox from "components/Box/StepBox";
 import InfoBlock from "components/Block/InfoBlock";
 import InputBox from "components/Box/InputBox";
 import SubmitButton from "components/Button/SubmitButton";
+import { DatePickerComponent } from "@syncfusion/ej2-react-calendars";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { AiTwotoneCalendar } from "react-icons/ai";
 
 const OrderStep1 = ({ person, setPerson, schedule, setSchedule, onChange }) => {
 	const onSubmit = () => {};
+	const [date, setDate] = useState(new Date());
+	const startdate = new Date(
+		new Date().getFullYear(),
+		new Date().getMonth(),
+		10
+	);
+	const enddate = new Date(new Date().getFullYear(), new Date().getMonth(), 20);
+	const onChange2 = (date) => {
+		setDate(date);
+	};
+	const dateToString = (date) => {
+		return (
+			date.getFullYear() +
+			"-" +
+			(date.getMonth() + 1).toString().padStart(2, "0") +
+			"-" +
+			date.getDate().toString().padStart(2, "0")
+		);
+	};
+	const DateInput = ({ value, onClick }) => {
+		return (
+			<div
+				onClick={onClick}
+				class="w-full h-full flex justify-center items-center cursor-pointer"
+			>
+				<AiTwotoneCalendar size={24} />
+			</div>
+		);
+	};
 
 	return (
 		<div class="w-full flex flex-col justify-center items-center">
@@ -62,19 +95,24 @@ const OrderStep1 = ({ person, setPerson, schedule, setSchedule, onChange }) => {
 					<div class="px-4 flex flex-col">
 						<div class="h-12 mb-4 flex flex-row justify-between items-center">
 							<div class="w-1/4 text-xl">날짜</div>
-							<div class="flex-1 h-full grid grid-cols-2 gap-2">
-								<InputBox
-									value=""
-									type=""
-									placeholder="월"
-									onChange={onChange}
-								/>
-								<InputBox
-									value=""
-									type=""
-									placeholder="일"
-									onChange={onChange}
-								/>
+							<div class="flex-1 h-full flex justify-between items-center">
+								{/* <DatePickerComponent
+									placeholder="Enter Date"
+									value={date}
+									min={startdate}
+									max={enddate}
+								></DatePickerComponent> */}
+								{/* <div class="w-full h-full px-4 outline-none border-2 border-gray-200 focus:border-hansupBrown transition delay-100 duration-200"></div> */}
+								<div class="flex-1 h-12 px-4 outline-none border-2 border-gray-200 focus:border-hansupBrown transition delay-100 duration-200 flex items-center">
+									{dateToString(date)}
+								</div>
+								<div class="w-12">
+									<DatePicker
+										selected={date}
+										onChange={(date) => onChange2(date)}
+										customInput={<DateInput />}
+									/>
+								</div>
 							</div>
 						</div>
 						<div class="h-12 mb-4 flex flex-row justify-between items-center">
