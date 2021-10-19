@@ -2,9 +2,9 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema(
+const reviewSchema = new Schema(
 	{
-		type: {
+		content: {
 			type: String,
 			required: true,
 		},
@@ -12,9 +12,17 @@ const userSchema = new Schema(
 			type: String,
 			required: true,
 		},
+		response: {
+			type: String,
+			required: false,
+		},
 		password: {
 			type: String,
 			required: true,
+		},
+		imgList: {
+			type: [Object],
+			required: false,
 		},
 	},
 	{
@@ -22,6 +30,6 @@ const userSchema = new Schema(
 	}
 );
 
-const User = mongoose.model("User", userSchema);
+const Review = mongoose.model("Review", reviewSchema);
 
-module.exports = User;
+module.exports = Review;
