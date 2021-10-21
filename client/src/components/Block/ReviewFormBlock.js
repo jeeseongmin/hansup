@@ -1,13 +1,64 @@
 import React, { useState, useEffect, useRef } from "react";
 import { MdCancel } from "react-icons/md";
-// import CircularProgress from "@material-ui/core/CircularProgress";
+import CircularProgress from "@mui/material/CircularProgress";
 
-const ReviewFormBlock = ({ changeInfo, contentRef, info }) => {
+import axios from "axios";
+
+const ReviewFormBlock = ({
+	changeInfo,
+	contentRef,
+	emailRef,
+	passwordRef,
+	info,
+	isEdit,
+}) => {
 	const buttonRef = useRef(null);
 	const [loading, setLoading] = useState(true);
-	const onChange = () => {};
-	const buttonClick = () => {};
-	const removeImg = () => {};
+	const [isImageUpload, setIsImageUpload] = useState(false);
+
+	const onChange = async (e) => {
+		setLoading(false);
+		const formData = new FormData();
+		formData.append("file", e.target.files[0]);
+
+		// 서버의 upload API 호출
+		const res = await axios.post("/api/image/upload", formData);
+		const cp = [...info.imgList];
+		await cp.push({ filename: res.data.filename, id: res.data.id });
+		await changeInfo(cp, "imgList");
+		setLoading(true);
+		setIsImageUpload(true);
+	};
+	// const deletePhoto = isEdit ? props.deletePhoto : null;
+	const deletePhoto = null;
+
+	const buttonClick = () => {
+		buttonRef.current.click();
+	};
+	const removeImg = async (index) => {
+		if (isEdit) {
+			const cp = [...info.imgList];
+			const name = cp[index];
+			deletePhoto(name);
+
+			cp.splice(index, 1);
+			await changeInfo(cp, "imgList");
+		} else {
+			const cp = [...info.imgList];
+			const id = cp[index].id;
+			cp.splice(index, 1);
+			changeInfo(cp, "imgList");
+
+			await axios.get("/api/image/delete/" + id);
+		}
+
+		if (info.imgList.length === 0) {
+			setIsImageUpload(false);
+		}
+	};
+
+	const [img, setImg] = useState(null);
+	const [url, setUrl] = useState(null);
 
 	return (
 		<div class="w-full h-auto mb-4">
@@ -22,7 +73,7 @@ const ReviewFormBlock = ({ changeInfo, contentRef, info }) => {
 			<div class="w-full my-4 flex flex-row justify-between items-center">
 				<h1 class="text-lg font-bold">업로드 된 이미지 목록</h1>
 				<button
-					class="text-sm outline-none w-full md:w-auto cursor-pointer px-0 md:px-8 py-1 justify-center border border-hansupBrown bg-hansupBrown text-white flex flex-row items-center hover:opacity-60 hover:text-white hover:font-bold"
+					class="text-sm outline-none w-24 md:w-auto cursor-pointer px-0 md:px-8 py-1 justify-center border border-hansupBrown bg-hansupBrown text-white flex flex-row items-center hover:opacity-60 hover:text-white hover:font-bold"
 					onClick={buttonClick}
 				>
 					이미지 업로드
@@ -49,13 +100,6 @@ const ReviewFormBlock = ({ changeInfo, contentRef, info }) => {
 									}
 									alt="imgList"
 								/>
-								{/* <img
-                            class="w-full h-24 object-contain"
-                            src={
-                                "http://localhost:5000/api/image/view/" + element.filename
-                            }
-                            alt="imgList"
-                        /> */}
 								<MdCancel
 									onClick={() => removeImg(index)}
 									size={24}
@@ -66,10 +110,11 @@ const ReviewFormBlock = ({ changeInfo, contentRef, info }) => {
 					})
 				) : (
 					<div class="w-full h-24 my-2 py-4 flex justify-center items-center text-center">
-						{/* <CircularProgress /> */}
+						<CircularProgress />
 					</div>
 				)}
 			</div>
+			<h1 class="text-lg font-bold pt-4">이미지 업로드 후 입력 가능합니다.</h1>
 			<div class="cursor-pointer w-full pt-2 pb-0 flex justify-end items-center">
 				<textarea
 					ref={contentRef}
@@ -77,24 +122,29 @@ const ReviewFormBlock = ({ changeInfo, contentRef, info }) => {
 					onChange={(e) => changeInfo(e, "content")}
 					value={info.content}
 					placeholder="내용"
+					disabled={!isImageUpload}
 				></textarea>
 			</div>
 			<div class="w-full pt-4 pb-2 mb-2 grid grid-cols-2 gap-2">
 				<input
 					// ref={titleRef}
+					ref={emailRef}
 					type="text"
 					class="flex-1 p-4 border-2 border-gray-300 outline-none focus:border-hansupBrown"
-					onChange={(e) => changeInfo(e, "title")}
-					value={info.title}
-					placeholder="작성자 이름"
+					onChange={(e) => changeInfo(e, "email")}
+					value={info.email}
+					placeholder="작성자 이메일"
+					disabled={!isImageUpload}
 				/>
 				<input
 					// ref={titleRef}
-					type="password"
+					ref={passwordRef}
+					type="text"
 					class="flex-1 p-4 border-2 border-gray-300 outline-none focus:border-hansupBrown"
-					onChange={(e) => changeInfo(e, "title")}
-					value={info.title}
+					onChange={(e) => changeInfo(e, "password")}
+					value={info.password}
 					placeholder="패스워드"
+					disabled={!isImageUpload}
 				/>
 			</div>
 		</div>

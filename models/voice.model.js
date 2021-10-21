@@ -23,18 +23,10 @@ const voiceSchema = new Schema(
 		},
 		phone: {
 			type: String,
-			required: true,
+			required: false,
 		},
 		email: {
 			type: String,
-			required: true,
-		},
-		password: {
-			type: String,
-			required: true,
-		},
-		imgList: {
-			type: [Object],
 			required: false,
 		},
 	},
