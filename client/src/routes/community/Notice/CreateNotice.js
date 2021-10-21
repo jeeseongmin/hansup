@@ -1,14 +1,22 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useHistory } from "react-router-dom";
-import ReviewFormBlock from "components/Block/ReviewFormBlock";
+import NoticeFormBlock from "components/Block/NoticeFormBlock";
 import Subtitle from "components/Subtitle";
 import axios from "axios";
+import Checkbox from "@mui/material/Checkbox";
 
-const CreateReview = () => {
+const label = { inputProps: { "aria-label": "Checkbox demo" } };
+
+const CreateNotice = () => {
+	const [includeImg, setIncludeImg] = useState(false);
 	const history = useHistory();
 	const contentRef = useRef(null);
 	const emailRef = useRef(null);
 	const passwordRef = useRef(null);
+
+	const onClickCheckBox = (e) => {
+		setIncludeImg(e.target.checked);
+	};
 	const [info, setInfo] = useState({
 		content: "",
 		email: "",
@@ -74,16 +82,30 @@ const CreateReview = () => {
 
 	return (
 		<div class={"w-full flex flex-col mb-16 lg:mb-24 px-8 xl:px-40 "}>
-			<div class="inline-flex w-full mb-6">
-				<Subtitle subtitle={"리뷰 작성하기"} />
+			<div class="inline-flex w-full justify-between mb-6">
+				<Subtitle subtitle={"공지사항 작성하기"} />
+				<div class="flex flex-row items-center">
+					<div>
+						<Checkbox
+							checked={includeImg}
+							onChange={(e) => onClickCheckBox(e)}
+							{...label}
+							labelStyle={{ color: "#6C4D3F" }}
+							iconStyle={{ fill: "white" }}
+							color="default"
+						/>
+					</div>
+					<div>이미지 첨부</div>
+				</div>
 			</div>
-			<ReviewFormBlock
+			<NoticeFormBlock
 				contentRef={contentRef}
 				emailRef={emailRef}
 				passwordRef={passwordRef}
 				changeInfo={changeInfo}
 				info={info}
 				isEdit={false}
+				includeImg={includeImg}
 			/>
 
 			<div class="flex justify-between items-center flex-col md:flex-row">
@@ -105,4 +127,4 @@ const CreateReview = () => {
 	);
 };
 
-export default CreateReview;
+export default CreateNotice;

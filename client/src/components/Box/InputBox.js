@@ -1,8 +1,9 @@
 import React from "react";
 
-const InputBox = ({ value, type, placeholder, onChange }) => {
+const InputBox = ({ value, type, placeholder, onChange, refName }) => {
 	return (
 		<input
+			ref={refName}
 			type="text"
 			value={value}
 			onChange={(e) => onChange(e, type)}
