@@ -6,6 +6,10 @@
 .pnp.js
 /clinet/node_modules
 
+# database
+dbconfig.js
+keyconfig.js
+
 # testing
 /coverage
 

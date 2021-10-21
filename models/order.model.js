@@ -12,7 +12,7 @@ const orderSchema = new Schema(
 			type: String,
 			required: true,
 		},
-		serving: {
+		count: {
 			type: String,
 			required: true,
 		},
