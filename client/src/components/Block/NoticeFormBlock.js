@@ -11,10 +11,11 @@ const NoticeFormBlock = ({
 	info,
 	isEdit,
 	includeImg,
+	setIsImageUpload,
+	isImageUpload,
 }) => {
 	const buttonRef = useRef(null);
 	const [loading, setLoading] = useState(true);
-	const [isImageUpload, setIsImageUpload] = useState(false);
 
 	const onChange = async (e) => {
 		setLoading(false);
@@ -64,14 +65,14 @@ const NoticeFormBlock = ({
 		<div
 			class={
 				"w-full h-auto mb-4 relative transaition delay-100 duration-300 " +
-				(includeImg ? "pt-48 " : "pt-0")
+				(includeImg ? "pt-0 " : "pt-0")
 			}
 		>
 			{/* 딱 10개 씩만 로드하기 */}
 			<div
 				class={
-					"top-0 w-full transaition delay-100 overflow-hidden duration-300 h-auto absolute " +
-					(includeImg ? "opacity-100 h-auto" : "h-0 opacity-0")
+					"z-10 top-0 w-full transaition delay-100 overflow-hidden duration-300 " +
+					(includeImg ? "opacity-100 h-auto" : "h-0 opacity-0 flex flex-col")
 				}
 			>
 				<input
@@ -134,8 +135,8 @@ const NoticeFormBlock = ({
 					// ref={titleRef}
 					ref={titleRef}
 					type="text"
-					class="flex-1 p-4 border-2 border-gray-300 outline-none focus:border-hansupBrown"
-					onChange={(e) => changeInfo(e, "email")}
+					class="z-20 flex-1 p-4 border-2 border-gray-300 outline-none focus:border-hansupBrown"
+					onChange={(e) => changeInfo(e, "title")}
 					value={info.title}
 					placeholder="제목을 입력하세요."
 					disabled={!isImageUpload}
@@ -144,7 +145,7 @@ const NoticeFormBlock = ({
 			<div class="cursor-pointer w-full pt-2 pb-0 flex justify-end items-center">
 				<textarea
 					ref={contentRef}
-					class="w-full h-24 p-4 border-2 border-gray-300 outline-none focus:border-hansupBrown resize-none	"
+					class="z-20 w-full h-48 p-4 border-2 border-gray-300 outline-none focus:border-hansupBrown resize-none	"
 					onChange={(e) => changeInfo(e, "content")}
 					value={info.content}
 					placeholder="내용을 입력하세요."

@@ -8,7 +8,7 @@ router.route("/add").post((req, res) => {
 	if (req.body.key === API_KEY) {
 		const one = {
 			title: req.body.title,
-			content: req.params.content,
+			content: req.body.content,
 			imgList: req.body.imgList,
 		};
 		const newOne = new Notice(one);
