@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import CateringMenuBlock from "components/Block/CateringMenuBlock";
+import OrderMenuBlock from "components/Block/OrderMenuBlock";
 import Example from "image/example.png";
 
 const MenuTitle = styled.div`
@@ -14,24 +15,40 @@ const Line = styled.div`
 	width: 100%;
 	border-top: 1px solid #6c4d3f;
 `;
-const OrderListLayout = ({ info, col, type }) => {
+const OrderListLayout = ({ info, col, type, clickMenu, data }) => {
 	const colStyle = "grid-cols-" + col;
 	return (
 		<div class="mb-16">
 			<MenuTitle>{info.title}</MenuTitle>
 			<Line></Line>
-			<div class={"w-full grid grid-cols-2 gap-5 lg:" + colStyle}>
-				{info.menu.map((element, index) => {
-					return (
-						<CateringMenuBlock
-							url={Example}
-							title={element.name}
-							price={element.price + "원"}
-							type={type}
-						/>
-					);
-				})}
-			</div>
+			{type === "view" ? (
+				<div class={"w-full grid grid-cols-2 gap-5 lg:" + colStyle}>
+					{info.menu.map((element, index) => {
+						return (
+							<CateringMenuBlock
+								url={Example}
+								title={element.name}
+								price={element.price + "원"}
+							/>
+						);
+					})}
+				</div>
+			) : (
+				<div class={"w-full grid grid-cols-2 gap-5 lg:" + colStyle}>
+					{info.menu.map((element, index) => {
+						return (
+							<OrderMenuBlock
+								url={Example}
+								title={element.name}
+								price={element.price + "원"}
+								index={index}
+								type={element.type}
+								clickMenu={clickMenu}
+							/>
+						);
+					})}
+				</div>
+			)}
 		</div>
 	);
 };
