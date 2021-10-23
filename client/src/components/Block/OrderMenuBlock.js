@@ -9,13 +9,23 @@ const Container = styled.div`
 	flex-direction: column;
 	color: #6c4d3f;
 	width: 100%;
+	cursor: pointer;
 `;
 
-const CateringMenuBlock = ({ url, title, price }) => {
+const OrderMenuBlock = ({
+	url,
+	title,
+	price,
+	clickMenu,
+	index,
+	type,
+	data,
+}) => {
 	const [selected, setSelected] = useState(false);
 
 	const onToggle = () => {
 		// if (type === "select") setSelected(!selected);
+		clickMenu(index, type);
 	};
 
 	return (
@@ -29,7 +39,7 @@ const CateringMenuBlock = ({ url, title, price }) => {
 				<div
 					class={
 						"w-full h-full border-4 border-hansupBrown absolute left-0 bottom-0 flex justify-center items-center " +
-						(selected ? "block" : "hidden")
+						(data && data[type].includes(index) ? "block" : "hidden")
 					}
 				>
 					<div class="z-10 bg-hansupBrown w-full h-full opacity-60 flex justify-center items-center text-gray-200 relative"></div>
@@ -44,4 +54,4 @@ const CateringMenuBlock = ({ url, title, price }) => {
 	);
 };
 
-export default CateringMenuBlock;
+export default OrderMenuBlock;

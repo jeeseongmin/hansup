@@ -79,7 +79,8 @@ const NoticeDetailBlock = ({ match }) => {
 												alt="img"
 											/>
 										) : (
-											<Skeleton variant="rectangular" height={150} />
+											// <CircularProgress/>
+											<></>
 										)}
 									</div>
 								);
