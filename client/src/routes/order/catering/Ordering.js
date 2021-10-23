@@ -9,20 +9,53 @@ import OrderFinal from "routes/order/catering/OrderFinal";
 
 const Ordering = () => {
 	const [step, setStep] = useState(1);
-	const [person, setPerson] = useState({
+	const [info, setInfo] = useState({
 		name: "",
-		phone: "",
+		phone1: "",
+		phone2: "",
+		phone3: "",
 		count: "",
 		request: "",
+		date: new Date(),
+		delivery: "delivery",
+		address1: "",
+		address2: "",
+		mainMenu: [],
+		subMenu: [],
+		soup: [],
+		dessert: [],
+		payment: "",
+		cashReceipt: {},
 	});
-	const [schedule, setSchedule] = useState({
-		date: "",
-		time: "",
-		method: "",
-		location: "",
-	});
+	const clickMenu = (index, type) => {
+		console.log(index, type);
+		const cp = { ...info };
+		if (info[type].includes(index)) {
+			let arr = [...info[type]].filter(function (element, index) {
+				return element !== index;
+			});
+			cp[type] = arr;
+			setInfo(cp);
+		} else {
+			let arr = [...info[type], index];
+			cp[type] = arr;
+			setInfo(cp);
+		}
+		console.log(info);
+		여기부터 해결해보기
+	};
 
-	const onChange = () => {};
+	const changeInfo = (e, type) => {
+		if (type === "date" || type === "delivery") {
+			const cp = { ...info };
+			cp[type] = e;
+			setInfo(cp);
+		} else {
+			const cp = { ...info };
+			cp[type] = e.target.value;
+			setInfo(cp);
+		}
+	};
 	return (
 		<PageLayout>
 			<div class="z-30 w-full flex flex-col mb-16 lg:mb-24 px-8 xl:px-40 ">
@@ -121,16 +154,26 @@ const Ordering = () => {
 				</div>
 				{step === 1 && (
 					<OrderStep1
-						person={person}
-						setPerson={setPerson}
-						schedule={schedule}
-						setSchedule={setSchedule}
-						onChange={onChange}
+						info={info}
+						setInfo={setInfo}
+						setStep={setStep}
+						changeInfo={changeInfo}
 					/>
 				)}
-				{step === 2 && <OrderStep2 />}
-				{step === 3 && <OrderStep3 person={person} schedule={schedule} />}
-				{step === 4 && <OrderFinal person={person} schedule={schedule} />}
+				{step === 2 && (
+					<OrderStep2
+						info={info}
+						setInfo={setInfo}
+						setStep={setStep}
+						clickMenu={clickMenu}
+					/>
+				)}
+				{step === 3 && (
+					<OrderStep3 info={info} setInfo={setInfo} setStep={setStep} />
+				)}
+				{step === 4 && (
+					<OrderFinal info={info} setInfo={setInfo} setStep={setStep} />
+				)}
 			</div>
 		</PageLayout>
 	);

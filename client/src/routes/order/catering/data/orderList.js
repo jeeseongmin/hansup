@@ -5,22 +5,27 @@ var menuList = [
 			{
 				name: "메인메뉴",
 				price: 10000,
+				type: "mainMenu",
 			},
 			{
 				name: "메인메뉴",
 				price: 10000,
+				type: "mainMenu",
 			},
 			{
 				name: "메인메뉴",
 				price: 10000,
+				type: "mainMenu",
 			},
 			{
 				name: "메인메뉴",
 				price: 10000,
+				type: "mainMenu",
 			},
 			{
 				name: "메인메뉴",
 				price: 10000,
+				type: "mainMenu",
 			},
 		],
 	},
@@ -30,42 +35,52 @@ var menuList = [
 			{
 				name: "메인메뉴",
 				price: 10000,
+				type: "subMenu",
 			},
 			{
 				name: "메인메뉴",
 				price: 10000,
+				type: "subMenu",
 			},
 			{
 				name: "메인메뉴",
 				price: 10000,
+				type: "subMenu",
 			},
 			{
 				name: "메인메뉴",
 				price: 10000,
+				type: "subMenu",
 			},
 			{
 				name: "메인메뉴",
 				price: 10000,
+				type: "subMenu",
 			},
 			{
 				name: "메인메뉴",
 				price: 10000,
+				type: "subMenu",
 			},
 			{
 				name: "메인메뉴",
 				price: 10000,
+				type: "subMenu",
 			},
 			{
 				name: "메인메뉴",
 				price: 10000,
+				type: "subMenu",
 			},
 			{
 				name: "메인메뉴",
 				price: 10000,
+				type: "subMenu",
 			},
 			{
 				name: "메인메뉴",
 				price: 10000,
+				type: "subMenu",
 			},
 		],
 	},
@@ -75,22 +90,27 @@ var menuList = [
 			{
 				name: "메인메뉴",
 				price: 10000,
+				type: "soup",
 			},
 			{
 				name: "메인메뉴",
 				price: 10000,
+				type: "soup",
 			},
 			{
 				name: "메인메뉴",
 				price: 10000,
+				type: "soup",
 			},
 			{
 				name: "메인메뉴",
 				price: 10000,
+				type: "soup",
 			},
 			{
 				name: "메인메뉴",
 				price: 10000,
+				type: "soup",
 			},
 		],
 	},
@@ -100,22 +120,27 @@ var menuList = [
 			{
 				name: "메인메뉴",
 				price: 10000,
+				type: "dessert",
 			},
 			{
 				name: "메인메뉴",
 				price: 10000,
+				type: "dessert",
 			},
 			{
 				name: "메인메뉴",
 				price: 10000,
+				type: "dessert",
 			},
 			{
 				name: "메인메뉴",
 				price: 10000,
+				type: "dessert",
 			},
 			{
 				name: "메인메뉴",
 				price: 10000,
+				type: "dessert",
 			},
 		],
 	},
