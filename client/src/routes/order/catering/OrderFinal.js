@@ -9,11 +9,7 @@ import SubmitButton from "components/Button/SubmitButton";
 import RadioButton from "components/Button/RadioButton";
 import Description from "components/Description";
 
-const OrderFinal = () => {
-	const [selected, setSelected] = useState(false);
-	const [selected2, setSelected2] = useState(false);
-	const onSubmit = () => {};
-	const onChange = () => {};
+const OrderFinal = ({ info }) => {
 	return (
 		<div class="w-full flex flex-col justify-center items-center">
 			<h1 class="text-4xl font-bold text-hansupBrown mb-16">
@@ -26,25 +22,29 @@ const OrderFinal = () => {
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								이름
 							</div>
-							<div class="w-full md:flex-1 text-xl">김한숲</div>
+							<div class="w-full md:flex-1 text-xl">{info.name}</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-center border-b-2 border-gray-200">
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								연락처
 							</div>
-							<div class="w-full md:flex-1 text-xl">010-1111-2222</div>
+							<div class="w-full md:flex-1 text-xl">
+								{info.phone1}-{info.phone2}-{info.phone3}
+							</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-center border-b-2 border-gray-200">
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								인분
 							</div>
-							<div class="w-full md:flex-1 text-xl">12 인분</div>
+							<div class="w-full md:flex-1 text-xl">{info.count} 인분</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-center">
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								요청사항
 							</div>
-							<div class="w-full md:flex-1 text-xl">없음</div>
+							<div class="w-full md:flex-1 text-xl">
+								{info.request === "" ? "없음" : info.request}
+							</div>
 						</div>
 					</div>
 				</InfoBlock>
@@ -54,26 +54,34 @@ const OrderFinal = () => {
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								날짜
 							</div>
-							<div class="w-full md:flex-1 text-xl">10월 1일</div>
+							<div class="w-full md:flex-1 text-xl">
+								{info.date.getFullYear()}-{info.date.getMonth()}-
+								{info.date.getDate()}
+							</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-center border-b-2 border-gray-200">
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								시간
 							</div>
-							<div class="w-full md:flex-1 text-xl">18시 00분</div>
+							<div class="w-full md:flex-1 text-xl">
+								{info.date.getHours()}시 {info.date.getMinutes()}분
+							</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-center border-b-2 border-gray-200">
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								수령방식
 							</div>
-							<div class="w-full md:flex-1 text-xl">배달</div>
+							<div class="w-full md:flex-1 text-xl">
+								{info.delivery === "delivery" ? "배달" : "직접 수령"}
+							</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start">
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								배달장소
 							</div>
 							<div class="w-full md:flex-1 text-xl">
-								도로명 주소 <br></br>상세주소
+								{info.address1} <br></br>
+								{info.address2}
 							</div>
 						</div>
 					</div>
@@ -85,7 +93,7 @@ const OrderFinal = () => {
 								메인메뉴
 							</div>
 							<div class="w-full md:flex-1 text-xl">
-								메인메뉴1, 메인메뉴2, 메인메뉴3, 메인메뉴4
+								{info.mainMenu.join(", ")}
 							</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start border-b-2 border-gray-200">
@@ -93,21 +101,21 @@ const OrderFinal = () => {
 								식사메뉴
 							</div>
 							<div class="w-full md:flex-1 text-xl">
-								식사메뉴1, 식사메뉴2, 식사메뉴3, 식사메뉴4
+								{info.subMenu.join(", ")}
 							</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start border-b-2 border-gray-200">
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								국1
 							</div>
-							<div class="w-full md:flex-1 text-xl">국1</div>
+							<div class="w-full md:flex-1 text-xl">{info.soup.join(", ")}</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start">
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								디저트
 							</div>
 							<div class="w-full md:flex-1 text-xl">
-								디저트1, 디저트2, 디저트3, 디저트4
+								{info.dessert.join(", ")}
 							</div>
 						</div>
 					</div>
@@ -118,15 +126,46 @@ const OrderFinal = () => {
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								결제수단
 							</div>
-							<div class="w-full md:flex-1 text-xl">결제수단 1</div>
+							<div class="w-full md:flex-1 text-xl">
+								{info.payment === "card"
+									? "신용카드"
+									: info.payment === "cash"
+									? "현금"
+									: "계좌이체"}
+							</div>
 						</div>
 
-						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start">
-							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
-								현금영수증
+						{!info.cashReceipt.status ? (
+							<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start">
+								<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
+									현금영수증
+								</div>
+								<div class="w-full md:flex-1 text-xl">없음</div>
 							</div>
-							<div class="w-full md:flex-1 text-xl">없음</div>
-						</div>
+						) : (
+							<>
+								<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start">
+									<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
+										현금영수증
+									</div>
+									<div class="w-full md:flex-1 text-xl">
+										{info.cashReceipt.type === "business"
+											? "사업자증빙용"
+											: "개인소득공제용"}
+									</div>
+								</div>
+								<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start">
+									<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
+										{info.cashReceipt.type === "business"
+											? "사업자번호"
+											: "핸드폰번호"}
+									</div>
+									<div class="w-full md:flex-1 text-xl">
+										{info.cashReceipt.number}
+									</div>
+								</div>
+							</>
+						)}
 					</div>
 				</InfoBlock>
 			</div>

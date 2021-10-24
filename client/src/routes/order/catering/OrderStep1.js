@@ -1,28 +1,85 @@
-import React, { useState, useEffect, useRef } from "react";
-import PageLayout from "components/Layout/PageLayout";
-import ContentLayout from "components/Layout/ContentLayout";
-import styled, { css } from "styled-components";
-import StepBox from "components/Box/StepBox";
+import Modal from "@mui/material/Modal";
 import InfoBlock from "components/Block/InfoBlock";
+import PopupPostCodeBlock from "components/Block/PopupPostCodeBlock";
 import InputBox from "components/Box/InputBox";
-import SubmitButton from "components/Button/SubmitButton";
-import { DatePickerComponent } from "@syncfusion/ej2-react-calendars";
+import React, { useRef } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { AiTwotoneCalendar } from "react-icons/ai";
+import styled from "styled-components";
+
+// const style = {
+// 	position: "absolute",
+// 	top: "50%",
+// 	left: "50%",
+// 	transform: "translate(-50%, -50%)",
+// 	width: 400,
+// 	bgcolor: "background.paper",
+// 	border: "2px solid #000",
+// 	boxShadow: 24,
+// 	p: 4,
+// };
+
+const Container = styled.div`
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 400;
+	border: 2px solid #000;
+	/* boxshadow: 24;
+	p: 4; */
+`;
 
 const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
-	// const [date, setDate] = useState(new Date());
-	const passStep = () => {
-		console.log("step 1 마감");
-		console.log(info);
-		setStep(2);
-		document.getElementById("scrollRef").scrollTo(0, 0);
+	const [open, setOpen] = React.useState(false);
+	const handleOpen = () => setOpen(true);
+	const handleClose = () => setOpen(false);
+
+	const nameRef = useRef();
+	const phone1Ref = useRef();
+	const phone2Ref = useRef();
+	const phone3Ref = useRef();
+	const countRef = useRef();
+	const requestRef = useRef();
+	const address1Ref = useRef();
+	const address2Ref = useRef();
+	const addressBtnRef = useRef();
+
+	const clickAddress = (address) => {
+		const cp = { ...info };
+		cp["address1"] = address;
+		setInfo(cp);
 	};
-	// const onChange2 = (date) => {
-	// 	setDate(date);
-	// 	changeInfo();
-	// };
+	const nextStep = () => {
+		if (info.name === "") {
+			alert("이름을 입력해주세요.");
+			nameRef.current.focus();
+		} else if (info.phone1 === "") {
+			alert("핸드폰 번호를 입력해주세요.");
+			phone1Ref.current.focus();
+		} else if (info.phone2 === "") {
+			alert("핸드폰 번호를 입력해주세요.");
+			phone2Ref.current.focus();
+		} else if (info.phone3 === "") {
+			alert("핸드폰 번호를 입력해주세요.");
+			phone3Ref.current.focus();
+		} else if (info.count === "" || info.current === 0) {
+			alert("인원수를 입력해주세요.");
+			countRef.current.focus();
+		} else if (info.address1 === "") {
+			alert("도로명 주소를 입력해주세요.");
+			// address1Ref.current.focus();
+			addressBtnRef.current.click();
+		} else if (info.address2 === "") {
+			alert("상세 주소를 입력해주세요.");
+			address2Ref.current.focus();
+		} else {
+			setStep(2);
+			document.getElementById("scrollRef").scrollTo(0, 0);
+		}
+	};
+
 	const dateToString = (date) => {
 		return (
 			date.getFullYear() +
@@ -48,90 +105,97 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
 	};
 
 	return (
-		<div class="w-full flex flex-col justify-center items-center">
-			<div class="w-full md:w-2/3 lg:w-1/2">
-				<InfoBlock title={"예약자 정보"}>
-					<div class="px-4 flex flex-col">
-						<div class="h-12 mb-4 flex flex-row justify-between items-center">
-							<div class="w-1/4 text-xl">이름</div>
-							<div class="flex-1 h-full">
-								<InputBox
-									value={info.name}
-									type="name"
-									placeholder="이름을 입력하세요"
-									onChange={changeInfo}
-								/>
-							</div>
-						</div>
-						<div class="h-12 mb-4 flex flex-row justify-between items-center">
-							<div class="w-1/4 text-xl">연락처</div>
-							<div class="flex-1 h-full grid grid-cols-3 gap-2">
-								<InputBox
-									value={info.phone1}
-									type="phone1"
-									placeholder="010"
-									onChange={changeInfo}
-								/>
-								<InputBox
-									value={info.phone2}
-									type="phone2"
-									placeholder=""
-									onChange={changeInfo}
-								/>
-								<InputBox
-									value={info.phone3}
-									type="phone3"
-									placeholder=""
-									onChange={changeInfo}
-								/>
-							</div>
-						</div>
-						<div class="h-12 mb-4 flex flex-row justify-between items-center">
-							<div class="w-1/4 text-xl">인분</div>
-							<div class="flex-1 h-full">
-								<InputBox
-									value={info.count}
-									type="count"
-									placeholder="ex) 10인분 (최소 10인분)"
-									onChange={changeInfo}
-								/>
-							</div>
-						</div>
-						<div class="h-12 mb-4 flex flex-row justify-between items-center">
-							<div class="w-1/4 text-xl">요청사항</div>
-							<div class="flex-1 h-full">
-								<InputBox
-									value={info.request}
-									type="request"
-									placeholder="최대 50자까지 입력 가능"
-									onChange={changeInfo}
-								/>
-							</div>
-						</div>
-					</div>
-				</InfoBlock>
-				<InfoBlock title={"예약 일정 정보"}>
-					<p class="w-full text-center mb-4 font-bold text-hansupBrown">
-						배달을 원하는 시간과 장소를 입력해주세요.{" "}
-					</p>
-					<div class="px-4 flex flex-col">
-						<div class="h-12 mb-4 flex flex-row justify-between items-center">
-							<div class="w-1/4 text-xl">날짜</div>
-							<div class="flex-1 h-full flex justify-between items-center">
-								<div class="flex-1 h-12 px-4 outline-none border-2 border-gray-200 focus:border-hansupBrown transition delay-100 duration-200 flex items-center">
-									{dateToString(info.date)}
+		<>
+			<div class="w-full flex flex-col justify-center items-center select-none">
+				<div class="w-full md:w-2/3 lg:w-1/2">
+					<InfoBlock title={"예약자 정보"}>
+						<div class="px-4 flex flex-col">
+							<div class="h-12 mb-4 flex flex-row justify-between items-center">
+								<div class="w-1/4 text-xl">이름</div>
+								<div class="flex-1 h-full">
+									<InputBox
+										value={info.name}
+										refName={nameRef}
+										type="name"
+										placeholder="이름을 입력하세요"
+										onChange={changeInfo}
+									/>
 								</div>
-								<div class="w-12">
-									<DatePicker
-										selected={info.date}
-										onChange={(date) => changeInfo(date, "date")}
-										showTimeSelect
-										customInput={<DateInput />}
+							</div>
+							<div class="h-12 mb-4 flex flex-row justify-between items-center">
+								<div class="w-1/4 text-xl">연락처</div>
+								<div class="flex-1 h-full grid grid-cols-3 gap-2">
+									<InputBox
+										value={info.phone1}
+										refName={phone1Ref}
+										type="phone1"
+										placeholder="010"
+										onChange={changeInfo}
+									/>
+									<InputBox
+										value={info.phone2}
+										refName={phone2Ref}
+										type="phone2"
+										placeholder=""
+										onChange={changeInfo}
+									/>
+									<InputBox
+										value={info.phone3}
+										refName={phone3Ref}
+										type="phone3"
+										placeholder=""
+										onChange={changeInfo}
+									/>
+								</div>
+							</div>
+							<div class="h-12 mb-4 flex flex-row justify-between items-center">
+								<div class="w-1/4 text-xl">인원수</div>
+								<div class="flex-1 h-full">
+									<InputBox
+										value={info.count}
+										refName={countRef}
+										type="count"
+										placeholder="ex) 10 (최소 10인분)"
+										onChange={changeInfo}
+									/>
+								</div>
+							</div>
+							<div class="h-12 mb-4 flex flex-row justify-between items-center">
+								<div class="w-1/4 text-xl">요청사항</div>
+								<div class="flex-1 h-full">
+									<InputBox
+										value={info.request}
+										refName={requestRef}
+										type="request"
+										placeholder="최대 50자까지 입력 가능"
+										onChange={changeInfo}
 									/>
 								</div>
 							</div>
 						</div>
-						{/* <div class="h-12 mb-4 flex flex-row justify-between items-center">
+					</InfoBlock>
+					<InfoBlock title={"예약 일정 정보"}>
+						<p class="w-full text-center mb-4 font-bold text-hansupBrown">
+							배달을 원하는 시간과 장소를 입력해주세요.{" "}
+						</p>
+						<div class="px-4 flex flex-col">
+							<div class="h-12 mb-4 flex flex-row justify-between items-center">
+								<div class="w-1/4 text-xl">날짜</div>
+								<div class="flex-1 h-full flex justify-between items-center">
+									<div class="flex-1 h-12 px-4 outline-none border-2 border-gray-200 focus:border-hansupBrown transition delay-100 duration-200 flex items-center">
+										{dateToString(info.date)}
+									</div>
+									<div class="w-12">
+										<DatePicker
+											selected={info.date}
+											onChange={(date) => changeInfo(date, "date")}
+											showTimeSelect
+											customInput={<DateInput />}
+										/>
+									</div>
+								</div>
+							</div>
+							{/* <div class="h-12 mb-4 flex flex-row justify-between items-center">
 							<div class="w-1/4 text-xl">시간</div>
 							<div class="flex-1 h-full grid grid-cols-2 gap-2">
 								<InputBox
@@ -148,67 +212,94 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
 								/>
 							</div>
 						</div> */}
-						<div class="h-12 mb-4 flex flex-row justify-between items-center">
-							<div class="w-1/4 text-xl">수령방식</div>
-							<div class="flex-1 h-full grid grid-cols-2">
-								<div
-									onClick={() => changeInfo("delivery", "delivery")}
-									class={
-										"w-full h-full flex justify-center items-center transition delay-50 duration-100 border-2 cursor-pointer " +
-										(info.delivery === "delivery"
-											? "bg-hansupBrown text-white fond-bold"
-											: "border-gray-200 text-gray-400")
-									}
-								>
-									배달
-								</div>
-								<div
-									onClick={() => changeInfo("self", "delivery")}
-									class={
-										"w-full h-full flex justify-center items-center transition delay-50 duration-100 border-t-2 border-b-2 border-r-2 cursor-pointer " +
-										(info.delivery === "self"
-											? "bg-hansupBrown text-white fond-bold"
-											: "border-gray-200 text-gray-400")
-									}
-								>
-									{" "}
-									직접방문
+							<div class="h-12 mb-4 flex flex-row justify-between items-center">
+								<div class="w-1/4 text-xl">수령방식</div>
+								<div class="flex-1 h-full grid grid-cols-2">
+									<div
+										onClick={() => changeInfo("delivery", "delivery")}
+										class={
+											"w-full h-full flex justify-center items-center transition delay-50 duration-100 border-2 cursor-pointer " +
+											(info.delivery === "delivery"
+												? "bg-hansupBrown text-white fond-bold"
+												: "border-gray-200 text-gray-400")
+										}
+									>
+										배달
+									</div>
+									<div
+										onClick={() => changeInfo("self", "delivery")}
+										class={
+											"w-full h-full flex justify-center items-center transition delay-50 duration-100 border-t-2 border-b-2 border-r-2 cursor-pointer " +
+											(info.delivery === "self"
+												? "bg-hansupBrown text-white fond-bold"
+												: "border-gray-200 text-gray-400")
+										}
+									>
+										{" "}
+										직접방문
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="h-28 mb-8 flex flex-row justify-between items-start">
-							<div class="w-1/4 text-xl h-full grid grid-rows-2 gap-2 ">
-								<p class="w-full h-full flex items-center">배달장소</p>
-								<p></p>
-							</div>
+							<div class="h-28 mb-8 flex flex-row justify-between items-start">
+								<div class="w-1/4 text-xl h-full grid grid-rows-2 gap-2 ">
+									<p class="w-full h-full flex items-center">배달장소</p>
+									<p></p>
+								</div>
 
-							<div class="flex-1 h-full grid grid-rows-2 gap-2">
-								<InputBox
-									value={info.address1}
-									type="address1"
-									placeholder="도로명 주소"
-									onChange={changeInfo}
-								/>
-								<InputBox
-									value={info.address2}
-									type="address2"
-									placeholder="상세 주소"
-									onChange={changeInfo}
-								/>
+								<div class="flex-1 h-full grid grid-rows-2 gap-2">
+									<div class="h-full w-full flex flex-row justify-between items-center ">
+										<InputBox
+											value={info.address1}
+											refName={address1Ref}
+											type="address1"
+											placeholder="도로명 주소"
+											onChange={changeInfo}
+										/>
+										<button
+											ref={addressBtnRef}
+											onClick={handleOpen}
+											class="ml-2 w-24 bg-hansupBrown text-white h-full"
+										>
+											검색
+										</button>
+									</div>
+									<InputBox
+										value={info.address2}
+										refName={address2Ref}
+										type="address2"
+										placeholder="상세 주소"
+										onChange={changeInfo}
+									/>
+								</div>
+							</div>
+							<div class="w-full h-12">
+								<div
+									onClick={nextStep}
+									class="cursor-pointer w-full h-full flex justify-center items-center outline-none bg-hansupBrown text-white font-bold text-xl"
+								>
+									다음
+								</div>
 							</div>
 						</div>
-						<div class="w-full h-12">
-							<div
-								onClick={passStep}
-								class="cursor-pointer w-full h-full flex justify-center items-center outline-none bg-hansupBrown text-white font-bold text-xl"
-							>
-								다음
-							</div>
-						</div>
-					</div>
-				</InfoBlock>
+					</InfoBlock>
+				</div>
 			</div>
-		</div>
+			<Modal
+				open={open}
+				onClose={handleClose}
+				aria-labelledby="modal-modal-title"
+				aria-describedby="modal-modal-description"
+			>
+				<div class="">
+					<PopupPostCodeBlock
+						onClose={handleClose}
+						clickAddress={clickAddress}
+					/>
+					{/* <PopupDomBlock>
+					</PopupDomBlock> */}
+				</div>
+			</Modal>
+		</>
 	);
 };
 

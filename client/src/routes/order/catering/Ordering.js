@@ -24,8 +24,12 @@ const Ordering = () => {
 		subMenu: [],
 		soup: [],
 		dessert: [],
-		payment: "",
-		cashReceipt: {},
+		payment: "card",
+		cashReceipt: {
+			status: false,
+			type: "personal",
+			number: "",
+		},
 	});
 	const clickMenu = (index, type) => {
 		console.log(index, type);
@@ -42,7 +46,6 @@ const Ordering = () => {
 			setInfo(cp);
 		}
 		console.log(info);
-		여기부터 해결해보기
 	};
 
 	const changeInfo = (e, type) => {
@@ -169,7 +172,12 @@ const Ordering = () => {
 					/>
 				)}
 				{step === 3 && (
-					<OrderStep3 info={info} setInfo={setInfo} setStep={setStep} />
+					<OrderStep3
+						info={info}
+						setInfo={setInfo}
+						setStep={setStep}
+						changeInfo={changeInfo}
+					/>
 				)}
 				{step === 4 && (
 					<OrderFinal info={info} setInfo={setInfo} setStep={setStep} />

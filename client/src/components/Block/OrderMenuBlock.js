@@ -12,20 +12,32 @@ const Container = styled.div`
 	cursor: pointer;
 `;
 
-const OrderMenuBlock = ({
-	url,
-	title,
-	price,
-	clickMenu,
-	index,
-	type,
-	data,
-}) => {
+const OrderMenuBlock = ({ url, title, price, setMenu, index, type, menu }) => {
 	const [selected, setSelected] = useState(false);
 
 	const onToggle = () => {
-		// if (type === "select") setSelected(!selected);
-		clickMenu(index, type);
+		const cp = { ...menu };
+		if (menu[type].includes(index)) {
+			let arr = [...menu[type]].filter(function (element, i) {
+				return element !== index;
+			});
+			cp[type] = arr;
+			setMenu(cp);
+		} else {
+			if (type === "mainMenu" && menu[type].length >= 4) {
+				alert("메인 메뉴는 4개까지 선택가능합니다.");
+			} else if (type === "subMenu" && menu[type].length >= 4) {
+				alert("식사 메뉴는 4개까지 선택가능합니다.");
+			} else if (type === "soup" && menu[type].length >= 1) {
+				alert("국 메뉴는 1개까지 선택가능합니다.");
+			} else if (type === "dessert" && menu[type].length >= 5) {
+				alert("디저트 메뉴는 5개까지 선택가능합니다.");
+			} else {
+				let arr = [...menu[type], index];
+				cp[type] = arr;
+				setMenu(cp);
+			}
+		}
 	};
 
 	return (
@@ -39,7 +51,7 @@ const OrderMenuBlock = ({
 				<div
 					class={
 						"w-full h-full border-4 border-hansupBrown absolute left-0 bottom-0 flex justify-center items-center " +
-						(data && data[type].includes(index) ? "block" : "hidden")
+						(menu[type].includes(index) ? "block" : "hidden")
 					}
 				>
 					<div class="z-10 bg-hansupBrown w-full h-full opacity-60 flex justify-center items-center text-gray-200 relative"></div>
