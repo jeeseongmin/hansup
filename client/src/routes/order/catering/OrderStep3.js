@@ -7,12 +7,44 @@ import InfoBlock from "components/Block/InfoBlock";
 import InputBox from "components/Box/InputBox";
 import SubmitButton from "components/Button/SubmitButton";
 import RadioButton from "components/Button/RadioButton";
+import { BsArrowRight, BsArrowLeft } from "react-icons/bs";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
 
-const OrderStep3 = () => {
+const OrderStep3 = ({ info, setInfo, setStep, changeInfo }) => {
 	const [selected, setSelected] = useState(false);
 	const [selected2, setSelected2] = useState(false);
-	const onSubmit = () => {};
-	const onChange = () => {};
+	const prevStep = () => {
+		setStep(2);
+		document.getElementById("scrollRef").scrollTo(0, 0);
+	};
+
+	const handleChange = (e) => {
+		const cp = { ...info };
+		cp["payment"] = e.target.value;
+		setInfo(cp);
+	};
+
+	const onChangeNumber = (e) => {
+		const cp = { ...info };
+		cp["cashReceipt"].number = e.target.value;
+		setInfo(cp);
+	};
+
+	useEffect(() => {
+		console.log(selected2);
+		const cp = { ...info };
+		cp["cashReceipt"].status = selected;
+		cp["cashReceipt"].type = selected2 ? "business" : "personal";
+	}, [selected, selected2]);
+
+	const nextStep = () => {
+		setStep(4);
+		console.log(info);
+		document.getElementById("scrollRef").scrollTo(0, 0);
+	};
 	return (
 		<div class="w-full flex flex-col justify-center items-center">
 			<div class="h-full px-6 py-8 w-full md:w-2/3 lg:w-1/2 border border-gray-200 shadow-lg">
@@ -22,25 +54,29 @@ const OrderStep3 = () => {
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								이름
 							</div>
-							<div class="w-full md:flex-1 text-xl">김한숲</div>
+							<div class="w-full md:flex-1 text-xl">{info.name}</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-center border-b-2 border-gray-200">
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								연락처
 							</div>
-							<div class="w-full md:flex-1 text-xl">010-1111-2222</div>
+							<div class="w-full md:flex-1 text-xl">
+								{info.phone1}-{info.phone2}-{info.phone3}
+							</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-center border-b-2 border-gray-200">
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								인분
 							</div>
-							<div class="w-full md:flex-1 text-xl">12 인분</div>
+							<div class="w-full md:flex-1 text-xl">{info.count} 인분</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-center">
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								요청사항
 							</div>
-							<div class="w-full md:flex-1 text-xl">없음</div>
+							<div class="w-full md:flex-1 text-xl">
+								{info.request === "" ? "없음" : info.request}
+							</div>
 						</div>
 					</div>
 				</InfoBlock>
@@ -50,26 +86,34 @@ const OrderStep3 = () => {
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								날짜
 							</div>
-							<div class="w-full md:flex-1 text-xl">10월 1일</div>
+							<div class="w-full md:flex-1 text-xl">
+								{info.date.getFullYear()}-{info.date.getMonth()}-
+								{info.date.getDate()}
+							</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-center border-b-2 border-gray-200">
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								시간
 							</div>
-							<div class="w-full md:flex-1 text-xl">18시 00분</div>
+							<div class="w-full md:flex-1 text-xl">
+								{info.date.getHours()}시 {info.date.getMinutes()}분
+							</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-center border-b-2 border-gray-200">
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								수령방식
 							</div>
-							<div class="w-full md:flex-1 text-xl">배달</div>
+							<div class="w-full md:flex-1 text-xl">
+								{info.delivery === "delivery" ? "배달" : "직접 수령"}
+							</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start">
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								배달장소
 							</div>
 							<div class="w-full md:flex-1 text-xl">
-								도로명 주소 <br></br>상세주소
+								{info.address1} <br></br>
+								{info.address2}
 							</div>
 						</div>
 					</div>
@@ -81,7 +125,7 @@ const OrderStep3 = () => {
 								메인메뉴
 							</div>
 							<div class="w-full md:flex-1 text-xl">
-								메인메뉴1, 메인메뉴2, 메인메뉴3, 메인메뉴4
+								{info.mainMenu.join(", ")}
 							</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start border-b-2 border-gray-200">
@@ -89,21 +133,21 @@ const OrderStep3 = () => {
 								식사메뉴
 							</div>
 							<div class="w-full md:flex-1 text-xl">
-								식사메뉴1, 식사메뉴2, 식사메뉴3, 식사메뉴4
+								{info.subMenu.join(", ")}
 							</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start border-b-2 border-gray-200">
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								국1
 							</div>
-							<div class="w-full md:flex-1 text-xl">국1</div>
+							<div class="w-full md:flex-1 text-xl">{info.soup.join(", ")}</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start">
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								디저트
 							</div>
 							<div class="w-full md:flex-1 text-xl">
-								디저트1, 디저트2, 디저트3, 디저트4
+								{info.dessert.join(", ")}
 							</div>
 						</div>
 					</div>
@@ -111,11 +155,30 @@ const OrderStep3 = () => {
 				<InfoBlock title={"결제"}>
 					<div class="flex flex-col ">
 						<div class="flex flex-col mb-4">
-							<p class="text-lg mb-4">결제수단</p>
-							<input
+							{/* <p class="text-lg mb-4">결제수단</p> */}
+							<FormControl sx={{ m: 1, minWidth: 80 }}>
+								<InputLabel id="demo-simple-select-autowidth-label">
+									결제수단
+								</InputLabel>
+
+								<Select
+									value={info.payment}
+									label="결제 수단"
+									onChange={handleChange}
+								>
+									<MenuItem value={"card"}>신용카드</MenuItem>
+									<MenuItem value={"cash"}>현금</MenuItem>
+									<MenuItem value={"transfer"}>계좌이체</MenuItem>
+								</Select>
+							</FormControl>
+
+							{/* <input
 								type="text"
-								class="px-2 text-lg border-2 border-gray-300 outline-none w-full h-12 flex justify-center items-center"
-							/>
+								placeholder="ex) 신용카드, 현금, 계좌이체"
+								value={info.payment}
+								onChange={(e) => changeInfo(e, "payment")}
+								class="px-4 text-lg border-2 border-gray-300 outline-none w-full h-12 flex justify-center items-center"
+							/> */}
 						</div>
 						<div
 							class={
@@ -151,7 +214,11 @@ const OrderStep3 = () => {
 								(selected ? "block" : "hidden")
 							}
 						>
-							<div class="flex flex-col h-auto">
+							{/* 
+								selected2가 false이면 개인소득공제용 
+								selected2가 true이면 사업자증빙용
+							*/}
+							<div class="flex flex-col h-auto mb-4">
 								<div class="w-full h-8">
 									<RadioButton
 										text={"개인소득공제용"}
@@ -160,16 +227,8 @@ const OrderStep3 = () => {
 										clicked={false}
 									/>
 								</div>
-								<div class="h-12 pl-8 my-2">
-									<InputBox
-										value={""}
-										placeholder="휴대폰 번호"
-										type=""
-										onChange={onChange}
-									/>
-								</div>
 							</div>
-							<div class="flex flex-col">
+							<div class="flex flex-col mb-4">
 								<div class="w-fuill h-8">
 									<RadioButton
 										text={"사업자증빙용"}
@@ -179,9 +238,31 @@ const OrderStep3 = () => {
 									/>
 								</div>
 							</div>
+							<div class="h-12 my-2">
+								<InputBox
+									value={info.cashReceipt["number"]}
+									placeholder={!selected2 ? "휴대폰 번호" : "사업자등록번호"}
+									type=""
+									onChange={onChangeNumber}
+								/>
+							</div>
 						</div>
 						<div class="w-full h-12 -mb-8">
-							<SubmitButton text={"결제"} onSubmit={(e) => onSubmit(e)} />
+							{/* <SubmitButton text={"결제"} onSubmit={(e) => onSubmit(e)} /> */}
+							<div class="w-full h-12 flex flex-row justify-between">
+								<div
+									onClick={prevStep}
+									class="w-36 md:w-48 cursor-pointer h-full flex justify-center items-center outline-none bg-hansupBrown text-white font-bold text-xl"
+								>
+									<BsArrowLeft class="mr-2" /> 이전
+								</div>
+								<div
+									onClick={nextStep}
+									class="w-36 md:w-48 cursor-pointer h-full flex justify-center items-center outline-none bg-hansupBrown text-white font-bold text-xl"
+								>
+									다음 <BsArrowRight class="ml-2" />
+								</div>
+							</div>
 						</div>
 					</div>
 				</InfoBlock>
