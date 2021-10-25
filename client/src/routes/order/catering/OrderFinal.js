@@ -1,13 +1,6 @@
-import React, { useState, useEffect } from "react";
-import PageLayout from "components/Layout/PageLayout";
-import ContentLayout from "components/Layout/ContentLayout";
-import styled, { css } from "styled-components";
-import StepBox from "components/Box/StepBox";
 import InfoBlock from "components/Block/InfoBlock";
-import InputBox from "components/Box/InputBox";
-import SubmitButton from "components/Button/SubmitButton";
-import RadioButton from "components/Button/RadioButton";
 import Description from "components/Description";
+import React from "react";
 
 const OrderFinal = ({ info }) => {
 	return (
@@ -134,6 +127,14 @@ const OrderFinal = ({ info }) => {
 									: info.payment === "cash"
 									? "현금"
 									: "계좌이체"}
+							</div>
+						</div>
+						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start border-b-2 border-gray-200">
+							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
+								결제여부
+							</div>
+							<div class="w-full md:flex-1 text-xl">
+								{info.payed ? "결제 완료" : "미결제"}
 							</div>
 						</div>
 

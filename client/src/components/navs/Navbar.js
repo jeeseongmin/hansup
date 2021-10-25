@@ -57,6 +57,7 @@ const SubContainer = styled.div`
 
 	${(props) =>
 		props.num !== 0 &&
+		props.num !== 6 &&
 		css`
 			display: flex;
 			height: 4rem;
@@ -71,6 +72,7 @@ const SubContainer = styled.div`
 
 		${(props) =>
 			props.num !== 0 &&
+			props.num !== 6 &&
 			css`
 				display: flex;
 				height: 0rem;
@@ -138,6 +140,8 @@ const Navbar = ({ currentMenu }) => {
 			setMenu(4);
 		} else if (e.target.innerText === "협력기업") {
 			setMenu(5);
+		} else if (e.target.innerText === "관리자") {
+			setMenu(6);
 		} else if (menu === 0) {
 			setMenu(1);
 		}

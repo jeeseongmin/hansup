@@ -30,6 +30,7 @@ const Ordering = () => {
 			type: "personal",
 			number: "",
 		},
+		payed: false,
 	});
 	const clickMenu = (index, type) => {
 		console.log(index, type);
