@@ -2,7 +2,7 @@ import Modal from "@mui/material/Modal";
 import InfoBlock from "components/Block/InfoBlock";
 import PopupPostCodeBlock from "components/Block/PopupPostCodeBlock";
 import InputBox from "components/Box/InputBox";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -34,7 +34,7 @@ const Container = styled.div`
 
 const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
 	const history = useHistory();
-	const [open, setOpen] = React.useState(false);
+	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
 

@@ -51,6 +51,7 @@ const Title = styled.span`
 			border-radius: 25px;
 		`}
 	${(props) =>
+		props.menu !== 6 &&
 		props.current === props.menu &&
 		css`
 			border-top: 4px solid #6c4d3f;

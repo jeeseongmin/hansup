@@ -1,19 +1,22 @@
-import React, { useState, useEffect, useRef } from "react";
-import PageLayout from "components/Layout/PageLayout";
-import ContentLayout from "components/Layout/ContentLayout";
-import ReviewListBlock from "components/Block/ReviewListBlock";
-import Subtitle from "components/Subtitle";
-import { VscArrowRight } from "react-icons/vsc";
-import { Link, Switch, Route, useHistory } from "react-router-dom";
-import CreateVoice from "routes/community/Voice/CreateVoice";
-import DefaultButton from "components/Button/DefaultButton";
+import CircularProgress from "@mui/material/CircularProgress";
+import Modal from "@mui/material/Modal";
+import axios from "axios";
 import InfoBlock from "components/Block/InfoBlock";
+import OrderReceiptBlock from "components/Block/OrderReceiptBlock";
 import InputBox from "components/Box/InputBox";
+import ContentLayout from "components/Layout/ContentLayout";
+import PageLayout from "components/Layout/PageLayout";
+import React, { useEffect, useRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import { AiTwotoneCalendar } from "react-icons/ai";
-import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 const OrderCheck = () => {
+	const [loading, setLoading] = useState(false);
+	const [empty, setEmpty] = useState(false);
+	const [open, setOpen] = useState(false);
+	const handleOpen = () => setOpen(true);
+	const handleClose = () => setOpen(false);
 	const [searchInfo, setSearchInfo] = useState({
 		name: "",
 		date: new Date(),
@@ -21,8 +24,23 @@ const OrderCheck = () => {
 		phone2: "",
 		phone3: "",
 	});
+	const modalRef = useRef();
 
-	const [orderInfo, setOrderInfo] = useState([]);
+	useEffect(() => {
+		if (!open) return;
+		function handleClick(e) {
+			if (modalRef.current === null) {
+				return;
+			} else if (!modalRef.current.contains(e.target)) {
+				handleClose();
+			}
+		}
+		window.addEventListener("click", handleClick);
+
+		return () => window.removeEventListener("click", handleClick);
+	}, [open]);
+
+	const [orderInfo, setOrderInfo] = useState({});
 
 	const nameRef = useRef();
 	const phone1Ref = useRef();
@@ -47,6 +65,7 @@ const OrderCheck = () => {
 	};
 
 	const orderCheck = async () => {
+		setLoading(false);
 		if (searchInfo.name === "") {
 			alert("이름을 입력해주세요");
 			nameRef.current.focus();
@@ -80,10 +99,17 @@ const OrderCheck = () => {
 						},
 					}
 				)
-				.then((Response) => {
-					setOrderInfo(Response.data);
+				.then(async (Response) => {
+					await setOrderInfo(Response.data[0]);
 					console.log(searchInfo.name, phoneNumber, searchInfo.date);
-					console.log(Response);
+					console.log(Response.data[0]);
+					if (Response.data.length > 0) {
+						setEmpty(false);
+						handleOpen();
+					} else {
+						setEmpty(true);
+					}
+					setLoading(true);
 				})
 				.catch((Error) => {
 					console.log(phoneNumber);
@@ -91,36 +117,6 @@ const OrderCheck = () => {
 				});
 			// await getOrderInfo();
 		}
-	};
-	const getOrderInfo = async () => {
-		let phoneNumber =
-			searchInfo.phone1 + "-" + searchInfo.phone2 + "-" + searchInfo.phone3;
-		console.log(searchInfo, phoneNumber);
-		await axios
-			.post(
-				"/api/order/search",
-				{
-					key: process.env.REACT_APP_API_KEY,
-					name: searchInfo.name,
-					phone: phoneNumber,
-					date: searchInfo.date,
-				},
-				{
-					headers: {
-						"Content-type": "application/json",
-						Accept: "application/json",
-					},
-				}
-			)
-			.then((Response) => {
-				setOrderInfo(Response.data);
-				console.log(searchInfo.name, phoneNumber, searchInfo.date);
-				console.log(orderInfo);
-			})
-			.catch((Error) => {
-				console.log(phoneNumber);
-				console.log(Error);
-			});
 	};
 	const dateToString = (date) => {
 		return (
@@ -142,92 +138,123 @@ const OrderCheck = () => {
 		);
 	};
 	return (
-		<PageLayout>
-			<div class="w-full flex flex-col justify-center items-center ">
-				<div class="w-full md:w-2/3 lg:w-2/3">
-					<ContentLayout subtitle={"예약 내역 확인"}>
-						<p class="w-full text-left text-xl mb-4 font-bold text-hansupBrown">
-							예약 시 입력하셨던 이름과 연락처, 예약 날짜를 적어주세요.
-						</p>
-						<InfoBlock title={""}>
-							<div class="px-4 flex flex-col mb-4">
-								<div class="h-12 mb-4 flex flex-row justify-between items-center">
-									<div class="w-1/4 text-xl">이름</div>
-									<div class="flex-1 h-full">
-										<InputBox
-											value={searchInfo.name}
-											refName={nameRef}
-											type="name"
-											placeholder="이름을 입력하세요"
-											onChange={changeInfo}
-										/>
-									</div>
-								</div>
-								<div class="h-12 flex flex-row justify-between items-center mb-4">
-									<div class="w-1/4 text-xl">연락처</div>
-									<div class="flex-1 h-full grid grid-cols-3 gap-2">
-										<InputBox
-											value={searchInfo.phone1}
-											refName={phone1Ref}
-											type="phone1"
-											placeholder="010"
-											onChange={changeInfo}
-										/>
-										<InputBox
-											value={searchInfo.phone2}
-											refName={phone2Ref}
-											type="phone2"
-											placeholder=""
-											onChange={changeInfo}
-										/>
-										<InputBox
-											value={searchInfo.phone3}
-											refName={phone3Ref}
-											type="phone3"
-											placeholder=""
-											onChange={changeInfo}
-										/>
-									</div>
-								</div>
-								<div class="h-12 flex flex-row justify-between items-center">
-									<div class="w-1/4 text-xl">예약 날짜</div>
-									<div class="flex-1 h-full flex justify-between items-center">
-										<div class="flex-1 h-12 px-4 outline-none border-2 border-gray-200 focus:border-hansupBrown transition delay-100 duration-200 flex items-center">
-											{dateToString(searchInfo.date)}
-										</div>
-										<div class="w-12">
-											<DatePicker
-												selected={searchInfo.date}
-												onChange={(date) => changeInfo(date, "date")}
-												customInput={<DateInput />}
+		<>
+			<PageLayout>
+				<div class="w-full flex flex-col justify-center items-center ">
+					<div class="w-full md:w-2/3 lg:w-2/3">
+						<ContentLayout subtitle={"예약 내역 확인"}>
+							<p class="w-full text-left text-xl mb-4 font-bold text-hansupBrown">
+								예약 시 입력하셨던 이름과 연락처, 예약 날짜를 적어주세요.
+							</p>
+							<InfoBlock title={""}>
+								<div class="px-4 flex flex-col mb-4">
+									<div class="h-12 mb-4 flex flex-row justify-between items-center">
+										<div class="w-1/4 text-xl">이름</div>
+										<div class="flex-1 h-full">
+											<InputBox
+												value={searchInfo.name}
+												refName={nameRef}
+												type="name"
+												placeholder="이름을 입력하세요"
+												onChange={changeInfo}
 											/>
 										</div>
 									</div>
+									<div class="h-12 flex flex-row justify-between items-center mb-4">
+										<div class="w-1/4 text-xl">연락처</div>
+										<div class="flex-1 h-full grid grid-cols-3 gap-2">
+											<InputBox
+												value={searchInfo.phone1}
+												refName={phone1Ref}
+												type="phone1"
+												placeholder="010"
+												onChange={changeInfo}
+											/>
+											<InputBox
+												value={searchInfo.phone2}
+												refName={phone2Ref}
+												type="phone2"
+												placeholder=""
+												onChange={changeInfo}
+											/>
+											<InputBox
+												value={searchInfo.phone3}
+												refName={phone3Ref}
+												type="phone3"
+												placeholder=""
+												onChange={changeInfo}
+											/>
+										</div>
+									</div>
+									<div class="h-12 flex flex-row justify-between items-center">
+										<div class="w-1/4 text-xl">예약 날짜</div>
+										<div class="flex-1 h-full flex justify-between items-center">
+											<div class="flex-1 h-12 px-4 outline-none border-2 border-gray-200 focus:border-hansupBrown transition delay-100 duration-200 flex items-center">
+												{dateToString(searchInfo.date)}
+											</div>
+											<div class="w-12">
+												<DatePicker
+													selected={searchInfo.date}
+													onChange={(date) => changeInfo(date, "date")}
+													customInput={<DateInput />}
+												/>
+											</div>
+										</div>
+									</div>
+
+									{empty && loading ? (
+										<p class="pt-6 w-full text-center text-xl mb-4 font-bold text-hansupBrown">
+											예약 내역이 존재하지 않습니다.
+										</p>
+									) : empty && !loading ? (
+										<div class="pt-6 w-full text-center text-xl font-bold text-hansupBrown">
+											<CircularProgress />
+										</div>
+									) : (
+										<div class=" hidden pt-6 w-full text-center text-xl mb-4 font-bold text-hansupBrown"></div>
+									)}
 								</div>
-							</div>
-							<div class="px-4 pt-4 flex flex-col md:flex-row justify-between border-t border-hansupBrown">
-								<div class="w-full md:w-48 lg:w-60 h-12 mb-4 md:mb-0">
-									<div
-										onClick={() => goPage("/order/catering/orderMain")}
-										class="cursor-pointer w-full h-full flex justify-center items-center outline-none transtion delay-50 duration-300 bg-hansupBrown hover:bg-white text-white hover:text-hansupBrown border hover:border-hansupBrown font-bold text-xl"
-									>
-										뒤로가기
+								<div class="px-4 pt-4 flex flex-col md:flex-row justify-between border-t border-hansupBrown">
+									<div class="w-full md:w-48 lg:w-60 h-12 mb-4 md:mb-0">
+										<div
+											onClick={() => goPage("/order/catering/orderMain")}
+											class="cursor-pointer w-full h-full flex justify-center items-center outline-none transtion delay-50 duration-300 bg-hansupBrown hover:bg-white text-white hover:text-hansupBrown border hover:border-hansupBrown font-bold text-xl"
+										>
+											뒤로가기
+										</div>
+									</div>
+									<div class="w-full md:w-48 lg:w-60 h-12">
+										<div
+											onClick={orderCheck}
+											class="cursor-pointer w-full h-full flex justify-center items-center outline-none transtion delay-50 duration-300 bg-hansupBrown hover:bg-white text-white hover:text-hansupBrown border hover:border-hansupBrown font-bold text-xl"
+										>
+											확인하기
+										</div>
 									</div>
 								</div>
-								<div class="w-full md:w-48 lg:w-60 h-12">
-									<div
-										onClick={orderCheck}
-										class="cursor-pointer w-full h-full flex justify-center items-center outline-none transtion delay-50 duration-300 bg-hansupBrown hover:bg-white text-white hover:text-hansupBrown border hover:border-hansupBrown font-bold text-xl"
-									>
-										확인하기
-									</div>
-								</div>
-							</div>
-						</InfoBlock>
-					</ContentLayout>
+							</InfoBlock>
+						</ContentLayout>
+					</div>
 				</div>
-			</div>
-		</PageLayout>
+			</PageLayout>
+			<Modal
+				open={open}
+				onClose={handleClose}
+				aria-labelledby="modal-modal-title"
+				aria-describedby="modal-modal-description"
+			>
+				<div class="h-full">
+					<div class="w-full h-full flex flex-col justify-center items-center py-16 px-4 lg:px-16">
+						<div
+							ref={modalRef}
+							class="select-none bg-white w-full md:w-2/3 lg:w-1/2 max-h-full overflow-auto h-full p-8"
+						>
+							<OrderReceiptBlock info={orderInfo} handleClose={handleClose} />
+						</div>
+					</div>
+				</div>
+			</Modal>
+		</>
 	);
 };
 
