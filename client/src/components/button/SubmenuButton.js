@@ -40,7 +40,14 @@ const Submenu = ({ text, current }) => {
 			setSelected(true);
 		else if (location.pathname.includes("review") && current.includes("review"))
 			setSelected(true);
-		else if (location.pathname === current) setSelected(true);
+		else if (
+			location.pathname.includes("/order/catering/order") &&
+			(current.includes("orderMain") ||
+				current.includes("orderCheck") ||
+				current.includes("ordering"))
+		) {
+			setSelected(true);
+		} else if (location.pathname === current) setSelected(true);
 		else setSelected(false);
 	}, [location.pathname]);
 

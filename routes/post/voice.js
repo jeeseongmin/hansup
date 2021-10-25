@@ -4,7 +4,7 @@ let Voice = require("../../models/voice.model");
 const API_KEY = require("../../keyconfig");
 
 // Create voice
-router.route("/add").post((req, res) => {
+router.route("/create").post((req, res) => {
 	if (req.body.key === API_KEY) {
 		const one = {
 			status: req.body.status,
@@ -19,7 +19,7 @@ router.route("/add").post((req, res) => {
 
 		newOne
 			.save()
-			.then(() => res.json("Voice added!"))
+			.then(() => res.json("Voice created!"))
 			.catch((err) => res.status(400).json("Error: " + err));
 	} else return res.status(400).json("Error");
 });

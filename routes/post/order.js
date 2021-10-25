@@ -4,10 +4,10 @@ let Order = require("../../models/order.model");
 const API_KEY = require("../../keyconfig");
 
 // Create order
-router.route("/add").post((req, res) => {
+router.route("/create").post((req, res) => {
 	if (req.body.key === API_KEY) {
 		const one = {
-			name: req.params.name,
+			name: req.body.name,
 			phone: req.body.phone,
 			count: req.body.count,
 			request: req.body.request,
@@ -26,7 +26,7 @@ router.route("/add").post((req, res) => {
 
 		newOne
 			.save()
-			.then(() => res.json("Order added!"))
+			.then(() => res.json("Order created!"))
 			.catch((err) => res.status(400).json("Error: " + err));
 	} else return res.status(400).json("Error");
 });
@@ -60,6 +60,32 @@ router.route("/page/:page").post((req, res) => {
 			.then((all) => res.json(all))
 			.catch((err) => res.status(400).json("Error: " + err));
 	} else return res.status(400).json("Error");
+});
+
+router.route("/search/:page").post((req, res) => {
+	if (req.body.key === API_KEY) {
+		let searchName = req.body.name;
+		let searchPhone = req.body.phone;
+		let searchYear = req.body.year;
+		let searchMonth = req.body.month;
+		let searchDate = req.body.date;
+
+		Order.find({
+			$and: [
+				{ name: { $regex: searchName, $options: "i" } },
+				{ phone: { $regex: searchPhone, $options: "i" } },
+				{
+					date: {
+						$gte: new Date(searchYear, searchMonth, searchDate, 0, 0, 0),
+						$lte: new Date(searchYear, searchMonth, searchDate, 23, 59, 59),
+					},
+				},
+			],
+		})
+			.sort({ createdAt: -1 })
+			.then((one) => res.json(one))
+			.catch((err) => res.status(400).json("Error: ") + err);
+	} else res.status(400).json("Error");
 });
 
 // Update order

@@ -13,7 +13,7 @@ const orderSchema = new Schema(
 			required: true,
 		},
 		count: {
-			type: String,
+			type: Number,
 			required: true,
 		},
 		request: {
@@ -21,7 +21,7 @@ const orderSchema = new Schema(
 			required: true,
 		},
 		date: {
-			type: String,
+			type: Date,
 			required: true,
 		},
 		delivery: {
@@ -36,7 +36,7 @@ const orderSchema = new Schema(
 			type: Array,
 			required: true,
 		},
-		SubMenu: {
+		subMenu: {
 			type: Array,
 			required: true,
 		},

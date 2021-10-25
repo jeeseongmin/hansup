@@ -55,8 +55,8 @@ const OrderFinal = ({ info }) => {
 								날짜
 							</div>
 							<div class="w-full md:flex-1 text-xl">
-								{info.date.getFullYear()}-{info.date.getMonth()}-
-								{info.date.getDate()}
+								{info.date.getFullYear()}년 {info.date.getMonth() + 1}월{" "}
+								{info.date.getDate()}일
 							</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-center border-b-2 border-gray-200">
@@ -93,7 +93,7 @@ const OrderFinal = ({ info }) => {
 								메인메뉴
 							</div>
 							<div class="w-full md:flex-1 text-xl">
-								{info.mainMenu.join(", ")}
+								{info.mainMenu.sort().join(", ")}
 							</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start border-b-2 border-gray-200">
@@ -101,21 +101,23 @@ const OrderFinal = ({ info }) => {
 								식사메뉴
 							</div>
 							<div class="w-full md:flex-1 text-xl">
-								{info.subMenu.join(", ")}
+								{info.subMenu.sort().join(", ")}
 							</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start border-b-2 border-gray-200">
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								국1
 							</div>
-							<div class="w-full md:flex-1 text-xl">{info.soup.join(", ")}</div>
+							<div class="w-full md:flex-1 text-xl">
+								{info.soup.sort().join(", ")}
+							</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start">
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								디저트
 							</div>
 							<div class="w-full md:flex-1 text-xl">
-								{info.dessert.join(", ")}
+								{info.dessert.sort().join(", ")}
 							</div>
 						</div>
 					</div>
@@ -169,6 +171,10 @@ const OrderFinal = ({ info }) => {
 					</div>
 				</InfoBlock>
 			</div>
+			<p class="font-bold text-hansupBrown text-xl text-center mb-4 leading-8">
+				주문을 확인한 뒤,<br class="block md:hidden"></br> 해당 연락처로 확정
+				문자를 드리겠습니다.
+			</p>
 			<p class="font-bold text-hansupBrown text-xl text-center mb-2 leading-8">
 				예약과 관련해서 문의있으시면,<br class="block md:hidden"></br> 하단의
 				번호로 연락주세요!

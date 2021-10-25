@@ -3,6 +3,7 @@ import InfoBlock from "components/Block/InfoBlock";
 import PopupPostCodeBlock from "components/Block/PopupPostCodeBlock";
 import InputBox from "components/Box/InputBox";
 import React, { useRef } from "react";
+import { useHistory } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { AiTwotoneCalendar } from "react-icons/ai";
@@ -32,6 +33,7 @@ const Container = styled.div`
 `;
 
 const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
+	const history = useHistory();
 	const [open, setOpen] = React.useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
@@ -50,6 +52,10 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
 		const cp = { ...info };
 		cp["address1"] = address;
 		setInfo(cp);
+	};
+	const prevStep = () => {
+		history.push("/order/catering/orderMain");
+		document.getElementById("scrollRef").scrollTo(0, 0);
 	};
 	const nextStep = () => {
 		if (info.name === "") {
@@ -272,10 +278,16 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
 									/>
 								</div>
 							</div>
-							<div class="w-full h-12">
+							<div class="w-full h-28 md:h-12 flex flex-col md:flex-row justify-between">
+								<div
+									onClick={prevStep}
+									class="mb-4 md:mb-0 cursor-pointer w-full md:w-48 lg:w-60 h-full flex justify-center items-center outline-none bg-hansupBrown text-white font-bold text-xl"
+								>
+									뒤로
+								</div>
 								<div
 									onClick={nextStep}
-									class="cursor-pointer w-full h-full flex justify-center items-center outline-none bg-hansupBrown text-white font-bold text-xl"
+									class="cursor-pointer w-full md:w-48 lg:w-60 h-full flex justify-center items-center outline-none bg-hansupBrown text-white font-bold text-xl"
 								>
 									다음
 								</div>

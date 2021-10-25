@@ -4,7 +4,7 @@ import labelCover from "image/labelCover.png";
 import { BsArrowRight } from "react-icons/bs";
 import styled, { css } from "styled-components";
 
-const Container = styled(Link)`
+const Container = styled.div`
 	width: 0%;
 	height: 100%;
 	margin-bottom: 1.5rem;
@@ -50,18 +50,19 @@ const ImageLabel = ({ imgUrl, text, url }) => {
 		setIsHover(false);
 	};
 
-	const goPage = (e) => {
-		e.preventDefault();
-		history.push(url);
-	};
+	// const goPage = (e) => {
+	// 	document.getElementById("scrollRef").scrollTo(0, 0);
+	// 	history.push(url);
+	// };
 	return (
 		<Link
 			to={url}
 			onMouseOver={onMouseOver}
 			onMouseOut={onMouseOut}
+			onClick={() => document.getElementById("scrollRef").scrollTo(0, 0)}
 			class="w-full h-16 lg:h-20 mb-6 cursor-pointer relative flex justify-between items-center px-8 text-white"
 		>
-			<Container onClick={goPage} isHover={isHover} />
+			<Container isHover={isHover} />
 			<img
 				src={labelCover}
 				class="z-40 h-full w-full object-cover absolute left-0 top-0"

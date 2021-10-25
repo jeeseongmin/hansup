@@ -73,7 +73,7 @@ const CreateVoice = () => {
 		} else {
 			axios
 				.post(
-					"/api/voice/add",
+					"/api/voice/create",
 					{
 						key: process.env.REACT_APP_API_KEY,
 						status: info.status,
