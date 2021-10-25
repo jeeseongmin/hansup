@@ -6,7 +6,7 @@ let User = require("../models/user.model");
 const API_KEY = require("../keyconfig");
 
 // Create
-router.route("/add").post((req, res) => {
+router.route("/create").post((req, res) => {
 	if (req.body.key === API_KEY) {
 		const newUser = new User({
 			type: req.body.type,
@@ -15,7 +15,7 @@ router.route("/add").post((req, res) => {
 		});
 		newUser
 			.save()
-			.then(() => res.json("User added!"))
+			.then(() => res.json("User created!"))
 			.catch((err) => res.status(400).json("Error: " + err));
 	} else return res.json({ message: "fail" });
 

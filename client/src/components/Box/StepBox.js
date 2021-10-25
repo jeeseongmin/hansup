@@ -17,7 +17,7 @@ const StepDiv = styled.div`
 	font-size: 1.25rem;
 	height: 2.5rem;
 	font-weight: bold;
-	cursor: pointer;
+	/* cursor: pointer; */
 	position: relative;
 	transition: all 0.3s ease;
 
@@ -49,6 +49,7 @@ const ArrowBox = styled.div`
 const StepBox = ({ step, current, text, setStep }) => {
 	return (
 		<StepDiv step={step} current={current} onClick={() => setStep(current)}>
+			{/* <StepDiv step={step} current={current}> */}
 			<span class="z-30">{text}</span>
 			{/* <ArrowBox step={step} step={1}/> */}
 			<ArrowBox step={step} current={current} />

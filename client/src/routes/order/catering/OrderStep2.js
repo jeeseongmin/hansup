@@ -11,14 +11,36 @@ import orderList from "routes/order/catering/data/orderList";
 import OrderListLayout from "components/Layout/OrderListLayout";
 import { BsArrowRight, BsArrowLeft } from "react-icons/bs";
 const OrderStep2 = ({ info, setInfo, setStep, clickMenu }) => {
+	const [menu, setMenu] = useState({
+		mainMenu: [...info.mainMenu],
+		subMenu: [...info.subMenu],
+		soup: [...info.soup],
+		dessert: [...info.dessert],
+	});
 	const prevStep = () => {
 		setStep(1);
 		document.getElementById("scrollRef").scrollTo(0, 0);
 	};
 
-	const check = () => {
-		setStep(3);
-		document.getElementById("scrollRef").scrollTo(0, 0);
+	const nextStep = () => {
+		if (menu["mainMenu"].length !== 4) {
+			alert("메인 메뉴를 4개 선택해주세요.");
+		} else if (menu["subMenu"].length !== 4) {
+			alert("식사 메뉴를 4개 선택해주세요.");
+		} else if (menu["soup"].length !== 1) {
+			alert("국 메뉴를 1개 선택해주세요.");
+		} else if (menu["dessert"].length !== 5) {
+			alert("디저트 메뉴를 5개 선택해주세요.");
+		} else {
+			const cp = { ...info };
+			cp["mainMenu"] = [...menu["mainMenu"]];
+			cp["subMenu"] = [...menu["subMenu"]];
+			cp["soup"] = [...menu["soup"]];
+			cp["dessert"] = [...menu["dessert"]];
+			setInfo(cp);
+			document.getElementById("scrollRef").scrollTo(0, 0);
+			setStep(3);
+		}
 	};
 
 	return (
@@ -27,12 +49,12 @@ const OrderStep2 = ({ info, setInfo, setStep, clickMenu }) => {
 				{[0, 1, 2, 3].map((element, index) => {
 					return (
 						<OrderListLayout
-							key={orderList[element]}
+							key={index}
 							info={orderList[element]}
 							col={5}
 							type={"select"}
-							clickMenu={clickMenu}
-							data={info}
+							setMenu={setMenu}
+							menu={menu}
 						/>
 					);
 				})}{" "}
@@ -45,7 +67,7 @@ const OrderStep2 = ({ info, setInfo, setStep, clickMenu }) => {
 							<BsArrowLeft class="mr-2" /> 이전
 						</div>
 						<div
-							onClick={check}
+							onClick={nextStep}
 							class="w-36 md:w-60 cursor-pointer h-full flex justify-center items-center outline-none bg-hansupBrown text-white font-bold text-xl"
 						>
 							다음 <BsArrowRight class="ml-2" />

@@ -4,7 +4,7 @@ let Notice = require("../../models/notice.model");
 const API_KEY = require("../../keyconfig");
 
 // Create notice
-router.route("/add").post((req, res) => {
+router.route("/create").post((req, res) => {
 	if (req.body.key === API_KEY) {
 		const one = {
 			title: req.body.title,
@@ -15,7 +15,7 @@ router.route("/add").post((req, res) => {
 
 		newOne
 			.save()
-			.then(() => res.json("Notice added!"))
+			.then(() => res.json("Notice created!"))
 			.catch((err) => res.status(400).json("Error: " + err));
 	} else res.status(400).json("Error");
 });

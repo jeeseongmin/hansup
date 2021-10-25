@@ -15,7 +15,7 @@ const Line = styled.div`
 	width: 100%;
 	border-top: 1px solid #6c4d3f;
 `;
-const OrderListLayout = ({ info, col, type, clickMenu, data }) => {
+const OrderListLayout = ({ info, col, type, setMenu, menu }) => {
 	const colStyle = "grid-cols-" + col;
 	return (
 		<div class="mb-16">
@@ -43,7 +43,8 @@ const OrderListLayout = ({ info, col, type, clickMenu, data }) => {
 								price={element.price + "원"}
 								index={index}
 								type={element.type}
-								clickMenu={clickMenu}
+								setMenu={setMenu}
+								menu={menu}
 							/>
 						);
 					})}
