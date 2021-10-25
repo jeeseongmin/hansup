@@ -12,6 +12,7 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
+import axios from "axios";
 
 const OrderStep3 = ({ info, setInfo, setStep, changeInfo }) => {
 	const [selected, setSelected] = useState(false);
@@ -40,10 +41,42 @@ const OrderStep3 = ({ info, setInfo, setStep, changeInfo }) => {
 		cp["cashReceipt"].type = selected2 ? "business" : "personal";
 	}, [selected, selected2]);
 
-	const nextStep = () => {
-		setStep(4);
+	const nextStep = async () => {
 		console.log(info);
-		document.getElementById("scrollRef").scrollTo(0, 0);
+		await axios
+			.post(
+				"/api/order/create",
+				{
+					key: process.env.REACT_APP_API_KEY,
+					name: info.name,
+					phone: info.phone1 + "-" + info.phone2 + "-" + info.phone3,
+					count: info.count,
+					request: info.request,
+					date: info.date,
+					delivery: info.delivery,
+					address: info.address1 + " " + info.address2,
+					mainMenu: info.mainMenu,
+					subMenu: info.subMenu,
+					soup: info.soup,
+					dessert: info.dessert,
+					payment: info.payment,
+					cashReceipt: info.cashReceipt,
+				},
+				{
+					headers: {
+						"content-type": "application/json",
+						Accept: "application/json",
+					},
+				}
+			)
+			.then((response) => {
+				setStep(4);
+				console.log(info);
+				document.getElementById("scrollRef").scrollTo(0, 0);
+			})
+			.catch((response) => {
+				console.log("Error!");
+			});
 	};
 	return (
 		<div class="w-full flex flex-col justify-center items-center">
@@ -87,8 +120,8 @@ const OrderStep3 = ({ info, setInfo, setStep, changeInfo }) => {
 								날짜
 							</div>
 							<div class="w-full md:flex-1 text-xl">
-								{info.date.getFullYear()}-{info.date.getMonth()}-
-								{info.date.getDate()}
+								{info.date.getFullYear()}년 {info.date.getMonth() + 1}월{" "}
+								{info.date.getDate()}일
 							</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-center border-b-2 border-gray-200">
@@ -125,7 +158,7 @@ const OrderStep3 = ({ info, setInfo, setStep, changeInfo }) => {
 								메인메뉴
 							</div>
 							<div class="w-full md:flex-1 text-xl">
-								{info.mainMenu.join(", ")}
+								{info.mainMenu.sort().join(", ")}
 							</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start border-b-2 border-gray-200">
@@ -133,21 +166,23 @@ const OrderStep3 = ({ info, setInfo, setStep, changeInfo }) => {
 								식사메뉴
 							</div>
 							<div class="w-full md:flex-1 text-xl">
-								{info.subMenu.join(", ")}
+								{info.subMenu.sort().join(", ")}
 							</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start border-b-2 border-gray-200">
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								국1
 							</div>
-							<div class="w-full md:flex-1 text-xl">{info.soup.join(", ")}</div>
+							<div class="w-full md:flex-1 text-xl">
+								{info.soup.sort().join(", ")}
+							</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start">
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								디저트
 							</div>
 							<div class="w-full md:flex-1 text-xl">
-								{info.dessert.join(", ")}
+								{info.dessert.sort().join(", ")}
 							</div>
 						</div>
 					</div>

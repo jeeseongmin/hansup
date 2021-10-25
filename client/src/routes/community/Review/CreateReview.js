@@ -45,7 +45,7 @@ const CreateReview = () => {
 
 			axios
 				.post(
-					"/api/review/add",
+					"/api/review/create",
 					{
 						key: process.env.REACT_APP_API_KEY,
 						content: info.content,

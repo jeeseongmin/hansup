@@ -132,7 +132,7 @@ const Navbar = ({ currentMenu }) => {
 			setMenu(1);
 		} else if (e.target.innerText === "한숲사업") {
 			setMenu(2);
-		} else if (e.target.innerText === "주문안내") {
+		} else if (e.target.innerText === "예약안내") {
 			setMenu(3);
 		} else if (e.target.innerText === "커뮤니티") {
 			setMenu(4);
@@ -185,7 +185,7 @@ const Navbar = ({ currentMenu }) => {
 					<Menu
 						toggleMenu={toggleMenu}
 						menu={3}
-						title={"주문안내"}
+						title={"예약안내"}
 						url={"/order/catering/menu"}
 						current={menu}
 						currentMenu={currentMenu}
@@ -284,8 +284,8 @@ const Navbar = ({ currentMenu }) => {
 							empty={false}
 						/>
 						<Submenu
-							title={"주문하기"}
-							url={"/order/catering/ordering"}
+							title={"케이터링 예약"}
+							url={"/order/catering/orderMain"}
 							empty={false}
 						/>
 						<Submenu title={""} url={"#"} empty={true} />
@@ -308,7 +308,7 @@ const Navbar = ({ currentMenu }) => {
 						/>
 						<Submenu
 							title={"고객의 소리"}
-							url={"/community/voice/main"}
+							url={"/community/voice/list"}
 							empty={false}
 						/>
 					</MenuContainer>

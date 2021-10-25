@@ -52,7 +52,7 @@ const CreateNotice = () => {
 		} else {
 			axios
 				.post(
-					"/api/notice/add",
+					"/api/notice/create",
 					{
 						key: process.env.REACT_APP_API_KEY,
 						title: info.title,

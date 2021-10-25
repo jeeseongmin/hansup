@@ -12,10 +12,10 @@ import OrderListLayout from "components/Layout/OrderListLayout";
 import { BsArrowRight, BsArrowLeft } from "react-icons/bs";
 const OrderStep2 = ({ info, setInfo, setStep, clickMenu }) => {
 	const [menu, setMenu] = useState({
-		mainMenu: [],
-		subMenu: [],
-		soup: [],
-		dessert: [],
+		mainMenu: [...info.mainMenu],
+		subMenu: [...info.subMenu],
+		soup: [...info.soup],
+		dessert: [...info.dessert],
 	});
 	const prevStep = () => {
 		setStep(1);

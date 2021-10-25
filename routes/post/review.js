@@ -4,7 +4,7 @@ let Review = require("../../models/review.model");
 const API_KEY = require("../../keyconfig");
 
 // Create review
-router.route("/add").post((req, res) => {
+router.route("/create").post((req, res) => {
 	if (req.body.key === API_KEY) {
 		const newOne = new Review({
 			content: req.body.content,
@@ -17,7 +17,7 @@ router.route("/add").post((req, res) => {
 		console.log(newOne);
 		newOne
 			.save()
-			.then(() => res.json("Review added!"))
+			.then(() => res.json("Review created!"))
 			.catch((err) => res.status(400).json("Error: " + err));
 	} else return res.status(400).json("Error");
 });
