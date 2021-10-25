@@ -20,6 +20,7 @@ router.route("/create").post((req, res) => {
 			dessert: req.body.dessert,
 			payment: req.body.payment,
 			cashReceipt: req.body.cashReceipt,
+			payed: false,
 		};
 
 		const newOne = new Order(one);
@@ -60,6 +61,27 @@ router.route("/page/:page").post((req, res) => {
 			.then((all) => res.json(all))
 			.catch((err) => res.status(400).json("Error: " + err));
 	} else return res.status(400).json("Error");
+});
+
+router.route("/get/date").post((req, res) => {
+	if (req.body.key === API_KEY) {
+		let searchYear = req.body.year;
+		let searchMonth = req.body.month;
+
+		Order.find({
+			$and: [
+				{
+					date: {
+						$gte: new Date(searchYear, searchMonth, 1, 0, 0, 0),
+						$lte: new Date(searchYear, searchMonth + 1, 1, 0, 0, 0),
+					},
+				},
+			],
+		})
+			.sort({ createdAt: -1 })
+			.then((one) => res.json(one))
+			.catch((err) => res.status(400).json("Error: ") + err);
+	} else res.status(400).json("Error");
 });
 
 router.route("/search/:page").post((req, res) => {
@@ -106,6 +128,7 @@ router.route("/update/:id").post((req, res) => {
 				one.dessert = req.body.dessert;
 				one.payment = req.body.payment;
 				one.cashReceipt = req.body.cashReceipt;
+				one.payed = req.body.payed;
 
 				one
 					.save()

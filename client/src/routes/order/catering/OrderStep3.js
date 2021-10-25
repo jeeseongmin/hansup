@@ -61,6 +61,7 @@ const OrderStep3 = ({ info, setInfo, setStep, changeInfo }) => {
 					dessert: info.dessert,
 					payment: info.payment,
 					cashReceipt: info.cashReceipt,
+					payed: false,
 				},
 				{
 					headers: {
