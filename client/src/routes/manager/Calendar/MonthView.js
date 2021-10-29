@@ -5,42 +5,23 @@ import WeekView from "routes/manager/Calendar/WeekView";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 
-const MonthView = ({}) => {
-	const [loading, setLoading] = useState(false);
-	const [focusDate, setFocusDate] = useState(dayjs());
+const MonthView = ({
+	focusDate,
+	setFocusDate,
+	orderInfo,
+	setOrderInfo,
+	loading,
+	setLoading,
+	month,
+	setMonth,
+}) => {
+	// const [focusDate, setFocusDate] = useState(dayjs());
 
 	const [firstOfWeek, setFirstOfWeek] = useState([]);
 	const style = { color: "#6C4D3F" };
-	const [orderInfo, setOrderInfo] = useState([]);
-
-	const getOrderInfo = async () => {
-		setLoading(false);
-		await axios
-			.post(
-				"/api/order/get/date",
-				{
-					key: process.env.REACT_APP_API_KEY,
-					year: focusDate.get("year"),
-					month: focusDate.get("month"),
-				},
-				{
-					headers: {
-						"Content-type": "application/json",
-						Accept: "application/json",
-					},
-				}
-			)
-			.then(async (Response) => {
-				await setOrderInfo(Response.data);
-				setLoading(true);
-			})
-			.catch((Error) => {
-				console.log(Error);
-			});
-	};
 
 	useEffect(() => {
-		getOrderInfo();
+		if (month !== focusDate.get("month")) setMonth(focusDate.get("month"));
 	}, [focusDate]);
 
 	useEffect(() => {
@@ -102,6 +83,7 @@ const MonthView = ({}) => {
 								firstOfWeek={element}
 								focusDate={focusDate}
 								orderInfo={orderInfo}
+								setFocusDate={setFocusDate}
 							/>
 						);
 					})}

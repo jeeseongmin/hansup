@@ -28,7 +28,6 @@ const NoticeList = () => {
 				}
 			)
 			.then((Response) => {
-				// console.log(Response);
 				setNoticeList(Response.data);
 			})
 			.catch((Error) => {
