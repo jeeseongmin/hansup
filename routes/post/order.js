@@ -110,6 +110,21 @@ router.route("/search/:page").post((req, res) => {
 	} else res.status(400).json("Error");
 });
 
+router.route("/payed/:id").post((req, res) => {
+	if (req.body.key === API_KEY) {
+		Order.findById(req.params.id)
+			.then((one) => {
+				one.payed = req.body.payed;
+
+				one
+					.save()
+					.then(() => res.json("Order updated!"))
+					.catch((err) => res.status(400).json("Error: " + err));
+			})
+			.catch((err) => res.status(400).json("Error: " + err));
+	} else return res.status(400).json("Error");
+});
+
 // Update order
 router.route("/update/:id").post((req, res) => {
 	if (req.body.key === API_KEY) {

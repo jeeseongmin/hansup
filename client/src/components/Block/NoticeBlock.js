@@ -2,7 +2,6 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 
 const NoticeBlock = ({ notice }) => {
-	console.log(notice._id);
 	const history = useHistory();
 	const goPage = () => {
 		history.push("/community/notice/" + notice._id);

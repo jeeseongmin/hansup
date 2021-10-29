@@ -22,7 +22,8 @@ const OrderListLayout = ({ info, col, type, setMenu, menu }) => {
 			<MenuTitle>{info.title}</MenuTitle>
 			<Line></Line>
 			{type === "view" ? (
-				<div class={"w-full grid grid-cols-2 gap-5 lg:" + colStyle}>
+				<div class={"w-full grid grid-cols-2 gap-5 lg:grid-cols-5"}>
+					{/* <div class={"w-full grid grid-cols-2 gap-5 lg:grid-cols-5" + colStyle}> */}
 					{info.menu.map((element, index) => {
 						return (
 							<CateringMenuBlock

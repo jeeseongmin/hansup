@@ -2,10 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import DayView from "routes/manager/Calendar/DayView";
 import dayjs from "dayjs";
 
-const WeekView = ({ firstOfWeek, focusDate, orderInfo }) => {
+const WeekView = ({ firstOfWeek, focusDate, orderInfo, setFocusDate }) => {
 	const [dayOfWeek, setDayOfWeek] = useState([]);
 	useEffect(() => {
-		console.log("firstOfWeek", firstOfWeek);
 		const cp = [];
 		for (let i = 0; i < 7; i++) {
 			let target = firstOfWeek.add(i * 1, "day");
@@ -15,7 +14,7 @@ const WeekView = ({ firstOfWeek, focusDate, orderInfo }) => {
 	}, [firstOfWeek]);
 
 	return (
-		<div class="grid grid-cols-7 border-b-2 border-gray-200 py-3">
+		<div class="grid grid-cols-7 border-b-2 border-gray-200">
 			{dayOfWeek.length > 0 &&
 				dayOfWeek.map((element, index) => {
 					return (
@@ -24,6 +23,7 @@ const WeekView = ({ firstOfWeek, focusDate, orderInfo }) => {
 							orderInfo={orderInfo}
 							currentDate={element}
 							focusDate={focusDate}
+							setFocusDate={setFocusDate}
 						/>
 					);
 				})}
