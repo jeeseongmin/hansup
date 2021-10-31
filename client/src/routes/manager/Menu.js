@@ -7,9 +7,7 @@ const Menu = () => {
 		<PageLayout>
 			<ContentLayout subtitle={"메뉴 추가"}>
 				<div class="flex flex-col">
-					<p class="text-hansupBrown text-lg mb-8 font-semibold">
-						인당 15,000원 (케이터링 주문 최소 인원 : 10인)
-					</p>
+					<div>메뉴 관리 내용 넣을 예정입니다.</div>
 				</div>
 			</ContentLayout>
 		</PageLayout>
