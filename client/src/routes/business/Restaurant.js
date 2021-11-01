@@ -68,6 +68,7 @@ const Restaurant = () => {
 							key={menuList[element]}
 							info={menuList[element]}
 							col={4}
+							type={"view"}
 						/>
 					);
 				})}

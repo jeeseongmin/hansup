@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import OrderBox from "components/Box/OrderBox";
 import MenuCountBox from "components/Box/MenuCountBox";
+import Modal from "@mui/material/Modal";
 
 const DailyOrder = ({ focusDate, orderInfo, setFocusDate, toggleChange }) => {
 	const [loading, setLoading] = useState(false);
