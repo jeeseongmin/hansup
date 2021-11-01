@@ -1,15 +1,7 @@
-import React, { useState, useEffect } from "react";
-import PageLayout from "components/Layout/PageLayout";
-import ContentLayout from "components/Layout/ContentLayout";
-import styled, { css } from "styled-components";
-import StepBox from "components/Box/StepBox";
-import InfoBlock from "components/Block/InfoBlock";
-import InputBox from "components/Box/InputBox";
-import SubmitButton from "components/Button/SubmitButton";
-import CateringMenuBlock from "components/Block/CateringMenuBlock";
-import orderList from "routes/order/catering/data/orderList";
 import OrderListLayout from "components/Layout/OrderListLayout";
-import { BsArrowRight, BsArrowLeft } from "react-icons/bs";
+import React, { useState } from "react";
+import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
+import orderList from "routes/order/catering/data/orderList";
 const OrderStep2 = ({ info, setInfo, setStep, clickMenu }) => {
 	const [menu, setMenu] = useState({
 		mainMenu: [...info.mainMenu],

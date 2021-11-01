@@ -8,7 +8,7 @@ const SubmenuBlock = ({ menu }) => {
 		["케이터링 메뉴", "케이터링 안내", "케이터링 예약"],
 		["공지사항", "리뷰", "고객의 소리"],
 		["한숲맛이야기"],
-		["예약관리", "예약확인", "메뉴관리"],
+		["예약관리", "예약확인", "메뉴관리", "고객의 소리"],
 		[""],
 	];
 	const linkArr = [
@@ -25,7 +25,7 @@ const SubmenuBlock = ({ menu }) => {
 			"/community/voice/main",
 		],
 		["/enterprise/hansup"],
-		["/manager/order", "/manager/schedule", "/manager/menu"],
+		["/manager/order", "/manager/schedule", "/manager/menu", "/manager/voice"],
 		[""],
 	];
 	return (

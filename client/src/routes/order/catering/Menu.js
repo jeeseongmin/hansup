@@ -2,7 +2,6 @@ import React from "react";
 import PageLayout from "components/Layout/PageLayout";
 import ContentLayout from "components/Layout/ContentLayout";
 import CateringMenu from "image/order-catering-img1.png";
-import MenuListLayout from "components/Layout/MenuListLayout";
 import orderList from "routes/order/catering/data/orderList";
 import ImageLabel from "components/ImageLabel";
 import CateringImg2 from "image/order-catering-img2.png";
