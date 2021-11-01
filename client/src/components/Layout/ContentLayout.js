@@ -11,9 +11,11 @@ const ContentLayout = ({ children, subtitle }) => {
 					: "px-8 xl:px-40")
 			}
 		>
-			<div class="inline-flex w-full mb-6">
-				<Subtitle subtitle={subtitle} />
-			</div>
+			{subtitle !== "" && (
+				<div class="inline-flex w-full mb-6">
+					<Subtitle subtitle={subtitle} />
+				</div>
+			)}
 			{children}
 		</div>
 	);

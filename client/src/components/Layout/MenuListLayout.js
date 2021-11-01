@@ -1,4 +1,5 @@
 import FoodMenuBlock from "components/Block/FoodMenuBlock";
+import ManageMenuBlock from "components/Block/ManageMenuBlock";
 import Example from "image/example.png";
 import React from "react";
 import styled from "styled-components";
@@ -14,23 +15,38 @@ const Line = styled.div`
 	width: 100%;
 	border-top: 1px solid #6c4d3f;
 `;
-const MenuListLayout = ({ info, col }) => {
+const MenuListLayout = ({ info, col, type }) => {
 	const colStyle = "grid-cols-" + col;
 	return (
 		<div class="mb-16">
 			<MenuTitle>{info.title}</MenuTitle>
 			<Line></Line>
-			<div class={"w-full grid grid-cols-2 gap-5 lg:" + colStyle}>
-				{info.menu.map((element, index) => {
-					return (
-						<FoodMenuBlock
-							url={Example}
-							title={element.name}
-							price={element.price + "원"}
-						/>
-					);
-				})}
-			</div>
+			{type === "manager" && (
+				<div class={"w-full grid grid-cols-2 gap-5 lg:" + colStyle}>
+					{info.menu.map((element, index) => {
+						return (
+							<ManageMenuBlock
+								url={Example}
+								title={element.name}
+								price={element.price + "원"}
+							/>
+						);
+					})}
+				</div>
+			)}
+			{type === "view" && (
+				<div class={"w-full grid grid-cols-2 gap-5 lg:" + colStyle}>
+					{info.menu.map((element, index) => {
+						return (
+							<FoodMenuBlock
+								url={Example}
+								title={element.name}
+								price={element.price + "원"}
+							/>
+						);
+					})}
+				</div>
+			)}
 		</div>
 	);
 };
