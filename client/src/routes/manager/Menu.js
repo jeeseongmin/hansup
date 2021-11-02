@@ -5,8 +5,10 @@ import MenuListLayout from "components/Layout/MenuListLayout";
 import orderList from "routes/order/catering/data/orderList";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
+import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 
 const Menu = () => {
+	const [modalMenu, setModalMenu] = useState();
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
@@ -69,10 +71,10 @@ const Menu = () => {
 				aria-describedby="modal-modal-description"
 			>
 				<div class="h-full">
-					<div class="w-full h-full flex flex-col justify-center items-center py-48 px-4 lg:px-16">
+					<div class="w-full h-full flex flex-col justify-center items-center py-0 px-4 lg:px-16">
 						<div
 							ref={modalRef}
-							class="select-none bg-white w-full md:w-2/3 lg:w-1/2 max-h-full overflow-auto h-full p-8"
+							class="select-none bg-white w-full md:w-2/3 lg:w-1/2 max-h-full  overflow-auto h-96 px-8 py-6"
 						>
 							{/* <OrderCheckBlock
 								info={dayOrder}
@@ -83,14 +85,18 @@ const Menu = () => {
 								<div class="w-full font-bold text-hansupBrown text-2xl">
 									메뉴 추가
 								</div>
-								<div class="w-full flex-1 py-3 border-b-2 border-t-2 border-hansupBrown grid grid-rows-3 my-2 gap-4">
-									<div class="w-full h-12 border-2 border-hansupBrown flex justify-center items-center text-hansupBrown font-bold">
-										메인메뉴
+								<div class="w-full flex-1 py-6 border-b-2 border-t-2 border-hansupBrown grid grid-rows-3 my-2 gap-4">
+									<div class="relative cursor-pointer w-full border-2 border-hansupBrown flex justify-between items-center text-hansupBrown font-bold">
+										<div class=" w-12 h-full"></div>
+										<p>메인메뉴</p>
+										<div class=" w-12 h-full flex justify-center items-center">
+											<IoIosArrowDown size={28} />
+											{/* <IoIosArrowUp size={28} /> */}
+										</div>
+										<div class="absolute w-full h-full top-12 border-2 border-red-500"></div>
 									</div>
-									<div class="w-full h-12 border-2 border-hansupBrown flex justify-center items-center text-hansupBrown font-bold">
-										음식이름 입력
-									</div>
-									<div class="w-full h-12 border-2 border-hansupBrown flex justify-center items-center text-hansupBrown font-bold">
+									<input class="cursor-pointer w-full border-2 border-hansupBrown flex justify-center items-center text-hansupBrown font-bold text-center" />
+									<div class="cursor-pointer w-full border-2 border-hansupBrown flex justify-center items-center text-hansupBrown font-bold">
 										음식 사진 첨부
 									</div>
 								</div>
