@@ -8,11 +8,11 @@ import Checkbox from "@mui/material/Checkbox";
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 const CreateNotice = () => {
-	const [includeImg, setIncludeImg] = useState(false);
 	const history = useHistory();
 	const contentRef = useRef(null);
 	const titleRef = useRef(null);
 	const passwordRef = useRef(null);
+	const [includeImg, setIncludeImg] = useState(false);
 	const [isImageUpload, setIsImageUpload] = useState(true);
 
 	const onClickCheckBox = (e) => {
