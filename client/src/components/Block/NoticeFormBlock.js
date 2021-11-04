@@ -58,9 +58,6 @@ const NoticeFormBlock = ({
 		}
 	};
 
-	const [img, setImg] = useState(null);
-	const [url, setUrl] = useState(null);
-
 	return (
 		<div
 			class={
