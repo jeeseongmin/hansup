@@ -29,6 +29,7 @@ const Menu = () => {
 	const clickRef = useRef();
 	const nameRef = useRef();
 	const modalMenuRef = useRef();
+	const fileRef = useRef();
 
 	// image
 	const [includeImg, setIncludeImg] = useState(false);
@@ -37,8 +38,6 @@ const Menu = () => {
 	const buttonRef = useRef(null);
 	const onChangeImg = async (e) => {
 		if (newMenu.imgList.length > 0) {
-			console.log("이미 있습니다.");
-			console.log("before menu", newMenu);
 			await removeImg(0);
 		}
 		setLoading(false);
@@ -48,14 +47,14 @@ const Menu = () => {
 		// 서버의 upload API 호출
 		const res = await axios.post("/api/image/upload", formData);
 		const cp = [...newMenu.imgList];
-		await cp.push({ filename: res.data.filename, id: res.data.id });
+		cp[0] = { filename: res.data.filename, id: res.data.id };
+
 		await onChange(cp, "imgList");
 		setLoading(true);
 		setIsImageUpload(true);
-		console.log("change menu", newMenu);
 	};
 	const buttonClick = () => {
-		buttonRef.current.click();
+		fileRef.current.click();
 	};
 
 	const removeImg = async () => {
@@ -73,9 +72,10 @@ const Menu = () => {
 		category: "Catering",
 		type: "mainMenu",
 		name: "",
-		price: "",
+		price: 0,
 		imgList: [],
 	});
+
 	const onChange = (e, type) => {
 		if (type === "imgList") {
 			const cp = { ...newMenu };
@@ -129,20 +129,23 @@ const Menu = () => {
 		return () => window.removeEventListener("click", handleClick);
 	}, [modalMenu]);
 
-	const submit = () => {
+	const submit = async () => {
 		if (newMenu.name === "") {
 			alert("메뉴명을 입력해주세요.");
 			nameRef.current.focus();
 		} else if (includeImg && newMenu.imgList.length === 0) {
 			alert("이미지를 업로드 해주세요.");
 		} else {
-			axios
+			console.log(newMenu);
+			await axios
 				.post(
 					"/api/menu/create",
 					{
 						key: process.env.REACT_APP_API_KEY,
 						category: newMenu.category,
+						type: newMenu.type,
 						name: newMenu.name,
+						price: newMenu.price,
 						imgList: newMenu.imgList,
 					},
 					{
@@ -155,7 +158,8 @@ const Menu = () => {
 				.then((response) => {
 					alert("업로드 되었습니다.");
 					// history.push("/community/notice/list");
-					document.getElementById("scrollRef").scrollTo(0, 0);
+					// document.getElementById("scrollRef").scrollTo(0, 0);
+					handleClose();
 				})
 				.catch((response) => {
 					console.log("Error!");
@@ -310,7 +314,7 @@ const Menu = () => {
 										<div class="w-full h-48 border-2 border-hansupBrown flex justify-center mb-4">
 											<img
 												onClick={buttonClick}
-												class="h-full object-contain"
+												class="cursor-pointer h-full object-contain"
 												src={
 													window.location.origin +
 													"/api/image/view/" +
@@ -326,14 +330,17 @@ const Menu = () => {
 									)}
 								</div>
 								<input
-									ref={buttonRef}
+									ref={fileRef}
 									type="file"
 									class="hidden"
 									name="img"
 									onChange={onChangeImg}
 								/>
 								<div class="w-full h-12 font-bold text-hansupBrown flex flex-row justify-end">
-									<div class="w-48 h-full bg-hansupBrown text-lg text-white font-bold flex justify-center items-center">
+									<div
+										onClick={submit}
+										class="cursor-pointer w-48 h-full bg-hansupBrown text-lg text-white font-bold flex justify-center items-center"
+									>
 										완료
 									</div>
 								</div>
