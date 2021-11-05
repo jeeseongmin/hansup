@@ -37,6 +37,7 @@ const reviewRouter = require("./routes/post/review");
 const noticeRouter = require("./routes/post/notice");
 const orderRouter = require("./routes/post/order");
 const voiceRouter = require("./routes/post/voice");
+const menuRouter = require("./routes/post/menu");
 
 const imageRouter = require("./routes/post/image");
 
@@ -48,6 +49,7 @@ app.use("/api/voice", voiceRouter);
 app.use("/api/notice", noticeRouter);
 app.use("/api/order", orderRouter);
 app.use("/api/review", reviewRouter);
+app.use("/api/menu", menuRouter);
 
 // app.use("/api/volunteer", volunteerRouter);
 

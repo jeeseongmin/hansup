@@ -54,6 +54,22 @@ router.route("/page/:page").post((req, res) => {
 	} else return res.status(400).json("Error");
 });
 
+router.route("/search/category/:category").post((req, res) => {
+	if (req.body.key === API_KEY) {
+		let searchType = req.body.type;
+
+		Menu.find({
+			$and: [
+				{ category: { $regex: req.params.category, $options: "i" } },
+				{ type: { $regex: searchType, $options: "i" } },
+			],
+		})
+			.sort({ createdAt: -1 })
+			.then((one) => res.json(one))
+			.catch((err) => res.status(400).json("Error: ") + err);
+	} else res.status(400).json("Error");
+});
+
 router.route("/search/:page").post((req, res) => {
 	if (req.body.key === API_KEY) {
 		let searchName = req.body.name;
@@ -100,20 +116,11 @@ router.route("/update/:id").post((req, res) => {
 	if (req.body.key === API_KEY) {
 		Menu.findById(req.params.id)
 			.then((one) => {
+				one.category = req.body.category;
+				one.type = req.body.type;
 				one.name = req.body.name;
-				one.phone = req.body.phone;
-				one.count = req.body.count;
-				one.request = req.body.request;
-				one.date = req.body.date;
-				one.delivery = req.body.delivery;
-				one.address = req.body.address;
-				one.mainMenu = req.body.mainMenu;
-				one.subMenu = req.body.subMenu;
-				one.soup = req.body.soup;
-				one.dessert = req.body.dessert;
-				one.payment = req.body.payment;
-				one.cashReceipt = req.body.cashReceipt;
-				one.payed = req.body.payed;
+				one.price = req.body.price;
+				one.imgList = req.body.imgList;
 
 				one
 					.save()
