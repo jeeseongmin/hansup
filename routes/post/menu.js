@@ -18,7 +18,7 @@ router.route("/create").post((req, res) => {
 
 		newOne
 			.save()
-			.then(() => res.json("Menu created!"))
+			.then((all) => res.json(all))
 			.catch((err) => res.status(400).json("Error: " + err));
 	} else return res.status(400).json("Error");
 });
@@ -54,43 +54,12 @@ router.route("/page/:page").post((req, res) => {
 	} else return res.status(400).json("Error");
 });
 
-router.route("/search/category/:category").post((req, res) => {
+router.route("/search/:category").post((req, res) => {
 	if (req.body.key === API_KEY) {
-		let searchType = req.body.type;
-
 		Menu.find({
-			$and: [
-				{ category: { $regex: req.params.category, $options: "i" } },
-				{ type: { $regex: searchType, $options: "i" } },
-			],
+			$and: [{ category: { $regex: req.params.category, $options: "i" } }],
 		})
-			.sort({ createdAt: -1 })
-			.then((one) => res.json(one))
-			.catch((err) => res.status(400).json("Error: ") + err);
-	} else res.status(400).json("Error");
-});
-
-router.route("/search/:page").post((req, res) => {
-	if (req.body.key === API_KEY) {
-		let searchName = req.body.name;
-		let searchPhone = req.body.phone;
-		let searchYear = req.body.year;
-		let searchMonth = req.body.month;
-		let searchDate = req.body.date;
-
-		Menu.find({
-			$and: [
-				{ name: { $regex: searchName, $options: "i" } },
-				{ phone: { $regex: searchPhone, $options: "i" } },
-				{
-					date: {
-						$gte: new Date(searchYear, searchMonth, searchDate, 0, 0, 0),
-						$lte: new Date(searchYear, searchMonth, searchDate, 23, 59, 59),
-					},
-				},
-			],
-		})
-			.sort({ createdAt: -1 })
+			.sort({ createdAt: 1 })
 			.then((one) => res.json(one))
 			.catch((err) => res.status(400).json("Error: ") + err);
 	} else res.status(400).json("Error");
@@ -124,7 +93,7 @@ router.route("/update/:id").post((req, res) => {
 
 				one
 					.save()
-					.then(() => res.json("Menu updated!"))
+					.then((all) => res.json(all))
 					.catch((err) => res.status(400).json("Error: " + err));
 			})
 			.catch((err) => res.status(400).json("Error: " + err));
