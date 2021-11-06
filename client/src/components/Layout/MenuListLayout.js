@@ -15,7 +15,7 @@ const Line = styled.div`
 	width: 100%;
 	border-top: 1px solid #6c4d3f;
 `;
-const MenuListLayout = ({ info, col, type }) => {
+const MenuListLayout = ({ info, col, type, use, updateMenu, deleteMenu }) => {
 	const colStyle = "grid-cols-" + col;
 	return (
 		<div class="mb-16">
@@ -26,9 +26,10 @@ const MenuListLayout = ({ info, col, type }) => {
 					{info.menu.map((element, index) => {
 						return (
 							<ManageMenuBlock
-								url={Example}
-								title={element.name}
-								price={element.price + "원"}
+								menu={element}
+								use={use}
+								updateMenu={updateMenu}
+								deleteMenu={deleteMenu}
 							/>
 						);
 					})}
