@@ -8,15 +8,55 @@ const Container = styled.div`
 	width: 100%;
 `;
 
-const ManageMenuBlock = ({ url, title, price }) => {
-	return (
-		<Container>
-			<div class="h-48 mb-2">
-				<img src={url} class="h-full w-full object-cover " alt="menu" />
-			</div>
-			<div class="text-lg mb-2">{title}</div>
-		</Container>
-	);
+const ManageMenuBlock = ({ use, menu, updateMenu, deleteMenu }) => {
+	if (use === "control") {
+		return (
+			<Container>
+				<div class="h-48 mb-2 relative">
+					<img
+						src={
+							"http://localhost:5000/api/image/view/" + menu.imgList[0].filename
+						}
+						class="h-full w-full object-cover "
+						alt="menu"
+					/>
+					<div class="z-20 w-full h-full absolute left-0 top-0 transition delay-50 duration-150 bg-black bg-opacity-0 hover:bg-opacity-30 opacity-0 hover:opacity-100 flex justify-center items-center">
+						<div class="z-30 w-full flex flex-row justify-center text-white text-lg font-bold">
+							<span
+								onClick={() => updateMenu(menu)}
+								class="cursor-pointer mr-2"
+							>
+								수정
+							</span>{" "}
+							/{" "}
+							<span
+								onClick={() => deleteMenu(menu._id)}
+								class="cursor-pointer ml-2"
+							>
+								삭제
+							</span>
+						</div>
+					</div>
+				</div>
+				<div class="text-lg mb-2">{menu.name}</div>
+			</Container>
+		);
+	} else if (use === "view") {
+		return (
+			<Container>
+				<div class="h-48 mb-2 relative">
+					<img
+						src={
+							"http://localhost:5000/api/image/view/" + menu.imgList[0].filename
+						}
+						class="h-full w-full object-cover "
+						alt="menu"
+					/>
+				</div>
+				<div class="text-lg mb-2">{menu.name}</div>
+			</Container>
+		);
+	}
 };
 
 export default ManageMenuBlock;

@@ -27,7 +27,10 @@ const OrderListLayout = ({ info, col, type, setMenu, menu }) => {
 					{info.menu.map((element, index) => {
 						return (
 							<CateringMenuBlock
-								url={Example}
+								url={
+									"http://localhost:5000/api/image/view/" +
+									element.imgList[0].filename
+								}
 								title={element.name}
 								price={element.price + "원"}
 							/>
@@ -39,7 +42,10 @@ const OrderListLayout = ({ info, col, type, setMenu, menu }) => {
 					{info.menu.map((element, index) => {
 						return (
 							<OrderMenuBlock
-								url={Example}
+								url={
+									"http://localhost:5000/api/image/view/" +
+									element.imgList[0].filename
+								}
 								title={element.name}
 								price={element.price + "원"}
 								index={index}

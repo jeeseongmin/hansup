@@ -8,6 +8,8 @@ import axios from "axios";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { useHistory } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
+import { confirmAlert } from "react-confirm-alert"; // Import
+import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
 
 const Menu = () => {
 	const history = useHistory();
@@ -22,19 +24,78 @@ const Menu = () => {
 		onToggleMenu();
 	};
 
+	const [isEdit, setIsEdit] = useState(false);
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
-	const handleClose = () => setOpen(false);
+	const handleClose = () => {
+		setIsEdit(false);
+		setOpen(false);
+	};
 	const modalRef = useRef();
 	const clickRef = useRef();
 	const nameRef = useRef();
 	const modalMenuRef = useRef();
 	const fileRef = useRef();
 
+	const [menuList, setMenuList] = useState([]);
+	const typeList = [
+		{ title: "메인메뉴 (택 4)", type: "mainMenu" },
+		{ title: "식사메뉴 (택 4)", type: "subMenu" },
+		{ title: "국 (택 1)", type: "soup" },
+		{ title: "디저트 (택 5)", type: "dessert" },
+	];
+
+	const getList = async () => {
+		setListLoading(false);
+		console.log("getList");
+		await axios
+			.post(
+				"/api/menu/search/catering",
+				{ key: process.env.REACT_APP_API_KEY },
+				{
+					headers: {
+						"Content-type": "application/json",
+						Accept: "application/json",
+					},
+				}
+			)
+			.then((Response) => {
+				console.log(Response.data);
+				const tmpList = [];
+				for (let one of typeList) {
+					const cp = Response.data.filter(function (element, index) {
+						return element.type === one.type;
+					});
+					tmpList.push({
+						title: one.title,
+						type: one.type,
+						menu: [...cp],
+					});
+				}
+				setMenuList(tmpList);
+				setListLoading(true);
+			})
+			.catch((Error) => {
+				console.log(Error);
+			});
+	};
+	useEffect(() => {
+		getList();
+	}, []);
+
+	const [newMenu, setNewMenu] = useState({
+		category: "catering",
+		type: "mainMenu",
+		name: "",
+		price: 0,
+		imgList: [],
+	});
+
 	// image
 	const [includeImg, setIncludeImg] = useState(false);
 	const [isImageUpload, setIsImageUpload] = useState(true);
 	const [loading, setLoading] = useState(true);
+	const [listLoading, setListLoading] = useState(true);
 	const buttonRef = useRef(null);
 	const onChangeImg = async (e) => {
 		if (newMenu.imgList.length > 0) {
@@ -68,14 +129,6 @@ const Menu = () => {
 		}
 	};
 
-	const [newMenu, setNewMenu] = useState({
-		category: "Catering",
-		type: "mainMenu",
-		name: "",
-		price: 0,
-		imgList: [],
-	});
-
 	const onChange = (e, type) => {
 		if (type === "imgList") {
 			const cp = { ...newMenu };
@@ -88,21 +141,26 @@ const Menu = () => {
 		}
 	};
 
-	useEffect(() => {
+	const init = () => {
 		setNewMenu({
-			category: "Catering",
+			category: "catering",
 			type: "mainMenu",
 			name: "",
-			price: "",
+			price: 0,
 			imgList: [],
 		});
+	};
+
+	useEffect(() => {
+		init();
 	}, []);
 
 	//  메뉴 추가 모달
 	useEffect(() => {
 		if (!open) return;
 		function handleClick(e) {
-			if (clickRef && clickRef.current.contains(e.target)) handleOpen();
+			if (isEdit || (clickRef && clickRef.current.contains(e.target)))
+				handleOpen();
 			else if (modalRef.current === null) {
 				return;
 			} else if (!modalRef.current.contains(e.target)) {
@@ -129,41 +187,189 @@ const Menu = () => {
 		return () => window.removeEventListener("click", handleClick);
 	}, [modalMenu]);
 
+	const updateMenu = async (menu) => {
+		setIsEdit(true);
+		setNewMenu({
+			id: menu._id,
+			category: menu.category,
+			type: menu.type,
+			name: menu.name,
+			price: menu.price,
+			imgList: menu.imgList,
+		});
+		clickRef.current.click();
+	};
+
+	useEffect(() => {
+		if (isEdit) {
+		} else {
+			handleClose();
+		}
+	}, [isEdit]);
+
+	const deleteMenu = async (id) => {
+		confirmAlert({
+			message: "정말 삭제하시겠습니까?",
+			buttons: [
+				{
+					label: "삭제하기",
+					onClick: async () =>
+						await axios
+							.post(
+								"/api/menu/delete/" + id,
+								{
+									key: process.env.REACT_APP_API_KEY,
+								},
+								{
+									headers: {
+										"content-type": "application/json",
+										Accept: "application/json",
+									},
+								}
+							)
+							.then((response) => {
+								alert("삭제되었습니다.");
+								const cp = [...menuList];
+								console.log(response.data);
+								if (newMenu.type === "mainMenu") {
+									cp[0].menu = cp[0].menu.filter(function (element, index) {
+										return element._id !== id;
+									});
+								} else if (newMenu.type === "subMenu") {
+									cp[1].menu = cp[1].menu.filter(function (element, index) {
+										return element._id !== id;
+									});
+								} else if (newMenu.type === "soup") {
+									cp[2].menu = cp[2].menu.filter(function (element, index) {
+										return element._id !== id;
+									});
+								} else if (newMenu.type === "dessert") {
+									cp[3].menu = cp[3].menu.filter(function (element, index) {
+										return element._id !== id;
+									});
+								}
+								setMenuList(cp);
+								handleClose();
+								init();
+							})
+							.catch((response) => {
+								console.log("Error!");
+							}),
+				},
+				{
+					label: "취소하기",
+					onClick: () => alert("취소하였습니다."),
+				},
+			],
+		});
+	};
+
 	const submit = async () => {
 		if (newMenu.name === "") {
 			alert("메뉴명을 입력해주세요.");
 			nameRef.current.focus();
-		} else if (includeImg && newMenu.imgList.length === 0) {
+		} else if (includeImg || newMenu.imgList.length === 0) {
 			alert("이미지를 업로드 해주세요.");
 		} else {
-			console.log(newMenu);
-			await axios
-				.post(
-					"/api/menu/create",
-					{
-						key: process.env.REACT_APP_API_KEY,
-						category: newMenu.category,
-						type: newMenu.type,
-						name: newMenu.name,
-						price: newMenu.price,
-						imgList: newMenu.imgList,
-					},
-					{
-						headers: {
-							"content-type": "application/json",
-							Accept: "application/json",
+			if (isEdit) {
+				await axios
+					.post(
+						"/api/menu/update/" + newMenu.id,
+						{
+							key: process.env.REACT_APP_API_KEY,
+							category: newMenu.category,
+							type: newMenu.type,
+							name: newMenu.name,
+							price: newMenu.price,
+							imgList: newMenu.imgList,
 						},
-					}
-				)
-				.then((response) => {
-					alert("업로드 되었습니다.");
-					// history.push("/community/notice/list");
-					// document.getElementById("scrollRef").scrollTo(0, 0);
-					handleClose();
-				})
-				.catch((response) => {
-					console.log("Error!");
-				});
+						{
+							headers: {
+								"content-type": "application/json",
+								Accept: "application/json",
+							},
+						}
+					)
+					.then((response) => {
+						alert("업데이트되었습니다.");
+						// history.push("/community/notice/list");
+						// document.getElementById("scrollRef").scrollTo(0, 0);
+						const cp = [...menuList];
+						console.log(response.data);
+						if (newMenu.type === "mainMenu") {
+							cp[0].menu = cp[0].menu.map((element, index) => {
+								if (element._id === response.data._id) {
+									return response.data;
+								} else return element;
+							});
+						} else if (newMenu.type === "subMenu") {
+							cp[1].menu = cp[1].menu.map((element, index) => {
+								if (element._id === response.data._id) {
+									return response.data;
+								} else return element;
+							});
+						} else if (newMenu.type === "soup") {
+							cp[2].menu = cp[2].menu.map((element, index) => {
+								if (element._id === response.data._id) {
+									return response.data;
+								} else return element;
+							});
+						} else if (newMenu.type === "dessert") {
+							cp[3].menu = cp[3].menu.map((element, index) => {
+								if (element._id === response.data._id) {
+									return response.data;
+								} else return element;
+							});
+						}
+						setMenuList(cp);
+						handleClose();
+						init();
+					})
+					.catch((response) => {
+						console.log("Error!");
+					});
+			} else {
+				await axios
+					.post(
+						"/api/menu/create",
+						{
+							key: process.env.REACT_APP_API_KEY,
+							category: newMenu.category,
+							type: newMenu.type,
+							name: newMenu.name,
+							price: newMenu.price,
+							imgList: newMenu.imgList,
+						},
+						{
+							headers: {
+								"content-type": "application/json",
+								Accept: "application/json",
+							},
+						}
+					)
+					.then((response) => {
+						alert("업로드 되었습니다.");
+						// history.push("/community/notice/list");
+						// document.getElementById("scrollRef").scrollTo(0, 0);
+						const cp = [...menuList];
+						console.log(response.data);
+						if (newMenu.type === "mainMenu") {
+							cp[0].menu.push(response.data);
+						} else if (newMenu.type === "subMenu") {
+							cp[1].menu.push(response.data);
+						} else if (newMenu.type === "soup") {
+							cp[2].menu.push(response.data);
+						} else if (newMenu.type === "dessert") {
+							cp[3].menu.push(response.data);
+						}
+						setMenuList(cp);
+						handleClose();
+						init();
+					})
+					.catch((response) => {
+						console.log("Error!");
+					});
+			}
 		}
 	};
 
@@ -181,16 +387,20 @@ const Menu = () => {
 								메뉴 추가
 							</div>
 						</div>
-						{[0, 1, 2, 3].map((element, index) => {
-							return (
-								<MenuListLayout
-									key={index}
-									info={orderList[element]}
-									col={5}
-									type={"manager"}
-								/>
-							);
-						})}{" "}
+						{listLoading &&
+							menuList.map((element, index) => {
+								return (
+									<MenuListLayout
+										key={index}
+										info={element}
+										col={5}
+										type={"manager"}
+										use={"control"}
+										updateMenu={updateMenu}
+										deleteMenu={deleteMenu}
+									/>
+								);
+							})}{" "}
 					</div>
 				</ContentLayout>
 			</PageLayout>
@@ -237,7 +447,7 @@ const Menu = () => {
 										</div>
 										<div
 											class={
-												"absolute shadow-xl font-bold w-full h-48 left-0 top-12 border-l-2 border-r-2 border-t-2 border-hansupBrown grid-rows-4 " +
+												"z-50 absolute shadow-xl font-bold w-full h-48 left-0 top-12 border-l-2 border-r-2 border-t-2 border-hansupBrown grid-rows-4 " +
 												(modalMenu ? "grid" : "hidden")
 											}
 										>
@@ -311,7 +521,7 @@ const Menu = () => {
 											음식 사진 첨부
 										</div>
 									) : loading ? (
-										<div class="w-full h-48 border-2 border-hansupBrown flex justify-center mb-4">
+										<div class="z-30 w-full h-48 border-2 border-hansupBrown flex justify-center mb-4">
 											<img
 												onClick={buttonClick}
 												class="cursor-pointer h-full object-contain"
@@ -336,12 +546,21 @@ const Menu = () => {
 									name="img"
 									onChange={onChangeImg}
 								/>
-								<div class="w-full h-12 font-bold text-hansupBrown flex flex-row justify-end">
+								<div class="w-full h-12 font-bold text-hansupBrown flex flex-row justify-between">
 									<div
-										onClick={submit}
+										onClick={isEdit ? () => setIsEdit(false) : handleClose}
 										class="cursor-pointer w-48 h-full bg-hansupBrown text-lg text-white font-bold flex justify-center items-center"
 									>
-										완료
+										닫기
+									</div>
+									<div
+										onClick={loading ? submit : ""}
+										class={
+											"w-48 h-full bg-hansupBrown text-lg text-white font-bold flex justify-center items-center " +
+											(loading ? "cursor-pointer" : "opacity-30")
+										}
+									>
+										{isEdit ? "수정" : "완료"}
 									</div>
 								</div>
 							</div>
