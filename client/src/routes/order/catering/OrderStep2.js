@@ -1,8 +1,10 @@
 import OrderListLayout from "components/Layout/OrderListLayout";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
-import orderList from "routes/order/catering/data/orderList";
-const OrderStep2 = ({ info, setInfo, setStep, clickMenu }) => {
+// import orderList from "routes/order/catering/data/orderList";
+import axios from "axios";
+
+const OrderStep2 = ({ info, setInfo, setStep, menuList, listLoading }) => {
 	const [menu, setMenu] = useState({
 		mainMenu: [...info.mainMenu],
 		subMenu: [...info.subMenu],
@@ -38,7 +40,7 @@ const OrderStep2 = ({ info, setInfo, setStep, clickMenu }) => {
 	return (
 		<div class="w-full flex flex-col justify-center items-center">
 			<div class="w-full mb-8">
-				{[0, 1, 2, 3].map((element, index) => {
+				{/* {[0, 1, 2, 3].map((element, index) => {
 					return (
 						<OrderListLayout
 							key={index}
@@ -49,7 +51,20 @@ const OrderStep2 = ({ info, setInfo, setStep, clickMenu }) => {
 							menu={menu}
 						/>
 					);
-				})}{" "}
+				})}{" "} */}
+				{listLoading &&
+					menuList.map((element, index) => {
+						return (
+							<OrderListLayout
+								key={element}
+								info={element}
+								col={5}
+								type={"select"}
+								setMenu={setMenu}
+								menuList={menu}
+							/>
+						);
+					})}{" "}
 				<div class="w-full flex justify-center items-center">
 					<div class="w-full h-12 flex flex-row justify-between">
 						<div

@@ -2,7 +2,7 @@ import InfoBlock from "components/Block/InfoBlock";
 import Description from "components/Description";
 import React from "react";
 
-const OrderFinal = ({ info }) => {
+const OrderFinal = ({ info, allMenuList }) => {
 	return (
 		<div class="w-full flex flex-col justify-center items-center">
 			<h1 class="text-4xl font-bold text-hansupBrown mb-16">
@@ -86,32 +86,48 @@ const OrderFinal = ({ info }) => {
 								메인메뉴
 							</div>
 							<div class="w-full md:flex-1 text-xl">
-								{info.mainMenu.sort().join(", ")}
-							</div>
+							{info.mainMenu
+									.map((element, index) => {
+										return allMenuList[element].name;
+									})
+									.sort((a, b) => a.createdAt - b.createAt)
+									.join(", ")}							</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start border-b-2 border-gray-200">
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								식사메뉴
 							</div>
 							<div class="w-full md:flex-1 text-xl">
-								{info.subMenu.sort().join(", ")}
-							</div>
+							{info.subMenu
+									.map((element, index) => {
+										return allMenuList[element].name;
+									})
+									.sort((a, b) => a.createdAt - b.createAt)
+									.join(", ")}							</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start border-b-2 border-gray-200">
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								국1
 							</div>
 							<div class="w-full md:flex-1 text-xl">
-								{info.soup.sort().join(", ")}
-							</div>
+							{info.soup
+									.map((element, index) => {
+										return allMenuList[element].name;
+									})
+									.sort((a, b) => a.createdAt - b.createAt)
+									.join(", ")}							</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start">
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								디저트
 							</div>
 							<div class="w-full md:flex-1 text-xl">
-								{info.dessert.sort().join(", ")}
-							</div>
+							{info.dessert
+									.map((element, index) => {
+										return allMenuList[element].name;
+									})
+									.sort((a, b) => a.createdAt - b.createAt)
+									.join(", ")}							</div>
 						</div>
 					</div>
 				</InfoBlock>
