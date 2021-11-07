@@ -15,7 +15,7 @@ const Line = styled.div`
 	width: 100%;
 	border-top: 1px solid #6c4d3f;
 `;
-const OrderListLayout = ({ info, col, type, setMenu, menu }) => {
+const OrderListLayout = ({ info, col, type, setMenu, menuList }) => {
 	const colStyle = "grid-cols-" + col;
 	return (
 		<div class="mb-16">
@@ -42,16 +42,10 @@ const OrderListLayout = ({ info, col, type, setMenu, menu }) => {
 					{info.menu.map((element, index) => {
 						return (
 							<OrderMenuBlock
-								url={
-									"http://localhost:5000/api/image/view/" +
-									element.imgList[0].filename
-								}
-								title={element.name}
-								price={element.price + "원"}
-								index={index}
+								menu={element}
 								type={element.type}
 								setMenu={setMenu}
-								menu={menu}
+								menuList={menuList}
 							/>
 						);
 					})}

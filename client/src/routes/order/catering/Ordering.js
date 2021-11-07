@@ -1,11 +1,12 @@
 import StepBox from "components/Box/StepBox";
 import PageLayout from "components/Layout/PageLayout";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AiOutlineCheck } from "react-icons/ai";
 import OrderStep1 from "routes/order/catering/OrderStep1";
 import OrderStep2 from "routes/order/catering/OrderStep2";
 import OrderStep3 from "routes/order/catering/OrderStep3";
 import OrderFinal from "routes/order/catering/OrderFinal";
+import axios from "axios";
 
 const Ordering = () => {
 	const [step, setStep] = useState(1);
@@ -32,22 +33,60 @@ const Ordering = () => {
 		},
 		payed: false,
 	});
-	const clickMenu = (index, type) => {
-		console.log(index, type);
-		const cp = { ...info };
-		if (info[type].includes(index)) {
-			let arr = [...info[type]].filter(function (element, index) {
-				return element !== index;
+
+	const [menuList, setMenuList] = useState([]);
+	const [allMenuList, setAllMenuList] = useState([]);
+	const [listLoading, setListLoading] = useState(true);
+
+	const typeList = [
+		{ title: "메인메뉴 (택 4)", type: "mainMenu" },
+		{ title: "식사메뉴 (택 4)", type: "subMenu" },
+		{ title: "국 (택 1)", type: "soup" },
+		{ title: "디저트 (택 5)", type: "dessert" },
+	];
+
+	const getList = async () => {
+		setListLoading(false);
+		console.log("getList");
+		await axios
+			.post(
+				"/api/menu/search/catering",
+				{ key: process.env.REACT_APP_API_KEY },
+				{
+					headers: {
+						"Content-type": "application/json",
+						Accept: "application/json",
+					},
+				}
+			)
+			.then((Response) => {
+				console.log(Response.data);
+				const tmpList = [];
+				for (let one of typeList) {
+					const cp = Response.data.filter(function (element, index) {
+						return element.type === one.type;
+					});
+					tmpList.push({
+						title: one.title,
+						type: one.type,
+						menu: [...cp],
+					});
+				}
+				let cp2 = {};
+				for (let i = 0; i < Response.data.length; i++) {
+					cp2[Response.data[i]._id] = Response.data[i];
+				}
+				setAllMenuList(cp2);
+				setMenuList(tmpList);
+				setListLoading(true);
+			})
+			.catch((Error) => {
+				console.log(Error);
 			});
-			cp[type] = arr;
-			setInfo(cp);
-		} else {
-			let arr = [...info[type], index];
-			cp[type] = arr;
-			setInfo(cp);
-		}
-		console.log(info);
 	};
+	useEffect(() => {
+		getList();
+	}, []);
 
 	const changeInfo = (e, type) => {
 		if (type === "date" || type === "delivery") {
@@ -169,7 +208,8 @@ const Ordering = () => {
 						info={info}
 						setInfo={setInfo}
 						setStep={setStep}
-						clickMenu={clickMenu}
+						menuList={menuList}
+						listLoading={listLoading}
 					/>
 				)}
 				{step === 3 && (
@@ -178,10 +218,14 @@ const Ordering = () => {
 						setInfo={setInfo}
 						setStep={setStep}
 						changeInfo={changeInfo}
+						allMenuList={allMenuList}
 					/>
 				)}
 				{step === 4 && (
-					<OrderFinal info={info} setInfo={setInfo} setStep={setStep} />
+					<OrderFinal
+						info={info}
+						allMenuList={allMenuList}
+					/>
 				)}
 			</div>
 		</PageLayout>

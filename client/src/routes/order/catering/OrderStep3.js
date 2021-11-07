@@ -14,7 +14,7 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import axios from "axios";
 
-const OrderStep3 = ({ info, setInfo, setStep, changeInfo }) => {
+const OrderStep3 = ({ info, setInfo, setStep, changeInfo, allMenuList }) => {
 	const [selected, setSelected] = useState(false);
 	const [selected2, setSelected2] = useState(false);
 	const prevStep = () => {
@@ -159,7 +159,13 @@ const OrderStep3 = ({ info, setInfo, setStep, changeInfo }) => {
 								메인메뉴
 							</div>
 							<div class="w-full md:flex-1 text-xl">
-								{info.mainMenu.sort().join(", ")}
+								{/* {info.mainMenu.sort().join(", ")} */}
+								{info.mainMenu
+									.map((element, index) => {
+										return allMenuList[element].name;
+									})
+									.sort((a, b) => a.createdAt - b.createAt)
+									.join(", ")}
 							</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start border-b-2 border-gray-200">
@@ -167,7 +173,13 @@ const OrderStep3 = ({ info, setInfo, setStep, changeInfo }) => {
 								식사메뉴
 							</div>
 							<div class="w-full md:flex-1 text-xl">
-								{info.subMenu.sort().join(", ")}
+								{/* {info.subMenu.sort().join(", ")} */}
+								{info.subMenu
+									.map((element, index) => {
+										return allMenuList[element].name;
+									})
+									.sort((a, b) => a.createdAt - b.createAt)
+									.join(", ")}
 							</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start border-b-2 border-gray-200">
@@ -175,7 +187,13 @@ const OrderStep3 = ({ info, setInfo, setStep, changeInfo }) => {
 								국1
 							</div>
 							<div class="w-full md:flex-1 text-xl">
-								{info.soup.sort().join(", ")}
+								{/* {info.soup.sort().join(", ")} */}
+								{info.soup
+									.map((element, index) => {
+										return allMenuList[element].name;
+									})
+									.sort((a, b) => a.createdAt - b.createAt)
+									.join(", ")}
 							</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start">
@@ -183,7 +201,13 @@ const OrderStep3 = ({ info, setInfo, setStep, changeInfo }) => {
 								디저트
 							</div>
 							<div class="w-full md:flex-1 text-xl">
-								{info.dessert.sort().join(", ")}
+								{/* {info.dessert.sort().join(", ")} */}
+								{info.dessert
+									.map((element, index) => {
+										return allMenuList[element].name;
+									})
+									.sort((a, b) => a.createdAt - b.createAt)
+									.join(", ")}
 							</div>
 						</div>
 					</div>
