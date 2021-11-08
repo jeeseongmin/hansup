@@ -34,6 +34,7 @@ const Schedule = () => {
 				}
 			)
 			.then(async (Response) => {
+				console.log(Response.data);
 				await setOrderInfo(Response.data);
 				setLoading(true);
 			})
