@@ -15,9 +15,12 @@ const DailyOrder = ({ focusDate, orderInfo, setFocusDate, toggleChange }) => {
 		let cp = await orderInfo.filter(function (element, index) {
 			return (
 				element.payed &&
-				String(focusDate.get("year")) === element.date.substr(0, 4) &&
-				String(focusDate.get("month") + 1) === element.date.substr(5, 2) &&
-				String(focusDate.get("date")) === element.date.substr(8, 2)
+				String(focusDate.get("year")) ===
+					String(Number(element.date.substr(0, 4))) &&
+				String(focusDate.get("month") + 1) ===
+					String(Number(element.date.substr(5, 2))) &&
+				String(focusDate.get("date")) ===
+					String(Number(element.date.substr(8, 2)))
 			);
 		});
 		if (cp.length > 0) {
@@ -34,9 +37,12 @@ const DailyOrder = ({ focusDate, orderInfo, setFocusDate, toggleChange }) => {
 		let cp = await orderInfo.filter(function (element, index) {
 			return (
 				!element.payed &&
-				String(focusDate.get("year")) === element.date.substr(0, 4) &&
-				String(focusDate.get("month") + 1) === element.date.substr(5, 2) &&
-				String(focusDate.get("date")) === element.date.substr(8, 2)
+				String(focusDate.get("year")) ===
+					String(Number(element.date.substr(0, 4))) &&
+				String(focusDate.get("month") + 1) ===
+					String(Number(element.date.substr(5, 2))) &&
+				String(focusDate.get("date")) ===
+					String(Number(element.date.substr(8, 2)))
 			);
 		});
 		if (cp.length > 0) {

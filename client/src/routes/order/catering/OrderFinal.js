@@ -1,8 +1,11 @@
 import InfoBlock from "components/Block/InfoBlock";
 import Description from "components/Description";
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 const OrderFinal = ({ info, allMenuList }) => {
+	const history = useHistory();
+
 	return (
 		<div class="w-full flex flex-col justify-center items-center">
 			<h1 class="text-4xl font-bold text-hansupBrown mb-16">
@@ -86,48 +89,52 @@ const OrderFinal = ({ info, allMenuList }) => {
 								메인메뉴
 							</div>
 							<div class="w-full md:flex-1 text-xl">
-							{info.mainMenu
+								{info.mainMenu
 									.map((element, index) => {
 										return allMenuList[element].name;
 									})
 									.sort((a, b) => a.createdAt - b.createAt)
-									.join(", ")}							</div>
+									.join(", ")}{" "}
+							</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start border-b-2 border-gray-200">
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								식사메뉴
 							</div>
 							<div class="w-full md:flex-1 text-xl">
-							{info.subMenu
+								{info.subMenu
 									.map((element, index) => {
 										return allMenuList[element].name;
 									})
 									.sort((a, b) => a.createdAt - b.createAt)
-									.join(", ")}							</div>
+									.join(", ")}{" "}
+							</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start border-b-2 border-gray-200">
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								국1
 							</div>
 							<div class="w-full md:flex-1 text-xl">
-							{info.soup
+								{info.soup
 									.map((element, index) => {
 										return allMenuList[element].name;
 									})
 									.sort((a, b) => a.createdAt - b.createAt)
-									.join(", ")}							</div>
+									.join(", ")}{" "}
+							</div>
 						</div>
 						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start">
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								디저트
 							</div>
 							<div class="w-full md:flex-1 text-xl">
-							{info.dessert
+								{info.dessert
 									.map((element, index) => {
 										return allMenuList[element].name;
 									})
 									.sort((a, b) => a.createdAt - b.createAt)
-									.join(", ")}							</div>
+									.join(", ")}{" "}
+							</div>
 						</div>
 					</div>
 				</InfoBlock>
@@ -202,6 +209,14 @@ const OrderFinal = ({ info, allMenuList }) => {
 						010-1111-2222
 					</div>
 				</Description>
+			</div>
+			<div class="h-12 w-full md:w-2/3 flex justify-center items-center">
+				<div
+					onClick={() => history.push("/")}
+					class="mt-4 cursor-pointer w-full lg:w-60 h-full flex justify-center items-center outline-none bg-hansupBrown text-white font-bold text-xl"
+				>
+					홈으로
+				</div>
 			</div>
 		</div>
 	);

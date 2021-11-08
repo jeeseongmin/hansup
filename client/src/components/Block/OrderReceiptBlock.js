@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import Subtitle from "components/Subtitle";
 import { MdClose } from "react-icons/md";
 
-const OrderReceiptBlock = ({ info, handleClose }) => {
+const OrderReceiptBlock = ({ info, handleClose, allMenuList }) => {
 	useEffect(() => {
 		console.log(info);
 	}, []);
@@ -97,7 +97,12 @@ const OrderReceiptBlock = ({ info, handleClose }) => {
 							메인메뉴
 						</div>
 						<div class="w-full md:flex-1 text-xl">
-							{info.mainMenu.sort().join(", ")}
+							{info.mainMenu
+								.map((element, index) => {
+									return allMenuList[element].name;
+								})
+								.sort((a, b) => a.createdAt - b.createAt)
+								.join(", ")}
 						</div>
 					</div>
 					<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start border-b-2 border-gray-200">
@@ -105,7 +110,12 @@ const OrderReceiptBlock = ({ info, handleClose }) => {
 							식사메뉴
 						</div>
 						<div class="w-full md:flex-1 text-xl">
-							{info.subMenu.sort().join(", ")}
+							{info.subMenu
+								.map((element, index) => {
+									return allMenuList[element].name;
+								})
+								.sort((a, b) => a.createdAt - b.createAt)
+								.join(", ")}{" "}
 						</div>
 					</div>
 					<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start border-b-2 border-gray-200">
@@ -113,7 +123,12 @@ const OrderReceiptBlock = ({ info, handleClose }) => {
 							국1
 						</div>
 						<div class="w-full md:flex-1 text-xl">
-							{info.soup.sort().join(", ")}
+							{info.soup
+								.map((element, index) => {
+									return allMenuList[element].name;
+								})
+								.sort((a, b) => a.createdAt - b.createAt)
+								.join(", ")}
 						</div>
 					</div>
 					<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start">
@@ -121,7 +136,12 @@ const OrderReceiptBlock = ({ info, handleClose }) => {
 							디저트
 						</div>
 						<div class="w-full md:flex-1 text-xl">
-							{info.dessert.sort().join(", ")}
+							{info.dessert
+								.map((element, index) => {
+									return allMenuList[element].name;
+								})
+								.sort((a, b) => a.createdAt - b.createAt)
+								.join(", ")}
 						</div>
 					</div>
 				</div>

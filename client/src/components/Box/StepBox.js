@@ -48,8 +48,8 @@ const ArrowBox = styled.div`
 
 const StepBox = ({ step, current, text, setStep }) => {
 	return (
-		<StepDiv step={step} current={current} onClick={() => setStep(current)}>
-			{/* <StepDiv step={step} current={current}> */}
+		// <StepDiv step={step} current={current} onClick={() => setStep(current)}>
+		<StepDiv step={step} current={current}>
 			<span class="z-30">{text}</span>
 			{/* <ArrowBox step={step} step={1}/> */}
 			<ArrowBox step={step} current={current} />

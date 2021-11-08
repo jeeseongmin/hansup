@@ -34,6 +34,7 @@ const Ordering = () => {
 		payed: false,
 	});
 
+	// 메뉴 리스트 불러오기
 	const [menuList, setMenuList] = useState([]);
 	const [allMenuList, setAllMenuList] = useState([]);
 	const [listLoading, setListLoading] = useState(true);
@@ -47,7 +48,6 @@ const Ordering = () => {
 
 	const getList = async () => {
 		setListLoading(false);
-		console.log("getList");
 		await axios
 			.post(
 				"/api/menu/search/catering",
@@ -60,7 +60,6 @@ const Ordering = () => {
 				}
 			)
 			.then((Response) => {
-				console.log(Response.data);
 				const tmpList = [];
 				for (let one of typeList) {
 					const cp = Response.data.filter(function (element, index) {
@@ -221,12 +220,7 @@ const Ordering = () => {
 						allMenuList={allMenuList}
 					/>
 				)}
-				{step === 4 && (
-					<OrderFinal
-						info={info}
-						allMenuList={allMenuList}
-					/>
-				)}
+				{step === 4 && <OrderFinal info={info} allMenuList={allMenuList} />}
 			</div>
 		</PageLayout>
 	);
