@@ -10,9 +10,12 @@ const DayView = ({ currentDate, focusDate, orderInfo, setFocusDate }) => {
 		let cp = await orderInfo.filter(function (element, index) {
 			return (
 				element.payed &&
-				String(currentDate.get("year")) === element.date.substr(0, 4) &&
-				String(currentDate.get("month") + 1) === element.date.substr(5, 2) &&
-				String(currentDate.get("date")) === element.date.substr(8, 2)
+				String(currentDate.get("year")) ===
+					String(Number(element.date.substr(0, 4))) &&
+				String(currentDate.get("month") + 1) ===
+					String(Number(element.date.substr(5, 2))) &&
+				String(currentDate.get("date")) ===
+					String(Number(element.date.substr(8, 2)))
 			);
 		});
 		if (cp.length > 0) {
@@ -28,9 +31,12 @@ const DayView = ({ currentDate, focusDate, orderInfo, setFocusDate }) => {
 		let cp = await orderInfo.filter(function (element, index) {
 			return (
 				!element.payed &&
-				String(currentDate.get("year")) === element.date.substr(0, 4) &&
-				String(currentDate.get("month") + 1) === element.date.substr(5, 2) &&
-				String(currentDate.get("date")) === element.date.substr(8, 2)
+				String(currentDate.get("year")) ===
+					String(Number(element.date.substr(0, 4))) &&
+				String(currentDate.get("month") + 1) ===
+					String(Number(element.date.substr(5, 2))) &&
+				String(currentDate.get("date")) ===
+					String(Number(element.date.substr(8, 2)))
 			);
 		});
 		if (cp.length > 0) {

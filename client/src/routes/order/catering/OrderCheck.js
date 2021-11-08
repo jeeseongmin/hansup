@@ -101,8 +101,6 @@ const OrderCheck = () => {
 				)
 				.then(async (Response) => {
 					await setOrderInfo(Response.data[0]);
-					console.log(searchInfo.name, phoneNumber, searchInfo.date);
-					console.log(Response.data[0]);
 					if (Response.data.length > 0) {
 						setEmpty(false);
 						handleOpen();
@@ -112,7 +110,6 @@ const OrderCheck = () => {
 					setLoading(true);
 				})
 				.catch((Error) => {
-					console.log(phoneNumber);
 					console.log(Error);
 				});
 			// await getOrderInfo();
@@ -137,6 +134,58 @@ const OrderCheck = () => {
 			</div>
 		);
 	};
+
+	// 메뉴 리스트 불러오기
+	const [allMenuList, setAllMenuList] = useState([]);
+	const [listLoading, setListLoading] = useState(true);
+
+	const typeList = [
+		{ title: "메인메뉴 (택 4)", type: "mainMenu" },
+		{ title: "식사메뉴 (택 4)", type: "subMenu" },
+		{ title: "국 (택 1)", type: "soup" },
+		{ title: "디저트 (택 5)", type: "dessert" },
+	];
+
+	const getList = async () => {
+		setListLoading(false);
+		await axios
+			.post(
+				"/api/menu/search/catering",
+				{ key: process.env.REACT_APP_API_KEY },
+				{
+					headers: {
+						"Content-type": "application/json",
+						Accept: "application/json",
+					},
+				}
+			)
+			.then((Response) => {
+				const tmpList = [];
+				for (let one of typeList) {
+					const cp = Response.data.filter(function (element, index) {
+						return element.type === one.type;
+					});
+					tmpList.push({
+						title: one.title,
+						type: one.type,
+						menu: [...cp],
+					});
+				}
+				let cp2 = {};
+				for (let i = 0; i < Response.data.length; i++) {
+					cp2[Response.data[i]._id] = Response.data[i];
+				}
+				setAllMenuList(cp2);
+				setListLoading(true);
+			})
+			.catch((Error) => {
+				console.log(Error);
+			});
+	};
+	useEffect(() => {
+		getList();
+	}, []);
+
 	return (
 		<>
 			<PageLayout>
@@ -249,7 +298,11 @@ const OrderCheck = () => {
 							ref={modalRef}
 							class="select-none bg-white w-full md:w-2/3 lg:w-1/2 max-h-full overflow-auto h-full p-8"
 						>
-							<OrderReceiptBlock info={orderInfo} handleClose={handleClose} />
+							<OrderReceiptBlock
+								info={orderInfo}
+								handleClose={handleClose}
+								allMenuList={allMenuList}
+							/>
 						</div>
 					</div>
 				</div>
