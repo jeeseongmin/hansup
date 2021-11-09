@@ -1,6 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import Menu from "routes/manager/Menu";
+import Voice from "routes/manager/Voice";
 import Schedule from "routes/manager/Schedule";
 import Order from "routes/manager/Order";
 
@@ -11,7 +12,7 @@ const Index = () => {
 				<Route exact path="/manager/order" component={Order} />
 				<Route exact path="/manager/schedule" component={Schedule} />
 				<Route exact path="/manager/menu" component={Menu} />
-				<Route exact path="/manager/voice" component={Menu} />
+				<Route exact path="/manager/voice" component={Voice} />
 			</switch>
 		</div>
 	);
