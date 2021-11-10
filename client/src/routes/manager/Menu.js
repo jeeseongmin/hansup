@@ -47,7 +47,6 @@ const Menu = () => {
 
 	const getList = async () => {
 		setListLoading(false);
-		console.log("getList");
 		await axios
 			.post(
 				"/api/menu/search/catering",
@@ -60,7 +59,6 @@ const Menu = () => {
 				}
 			)
 			.then((Response) => {
-				console.log(Response.data);
 				const tmpList = [];
 				for (let one of typeList) {
 					const cp = Response.data.filter(function (element, index) {
@@ -352,7 +350,6 @@ const Menu = () => {
 						// history.push("/community/notice/list");
 						// document.getElementById("scrollRef").scrollTo(0, 0);
 						const cp = [...menuList];
-						console.log(response.data);
 						if (newMenu.type === "mainMenu") {
 							cp[0].menu.push(response.data);
 						} else if (newMenu.type === "subMenu") {

@@ -18,11 +18,6 @@ const ReviewBlock = ({ review }) => {
 					onMouseLeave={() => setIsHover(false)}
 					class="w-full h-48 lg:h-72 relative cursor-pointer"
 				>
-					{/* <img
-				src={window.location.origin + "/api/image/view/" + review.imgList[0]}
-				class="w-full h-full object-cover"
-				alt="img"
-			/> */}
 					<img
 						class="w-full h-full object-cover"
 						src={
@@ -49,11 +44,7 @@ const ReviewBlock = ({ review }) => {
 					</div>
 				</div>
 			) : (
-				<div
-					// onMouseOver={() => setIsHover(true)}
-					// onMouseLeave={() => setIsHover(false)}
-					class="w-full h-48 lg:h-72 relative cursor-pointer"
-				>
+				<div class="w-full h-48 lg:h-72 relative cursor-pointer">
 					<Skeleton variant="rectangular" height={250} />
 				</div>
 			)}

@@ -3,7 +3,14 @@ import OrderBox from "components/Box/OrderBox";
 import MenuCountBox from "components/Box/MenuCountBox";
 import Modal from "@mui/material/Modal";
 
-const DailyOrder = ({ focusDate, orderInfo, setFocusDate, toggleChange }) => {
+const DailyOrder = ({
+	focusDate,
+	orderInfo,
+	setFocusDate,
+	toggleChange,
+	menuList,
+	allMenuList,
+}) => {
 	const [loading, setLoading] = useState(false);
 	const [dayOrderList, setDayOrderList] = useState([]);
 	const [total, setTotal] = useState(0);
@@ -142,24 +149,32 @@ const DailyOrder = ({ focusDate, orderInfo, setFocusDate, toggleChange }) => {
 						<p class="text-2xl font-bold mb-8">확정 예약 총계</p>
 						<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
 							<MenuCountBox
-								key={dayOrderList.mainMenu}
+								key={0}
 								type={"mainMenu"}
 								dayOrderList={dayOrderList}
+								menuList={menuList}
+								allMenuList={allMenuList}
 							/>
 							<MenuCountBox
-								key={dayOrderList.subMenu}
+								key={1}
 								type={"subMenu"}
 								dayOrderList={dayOrderList}
+								menuList={menuList}
+								allMenuList={allMenuList}
 							/>
 							<MenuCountBox
-								key={dayOrderList.soup}
+								key={2}
 								type={"soup"}
 								dayOrderList={dayOrderList}
+								menuList={menuList}
+								allMenuList={allMenuList}
 							/>
 							<MenuCountBox
-								key={dayOrderList.dessert}
+								key={3}
 								type={"dessert"}
 								dayOrderList={dayOrderList}
+								menuList={menuList}
+								allMenuList={allMenuList}
 							/>
 						</div>
 					</div>

@@ -118,7 +118,7 @@ router.route("/payed/:id").post((req, res) => {
 
 				one
 					.save()
-					.then(() => res.json("Order updated!"))
+					.then((result) => res.json(result))
 					.catch((err) => res.status(400).json("Error: " + err));
 			})
 			.catch((err) => res.status(400).json("Error: " + err));
