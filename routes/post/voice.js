@@ -65,7 +65,7 @@ router.route("/search/:page").post((req, res) => {
 router.route("/page/:page").post((req, res) => {
 	if (req.body.key === API_KEY) {
 		Voice.find()
-			.sort({ createdAt: -1 })
+			.sort({ createdAt: -1, status: 1 })
 			.skip((req.params.page - 1) * 10)
 			.limit(10)
 			.then((all) => res.json(all))
@@ -78,7 +78,7 @@ router.route("/read/:id").post((req, res) => {
 	if (req.body.key === API_KEY) {
 		Voice.findById(req.params.id)
 			.then((one) => {
-				one.status = req.body.status;
+				one.status = "read";
 
 				one
 					.save()

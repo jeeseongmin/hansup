@@ -26,7 +26,9 @@ const OrderCheckBlock = ({ info, handleClose, toggleChange, allMenuList }) => {
 			)
 			.then(async (Response) => {
 				await alert(
-					Response.payed ? "예약이 확정되었습니다." : "예약이 미확정되었습니다."
+					Response.data.payed
+						? "예약이 확정되었습니다."
+						: "예약이 미확정되었습니다."
 				);
 				toggleChange();
 			})

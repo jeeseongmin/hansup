@@ -1,11 +1,37 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 const VoiceBlock = ({ voice }) => {
 	const history = useHistory();
 	const goPage = () => {
-		history.push("/community/voice/" + voice._id);
+		if (voice.status === "unread") {
+			readCheck();
+		} else {
+			history.push("/manager/voice/" + voice._id);
+		}
 	};
+
+	const readCheck = async () => {
+		await axios
+			.post(
+				"/api/voice/read/" + voice._id,
+				{ key: process.env.REACT_APP_API_KEY },
+				{
+					headers: {
+						"Content-type": "application/json",
+						Accept: "application/json",
+					},
+				}
+			)
+			.then((Response) => {
+				history.push("/manager/voice/" + voice._id);
+			})
+			.catch((Error) => {
+				console.log(Error);
+			});
+	};
+
 	return (
 		<div
 			onClick={goPage}
