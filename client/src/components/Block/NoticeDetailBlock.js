@@ -60,15 +60,6 @@ const NoticeDetailBlock = ({ match }) => {
 							notice.imgList.map((element, index) => {
 								return (
 									<div class="w-2/3 lg:w-1/2 flex justify-center items-center my-4">
-										{/* <img
-											class="w-full object-cover"
-											src={
-												window.location.origin +
-												"/api/image/view/" +
-												element.filename
-											}
-											alt="img"
-										/> */}
 										{imgLoading ? (
 											<img
 												class="w-full object-cover"
@@ -79,8 +70,9 @@ const NoticeDetailBlock = ({ match }) => {
 												alt="img"
 											/>
 										) : (
-											// <CircularProgress/>
-											<></>
+											<>
+												<CircularProgress />
+											</>
 										)}
 									</div>
 								);
