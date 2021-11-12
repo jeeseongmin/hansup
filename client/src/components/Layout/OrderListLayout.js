@@ -28,7 +28,7 @@ const OrderListLayout = ({ info, col, type, setMenu, menuList }) => {
 						return (
 							<CateringMenuBlock
 								url={
-									"http://localhost:5000/api/image/view/" +
+									"http://hansup.cafe24app.com/api/image/view/" +
 									element.imgList[0].filename
 								}
 								title={element.name}

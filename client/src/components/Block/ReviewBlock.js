@@ -21,7 +21,7 @@ const ReviewBlock = ({ review }) => {
 					<img
 						class="w-full h-full object-cover"
 						src={
-							"http://localhost:5000/api/image/view/" +
+							"http://hansup.cafe24app.com/api/image/view/" +
 							review.imgList[0].filename
 						}
 						alt="imgList"

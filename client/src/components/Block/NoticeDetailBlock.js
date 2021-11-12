@@ -64,7 +64,7 @@ const NoticeDetailBlock = ({ match }) => {
 											<img
 												class="w-full object-cover"
 												src={
-													"http://localhost:5000/api/image/view/" +
+													"http://hansup.cafe24app.com/api/image/view/" +
 													element.filename
 												}
 												alt="img"
