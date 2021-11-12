@@ -22,7 +22,7 @@ const MenuListLayout = ({ info, col, type, use, updateMenu, deleteMenu }) => {
 			<MenuTitle>{info.title}</MenuTitle>
 			<Line></Line>
 			{type === "manager" && (
-				<div class={"w-full grid grid-cols-2 gap-5 lg:" + colStyle}>
+				<div class={"w-full grid grid-cols-2 gap-5 lg:grid-cols-5"}>
 					{info.menu.map((element, index) => {
 						return (
 							<ManageMenuBlock
@@ -36,7 +36,7 @@ const MenuListLayout = ({ info, col, type, use, updateMenu, deleteMenu }) => {
 				</div>
 			)}
 			{type === "view" && (
-				<div class={"w-full grid grid-cols-2 gap-5 lg:" + colStyle}>
+				<div class={"w-full grid grid-cols-2 gap-5 lg:grid-cols-5"}>
 					{info.menu.map((element, index) => {
 						return (
 							<FoodMenuBlock
