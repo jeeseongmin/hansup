@@ -16,9 +16,9 @@ const Schedule = () => {
 		setChange(!change);
 	};
 
-	const getOrderInfo = async () => {
+	const getOrderInfo = () => {
 		setLoading(false);
-		await axios
+		axios
 			.post(
 				"/api/order/get/date",
 				{
@@ -58,9 +58,9 @@ const Schedule = () => {
 		{ title: "디저트 (택 5)", type: "dessert" },
 	];
 
-	const getList = async () => {
+	const getList = () => {
 		setListLoading(false);
-		await axios
+		axios
 			.post(
 				"/api/menu/search/catering",
 				{ key: process.env.REACT_APP_API_KEY },

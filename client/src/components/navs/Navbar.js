@@ -312,7 +312,7 @@ const Navbar = ({ currentMenu }) => {
 						/>
 						<Submenu
 							title={"고객의 소리"}
-							url={"/community/voice/list"}
+							url={"/community/voice/main"}
 							empty={false}
 						/>
 					</MenuContainer>
