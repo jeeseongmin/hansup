@@ -8,11 +8,13 @@ import Emoji from "image/homeEmoji.png";
 import Lunchbox from "image/homeLunchbox.png";
 import React from "react";
 import { ImageBackground } from "react-native";
+import Forest from "image/bg-forest.png";
+
 const Home = () => {
 	return (
 		<div class="w-full h-full">
 			{/* <ImageBackground source={process.env.PUBLIC_URL + "/images/homeBack.png"}> */}
-			<ImageBackground source={Background}>
+			{/* <ImageBackground source={Background}>
 				<div class="flex">
 					<div class="w-3/5 pt-40 pl-24 pb-20 flex-col">
 						<img src={Emoji} class="h-48 w-48" alt="emoji" />
@@ -28,7 +30,12 @@ const Home = () => {
 						<HomeButton text="한숲은 꿈꿔요" />
 					</div>
 				</div>
-			</ImageBackground>
+			</ImageBackground> */}
+			<div class="w-full h-auto relative">
+				<div class="w-full h-auto top-0 left-0 absolute">
+					<img src={Forest} alt="hansup" class="object-cover h-full" />
+				</div>
+			</div>
 			<div class="text-center py-14 text-2xl text-hansupBrown">
 				<h2>특색을 담은 맛있는 음식으로</h2>
 				<h2>고객님들께 착하고 즐거운 맛을 제공합니다.</h2>
