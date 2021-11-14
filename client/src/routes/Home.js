@@ -12,7 +12,8 @@ import Forest from "image/bg-forest.png";
 
 const Home = () => {
 	return (
-		<div class="w-full h-full">
+		<div class="w-full h-full flex flex-col">
+			<div class=""></div>
 			{/* <ImageBackground source={process.env.PUBLIC_URL + "/images/homeBack.png"}> */}
 			{/* <ImageBackground source={Background}>
 				<div class="flex">
@@ -31,9 +32,26 @@ const Home = () => {
 					</div>
 				</div>
 			</ImageBackground> */}
-			<div class="w-full h-auto relative">
-				<div class="w-full h-auto top-0 left-0 absolute">
-					<img src={Forest} alt="hansup" class="object-cover h-full" />
+			<div class="w-full relative">
+				<div class="w-full relative">
+					<img src={Forest} alt="hansup" class="object-cover w-full h-full" />
+					<div class="absolute w-full h-full border border-red-500 left-0 top-0">
+						<div class="flex">
+							<div class="w-3/5 pt-40 pl-24 pb-20 flex-col">
+								<img src={Emoji} class="h-48 w-48" alt="emoji" />
+								<div class="text-3xl text-white pt-8">
+									<h2>다양한 나무들이 모여 하나의 숲을 만들 듯,</h2>
+									<h2>청각장애인과 비장애인들이 모여 우리만의</h2>
+									<h2>특색있는 숲을 만들고자 합니다.</h2>
+								</div>
+							</div>
+							<div class="flex-col pt-80 pl-20 pb-10 w-96">
+								<HomeButton text="한숲의 인사말" />
+								<HomeButton text="한숲 스토리" />
+								<HomeButton text="한숲은 꿈꿔요" />
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="text-center py-14 text-2xl text-hansupBrown">
