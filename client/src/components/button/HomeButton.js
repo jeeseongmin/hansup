@@ -4,9 +4,9 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 const HomeButton = ({ text }) => {
 	return (
-		<div class="py-6 cursor-pointer px-8 mb-3 transition delay-50 duration-300 w-full relative text-white font-bold bg-opacity-80 bg-hansupBrown hover:bg-white hover:text-hansupBrown">
+		<div class="flex flex-row justify-between items-center cursor-pointer px-8 mb-3 transition delay-50 duration-300 w-full relative text-white font-bold bg-opacity-80 bg-hansupBrown hover:bg-white hover:text-hansupBrown">
 			{text}
-			<div class="absolute top-7 right-10">
+			<div class="">
 				<FontAwesomeIcon icon={faArrowRight} className="float-right" />
 			</div>
 		</div>
