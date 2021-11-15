@@ -5,6 +5,9 @@ import styled, { css } from "styled-components";
 import Menu from "components/navs/Menu";
 import Submenu from "components/navs/Submenu";
 import logoImg from "image/logo.png";
+import { GiHamburgerMenu } from "react-icons/gi";
+import Drawer from "@mui/material/Drawer";
+
 const Nav = styled.div`
 	width: 100%;
 	position: fixed;
@@ -29,6 +32,32 @@ const NavContainer = styled.div`
 	// 기본 사이즈
 	@media screen and (max-width: 1200px) {
 		padding: 0 0rem 0 3rem;
+		display: none;
+	}
+	//
+	@media screen and (max-width: 768px) {
+		padding: 0 2rem;
+	}
+	// 모바일 iPhone
+	@media screen and (max-width: 480px) {
+		padding: 0 2rem;
+	}
+`;
+
+const ResponsiveContainer = styled.div`
+	height: 4rem;
+	max-width: 100%;
+	background-color: #6c4d3f;
+	display: none;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 3rem 0 10rem;
+
+	// 기본 사이즈
+	@media screen and (max-width: 1200px) {
+		padding: 0 2rem;
+		display: flex;
 	}
 	//
 	@media screen and (max-width: 768px) {
@@ -79,11 +108,11 @@ const SubContainer = styled.div`
 				transition: all 0.3s ease;
 				background-color: #6c4d3f;
 			`};
+		border-top: 1px solid transparent;
 	}
 	//
 	@media screen and (max-width: 768px) {
 		padding: 0 2rem;
-		border-top: 1px solid transparent;
 	}
 	// 모바일 iPhone
 	@media screen and (max-width: 480px) {
@@ -95,10 +124,12 @@ const Logo = styled.div`
 `;
 
 const MenuContainer = styled.div`
-	display: inline-flex;
+	display: none;
 	height: 4rem;
+	@media screen and (min-width: 1200px) {
+		display: inline-flex;
+	}
 	@media screen and (max-width: 1200px) {
-		display: none;
 	}
 	//
 	@media screen and (max-width: 768px) {
@@ -163,6 +194,19 @@ const Navbar = ({ currentMenu }) => {
 
 	return (
 		<Nav ref={subRef} onMouseLeave={onMouseOut}>
+			<ResponsiveContainer>
+				<Logo>
+					<Link to="/">
+						<img src={logoImg} class="object-cover h-8" alt="logo" />
+					</Link>
+				</Logo>
+				<div class="text-white hidden md:block cursor-pointer z-50">
+					<GiHamburgerMenu size={28} />
+				</div>
+				<div class="text-white block md:hidden cursor-pointer z-50">
+					<GiHamburgerMenu size={24} />
+				</div>
+			</ResponsiveContainer>
 			<NavContainer onMouseOver={onMouseOver}>
 				<Logo>
 					<Link to="/">
