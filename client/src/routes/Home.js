@@ -1,19 +1,14 @@
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import HomeButton from "components/Button/HomeButton";
-import HomeContent from "components/content/HomeContent";
-import Background from "image/homeBack.png";
+import CircularProgress from "@mui/material/CircularProgress";
+import axios from "axios";
+import ReviewBlock from "components/Block/ReviewBlock";
+import Forest from "image/bg-forest.png";
 import Catering from "image/homeCatering.png";
 import Emoji from "image/homeEmoji.png";
 import Lunchbox from "image/homeLunchbox.png";
-import React, { useState, useEffect } from "react";
-import { ImageBackground } from "react-native";
-import Forest from "image/bg-forest.png";
-import { HiOutlineArrowRight } from "react-icons/hi";
-import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import ReviewBlock from "components/Block/ReviewBlock";
-import CircularProgress from "@mui/material/CircularProgress";
 
 const Home = () => {
 	const history = useHistory();

@@ -8,12 +8,18 @@ import Home from "routes/Home";
 import Intro from "routes/intro/Index";
 import Manager from "routes/manager/Index";
 import Order from "routes/order/Index";
+import { useDispatch, useSelector } from "react-redux";
 
 const App = () => {
+	const sidebar = useSelector((state) => state.setting.sidebar);
+
 	return (
 		<div
 			id="scrollRef"
-			class="h-screen select-none w-full flex flex-col overflow-y-scroll scrollbar-hide relative"
+			class={
+				"h-screen select-none w-full flex flex-col scrollbar-hide relative " +
+				(sidebar === "off" ? "overflow-y-scroll" : "overflow-y-hidden")
+			}
 		>
 			<>
 				<Layout>
