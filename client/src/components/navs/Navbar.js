@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-// import "components/navs/nav.css";
 import { Link, useLocation } from "react-router-dom";
 import styled, { css } from "styled-components";
 import Menu from "components/navs/Menu";
@@ -7,6 +6,9 @@ import Submenu from "components/navs/Submenu";
 import logoImg from "image/logo.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Drawer from "@mui/material/Drawer";
+import { useDispatch, useSelector } from "react-redux";
+import { setSidebar } from "reducers/setting";
+import Modal from "@mui/material/Modal";
 
 const Nav = styled.div`
 	width: 100%;
@@ -140,10 +142,29 @@ const MenuContainer = styled.div`
 `;
 
 const Navbar = ({ currentMenu }) => {
+	const dispatch = useDispatch();
 	const location = useLocation();
 	const subRef = useRef();
 	const [menu, setMenu] = useState(0);
 	const [current, setCurrent] = useState(0);
+
+	const modalRef = useRef();
+	const clickRef = useRef();
+
+	const sidebar = useSelector((state) => state.setting.sidebar);
+
+	const toggleSidebar = () => {
+		console.log(sidebar);
+		if (true) {
+			dispatch(setSidebar("on"));
+		} else {
+			dispatch(setSidebar("off"));
+		}
+	};
+
+	useEffect(() => {
+		console.log(sidebar);
+	}, [sidebar]);
 
 	const toggleMenu = (e, num) => {
 		if (menu === 0) {
@@ -193,190 +214,208 @@ const Navbar = ({ currentMenu }) => {
 	}, [menu]);
 
 	return (
-		<Nav ref={subRef} onMouseLeave={onMouseOut}>
-			<ResponsiveContainer>
-				<Logo>
-					<Link to="/">
-						<img src={logoImg} class="object-cover h-8" alt="logo" />
-					</Link>
-				</Logo>
-				<div class="text-white hidden md:block cursor-pointer z-50">
-					<GiHamburgerMenu size={28} />
-				</div>
-				<div class="text-white block md:hidden cursor-pointer z-50">
-					<GiHamburgerMenu size={24} />
-				</div>
-			</ResponsiveContainer>
-			<NavContainer onMouseOver={onMouseOver}>
-				<Logo>
-					<Link to="/">
-						<img src={logoImg} class="object-cover h-8" alt="logo" />
-					</Link>
-				</Logo>
-				<MenuContainer>
-					<Menu
-						toggleMenu={toggleMenu}
-						menu={1}
-						title={"회사소개"}
-						url={"/intro/introduction"}
-						current={menu}
-						currentMenu={currentMenu}
-					/>
-					<Menu
-						toggleMenu={toggleMenu}
-						menu={2}
-						title={"한숲사업"}
-						url={"/business/restaurant"}
-						current={menu}
-						currentMenu={currentMenu}
-					/>
-					<Menu
-						toggleMenu={toggleMenu}
-						menu={3}
-						title={"예약안내"}
-						url={"/order/catering/menu"}
-						current={menu}
-						currentMenu={currentMenu}
-					/>
-					<Menu
-						toggleMenu={toggleMenu}
-						menu={4}
-						title={"커뮤니티"}
-						url={"/community/notice/list"}
-						current={menu}
-						currentMenu={currentMenu}
-					/>
-					<Menu
-						toggleMenu={toggleMenu}
-						menu={5}
-						title={"협력기업"}
-						url={"/enterprise/hansup"}
-						current={menu}
-						currentMenu={currentMenu}
-					/>
-					<Menu
-						// toggleMenu={toggleMenu}
-						menu={6}
-						title={"관리자"}
-						url={"/manager/schedule"}
-						current={menu}
-						currentMenu={currentMenu}
-
-						// empty={true}
-					/>
-				</MenuContainer>
-			</NavContainer>
-			<SubContainer num={menu} id="check">
-				<Logo>
-					<Link to="/">
-						<img
-							src="/image/logo.png"
-							class="object-cover h-8 invisible"
-							alt="logo"
-						/>
-					</Link>
-				</Logo>
-
-				{menu === 1 && (
+		<>
+			<Nav ref={subRef} onMouseLeave={onMouseOut}>
+				<ResponsiveContainer>
+					<Logo>
+						<Link to="/">
+							<img src={logoImg} class="object-cover h-8" alt="logo" />
+						</Link>
+					</Logo>
+					<div
+						onClick={() => dispatch(setSidebar("on"))}
+						class="text-white hidden md:block cursor-pointer z-50 border border-black"
+					>
+						<GiHamburgerMenu size={28} />
+					</div>
+					<div
+						onClick={() => dispatch(setSidebar("on"))}
+						class="text-white block md:hidden cursor-pointer z-50"
+					>
+						<GiHamburgerMenu size={24} />
+					</div>
+				</ResponsiveContainer>
+				<NavContainer onMouseOver={onMouseOver}>
+					<Logo>
+						<Link to="/">
+							<img src={logoImg} class="object-cover h-8" alt="logo" />
+						</Link>
+					</Logo>
 					<MenuContainer>
-						<Submenu
-							title={"인사말"}
+						<Menu
+							toggleMenu={toggleMenu}
+							menu={1}
+							title={"회사소개"}
 							url={"/intro/introduction"}
-							empty={false}
+							current={menu}
+							currentMenu={currentMenu}
 						/>
-						<Submenu title={"한숲 이야기"} url={"/intro/story"} empty={false} />
-						<Submenu
-							title={"한숲의 역사"}
-							url={"/intro/history"}
-							empty={false}
-						/>
-						<Submenu title={"오시는 길"} url={"/intro/guide"} empty={false} />
-						<Submenu title={""} url={"#"} empty={true} />
-						<Submenu title={""} url={"#"} empty={true} />
-					</MenuContainer>
-				)}
-				{menu === 2 && (
-					<MenuContainer>
-						<Submenu title={""} url={"#"} empty={true} />
-						<Submenu
-							title={"수화식당"}
+						<Menu
+							toggleMenu={toggleMenu}
+							menu={2}
+							title={"한숲사업"}
 							url={"/business/restaurant"}
-							empty={false}
+							current={menu}
+							currentMenu={currentMenu}
 						/>
-						<Submenu
-							title={"케이터링"}
-							url={"/business/catering"}
-							empty={false}
-						/>
-						<Submenu
-							title={"도시락 사업"}
-							url={"/business/box"}
-							empty={false}
-						/>
-						<Submenu title={""} url={"#"} empty={true} />
-						<Submenu title={""} url={"#"} empty={true} />
-					</MenuContainer>
-				)}
-				{menu === 3 && (
-					<MenuContainer>
-						<Submenu title={""} url={"#"} empty={true} />
-						<Submenu title={""} url={"#"} empty={true} />
-						<Submenu
-							title={"케이터링 메뉴"}
+						<Menu
+							toggleMenu={toggleMenu}
+							menu={3}
+							title={"예약안내"}
 							url={"/order/catering/menu"}
-							empty={false}
+							current={menu}
+							currentMenu={currentMenu}
 						/>
-						<Submenu
-							title={"케이터링 안내"}
-							url={"/order/catering/intro"}
-							empty={false}
-						/>
-						<Submenu
-							title={"케이터링 예약"}
-							url={"/order/catering/orderMain"}
-							empty={false}
-						/>
-						<Submenu title={""} url={"#"} empty={true} />
-					</MenuContainer>
-				)}
-				{menu === 4 && (
-					<MenuContainer>
-						<Submenu title={""} url={"#"} empty={true} />
-						<Submenu title={""} url={"#"} empty={true} />
-						<Submenu title={""} url={"#"} empty={true} />
-						<Submenu
-							title={"공지사항"}
+						<Menu
+							toggleMenu={toggleMenu}
+							menu={4}
+							title={"커뮤니티"}
 							url={"/community/notice/list"}
-							empty={false}
+							current={menu}
+							currentMenu={currentMenu}
 						/>
-						<Submenu
-							title={"리뷰"}
-							url={"/community/review/list"}
-							empty={false}
-						/>
-						<Submenu
-							title={"고객의 소리"}
-							url={"/community/voice/main"}
-							empty={false}
-						/>
-					</MenuContainer>
-				)}
-				{menu === 5 && (
-					<MenuContainer>
-						<Submenu title={""} url={"#"} empty={true} />
-						<Submenu title={""} url={"#"} empty={true} />
-						<Submenu title={""} url={"#"} empty={true} />
-						<Submenu title={""} url={"#"} empty={true} />
-						<Submenu
-							title={"한숲맛이야기"}
+						<Menu
+							toggleMenu={toggleMenu}
+							menu={5}
+							title={"협력기업"}
 							url={"/enterprise/hansup"}
-							empty={false}
+							current={menu}
+							currentMenu={currentMenu}
 						/>
-						<Submenu title={""} url={"#"} empty={true} />
+						<Menu
+							// toggleMenu={toggleMenu}
+							menu={6}
+							title={"관리자"}
+							url={"/manager/schedule"}
+							current={menu}
+							currentMenu={currentMenu}
+
+							// empty={true}
+						/>
 					</MenuContainer>
-				)}
-			</SubContainer>
-		</Nav>
+				</NavContainer>
+				<SubContainer num={menu} id="check">
+					<Logo>
+						<Link to="/">
+							<img
+								src="/image/logo.png"
+								class="object-cover h-8 invisible"
+								alt="logo"
+							/>
+						</Link>
+					</Logo>
+
+					{menu === 1 && (
+						<MenuContainer>
+							<Submenu
+								title={"인사말"}
+								url={"/intro/introduction"}
+								empty={false}
+							/>
+							<Submenu
+								title={"한숲 이야기"}
+								url={"/intro/story"}
+								empty={false}
+							/>
+							<Submenu
+								title={"한숲의 역사"}
+								url={"/intro/history"}
+								empty={false}
+							/>
+							<Submenu title={"오시는 길"} url={"/intro/guide"} empty={false} />
+							<Submenu title={""} url={"#"} empty={true} />
+							<Submenu title={""} url={"#"} empty={true} />
+						</MenuContainer>
+					)}
+					{menu === 2 && (
+						<MenuContainer>
+							<Submenu title={""} url={"#"} empty={true} />
+							<Submenu
+								title={"수화식당"}
+								url={"/business/restaurant"}
+								empty={false}
+							/>
+							<Submenu
+								title={"케이터링"}
+								url={"/business/catering"}
+								empty={false}
+							/>
+							<Submenu
+								title={"도시락 사업"}
+								url={"/business/box"}
+								empty={false}
+							/>
+							<Submenu title={""} url={"#"} empty={true} />
+							<Submenu title={""} url={"#"} empty={true} />
+						</MenuContainer>
+					)}
+					{menu === 3 && (
+						<MenuContainer>
+							<Submenu title={""} url={"#"} empty={true} />
+							<Submenu title={""} url={"#"} empty={true} />
+							<Submenu
+								title={"케이터링 메뉴"}
+								url={"/order/catering/menu"}
+								empty={false}
+							/>
+							<Submenu
+								title={"케이터링 안내"}
+								url={"/order/catering/intro"}
+								empty={false}
+							/>
+							<Submenu
+								title={"케이터링 예약"}
+								url={"/order/catering/orderMain"}
+								empty={false}
+							/>
+							<Submenu title={""} url={"#"} empty={true} />
+						</MenuContainer>
+					)}
+					{menu === 4 && (
+						<MenuContainer>
+							<Submenu title={""} url={"#"} empty={true} />
+							<Submenu title={""} url={"#"} empty={true} />
+							<Submenu title={""} url={"#"} empty={true} />
+							<Submenu
+								title={"공지사항"}
+								url={"/community/notice/list"}
+								empty={false}
+							/>
+							<Submenu
+								title={"리뷰"}
+								url={"/community/review/list"}
+								empty={false}
+							/>
+							<Submenu
+								title={"고객의 소리"}
+								url={"/community/voice/main"}
+								empty={false}
+							/>
+						</MenuContainer>
+					)}
+					{menu === 5 && (
+						<MenuContainer>
+							<Submenu title={""} url={"#"} empty={true} />
+							<Submenu title={""} url={"#"} empty={true} />
+							<Submenu title={""} url={"#"} empty={true} />
+							<Submenu title={""} url={"#"} empty={true} />
+							<Submenu
+								title={"한숲맛이야기"}
+								url={"/enterprise/hansup"}
+								empty={false}
+							/>
+							<Submenu title={""} url={"#"} empty={true} />
+						</MenuContainer>
+					)}
+				</SubContainer>
+			</Nav>
+			{sidebar === "on" && (
+				<div
+					onClick={() => dispatch(setSidebar("off"))}
+					class="z-50 w-full h-full absolute left-0 top-0 bg-black opacity-50"
+				></div>
+			)}
+		</>
 	);
 };
 
