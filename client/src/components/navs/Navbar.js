@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import styled, { css } from "styled-components";
 import Menu from "components/navs/Menu";
 import Submenu from "components/navs/Submenu";
@@ -7,8 +7,18 @@ import logoImg from "image/logo.png";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Drawer from "@mui/material/Drawer";
 import { useDispatch, useSelector } from "react-redux";
-import { setSidebar } from "reducers/setting";
 import Modal from "@mui/material/Modal";
+import {
+	setMenu,
+	setSubmenu,
+	setSidebar,
+	setProfile,
+	setCurrentEmail,
+	setCurrentPassword,
+	setLoginToken,
+	setSelected,
+} from "reducers/setting";
+import ProfileImg from "image/profileDefault.png";
 
 const Nav = styled.div`
 	width: 100%;
@@ -143,6 +153,9 @@ const MenuContainer = styled.div`
 
 const Navbar = ({ currentMenu }) => {
 	const dispatch = useDispatch();
+	const history = useHistory();
+	const [isLogin, setIsLogin] = useState(false);
+
 	const location = useLocation();
 	const subRef = useRef();
 	const [menu, setMenu] = useState(0);
@@ -152,6 +165,52 @@ const Navbar = ({ currentMenu }) => {
 	const clickRef = useRef();
 
 	const sidebar = useSelector((state) => state.setting.sidebar);
+	const profile = useSelector((state) => state.setting.profile);
+	const loginToken = useSelector((state) => state.setting.loginToken);
+	const currentEmail = useSelector((state) => state.setting.currentEmail);
+	const currentPassword = useSelector((state) => state.setting.currentPassword);
+
+	const profileRef = useRef(null);
+	const subProfileRef = useRef(null);
+
+	const [overMenu, setOverMenu] = useState([false, false, false, false, false]);
+
+	const [loginInfo, setLoginInfo] = useState({
+		position: "",
+		email: "",
+	});
+
+	useEffect(() => {
+		console.log(profile, currentEmail, loginToken);
+	}, []);
+
+	const onToggleProfile = () => {
+		if (profile === "on") {
+			dispatch(setProfile("off"));
+		} else dispatch(setProfile("on"));
+	};
+
+	const logout = () => {
+		sessionStorage.setItem("loginToken", false);
+		dispatch(setLoginToken("logout"));
+		dispatch(setCurrentEmail(""));
+		dispatch(setCurrentPassword(""));
+		dispatch(setProfile("off"));
+		dispatch(setMenu(0));
+		dispatch(setSubmenu(0));
+
+		alert("로그아웃되었습니다.");
+		history.push("/");
+		window.location.reload();
+	};
+
+	const goEditPage = () => {
+		// dispatch(setProfile("off"));
+		// setModalShow(true);
+		// dispatch(setMenu(0));
+		// dispatch(setSubmenu(1));
+		// history.push("/admin/edit");
+	};
 
 	const toggleSidebar = () => {
 		console.log(sidebar);
@@ -176,6 +235,22 @@ const Navbar = ({ currentMenu }) => {
 		}
 	};
 
+	useEffect(() => {
+		if (sessionStorage.getItem("loginToken")) {
+			if (currentEmail !== "" && currentPassword !== "") {
+				setIsLogin(true);
+				const payload = {
+					position: "",
+					email: currentEmail,
+				};
+				if (currentEmail === "master") {
+					payload.position = "총 관리자";
+				}
+				setLoginInfo(payload);
+			}
+		}
+	}, [sessionStorage.getItem("loginToken")]);
+
 	const onMouseOut = (e) => {
 		// console.log("out", e);
 		setMenu(0);
@@ -198,6 +273,20 @@ const Navbar = ({ currentMenu }) => {
 			setMenu(1);
 		}
 	};
+
+	useEffect(() => {
+		if (profile === "off") return;
+		function handleClick(e) {
+			if (profileRef.current === null) {
+				return;
+			} else if (!profileRef.current.contains(e.target)) {
+				dispatch(setProfile("off"));
+			}
+		}
+		window.addEventListener("click", handleClick);
+
+		return () => window.removeEventListener("click", handleClick);
+	}, [profile]);
 
 	useEffect(() => {
 		if (menu === 0) return;
@@ -292,6 +381,41 @@ const Navbar = ({ currentMenu }) => {
 
 							// empty={true}
 						/>
+						{isLogin ? (
+							<div
+								ref={profileRef}
+								class="h-full w-auto flex justify-end items-center relative"
+							>
+								<img
+									src={ProfileImg}
+									onClick={onToggleProfile}
+									class="z-30 p-1 w-10 h-10 rounded-full cursor-pointer object-cover"
+									alt="profile"
+								/>
+								{profile === "on" ? (
+									<div class="z-30 px-4 py-2 flex flex-col justify-center items-center -right-4 top-14 w-72 h-40 bg-white border border-gray-300 rounded-lg absolute">
+										<div class="w-full h-full flex flex-col justify-around">
+											<div class="w-full flex flex-col">
+												<p class="font-bold w-auto">{loginInfo.position}</p>
+												<p class="text-gray-500">ID : {loginInfo.email}</p>
+											</div>
+											<div
+												onClick={goEditPage}
+												class="cursor-pointer w-full py-1 border border-purple-400 text-purple-400 flex justify-center transition delay-50 duration-300 hover:bg-purple-400 hover:text-white"
+											>
+												정보 변경
+											</div>
+											<div
+												onClick={logout}
+												class="cursor-pointer w-full py-1 border border-purple-400 text-purple-400 flex justify-center transition delay-50 duration-300 hover:bg-purple-400 hover:text-white"
+											>
+												로그아웃
+											</div>
+										</div>
+									</div>
+								) : null}
+							</div>
+						) : null}
 					</MenuContainer>
 				</NavContainer>
 				<SubContainer num={menu} id="check">
