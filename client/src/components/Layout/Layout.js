@@ -11,7 +11,10 @@ const Layout = ({ children }) => {
 	const [title, setTitle] = useState("");
 
 	useEffect(() => {
-		if (location.pathname.includes("/manager")) {
+		if (location.pathname.includes("/admin")) {
+			setMenu(100);
+			setTitle("관리자 로그인");
+		} else if (location.pathname.includes("/manager")) {
 			setMenu(5);
 			setTitle("관리자");
 		} else if (location.pathname === "/") {
@@ -36,11 +39,11 @@ const Layout = ({ children }) => {
 	}, [location.pathname]);
 
 	return (
-		<div>
+		<div class="min-h-screen flex flex-col">
 			<Navbar currentMenu={menu} />
-			<div class="pt-16 h-full w-full ">
+			<div class="pt-16 flex-1 flex flex-col w-full border border-black">
 				<TitleBlock text={title} />
-				<SubmenuBlock menu={menu} />
+				{menu !== 100 && <SubmenuBlock menu={menu} />}
 				{children}
 				<Footer />
 			</div>
