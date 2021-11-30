@@ -65,7 +65,7 @@ const DayView = ({ currentDate, focusDate, orderInfo, setFocusDate }) => {
 		>
 			<div
 				class={
-					"text-xl font-bold " +
+					"text-xl font-bold  " +
 					(currentDate.get("month") === focusDate.get("month")
 						? "text-hansupBrown"
 						: "text-gray-300")
