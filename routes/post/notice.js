@@ -9,7 +9,8 @@ router.route("/create").post((req, res) => {
 		const one = {
 			title: req.body.title,
 			content: req.body.content,
-			imgList: req.body.imgList,
+			fileList: req.body.fileList,
+			read: 0,
 		};
 		const newOne = new Notice(one);
 
@@ -72,6 +73,21 @@ router.route("/search/:page").post((req, res) => {
 	} else res.status(400).json("Error");
 });
 
+router.route("/read/:id").post((req, res) => {
+	if (req.body.key === API_KEY) {
+		Notice.findById(req.params.id)
+			.then((one) => {
+				one.read = one.read + 1;
+
+				one
+					.save()
+					.then(() => res.json("Notice updated!"))
+					.catch((err) => res.status(400).json("Error: " + req));
+			})
+			.catch((err) => res.status(400).json("Error: " + err));
+	}
+});
+
 // Update notice
 router.route("/update/:id").post((req, res) => {
 	if (req.body.key === API_KEY) {
@@ -79,7 +95,8 @@ router.route("/update/:id").post((req, res) => {
 			.then((one) => {
 				one.title = req.body.title;
 				one.content = req.body.content;
-				one.imgList = req.body.imgList;
+				one.fileList = req.body.fileList;
+				one.read = req.body.read;
 
 				one
 					.save()
