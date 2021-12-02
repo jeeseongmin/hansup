@@ -65,7 +65,7 @@ const ReviewList = () => {
 				</div>
 				<Link
 					to="/community/review/create"
-					class="text-md md:text-lg w-auto text-hansupBrown flex flex-row justify-end items-center border border-black"
+					class="text-md md:text-lg w-auto text-hansupBrown flex flex-row justify-end items-center"
 				>
 					<p class="mr-2">작성하기</p> <VscArrowRight size={24} />
 				</Link>

@@ -8,12 +8,17 @@ import { Link } from "react-router-dom";
 import Paging from "components/Paging";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
+import { useDispatch, useSelector } from "react-redux";
 
 const NoticeList = () => {
 	const [loading, setLoading] = useState(false);
 	const [page, setPage] = useState(1);
 	const [totalPage, setTotalPage] = useState(0);
 	const [noticeList, setNoticeList] = useState([]);
+
+	const loginToken = useSelector((state) => state.setting.loginToken);
+	const currentEmail = useSelector((state) => state.setting.currentEmail);
+	const currentPassword = useSelector((state) => state.setting.currentPassword);
 
 	useEffect(() => {
 		axios
@@ -58,21 +63,23 @@ const NoticeList = () => {
 
 	return (
 		<div class={"w-full flex flex-col mb-16 lg:mb-24 px-8 xl:px-40 "}>
-			<div class="w-full flex flex-row justify-between items-center mb-4">
-				<div class="inline-flex w-full mb-6">
+			<div class="h-full w-full flex flex-row justify-between items-center mb-8">
+				<div class="inline-flex w-auto">
 					<Subtitle subtitle={"공지사항"} />
 				</div>
-				<Link
-					to="/community/notice/create"
-					class="w-32 text-hansupBrown text-lg flex flex-row justify-end items-center"
-				>
-					<p class="mr-2">작성하기</p> <VscArrowRight size={24} />
-				</Link>
+				{loginToken === "login" && (
+					<Link
+						to="/community/notice/create"
+						class="h-full w-32 text-hansupBrown text-lg flex flex-row justify-end items-center"
+					>
+						<p class="mr-2">작성하기</p> <VscArrowRight size={24} />
+					</Link>
+				)}
 			</div>
 			{loading ? (
 				noticeList.length === 0 ? (
 					<div class="w-full h-24 flex justify-center items-center">
-						<p>리뷰가 없습니다.</p>
+						<p>공지사항이 없습니다.</p>
 					</div>
 				) : (
 					<NoticeListBlock noticeList={noticeList} />

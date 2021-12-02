@@ -8,10 +8,10 @@ require("dotenv").config();
 
 const app = express();
 const port = process.env.PORT || 5000;
-app.use(express.static("uploads"));
 
 app.use(cors());
 app.use(express.json());
+app.use("/uploads", express.static(__dirname + "/uploads"));
 
 const uri = process.env.ATLAS_URI;
 mongoose.Promise = global.Promise;
@@ -38,8 +38,8 @@ const noticeRouter = require("./routes/post/notice");
 const orderRouter = require("./routes/post/order");
 const voiceRouter = require("./routes/post/voice");
 const menuRouter = require("./routes/post/menu");
-
 const imageRouter = require("./routes/post/image");
+const fileRouter = require("./routes/post/file");
 
 app.use("/data", exercisesRouter);
 app.use("/api/image", imageRouter);
@@ -50,6 +50,7 @@ app.use("/api/notice", noticeRouter);
 app.use("/api/order", orderRouter);
 app.use("/api/review", reviewRouter);
 app.use("/api/menu", menuRouter);
+app.use("/api/file", fileRouter);
 
 // app.use("/api/volunteer", volunteerRouter);
 
