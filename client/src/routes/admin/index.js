@@ -83,7 +83,7 @@ const Index = () => {
 					<input
 						ref={passwordRef}
 						onKeyUp={enterkey}
-						type="password"
+						type="text"
 						class="w-full p-4 border-b-2 border-gray-300 outline-none focus:border-hansupBrown"
 						onChange={(e) => changeInfo(e, "password")}
 						placeholder="관리자 password"

@@ -104,7 +104,7 @@ const SubContainer = styled.div`
 			height: 4rem;
 			transition: all 0.3s ease;
 			background-color: #6c4d3f;
-			border-top: 1px solid #d3d3d3;
+			/* border-top: 1px solid #d3d3d3; */
 		`};
 
 	// 기본 사이즈
@@ -180,28 +180,24 @@ const Navbar = ({ currentMenu }) => {
 		email: "",
 	});
 
-	useEffect(() => {
-		console.log(profile, currentEmail, loginToken);
-	}, []);
-
 	const onToggleProfile = () => {
 		if (profile === "on") {
 			dispatch(setProfile("off"));
 		} else dispatch(setProfile("on"));
 	};
 
-	const logout = () => {
-		sessionStorage.setItem("loginToken", false);
-		dispatch(setLoginToken("logout"));
-		dispatch(setCurrentEmail(""));
+	const logout = async () => {
+		await sessionStorage.setItem("loginToken", false);
+		await dispatch(setLoginToken("logout"));
+		await dispatch(setCurrentEmail(""));
 		dispatch(setCurrentPassword(""));
 		dispatch(setProfile("off"));
-		dispatch(setMenu(0));
-		dispatch(setSubmenu(0));
+		await setMenu(0);
+		await setSubmenu(0);
+		await setIsLogin(false);
 
 		alert("로그아웃되었습니다.");
 		history.push("/");
-		window.location.reload();
 	};
 
 	const goEditPage = () => {
@@ -213,7 +209,6 @@ const Navbar = ({ currentMenu }) => {
 	};
 
 	const toggleSidebar = () => {
-		console.log(sidebar);
 		if (true) {
 			dispatch(setSidebar("on"));
 		} else {
@@ -221,9 +216,7 @@ const Navbar = ({ currentMenu }) => {
 		}
 	};
 
-	useEffect(() => {
-		console.log(sidebar);
-	}, [sidebar]);
+	useEffect(() => {}, [sidebar]);
 
 	const toggleMenu = (e, num) => {
 		if (menu === 0) {
@@ -248,29 +241,32 @@ const Navbar = ({ currentMenu }) => {
 				}
 				setLoginInfo(payload);
 			}
-		}
+		} else setIsLogin(false);
 	}, [sessionStorage.getItem("loginToken")]);
 
 	const onMouseOut = (e) => {
-		// console.log("out", e);
 		setMenu(0);
 	};
 
 	const onMouseOver = (e) => {
-		if (e.target.innerText === "회사소개") {
-			setMenu(1);
-		} else if (e.target.innerText === "한숲사업") {
-			setMenu(2);
-		} else if (e.target.innerText === "예약안내") {
-			setMenu(3);
-		} else if (e.target.innerText === "커뮤니티") {
-			setMenu(4);
-		} else if (e.target.innerText === "협력기업") {
-			setMenu(5);
-		} else if (e.target.innerText === "관리자") {
-			setMenu(6);
-		} else if (menu === 0) {
-			setMenu(1);
+		if (e.target.tagName !== "DIV") {
+			if (e.target.innerText === "회사소개") {
+				setMenu(1);
+			} else if (e.target.innerText === "한숲사업") {
+				setMenu(2);
+			} else if (e.target.innerText === "예약안내") {
+				setMenu(3);
+			} else if (e.target.innerText === "커뮤니티") {
+				setMenu(4);
+			} else if (e.target.innerText === "협력기업") {
+				setMenu(5);
+			} else if (e.target.innerText === "관리자") {
+				setMenu(6);
+			} else if (e.target.innerText === "") {
+				setMenu(0);
+			} else if (menu === 0) {
+				setMenu(1);
+			}
 		}
 	};
 
@@ -313,7 +309,7 @@ const Navbar = ({ currentMenu }) => {
 					</Logo>
 					<div
 						onClick={() => dispatch(setSidebar("on"))}
-						class="text-white hidden md:block cursor-pointer z-50 border border-black"
+						class="text-white hidden md:block cursor-pointer z-50"
 					>
 						<GiHamburgerMenu size={28} />
 					</div>
@@ -371,16 +367,17 @@ const Navbar = ({ currentMenu }) => {
 							current={menu}
 							currentMenu={currentMenu}
 						/>
-						<Menu
-							// toggleMenu={toggleMenu}
-							menu={6}
-							title={"관리자"}
-							url={"/manager/schedule"}
-							current={menu}
-							currentMenu={currentMenu}
-
-							// empty={true}
-						/>
+						{isLogin && (
+							<Menu
+								// toggleMenu={toggleMenu}
+								menu={6}
+								title={"관리자"}
+								url={"/manager/schedule"}
+								current={menu}
+								currentMenu={currentMenu}
+								// empty={true}
+							/>
+						)}
 						{isLogin ? (
 							<div
 								ref={profileRef}
@@ -401,13 +398,13 @@ const Navbar = ({ currentMenu }) => {
 											</div>
 											<div
 												onClick={goEditPage}
-												class="cursor-pointer w-full py-1 border border-purple-400 text-purple-400 flex justify-center transition delay-50 duration-300 hover:bg-purple-400 hover:text-white"
+												class="cursor-pointer w-full py-1 border border-hansupBrown text-hansupBrown flex justify-center transition delay-50 duration-300 hover:bg-hansupBrown hover:text-white"
 											>
 												정보 변경
 											</div>
 											<div
 												onClick={logout}
-												class="cursor-pointer w-full py-1 border border-purple-400 text-purple-400 flex justify-center transition delay-50 duration-300 hover:bg-purple-400 hover:text-white"
+												class="cursor-pointer w-full py-1 border border-hansupBrown text-hansupBrown flex justify-center transition delay-50 duration-300 hover:bg-hansupBrown hover:text-white"
 											>
 												로그아웃
 											</div>
@@ -449,6 +446,15 @@ const Navbar = ({ currentMenu }) => {
 							<Submenu title={"오시는 길"} url={"/intro/guide"} empty={false} />
 							<Submenu title={""} url={"#"} empty={true} />
 							<Submenu title={""} url={"#"} empty={true} />
+							{isLogin ? (
+								<div class="h-full w-auto flex justify-end items-center relative invisible">
+									<img
+										src={ProfileImg}
+										class="z-30 p-1 w-10 h-10 rounded-full cursor-pointer object-cover"
+										alt="profile"
+									/>
+								</div>
+							) : null}
 						</MenuContainer>
 					)}
 					{menu === 2 && (
@@ -471,6 +477,15 @@ const Navbar = ({ currentMenu }) => {
 							/>
 							<Submenu title={""} url={"#"} empty={true} />
 							<Submenu title={""} url={"#"} empty={true} />
+							{isLogin ? (
+								<div class="h-full w-auto flex justify-end items-center relative invisible">
+									<img
+										src={ProfileImg}
+										class="z-30 p-1 w-10 h-10 rounded-full cursor-pointer object-cover"
+										alt="profile"
+									/>
+								</div>
+							) : null}
 						</MenuContainer>
 					)}
 					{menu === 3 && (
@@ -493,6 +508,15 @@ const Navbar = ({ currentMenu }) => {
 								empty={false}
 							/>
 							<Submenu title={""} url={"#"} empty={true} />
+							{isLogin ? (
+								<div class="h-full w-auto flex justify-end items-center relative invisible">
+									<img
+										src={ProfileImg}
+										class="z-30 p-1 w-10 h-10 rounded-full cursor-pointer object-cover"
+										alt="profile"
+									/>
+								</div>
+							) : null}
 						</MenuContainer>
 					)}
 					{menu === 4 && (
@@ -515,6 +539,15 @@ const Navbar = ({ currentMenu }) => {
 								url={"/community/voice/main"}
 								empty={false}
 							/>
+							{isLogin ? (
+								<div class="h-full w-auto flex justify-end items-center relative invisible">
+									<img
+										src={ProfileImg}
+										class="z-30 p-1 w-10 h-10 rounded-full cursor-pointer object-cover"
+										alt="profile"
+									/>
+								</div>
+							) : null}
 						</MenuContainer>
 					)}
 					{menu === 5 && (
@@ -529,16 +562,28 @@ const Navbar = ({ currentMenu }) => {
 								empty={false}
 							/>
 							<Submenu title={""} url={"#"} empty={true} />
+							{isLogin ? (
+								<div class="h-full w-auto flex justify-end items-center relative invisible">
+									<img
+										src={ProfileImg}
+										class="z-30 p-1 w-10 h-10 rounded-full cursor-pointer object-cover"
+										alt="profile"
+									/>
+								</div>
+							) : null}
 						</MenuContainer>
 					)}
 				</SubContainer>
 			</Nav>
-			{sidebar === "on" && (
-				<div
-					onClick={() => dispatch(setSidebar("off"))}
-					class="z-50 w-full h-full absolute left-0 top-0 bg-black opacity-50"
-				></div>
-			)}
+			{/* {sidebar === "on" && (
+				<div class="z-50 w-full h-full absolute left-0 top-0 flex flex-row">
+					<div class="bg-white h-screen top-0 left-0 w-36">123</div>
+					<div
+						onClick={() => dispatch(setSidebar("off"))}
+						class="flex-1 h-screen bg-black opacity-50"
+					></div>
+				</div>
+			)} */}
 		</>
 	);
 };

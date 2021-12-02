@@ -5,21 +5,21 @@ import Subtitle from "components/Subtitle";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
-
-const CreateNotice = () => {
+const EditNotice = (props) => {
 	const history = useHistory();
-	const contentRef = useRef(null);
+	const [info, setInfo] = useState({
+		title: props.info.title,
+		content: props.info.content,
+		fileList: props.info.fileList,
+		read: props.info.fileList,
+	});
+	const id = props.id;
+	const pages = props.pages;
 	const titleRef = useRef(null);
-	const passwordRef = useRef(null);
-	const [includeImg, setIncludeImg] = useState(false);
+	const contentRef = useRef(null);
+
 	const currentEmail = useSelector((state) => state.setting.currentEmail);
 
-	const [info, setInfo] = useState({
-		title: "",
-		content: "",
-		fileList: [],
-	});
 	const changeInfo = (e, type) => {
 		if (type === "fileList" || type === "content") {
 			const cp = { ...info };
@@ -32,33 +32,36 @@ const CreateNotice = () => {
 		}
 	};
 
-	const submit = () => {
+	useEffect(() => {
+		setInfo(props.info);
+	}, []);
+
+	const editSave = () => {
 		if (info.title === "") {
 			alert("제목을 입력해주세요!");
 			titleRef.current.focus();
 		} else if (info.content === "") {
 			alert("내용을 입력해주세요!");
-			contentRef.current.focus();
-		} else if (currentEmail === "master") {
+		} else if (currentEmail === "master" || currentEmail === info.type) {
 			axios
 				.post(
-					"/api/notice/create",
+					"/api/notice/update/" + id,
 					{
 						key: process.env.REACT_APP_API_KEY,
 						title: info.title,
 						content: info.content,
 						fileList: info.fileList,
-						read: 0,
+						read: info.read,
 					},
 					{
 						headers: {
-							"content-type": "application/json",
+							"Content-type": "application/json",
 							Accept: "application/json",
 						},
 					}
 				)
 				.then((response) => {
-					alert("업로드 되었습니다.");
+					alert("저장되었습니다.");
 					history.push("/community/notice/list");
 					document.getElementById("scrollRef").scrollTo(0, 0);
 				})
@@ -78,7 +81,7 @@ const CreateNotice = () => {
 				titleRef={titleRef}
 				contentRef={contentRef}
 				info={info}
-				isEdit={false}
+				isEdit={true}
 			/>
 
 			<div class="flex justify-between items-center flex-col md:flex-row">
@@ -90,7 +93,7 @@ const CreateNotice = () => {
 					뒤로 가기
 				</Link>
 				<button
-					onClick={submit}
+					onClick={editSave}
 					class="outline-none w-full md:w-auto cursor-pointer px-0 md:px-16 py-2 justify-center border border-hansupBrown text-hansupBrown flex flex-row items-center hover:bg-hansupBrown hover:text-white hover:font-bold"
 				>
 					제출하기
@@ -100,4 +103,4 @@ const CreateNotice = () => {
 	);
 };
 
-export default CreateNotice;
+export default EditNotice;

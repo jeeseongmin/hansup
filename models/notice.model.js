@@ -12,9 +12,13 @@ const noticeSchema = new Schema(
 			type: String,
 			required: true,
 		},
-		imgList: {
+		fileList: {
 			type: [Object],
 			required: false,
+		},
+		read: {
+			type: Number,
+			required: true,
 		},
 	},
 	{

@@ -41,7 +41,7 @@ const Layout = ({ children }) => {
 	return (
 		<div class="min-h-screen flex flex-col">
 			<Navbar currentMenu={menu} />
-			<div class="pt-16 flex-1 flex flex-col w-full border border-black">
+			<div class="pt-16 flex-1 flex flex-col w-full">
 				<TitleBlock text={title} />
 				{menu !== 100 && <SubmenuBlock menu={menu} />}
 				{children}
