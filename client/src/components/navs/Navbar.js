@@ -208,16 +208,6 @@ const Navbar = ({ currentMenu }) => {
 		// history.push("/admin/edit");
 	};
 
-	const toggleSidebar = () => {
-		if (true) {
-			dispatch(setSidebar("on"));
-		} else {
-			dispatch(setSidebar("off"));
-		}
-	};
-
-	useEffect(() => {}, [sidebar]);
-
 	const toggleMenu = (e, num) => {
 		if (menu === 0) {
 			setMenu(num);
@@ -249,7 +239,7 @@ const Navbar = ({ currentMenu }) => {
 	};
 
 	const onMouseOver = (e) => {
-		if (e.target.tagName !== "DIV") {
+		if (e.target.tagName !== "DIV" && e.target.tagName !== "P") {
 			if (e.target.innerText === "회사소개") {
 				setMenu(1);
 			} else if (e.target.innerText === "한숲사업") {
