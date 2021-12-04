@@ -119,9 +119,6 @@ const ReviewBlock = ({ review }) => {
 									</p>
 								</div>
 							</div>
-							<div class="absolute left-0 -top-4">
-								<img src={Close} class="h-full object-cover" alt="close" />
-							</div>
 						</div>
 					</div>
 				</div>
