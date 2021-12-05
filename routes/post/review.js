@@ -13,8 +13,6 @@ router.route("/create").post((req, res) => {
 			response: req.body.response,
 			imgList: req.body.imgList,
 		});
-		console.log(req.body.key, API_KEY);
-		console.log(newOne);
 		newOne
 			.save()
 			.then(() => res.json("Review created!"))
