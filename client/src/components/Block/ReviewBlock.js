@@ -92,7 +92,7 @@ const ReviewBlock = ({ review }) => {
 					<div class="w-full h-full flex flex-col justify-center items-center py-16 px-4 lg:px-16">
 						<div
 							ref={modalRef}
-							class="select-none bg-white w-full md:w-2/3 lg:w-2/3 max-h-full overflow-hidden h-96 p-8 flex flex-col lg:flex-row relative"
+							class="select-none bg-white w-full md:w-2/3 lg:w-2/3 max-h-full h-96 p-8 flex flex-col lg:flex-row overflow-y-scroll"
 						>
 							<div class="w-full lg:w-1/2 h-full">
 								<img
@@ -118,6 +118,7 @@ const ReviewBlock = ({ review }) => {
 										{review.content}
 									</p>
 								</div>
+								<div class="w-full h-8 border border-black">black</div>
 							</div>
 						</div>
 					</div>
