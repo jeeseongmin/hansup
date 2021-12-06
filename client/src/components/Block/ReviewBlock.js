@@ -3,8 +3,12 @@ import Example from "image/example.png";
 import Skeleton from "@mui/material/Skeleton";
 import Modal from "@mui/material/Modal";
 import Close from "image/close.png";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { Link, useHistory } from "react-router-dom";
 
-const ReviewBlock = ({ review }) => {
+const ReviewBlock = ({ review, reviewList, setReviewList }) => {
+	const history = useHistory();
 	const [isHover, setIsHover] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const [isModal, setIsModal] = useState(false);
@@ -13,6 +17,9 @@ const ReviewBlock = ({ review }) => {
 	const handleClose = () => setOpen(false);
 	const modalRef = useRef();
 	const clickRef = useRef();
+	const loginToken = useSelector((state) => state.setting.loginToken);
+	const currentEmail = useSelector((state) => state.setting.currentEmail);
+	const currentPassword = useSelector((state) => state.setting.currentPassword);
 
 	useEffect(() => {
 		if (!open) return;
@@ -34,6 +41,43 @@ const ReviewBlock = ({ review }) => {
 			setLoading(true);
 		}, 1000);
 	}, []);
+
+	const deleteReview = async () => {
+		if (currentEmail === "master") {
+			await review.imgList.forEach(async function (item, index) {
+				await axios.get("/api/image/delete/" + item.id);
+			});
+
+			await axios
+				.post(
+					"/api/review/delete/" + review._id,
+					{
+						key: process.env.REACT_APP_API_KEY,
+					},
+					{
+						headers: {
+							"Content-type": "application/json",
+							Accept: "application/json",
+						},
+					}
+				)
+				.then((response) => {
+					handleClose();
+					alert("삭제되었습니다.");
+					const cp = reviewList.filter(function (element, index) {
+						return element._id !== review._id;
+					});
+					setReviewList(cp);
+					// history.push("/community/review/list");
+					document.getElementById("scrollRef").scrollTo(0, 0);
+				})
+				.catch((response) => {
+					console.log("Error!");
+				});
+		} else {
+			alert("권한이 없습니다.");
+		}
+	};
 
 	const dataToText = (date) => {
 		let year = date.substring(2, 4);
@@ -92,11 +136,11 @@ const ReviewBlock = ({ review }) => {
 					<div class="w-full h-full flex flex-col justify-center items-center py-16 px-4 lg:px-16">
 						<div
 							ref={modalRef}
-							class="select-none bg-white w-full md:w-2/3 lg:w-2/3 max-h-full h-96 p-8 flex flex-col lg:flex-row overflow-y-scroll"
+							class="select-none bg-white w-full md:w-2/3 lg:w-2/3 h-full lg:h-96 p-8 flex flex-col lg:flex-row"
 						>
-							<div class="w-full lg:w-1/2 h-full">
+							<div class="w-full lg:w-1/2 h-1/3 lg:h-full flex justify-center">
 								<img
-									class="w-full h-full object-cover"
+									class="w-1/2 lg:w-full h-full object-cover"
 									src={
 										"http://hansup.cafe24app.com/api/image/view/" +
 										review.imgList[0].filename
@@ -104,7 +148,12 @@ const ReviewBlock = ({ review }) => {
 									alt="imgList"
 								/>
 							</div>
-							<div class="w-full lg:w-1/2 flex-1 flex flex-col px-4 overflow-y-scroll scrollbar-hide">
+							<div
+								class={
+									"w-full lg:w-1/2 h-1/2 lg:h-full flex-1 flex flex-col px-4 relative " +
+									(loginToken === "login" ? "pb-8" : "")
+								}
+							>
 								<div class="h-auto w-full border-b-2 border-hansupBrown flex flex-row justify-between items-center py-2">
 									<p class="w-3/4 h-auto break-words text-base overflow-ellipsis resize-none">
 										{review.email}
@@ -113,12 +162,22 @@ const ReviewBlock = ({ review }) => {
 										{dataToText(review.createdAt)}
 									</div>
 								</div>
-								<div class="w-full h-full my-2">
-									<p class="w-full h-full break-words text-base overflow-ellipsis resize-none">
+								<div class="w-full flex-1 my-2 flex flex-col pb-8 overflow-y-scroll scrollbar-hide">
+									<p class="w-full break-words text-base overflow-ellipsis resize-none">
 										{review.content}
 									</p>
 								</div>
-								<div class="w-full h-8 border border-black">black</div>
+								{loginToken === "login" && (
+									<div class="w-full h-8 absolute left-0 bottom-0 px-4 flex justify-between items-center">
+										<div class=""></div>
+										<div
+											onClick={deleteReview}
+											class="cursor-pointer hover:text-hansupBrown border border-hansupBrown px-4 py-1"
+										>
+											삭제하기
+										</div>
+									</div>
+								)}
 							</div>
 						</div>
 					</div>

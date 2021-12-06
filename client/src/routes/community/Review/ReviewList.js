@@ -76,7 +76,10 @@ const ReviewList = () => {
 						<p>리뷰가 없습니다.</p>
 					</div>
 				) : (
-					<ReviewListBlock reviewList={reviewList} />
+					<ReviewListBlock
+						reviewList={reviewList}
+						setReviewList={setReviewList}
+					/>
 				)
 			) : (
 				<div class="w-full h-24 flex justify-center items-center">
