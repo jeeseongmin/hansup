@@ -546,6 +546,7 @@ const Navbar = ({ currentMenu }) => {
 							<Submenu title={""} url={"#"} empty={true} />
 							<Submenu title={""} url={"#"} empty={true} />
 							<Submenu title={""} url={"#"} empty={true} />
+							<Submenu title={""} url={"#"} empty={true} />
 							<Submenu
 								title={"한숲맛이야기"}
 								url={"/enterprise/hansup"}
