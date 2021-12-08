@@ -36,12 +36,12 @@ const Box = () => {
 				<div class="w-full h-auto grid grid-cols-1 md:grid-cols-2 items-center mb-4 gap-4">
 					<Description>
 						<div class="py-6 px-4 font-bold flex justify-center items-center text-base lg:text-lg">
-							010-1111-2222
+							010-4388-2241
 						</div>
 					</Description>
 					<Description>
 						<div class="py-6 px-4 font-bold flex justify-center items-center text-base lg:text-lg">
-							010-1111-2222
+							054-231-0102
 						</div>
 					</Description>
 				</div>

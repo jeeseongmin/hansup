@@ -244,7 +244,7 @@ const Navbar = ({ currentMenu }) => {
 				setMenu(1);
 			} else if (e.target.innerText === "한숲사업") {
 				setMenu(2);
-			} else if (e.target.innerText === "예약안내") {
+			} else if (e.target.innerText === "케이터링 예약") {
 				setMenu(3);
 			} else if (e.target.innerText === "커뮤니티") {
 				setMenu(4);
@@ -336,7 +336,7 @@ const Navbar = ({ currentMenu }) => {
 						<Menu
 							toggleMenu={toggleMenu}
 							menu={3}
-							title={"예약안내"}
+							title={"케이터링 예약"}
 							url={"/order/catering/menu"}
 							current={menu}
 							currentMenu={currentMenu}

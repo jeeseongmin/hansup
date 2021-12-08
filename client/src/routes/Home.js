@@ -94,7 +94,7 @@ const Home = () => {
 			</div>
 			<div class="text-center py-8 lg:py-14 text-md lg:text-2xl text-hansupBrown">
 				<h2>특색을 담은 맛있는 음식으로</h2>
-				<h2>고객님들께 착하고 즐거운 맛을 제공합니다.</h2>
+				<h2>고객님들께 착하고 즐거운 맛을 제공하겠습니다.</h2>
 			</div>
 			<div class="grid grid-row-3 gap-8">
 				<div class="w-full h-72 lg:h-96 py-12 relative">
@@ -140,7 +140,7 @@ const Home = () => {
 						<div class="w-full h-72 lg:h-96 px-4 md:px-8 lg:px-24 flex flex-col justify-center">
 							<div class="h-auto w-full">
 								<h2 class="text-xl md:text-3xl text-hansupBrown my-4">
-									케이터링
+									케이터링 및 출장뷔페
 								</h2>
 								<p class="my-6 text-sm md:text-base">
 									행사, 기념일에 고객님께서 더 풍성하고 행복하게 보내도록 맛난 케이터링 서비스를 제공합니다!

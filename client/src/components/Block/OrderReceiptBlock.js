@@ -120,7 +120,7 @@ const OrderReceiptBlock = ({ info, handleClose, allMenuList }) => {
 					</div>
 					<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start border-b-2 border-gray-200">
 						<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
-							국1
+							국
 						</div>
 						<div class="w-full md:flex-1 text-xl">
 							{info.soup
@@ -154,9 +154,9 @@ const OrderReceiptBlock = ({ info, handleClose, allMenuList }) => {
 						</div>
 						<div class="w-full md:flex-1 text-xl">
 							{info.payment === "card"
-								? "신용카드"
+								? "후불 결제(카드)"
 								: info.payment === "cash"
-								? "현금"
+								? "후불 결제(현금)"
 								: "계좌이체"}
 						</div>
 					</div>
@@ -209,7 +209,7 @@ const OrderReceiptBlock = ({ info, handleClose, allMenuList }) => {
 			<div class="h-auto w-full">
 				<Description>
 					<div class="flex justify-center items-center font-bold py-4 text-xl">
-						010-1111-2222
+						010-4388-2241
 					</div>
 				</Description>
 			</div>
