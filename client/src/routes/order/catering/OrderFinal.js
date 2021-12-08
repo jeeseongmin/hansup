@@ -206,7 +206,7 @@ const OrderFinal = ({ info, allMenuList }) => {
 			<div class="h-full py-8 w-full md:w-2/3 lg:w-auto">
 				<Description>
 					<div class="flex justify-center items-center font-bold px-0 md:px-36 py-4 text-xl">
-						010-1111-2222
+						010-4388-2241
 					</div>
 				</Description>
 			</div>

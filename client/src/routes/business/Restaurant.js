@@ -52,7 +52,8 @@ const Restaurant = () => {
 								청각장애인 친화적 문화가 담겨있는 식당입니다.
 							</div>
 							<div class="p-8 flex-1 text-md lg:text-lg">
-								<b>위치</b> |<br></br>경상북도 포항시 북구 불종로 67-4 1층
+								<b>위치</b> |<br></br>경상북도 포항시 북구 불종로 67-4 (여천동),
+								1층
 							</div>
 						</Description>
 					</div>

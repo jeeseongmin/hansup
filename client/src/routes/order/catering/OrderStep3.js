@@ -226,8 +226,8 @@ const OrderStep3 = ({ info, setInfo, setStep, changeInfo, allMenuList }) => {
 									label="결제 수단"
 									onChange={handleChange}
 								>
-									<MenuItem value={"card"}>신용카드</MenuItem>
-									<MenuItem value={"cash"}>현금</MenuItem>
+									<MenuItem value={"card"}>후불 결제 (카드)</MenuItem>
+									<MenuItem value={"cash"}>후불 결제 (현금)</MenuItem>
 									<MenuItem value={"transfer"}>계좌이체</MenuItem>
 								</Select>
 							</FormControl>
