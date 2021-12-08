@@ -4,14 +4,20 @@ import ContentLayout from "components/Layout/ContentLayout";
 import IntroImg1 from "image/intro-intro-img1.png";
 import IntroImg2 from "image/intro-intro-img2.png";
 import Description from "components/Description";
+import ReactPlayer from "react-player";
 
 const Introduction = () => {
 	return (
 		<PageLayout>
 			<ContentLayout subtitle={"인사말"}>
 				<div class="flex w-full h-auto lg:h-auto flex-col lg:flex-row items-center mb-8 relative">
-					<div class="w-full lg:w-3/5 px-0 lg:pl-0 lg:pr-8 h-60 md:h-72 lg:h-96 mb-4 lg:mb-0 flex justify-start items-start ">
-						<img src={IntroImg1} class="h-full w-full object-cover" alt="img" />
+					<div class="w-full md:w-auto h-auto mb-4 lg:mb-0 flex justify-center lg:justify-start items-start">
+						{/* <img src={IntroImg1} class="h-full w-full object-cover" alt="img" /> */}
+						<ReactPlayer
+							url="https://youtu.be/hSoTS14DhTA"
+							controls
+							// className="home-video video-shadow main-video"
+						/>
 					</div>
 					<div class="flex-1 h-96 text-hansupBrown text-lg p-4 flex flex-col justify-center items-center">
 						<p class="h-auto leading-10">
