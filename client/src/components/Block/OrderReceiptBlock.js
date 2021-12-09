@@ -99,7 +99,7 @@ const OrderReceiptBlock = ({ info, handleClose, allMenuList }) => {
 						<div class="w-full md:flex-1 text-xl">
 							{info.mainMenu
 								.map((element, index) => {
-									return allMenuList[element].name;
+									return allMenuList[element] ? allMenuList[element].name : "";
 								})
 								.sort((a, b) => a.createdAt - b.createAt)
 								.join(", ")}
@@ -112,7 +112,7 @@ const OrderReceiptBlock = ({ info, handleClose, allMenuList }) => {
 						<div class="w-full md:flex-1 text-xl">
 							{info.subMenu
 								.map((element, index) => {
-									return allMenuList[element].name;
+									return allMenuList[element] ? allMenuList[element].name : "";
 								})
 								.sort((a, b) => a.createdAt - b.createAt)
 								.join(", ")}{" "}
@@ -125,7 +125,7 @@ const OrderReceiptBlock = ({ info, handleClose, allMenuList }) => {
 						<div class="w-full md:flex-1 text-xl">
 							{info.soup
 								.map((element, index) => {
-									return allMenuList[element].name;
+									return allMenuList[element] ? allMenuList[element].name : "";
 								})
 								.sort((a, b) => a.createdAt - b.createAt)
 								.join(", ")}
@@ -138,7 +138,7 @@ const OrderReceiptBlock = ({ info, handleClose, allMenuList }) => {
 						<div class="w-full md:flex-1 text-xl">
 							{info.dessert
 								.map((element, index) => {
-									return allMenuList[element].name;
+									return allMenuList[element] ? allMenuList[element].name : "";
 								})
 								.sort((a, b) => a.createdAt - b.createAt)
 								.join(", ")}
@@ -169,8 +169,8 @@ const OrderReceiptBlock = ({ info, handleClose, allMenuList }) => {
 						</div>
 					</div>
 
-					{!info.cashReceipt.status ? (
-						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start">
+					{info.payment !== "card" && !info.cashReceipt.status ? (
+						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start ">
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								현금영수증
 							</div>
@@ -178,7 +178,7 @@ const OrderReceiptBlock = ({ info, handleClose, allMenuList }) => {
 						</div>
 					) : (
 						<>
-							<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start">
+							<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start border-b-2 border-gray-200">
 								<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 									현금영수증
 								</div>

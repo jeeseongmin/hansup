@@ -14,7 +14,14 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import axios from "axios";
 
-const OrderStep3 = ({ info, setInfo, setStep, changeInfo, allMenuList }) => {
+const OrderStep3 = ({
+	info,
+	setInfo,
+	setStep,
+	changeInfo,
+	allMenuList,
+	menuList,
+}) => {
 	const [selected, setSelected] = useState(false);
 	const [selected2, setSelected2] = useState(false);
 	const prevStep = () => {
@@ -35,14 +42,12 @@ const OrderStep3 = ({ info, setInfo, setStep, changeInfo, allMenuList }) => {
 	};
 
 	useEffect(() => {
-		console.log(selected2);
 		const cp = { ...info };
 		cp["cashReceipt"].status = selected;
 		cp["cashReceipt"].type = selected2 ? "business" : "personal";
 	}, [selected, selected2]);
 
 	const nextStep = async () => {
-		console.log(info);
 		await axios
 			.post(
 				"/api/order/create",
@@ -72,7 +77,6 @@ const OrderStep3 = ({ info, setInfo, setStep, changeInfo, allMenuList }) => {
 			)
 			.then((response) => {
 				setStep(4);
-				console.log(info);
 				document.getElementById("scrollRef").scrollTo(0, 0);
 			})
 			.catch((response) => {
@@ -159,7 +163,16 @@ const OrderStep3 = ({ info, setInfo, setStep, changeInfo, allMenuList }) => {
 								메인메뉴
 							</div>
 							<div class="w-full md:flex-1 text-xl">
-								{/* {info.mainMenu.sort().join(", ")} */}
+								{/* {menuList[0].menu
+									.filter(function (element, index) {
+										return element.type === "mainMenu";
+									})
+									.map((element, index) => {
+										return element.name;
+									})
+									.sort((a, b) => a.createdAt - b.createAt)
+									.join(", ")} */}
+
 								{info.mainMenu
 									.map((element, index) => {
 										return allMenuList[element].name;
@@ -173,7 +186,15 @@ const OrderStep3 = ({ info, setInfo, setStep, changeInfo, allMenuList }) => {
 								식사메뉴
 							</div>
 							<div class="w-full md:flex-1 text-xl">
-								{/* {info.subMenu.sort().join(", ")} */}
+								{/* {menuList[1].menu
+									.filter(function (element, index) {
+										return element.type === "subMenu";
+									})
+									.map((element, index) => {
+										return element.name;
+									})
+									.sort((a, b) => a.createdAt - b.createAt)
+									.join(", ")}{" "} */}
 								{info.subMenu
 									.map((element, index) => {
 										return allMenuList[element].name;
@@ -201,7 +222,15 @@ const OrderStep3 = ({ info, setInfo, setStep, changeInfo, allMenuList }) => {
 								디저트
 							</div>
 							<div class="w-full md:flex-1 text-xl">
-								{/* {info.dessert.sort().join(", ")} */}
+								{/* {menuList[3].menu
+									.filter(function (element, index) {
+										return element.type === "dessert";
+									})
+									.map((element, index) => {
+										return element.name;
+									})
+									.sort((a, b) => a.createdAt - b.createAt)
+									.join(", ")} */}
 								{info.dessert
 									.map((element, index) => {
 										return allMenuList[element].name;
@@ -240,34 +269,36 @@ const OrderStep3 = ({ info, setInfo, setStep, changeInfo, allMenuList }) => {
 								class="px-4 text-lg border-2 border-gray-300 outline-none w-full h-12 flex justify-center items-center"
 							/> */}
 						</div>
-						<div
-							class={
-								"flex py-4 flex-row justify-between items-center " +
-								(selected ? "border-b-2 border-gray-200" : "mb-12")
-							}
-						>
-							<p class="text-lg h-full flex justify-center items-center ">
-								현금영수증
-							</p>
-							<div class="h-full flex flex-row items-center">
-								<div class="mr-3">
-									<RadioButton
-										text={"미신청"}
-										setSelected={setSelected}
-										current={selected}
-										clicked={false}
-									/>
-								</div>
-								<div>
-									<RadioButton
-										text={"신청"}
-										setSelected={setSelected}
-										current={selected}
-										clicked={true}
-									/>
+						{info.payment !== "card" && (
+							<div
+								class={
+									"flex py-4 flex-row justify-between items-center " +
+									(selected ? "border-b-2 border-gray-200" : "mb-12")
+								}
+							>
+								<p class="text-lg h-full flex justify-center items-center ">
+									현금영수증
+								</p>
+								<div class="h-full flex flex-row items-center">
+									<div class="mr-3">
+										<RadioButton
+											text={"미신청"}
+											setSelected={setSelected}
+											current={selected}
+											clicked={false}
+										/>
+									</div>
+									<div>
+										<RadioButton
+											text={"신청"}
+											setSelected={setSelected}
+											current={selected}
+											clicked={true}
+										/>
+									</div>
 								</div>
 							</div>
-						</div>
+						)}
 						<div
 							class={
 								"py-4 w-full h-full mb-12 flex flex-col transition delay-100 duration-200  " +

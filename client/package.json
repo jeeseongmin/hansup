@@ -2,7 +2,7 @@
   "name": "hansup",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://hansup.cafe24app.com",
+  "proxy": "http://localhost:5000",
   "dependencies": {
     "@craco/craco": "^6.3.0",
     "@emotion/react": "^11.5.0",

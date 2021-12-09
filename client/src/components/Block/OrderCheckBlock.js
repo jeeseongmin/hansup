@@ -2,11 +2,68 @@ import Switch from "@mui/material/Switch";
 import axios from "axios";
 import InfoBlock from "components/Block/InfoBlock";
 import Subtitle from "components/Subtitle";
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import { MdClose } from "react-icons/md";
 
-const OrderCheckBlock = ({ info, handleClose, toggleChange, allMenuList }) => {
+const OrderCheckBlock = ({
+	info,
+	handleClose,
+	toggleChange,
+	allMenuList,
+	listLoading,
+}) => {
 	const [checked, setChecked] = React.useState(info.payed);
+
+	const deleteOrder = async () => {
+		await axios
+			.post(
+				"/api/order/deletecheck/" + info._id,
+				{
+					key: process.env.REACT_APP_API_KEY,
+				},
+				{
+					headers: {
+						"content-type": "application/json",
+						Accept: "application/json",
+					},
+				}
+			)
+			.then((response) => {
+				toggleChange();
+				alert("삭제되었습니다.");
+				handleClose();
+				// const cp = [...menuList];
+				// if (newMenu.type === "mainMenu") {
+				// 	cp[0].menu = cp[0].menu.filter(function (element, index) {
+				// 		// return element._id !== id;
+				// 		return element.isDeleted;
+				// 	});
+				// } else if (newMenu.type === "subMenu") {
+				// 	cp[1].menu = cp[1].menu.filter(function (element, index) {
+				// 		// return element._id !== id;
+				// 		return element.isDeleted;
+				// 	});
+				// } else if (newMenu.type === "soup") {
+				// 	cp[2].menu = cp[2].menu.filter(function (element, index) {
+				// 		// return element._id !== id;
+				// 		return element.isDeleted;
+				// 	});
+				// } else if (newMenu.type === "dessert") {
+				// 	cp[3].menu = cp[3].menu.filter(function (element, index) {
+				// 		// return element._id !== id;
+				// 		return element.isDeleted;
+				// 	});
+				// }
+				// setMenuList(cp);
+				// handleClose();
+				// init();
+			})
+			.catch((response) => {
+				console.log("Error!");
+			});
+	};
+
+	const editOrder = async () => {};
 
 	const handleChange = async (event) => {
 		setChecked(event.target.checked);
@@ -136,12 +193,15 @@ const OrderCheckBlock = ({ info, handleClose, toggleChange, allMenuList }) => {
 							메인메뉴
 						</div>
 						<div class="w-full md:flex-1 text-xl">
-							{info.mainMenu
-								.map((element, index) => {
-									return allMenuList[element].name;
-								})
-								.sort((a, b) => a.createdAt - b.createAt)
-								.join(", ")}{" "}
+							{listLoading &&
+								info.mainMenu
+									.map((element, index) => {
+										return allMenuList[element]
+											? allMenuList[element].name
+											: "";
+									})
+									.sort((a, b) => a.createdAt - b.createAt)
+									.join(", ")}{" "}
 						</div>
 					</div>
 					<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start border-b-2 border-gray-200">
@@ -149,12 +209,15 @@ const OrderCheckBlock = ({ info, handleClose, toggleChange, allMenuList }) => {
 							식사메뉴
 						</div>
 						<div class="w-full md:flex-1 text-xl">
-							{info.subMenu
-								.map((element, index) => {
-									return allMenuList[element].name;
-								})
-								.sort((a, b) => a.createdAt - b.createAt)
-								.join(", ")}{" "}
+							{listLoading &&
+								info.subMenu
+									.map((element, index) => {
+										return allMenuList[element]
+											? allMenuList[element].name
+											: "";
+									})
+									.sort((a, b) => a.createdAt - b.createAt)
+									.join(", ")}{" "}
 						</div>
 					</div>
 					<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start border-b-2 border-gray-200">
@@ -162,12 +225,15 @@ const OrderCheckBlock = ({ info, handleClose, toggleChange, allMenuList }) => {
 							국
 						</div>
 						<div class="w-full md:flex-1 text-xl">
-							{info.soup
-								.map((element, index) => {
-									return allMenuList[element].name;
-								})
-								.sort((a, b) => a.createdAt - b.createAt)
-								.join(", ")}{" "}
+							{listLoading &&
+								info.soup
+									.map((element, index) => {
+										return allMenuList[element]
+											? allMenuList[element].name
+											: "";
+									})
+									.sort((a, b) => a.createdAt - b.createAt)
+									.join(", ")}{" "}
 						</div>
 					</div>
 					<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start">
@@ -175,12 +241,15 @@ const OrderCheckBlock = ({ info, handleClose, toggleChange, allMenuList }) => {
 							디저트
 						</div>
 						<div class="w-full md:flex-1 text-xl">
-							{info.dessert
-								.map((element, index) => {
-									return allMenuList[element].name;
-								})
-								.sort((a, b) => a.createdAt - b.createAt)
-								.join(", ")}{" "}
+							{listLoading &&
+								info.dessert
+									.map((element, index) => {
+										return allMenuList[element]
+											? allMenuList[element].name
+											: "";
+									})
+									.sort((a, b) => a.createdAt - b.createAt)
+									.join(", ")}{" "}
 						</div>
 					</div>
 				</div>
@@ -199,7 +268,12 @@ const OrderCheckBlock = ({ info, handleClose, toggleChange, allMenuList }) => {
 								: "계좌이체"}
 						</div>
 					</div>
-					<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start border-b-2 border-gray-200">
+					<div
+						class={
+							"px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start " +
+							(info.payment !== "card" ? "border-b-2 border-gray-200" : "")
+						}
+					>
 						<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 							결제여부
 						</div>
@@ -209,7 +283,12 @@ const OrderCheckBlock = ({ info, handleClose, toggleChange, allMenuList }) => {
 					</div>
 
 					{!info.cashReceipt.status ? (
-						<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start">
+						<div
+							class={
+								"px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start " +
+								(info.payment !== "card" ? "" : "hidden")
+							}
+						>
 							<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 								현금영수증
 							</div>
@@ -217,7 +296,12 @@ const OrderCheckBlock = ({ info, handleClose, toggleChange, allMenuList }) => {
 						</div>
 					) : (
 						<>
-							<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start">
+							<div
+								class={
+									"px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start border-b-2 border-gray-200 " +
+									(info.payment !== "card" ? "" : "hidden")
+								}
+							>
 								<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 									현금영수증
 								</div>
@@ -227,7 +311,12 @@ const OrderCheckBlock = ({ info, handleClose, toggleChange, allMenuList }) => {
 										: "개인소득공제용"}
 								</div>
 							</div>
-							<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start">
+							<div
+								class={
+									"px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start " +
+									(info.payment !== "card" ? "" : "hidden")
+								}
+							>
 								<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 									{info.cashReceipt.type === "business"
 										? "사업자번호"
@@ -241,6 +330,20 @@ const OrderCheckBlock = ({ info, handleClose, toggleChange, allMenuList }) => {
 					)}
 				</div>
 			</InfoBlock>
+			<div class="h-24 md:h-10 w-full flex justify-between flex-col md:flex-row">
+				<div
+					onClick={editOrder}
+					class="h-10 md:h-full cursor-pointer flex justify-center items-center w-full md:w-36 border border-hansupBrown transition delay-50 duration-150 hover:bg-hansupBrown hover:text-white text-hansupBrown mb-4 md:mb-0"
+				>
+					수정하기
+				</div>
+				<div
+					onClick={deleteOrder}
+					class="h-10 md:h-full cursor-pointer flex justify-center items-center w-full md:w-36 border border-hansupBrown transition delay-50 duration-150 hover:bg-hansupBrown hover:text-white text-hansupBrown"
+				>
+					삭제하기
+				</div>
+			</div>
 		</>
 	);
 };

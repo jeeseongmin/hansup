@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
-import styled, { css } from "styled-components";
-// import { BsCheckCircleFill } from "react-icons/bs";
-import { GrCheckmark } from "react-icons/gr";
+import React, { useState } from "react";
 import { AiOutlineCheck } from "react-icons/ai";
+import styled from "styled-components";
 
 const Container = styled.div`
 	display: flex;

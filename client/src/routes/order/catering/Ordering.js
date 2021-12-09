@@ -7,6 +7,7 @@ import OrderStep2 from "routes/order/catering/OrderStep2";
 import OrderStep3 from "routes/order/catering/OrderStep3";
 import OrderFinal from "routes/order/catering/OrderFinal";
 import axios from "axios";
+import dayjs from "dayjs";
 
 const Ordering = () => {
 	const [step, setStep] = useState(1);
@@ -15,6 +16,9 @@ const Ordering = () => {
 		phone1: "",
 		phone2: "",
 		phone3: "",
+		check1: "",
+		check2: "",
+		check3: "",
 		count: "",
 		request: "",
 		date: new Date(),
@@ -40,10 +44,10 @@ const Ordering = () => {
 	const [listLoading, setListLoading] = useState(true);
 
 	const typeList = [
-		{ title: "메인메뉴 (택 4)", type: "mainMenu" },
-		{ title: "식사메뉴 (택 4)", type: "subMenu" },
+		{ title: "메인메뉴(확정 4) + 자율 메뉴(추후 공지)", type: "mainMenu" },
+		{ title: "식사메뉴(확정)", type: "subMenu" },
 		{ title: "국 (택 1)", type: "soup" },
-		{ title: "디저트 (택 5)", type: "dessert" },
+		{ title: "디저트(확정)", type: "dessert" },
 	];
 
 	const getList = async () => {
@@ -59,7 +63,7 @@ const Ordering = () => {
 					},
 				}
 			)
-			.then((Response) => {
+			.then(async (Response) => {
 				const tmpList = [];
 				for (let one of typeList) {
 					const cp = Response.data.filter(function (element, index) {
@@ -89,6 +93,47 @@ const Ordering = () => {
 
 	const changeInfo = (e, type) => {
 		if (type === "date" || type === "delivery") {
+			if (type === "date") {
+				let prev = new Date();
+				prev.setDate(prev.getDate() + 1);
+				var selected = dayjs(
+					e.getFullYear() + "-" + e.getMonth() + "-" + e.getDate()
+				).add(1, "month");
+				if (
+					!selected.isAfter(dayjs().add(1, "day")) ||
+					!selected.isBefore(dayjs().add(2, "month"))
+				) {
+					alert("현재일 기준 이틀 뒤부터 2개월 이내까지 선택 가능합니다.");
+					let init = dayjs().add(2, "day");
+					let newDate = new Date(
+						init.get("year"),
+						init.get("month"),
+						init.get("date"),
+						14,
+						0,
+						0
+					);
+					const cp = { ...info };
+					cp[type] = newDate;
+					setInfo(cp);
+					return;
+				} else if (e.getHours() < 9 || e.getHours() > 22) {
+					alert("오전 9시 ~ 오후 10시 사이에만 가능합니다.");
+					selected.set("hour", 14);
+					let newDate = new Date(
+						selected.get("year"),
+						selected.get("month"),
+						selected.get("date"),
+						14,
+						0,
+						0
+					);
+					const cp = { ...info };
+					cp[type] = newDate;
+					setInfo(cp);
+					return;
+				}
+			}
 			const cp = { ...info };
 			cp[type] = e;
 			setInfo(cp);
@@ -218,6 +263,7 @@ const Ordering = () => {
 						setStep={setStep}
 						changeInfo={changeInfo}
 						allMenuList={allMenuList}
+						menuList={menuList}
 					/>
 				)}
 				{step === 4 && <OrderFinal info={info} allMenuList={allMenuList} />}
