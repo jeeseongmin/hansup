@@ -1,17 +1,6 @@
-import Description from "components/Description";
-import ImageLabel from "components/ImageLabel";
-import Subtitle from "components/Subtitle";
-import CateringIntro from "image/catering-intro.png";
-import React, { useEffect, useState } from "react";
-import PageLayout from "components/Layout/PageLayout";
-import ContentLayout from "components/Layout/ContentLayout";
-// import NoticeList from "routes/community/data/noticeList";
 import NoticeBlock from "components/Block/NoticeBlock";
-import { Route, Link, useHistory } from "react-router-dom";
-
-import Paging from "components/Paging";
-import NoticeDetailBlock from "components/Block/NoticeDetailBlock";
-import axios from "axios";
+import React from "react";
+import { useHistory } from "react-router-dom";
 
 const NoticeListBlock = ({ noticeList }) => {
 	const history = useHistory();

@@ -161,7 +161,7 @@ const OrderFinal = ({ info, allMenuList }) => {
 							</div>
 						</div>
 
-						{!info.cashReceipt.status ? (
+						{info.payment !== "card" && !info.cashReceipt.status ? (
 							<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start">
 								<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
 									현금영수증

@@ -48,11 +48,8 @@ const CreateVoice = () => {
 		} else if (info.name === "") {
 			alert("이름을 입력해주세요!");
 			nameRef.current.focus();
-		} else if (
-			(info.phone1 === "" || info.phone2 === "" || info.phone3 === "") &&
-			(info.email1 === "" || info.email2 === "")
-		) {
-			alert("휴대폰 번호 혹은 이메일을 입력해주세요.");
+		} else if (info.phone1 === "" || info.phone2 === "" || info.phone3 === "") {
+			alert("휴대폰 번호를 입력해주세요.");
 			phoneRef1.current.focus();
 		} else if (
 			info.phone1 !== "" &&
@@ -84,10 +81,11 @@ const CreateVoice = () => {
 							info.phone1 === "" || info.phone2 === "" || info.phone3 === ""
 								? ""
 								: info.phone1 + "-" + info.phone2 + "-" + info.phone3,
-						email:
-							info.email1 === "" || info.email2 === ""
-								? ""
-								: info.email1 + "@" + info.email2,
+						// email:
+						// 	info.email1 === "" || info.email2 === ""
+						// 		? ""
+						// 		: info.email1 + "@" + info.email2,
+						email: "",
 					},
 					{
 						headers: {

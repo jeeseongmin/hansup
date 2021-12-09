@@ -42,6 +42,9 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
 	const phone1Ref = useRef();
 	const phone2Ref = useRef();
 	const phone3Ref = useRef();
+	const check1Ref = useRef();
+	const check2Ref = useRef();
+	const check3Ref = useRef();
 	const countRef = useRef();
 	const requestRef = useRef();
 	const address1Ref = useRef();
@@ -70,16 +73,34 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
 		} else if (info.phone3 === "") {
 			alert("핸드폰 번호를 입력해주세요.");
 			phone3Ref.current.focus();
+		} else if (info.check1 === "") {
+			alert("핸드폰 번호 확인란을 입력해주세요.");
+			check1Ref.current.focus();
+		} else if (info.check2 === "") {
+			alert("핸드폰 번호 확인란을 입력해주세요.");
+			check2Ref.current.focus();
+		} else if (info.check3Ref === "") {
+			alert("핸드폰 번호 확인란을 입력해주세요.");
+			check3Ref.current.focus();
+		} else if (
+			info.phone1 !== info.check1 ||
+			info.phone2 !== info.check2 ||
+			info.phone3 !== info.check3
+		) {
+			alert("핸드폰 번호와 확인란을 확인해주세요.");
+			phone1Ref.current.focus();
 		} else if (info.count === "" || info.current === 0) {
 			alert("인원수를 입력해주세요.");
 			countRef.current.focus();
-		} else if (info.address1 === "") {
-			alert("도로명 주소를 입력해주세요.");
-			// address1Ref.current.focus();
-			addressBtnRef.current.click();
-		} else if (info.address2 === "") {
-			alert("상세 주소를 입력해주세요.");
-			address2Ref.current.focus();
+		} else if (info.delivery === "delivery") {
+			if (info.address1 === "") {
+				alert("도로명 주소를 입력해주세요.");
+				// address1Ref.current.focus();
+				addressBtnRef.current.click();
+			} else if (info.address2 === "") {
+				alert("상세 주소를 입력해주세요.");
+				address2Ref.current.focus();
+			}
 		} else {
 			setStep(2);
 			document.getElementById("scrollRef").scrollTo(0, 0);
@@ -155,6 +176,32 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
 								</div>
 							</div>
 							<div class="h-12 mb-4 flex flex-row justify-between items-center">
+								<div class="w-1/4 text-xl">연락처 확인</div>
+								<div class="flex-1 h-full grid grid-cols-3 gap-2">
+									<InputBox
+										value={info.check1}
+										refName={check1Ref}
+										type="check1"
+										placeholder="010"
+										onChange={changeInfo}
+									/>
+									<InputBox
+										value={info.check2}
+										refName={check2Ref}
+										type="check2"
+										placeholder=""
+										onChange={changeInfo}
+									/>
+									<InputBox
+										value={info.check3}
+										refName={check3Ref}
+										type="check3"
+										placeholder=""
+										onChange={changeInfo}
+									/>
+								</div>
+							</div>
+							<div class="h-12 mb-4 flex flex-row justify-between items-center">
 								<div class="w-1/4 text-xl">인원수</div>
 								<div class="flex-1 h-full">
 									<InputBox
@@ -182,7 +229,10 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
 					</InfoBlock>
 					<InfoBlock title={"예약 일정 정보"}>
 						<p class="w-full text-center mb-4 font-bold text-hansupBrown">
-							배달을 원하는 시간과 장소를 입력해주세요.{" "}
+							배달을 원하는 시간과 장소를 입력해주세요. <br></br>
+							날짜는 오늘({dateToString(new Date())}) 기준 2일 이후부터 2개월
+							전까지만 선택가능합니다. <br></br>
+							시간은 오전 9시 이후부터 오후 10시까지만 선택가능합니다.
 						</p>
 						<div class="px-4 flex flex-col">
 							<div class="h-12 mb-4 flex flex-row justify-between items-center">
@@ -218,7 +268,12 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
 								/>
 							</div>
 						</div> */}
-							<div class="h-12 mb-4 flex flex-row justify-between items-center">
+							<div
+								class={
+									"h-12 flex flex-row justify-between items-center " +
+									(info.delivery === "self" ? "mb-8" : "mb-4")
+								}
+							>
 								<div class="w-1/4 text-xl">수령방식</div>
 								<div class="flex-1 h-full grid grid-cols-2">
 									<div
@@ -246,7 +301,12 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
 									</div>
 								</div>
 							</div>
-							<div class="h-28 mb-8 flex flex-row justify-between items-start">
+							<div
+								class={
+									"h-28 mb-8 flex-row justify-between items-start " +
+									(info.delivery === "self" ? "hidden" : "flex")
+								}
+							>
 								<div class="w-1/4 text-xl h-full grid grid-rows-2 gap-2 ">
 									<p class="w-full h-full flex items-center">배달장소</p>
 									<p></p>

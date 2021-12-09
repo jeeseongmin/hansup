@@ -35,6 +35,7 @@ const Schedule = () => {
 			)
 			.then(async (Response) => {
 				await setOrderInfo(Response.data);
+				console.log("orderInfo", Response.data);
 				setLoading(true);
 			})
 			.catch((Error) => {
@@ -98,7 +99,7 @@ const Schedule = () => {
 	};
 	useEffect(() => {
 		getList();
-	}, []);
+	}, [change]);
 
 	return (
 		<>

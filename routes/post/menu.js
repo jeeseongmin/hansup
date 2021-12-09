@@ -3,6 +3,8 @@ const router = require("express").Router();
 let Menu = require("../../models/menu.model");
 const API_KEY = require("../../keyconfig");
 
+// 완전 삭제와 isDeleted true로 체크한 것은 다르다.
+
 // Create menu
 router.route("/create").post((req, res) => {
 	if (req.body.key === API_KEY) {
@@ -12,6 +14,7 @@ router.route("/create").post((req, res) => {
 			name: req.body.name,
 			price: req.body.price,
 			imgList: req.body.imgList,
+			isDeleted: false,
 		};
 
 		const newOne = new Menu(one);
@@ -90,6 +93,22 @@ router.route("/update/:id").post((req, res) => {
 				one.name = req.body.name;
 				one.price = req.body.price;
 				one.imgList = req.body.imgList;
+				one.isDeleted = false;
+
+				one
+					.save()
+					.then((all) => res.json(all))
+					.catch((err) => res.status(400).json("Error: " + err));
+			})
+			.catch((err) => res.status(400).json("Error: " + err));
+	} else return res.status(400).json("Error");
+});
+
+router.route("/deletecheck/:id").post((req, res) => {
+	if (req.body.key === API_KEY) {
+		Menu.findById(req.params.id)
+			.then((one) => {
+				one.isDeleted = true;
 
 				one
 					.save()
