@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-// import reviewList from "routes/community/data/reviewList";
 import ReviewBlock from "components/Block/ReviewBlock";
+import React from "react";
 
 const ReviewListBlock = ({ reviewList, setReviewList }) => {
 	return (

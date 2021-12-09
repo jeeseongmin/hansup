@@ -66,16 +66,18 @@ const MenuCountBox = ({ type, dayOrderList, menuList, allMenuList }) => {
 			</p>
 			{menuList[index[type]] &&
 				menuList[index[type]].menu.map((element, index) => {
-					return (
-						<div class="w-full h-12 pl-12 flex flex-row justify-between items-center border-b border-gray-400">
-							<p class="flex-1 text-left">
-								<b>{element.name}</b>
-							</p>
-							<p class="w-1/3 text-center mr-8">
-								{menuCount[element._id] ? menuCount[element._id] : 0}
-							</p>
-						</div>
-					);
+					if (menuCount[element._id]) {
+						return (
+							<div class="w-full h-12 pl-12 flex flex-row justify-between items-center border-b border-gray-400">
+								<p class="flex-1 text-left">
+									<b>{element.name}</b>
+								</p>
+								<p class="w-1/3 text-center mr-8">
+									{menuCount[element._id] ? menuCount[element._id] : 0}
+								</p>
+							</div>
+						);
+					}
 				})}
 		</div>
 	);

@@ -134,6 +134,7 @@ const DailyOrder = ({
 												key={index}
 												dayOrder={element}
 												toggleChange={toggleChange}
+												focusDate={focusDate}
 											/>
 										);
 									})}
@@ -145,7 +146,11 @@ const DailyOrder = ({
 							</div>
 						)}
 					</div>
-					<div class="flex flex-col mb-8">
+					<div
+						class={
+							"flex-col mb-8 " + (dayOrderList.length === 0 ? "hidden" : "flex")
+						}
+					>
 						<p class="text-2xl font-bold mb-8">확정 예약 총계</p>
 						<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
 							<MenuCountBox

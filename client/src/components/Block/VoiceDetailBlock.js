@@ -72,10 +72,10 @@ const VoiceDetailBlock = ({ match }) => {
 									{voice.phone}
 								</p>
 							</div>
-							<div class="w-1/2 font-bold">
+							{/* <div class="w-1/2 font-bold">
 								<span class="hidden sm:inline-block mr-2">이메일 : </span>
 								{voice.email}
-							</div>
+							</div> */}
 						</div>
 					</div>
 					<div class="flex justify-between items-center flex-col md:flex-row">

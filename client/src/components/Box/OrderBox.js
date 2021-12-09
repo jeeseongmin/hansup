@@ -3,7 +3,7 @@ import Modal from "@mui/material/Modal";
 import OrderCheckBlock from "components/Block/OrderCheckBlock";
 import axios from "axios";
 
-const OrderBox = ({ dayOrder, toggleChange }) => {
+const OrderBox = ({ dayOrder, toggleChange, focusDate }) => {
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const handleClose = () => setOpen(false);
@@ -113,6 +113,7 @@ const OrderBox = ({ dayOrder, toggleChange }) => {
 								handleClose={handleClose}
 								toggleChange={toggleChange}
 								allMenuList={allMenuList}
+								listLoading={listLoading}
 							/>
 						</div>
 					</div>

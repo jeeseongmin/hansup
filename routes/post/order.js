@@ -21,6 +21,7 @@ router.route("/create").post((req, res) => {
 			payment: req.body.payment,
 			cashReceipt: req.body.cashReceipt,
 			payed: false,
+			isDeleted: false,
 		};
 
 		const newOne = new Order(one);
@@ -144,6 +145,22 @@ router.route("/update/:id").post((req, res) => {
 				one.payment = req.body.payment;
 				one.cashReceipt = req.body.cashReceipt;
 				one.payed = req.body.payed;
+				one.isDeleted = req.body.isDeleted;
+
+				one
+					.save()
+					.then(() => res.json("Order updated!"))
+					.catch((err) => res.status(400).json("Error: " + err));
+			})
+			.catch((err) => res.status(400).json("Error: " + err));
+	} else return res.status(400).json("Error");
+});
+
+router.route("/deletecheck/:id").post((req, res) => {
+	if (req.body.key === API_KEY) {
+		Order.findById(req.params.id)
+			.then((one) => {
+				one.isDeleted = true;
 
 				one
 					.save()

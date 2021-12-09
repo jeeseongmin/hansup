@@ -1,11 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
-import Example from "image/example.png";
-import Skeleton from "@mui/material/Skeleton";
 import Modal from "@mui/material/Modal";
-import Close from "image/close.png";
-import { useDispatch, useSelector } from "react-redux";
+import Skeleton from "@mui/material/Skeleton";
 import axios from "axios";
-import { Link, useHistory } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const ReviewBlock = ({ review, reviewList, setReviewList }) => {
 	const history = useHistory();

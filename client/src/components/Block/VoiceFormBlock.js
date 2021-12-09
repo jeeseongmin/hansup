@@ -70,6 +70,7 @@ const VoiceFormBlock = ({
 				</div>
 				<div class="w-96"></div>
 			</div>
+			{/* 이메일 생략
 			<div class="h-16 flex flex-row mb-2 items-center">
 				<p class="w-24 text-xl font-bold">이메일</p>
 				<div class="h-full flex-1 grid grid-cols-1 gap-2 items-center">
@@ -90,7 +91,7 @@ const VoiceFormBlock = ({
 					/>
 				</div>
 				<div class="w-96"></div>
-			</div>
+			</div> */}
 		</div>
 	);
 };

@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
-import styled, { css } from "styled-components";
-// import { BsCheckCircleFill } from "react-icons/bs";
-import { GrCheckmark } from "react-icons/gr";
+import React, { useState } from "react";
 import { AiOutlineCheck } from "react-icons/ai";
+import styled from "styled-components";
 
 const Container = styled.div`
 	display: flex;
@@ -23,27 +21,50 @@ const OrderMenuBlock = ({
 }) => {
 	const [selected, setSelected] = useState(false);
 
+	// 모든 메뉴 선택하도록 할 경우
+	// const onToggle = () => {
+	// 	const cp = { ...menuList };
+	// 	if (menuList[type].includes(menu._id)) {
+	// 		let arr = [...menuList[type]].filter(function (element, i) {
+	// 			return element !== menu._id;
+	// 		});
+	// 		cp[type] = arr;
+	// 		setMenu(cp);
+	// 	} else {
+	// 		if (type === "mainMenu" && menuList[type].length >= 4) {
+	// 			alert("메인 메뉴는 4개까지 선택가능합니다.");
+	// 		} else if (type === "subMenu" && menuList[type].length >= 4) {
+	// 			alert("식사 메뉴는 4개까지 선택가능합니다.");
+	// 		} else if (type === "soup" && menuList[type].length >= 1) {
+	// 			alert("국 메뉴는 1개까지 선택가능합니다.");
+	// 		} else if (type === "dessert" && menuList[type].length >= 5) {
+	// 			alert("디저트 메뉴는 5개까지 선택가능합니다.");
+	// 		} else {
+	// 			let arr = [...menuList[type], menu._id];
+	// 			cp[type] = arr;
+	// 			setMenu(cp);
+	// 		}
+	// 	}
+	// };
+
+	// 국만 선택가능할 경우
 	const onToggle = () => {
 		const cp = { ...menuList };
-		if (menuList[type].includes(menu._id)) {
-			let arr = [...menuList[type]].filter(function (element, i) {
-				return element !== menu._id;
-			});
-			cp[type] = arr;
-			setMenu(cp);
-		} else {
-			if (type === "mainMenu" && menuList[type].length >= 4) {
-				alert("메인 메뉴는 4개까지 선택가능합니다.");
-			} else if (type === "subMenu" && menuList[type].length >= 4) {
-				alert("식사 메뉴는 4개까지 선택가능합니다.");
-			} else if (type === "soup" && menuList[type].length >= 1) {
-				alert("국 메뉴는 1개까지 선택가능합니다.");
-			} else if (type === "dessert" && menuList[type].length >= 5) {
-				alert("디저트 메뉴는 5개까지 선택가능합니다.");
-			} else {
-				let arr = [...menuList[type], menu._id];
+		if (type === "soup") {
+			if (menuList[type].includes(menu._id)) {
+				let arr = [...menuList[type]].filter(function (element, i) {
+					return element !== menu._id;
+				});
 				cp[type] = arr;
 				setMenu(cp);
+			} else {
+				if (type === "soup" && menuList[type].length >= 1) {
+					alert("국 메뉴는 1개만 선택가능합니다.");
+				} else {
+					let arr = [...menuList[type], menu._id];
+					cp[type] = arr;
+					setMenu(cp);
+				}
 			}
 		}
 	};

@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { Link, useHistory } from "react-router-dom";
-import Skeleton from "@mui/material/Skeleton";
-import ContentLayout from "components/Layout/ContentLayout";
 import CircularProgress from "@mui/material/CircularProgress";
-import { useDispatch, useSelector } from "react-redux";
+import Skeleton from "@mui/material/Skeleton";
+import axios from "axios";
+import ContentLayout from "components/Layout/ContentLayout";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
 import EditNotice from "routes/community/Notice/EditNotice";
 
 const NoticeDetailBlock = ({ match }) => {

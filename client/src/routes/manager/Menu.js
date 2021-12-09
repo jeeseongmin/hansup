@@ -59,10 +59,11 @@ const Menu = () => {
 				}
 			)
 			.then((Response) => {
+				console.log("Response.data", Response.data);
 				const tmpList = [];
 				for (let one of typeList) {
 					const cp = Response.data.filter(function (element, index) {
-						return element.type === one.type;
+						return element.type === one.type && !element.isDeleted;
 					});
 					tmpList.push({
 						title: one.title,
@@ -214,7 +215,7 @@ const Menu = () => {
 					onClick: async () =>
 						await axios
 							.post(
-								"/api/menu/delete/" + id,
+								"/api/menu/deletecheck/" + id,
 								{
 									key: process.env.REACT_APP_API_KEY,
 								},
@@ -228,22 +229,25 @@ const Menu = () => {
 							.then((response) => {
 								alert("삭제되었습니다.");
 								const cp = [...menuList];
-								console.log(response.data);
 								if (newMenu.type === "mainMenu") {
 									cp[0].menu = cp[0].menu.filter(function (element, index) {
-										return element._id !== id;
+										// return element._id !== id;
+										return element.isDeleted;
 									});
 								} else if (newMenu.type === "subMenu") {
 									cp[1].menu = cp[1].menu.filter(function (element, index) {
-										return element._id !== id;
+										// return element._id !== id;
+										return element.isDeleted;
 									});
 								} else if (newMenu.type === "soup") {
 									cp[2].menu = cp[2].menu.filter(function (element, index) {
-										return element._id !== id;
+										// return element._id !== id;
+										return element.isDeleted;
 									});
 								} else if (newMenu.type === "dessert") {
 									cp[3].menu = cp[3].menu.filter(function (element, index) {
-										return element._id !== id;
+										// return element._id !== id;
+										return element.isDeleted;
 									});
 								}
 								setMenuList(cp);
@@ -293,7 +297,6 @@ const Menu = () => {
 						// history.push("/community/notice/list");
 						// document.getElementById("scrollRef").scrollTo(0, 0);
 						const cp = [...menuList];
-						console.log(response.data);
 						if (newMenu.type === "mainMenu") {
 							cp[0].menu = cp[0].menu.map((element, index) => {
 								if (element._id === response.data._id) {
