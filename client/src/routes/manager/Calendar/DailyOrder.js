@@ -21,6 +21,7 @@ const DailyOrder = ({
 		setLoading(false);
 		let cp = await orderInfo.filter(function (element, index) {
 			return (
+				!element.isDeleted &&
 				element.payed &&
 				String(focusDate.get("year")) ===
 					String(Number(element.date.substr(0, 4))) &&
@@ -43,6 +44,7 @@ const DailyOrder = ({
 	const getUndecided = async () => {
 		let cp = await orderInfo.filter(function (element, index) {
 			return (
+				!element.isDeleted &&
 				!element.payed &&
 				String(focusDate.get("year")) ===
 					String(Number(element.date.substr(0, 4))) &&

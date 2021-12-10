@@ -59,7 +59,6 @@ const Menu = () => {
 				}
 			)
 			.then((Response) => {
-				console.log("Response.data", Response.data);
 				const tmpList = [];
 				for (let one of typeList) {
 					const cp = Response.data.filter(function (element, index) {

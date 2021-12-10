@@ -34,7 +34,10 @@ const Schedule = () => {
 				}
 			)
 			.then(async (Response) => {
-				await setOrderInfo(Response.data);
+				const filtered = Response.data.filter(function (element, index) {
+					return !element.isDeleted;
+				});
+				await setOrderInfo(filtered);
 				console.log("orderInfo", Response.data);
 				setLoading(true);
 			})
