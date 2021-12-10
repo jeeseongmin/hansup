@@ -60,6 +60,10 @@ const orderSchema = new Schema(
 			type: Boolean,
 			required: true,
 		},
+		isDeleted: {
+			type: Boolean,
+			required: false,
+		},
 	},
 	{
 		timestamps: true,

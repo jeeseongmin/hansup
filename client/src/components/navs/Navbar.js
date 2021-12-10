@@ -19,6 +19,7 @@ import {
 	setSelected,
 } from "reducers/setting";
 import ProfileImg from "image/profileDefault.png";
+import Notification from "image/notification.png";
 
 const Nav = styled.div`
 	width: 100%;
@@ -379,12 +380,38 @@ const Navbar = ({ currentMenu }) => {
 									class="z-30 p-1 w-10 h-10 rounded-full cursor-pointer object-cover"
 									alt="profile"
 								/>
+								<div
+									onClick={onToggleProfile}
+									class="cursor-pointer z-30 w-10 h-8 absolute"
+								>
+									<div class="w-4 h-4 rounded-full bg-red-500 absolute -right-1 -top-1 flex justify-center items-center text-white text-xs font-bold">
+										1
+									</div>
+								</div>
 								{profile === "on" ? (
-									<div class="z-30 px-4 py-2 flex flex-col justify-center items-center -right-4 top-14 w-72 h-40 bg-white border border-gray-300 rounded-lg absolute">
+									<div class="z-30 px-4 py-2 flex flex-col justify-center items-center -right-4 top-14 w-72 h-60 bg-white border border-gray-300 rounded-lg absolute">
 										<div class="w-full h-full flex flex-col justify-around">
 											<div class="w-full flex flex-col">
 												<p class="font-bold w-auto">{loginInfo.position}</p>
 												<p class="text-gray-500">ID : {loginInfo.email}</p>
+											</div>
+											<div
+												onClick={goEditPage}
+												class="relative cursor-pointer w-full py-1 border border-hansupBrown text-hansupBrown flex justify-center transition delay-50 duration-300 hover:bg-hansupBrown hover:text-white"
+											>
+												신규 예약
+												<div class="w-4 h-4 rounded-full bg-red-500 absolute -right-1 -top-1 flex justify-center items-center text-white text-xs font-bold">
+													1
+												</div>
+											</div>
+											<div
+												onClick={goEditPage}
+												class="relative cursor-pointer w-full py-1 border border-hansupBrown text-hansupBrown flex justify-center transition delay-50 duration-300 hover:bg-hansupBrown hover:text-white"
+											>
+												신규 고객의 소리
+												<div class="w-4 h-4 rounded-full bg-red-500 absolute -right-1 -top-1 flex justify-center items-center text-white text-xs font-bold">
+													1
+												</div>
 											</div>
 											<div
 												onClick={goEditPage}

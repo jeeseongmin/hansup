@@ -24,6 +24,10 @@ const menuSchema = new Schema(
 			type: [Object],
 			required: true,
 		},
+		isDeleted: {
+			type: Boolean,
+			required: false,
+		},
 	},
 	{
 		timestamps: true,
