@@ -2,13 +2,13 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
-const VoiceBlock = ({ voice }) => {
+const VoiceBlock = ({ voice, type }) => {
 	const history = useHistory();
 	const goPage = () => {
 		if (voice.status === "unread") {
 			readCheck();
 		} else {
-			history.push("/manager/voice/" + voice._id);
+			history.push("/manager/voicedetail/" + voice._id);
 		}
 	};
 
@@ -25,7 +25,7 @@ const VoiceBlock = ({ voice }) => {
 				}
 			)
 			.then((Response) => {
-				history.push("/manager/voice/" + voice._id);
+				history.push("/manager/voicedetail/" + voice._id);
 			})
 			.catch((Error) => {
 				console.log(Error);
@@ -35,7 +35,12 @@ const VoiceBlock = ({ voice }) => {
 	return (
 		<div
 			onClick={goPage}
-			class="py-4 cursor-pointer transition delay-50 duration-200 hover:bg-gray-100 h-auto min-h-14 flex flex-row px-8 border-b-2 border-gray-200 justify-between items-center"
+			class={
+				"py-4 cursor-pointer transition delay-50 duration-200 h-auto min-h-14 flex flex-row px-8 border-b-2 border-gray-200 justify-between items-center " +
+				(voice.status === "unread"
+					? "bg-gray-100 hover:bg-gray-200"
+					: "hover:bg-gray-200")
+			}
 		>
 			<div class="flex-1 truncate pr-4 ">
 				<p class="w-full truncate">{voice.title}</p>
