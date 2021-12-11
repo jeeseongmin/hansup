@@ -13,6 +13,7 @@ router.route("/create").post((req, res) => {
 			name: req.body.name,
 			phone: req.body.phone,
 			email: req.body.email,
+			isDeleted: false,
 		};
 
 		const newOne = new Voice(one);
@@ -34,6 +35,32 @@ router.route("/").post((req, res) => {
 	} else return res.status(400).json("Error");
 });
 
+// Read voice (type)
+router.route("/type/:type").post((req, res) => {
+	if (req.body.key === API_KEY) {
+		if (req.params.type === "all") {
+			Voice.find({
+				$and: [{ isDeleted: false }],
+			})
+				.sort({ createdAt: -1 })
+				.then((all) => res.json(all))
+				.catch((err) => res.status(400).json("Error: " + err));
+		} else {
+			Voice.find({
+				$and: [
+					{ isDeleted: false },
+					{
+						$or: [{ status: { $regex: req.params.type, $options: "i" } }],
+					},
+				],
+			})
+				.sort({ createdAt: -1 })
+				.then((all) => res.json(all))
+				.catch((err) => res.status(400).json("Error: " + err));
+		}
+	} else return res.status(400).json("Error");
+});
+
 // Read specific voice
 router.route("/:id").post((req, res) => {
 	if (req.body.key === API_KEY) {
@@ -43,23 +70,23 @@ router.route("/:id").post((req, res) => {
 	} else return res.status(400).json("Error");
 });
 
-router.route("/search/:page").post((req, res) => {
-	if (req.body.key === API_KEY) {
-		let search = req.body.text;
-		Voice.find({
-			$or: [
-				{ email: { $regex: search, $options: "i" } },
-				{ title: { $regex: search, $options: "i" } },
-				{ content: { $regex: search, $options: "i" } },
-			],
-		})
-			.sort({ createdAt: -1 })
-			.skip((req.params.page - 1) * 10)
-			.limit(10)
-			.then((all) => res.json(all))
-			.catch((err) => res.status(400).json("Error: " + err));
-	} else return res.status(400).json("Error");
-});
+// router.route("/search/:page").post((req, res) => {
+// 	if (req.body.key === API_KEY) {
+// 		let search = req.body.text;
+// 		Voice.find({
+// 			$or: [
+// 				{ email: { $regex: search, $options: "i" } },
+// 				{ title: { $regex: search, $options: "i" } },
+// 				{ content: { $regex: search, $options: "i" } },
+// 			],
+// 		})
+// 			.sort({ createdAt: -1 })
+// 			.skip((req.params.page - 1) * 10)
+// 			.limit(10)
+// 			.then((all) => res.json(all))
+// 			.catch((err) => res.status(400).json("Error: " + err));
+// 	} else return res.status(400).json("Error");
+// });
 
 // paging
 router.route("/page/:page").post((req, res) => {
@@ -73,12 +100,42 @@ router.route("/page/:page").post((req, res) => {
 	} else return res.status(400).json("Error");
 });
 
+// paging
+router.route("/page/:page/:type").post((req, res) => {
+	if (req.body.key === API_KEY) {
+		if (req.params.type === "all") {
+			Voice.find({
+				$and: [{ isDeleted: false }],
+			})
+				.sort({ createdAt: -1, status: 1 })
+				.skip((req.params.page - 1) * 10)
+				.limit(10)
+				.then((all) => res.json(all))
+				.catch((err) => res.status(400).json("Error: " + err));
+		} else {
+			Voice.find({
+				$and: [
+					{ isDeleted: false },
+					{
+						$or: [{ status: { $regex: req.params.type, $options: "i" } }],
+					},
+				],
+			})
+				.sort({ createdAt: -1, status: 1 })
+				.skip((req.params.page - 1) * 10)
+				.limit(10)
+				.then((all) => res.json(all))
+				.catch((err) => res.status(400).json("Error: " + err));
+		}
+	} else return res.status(400).json("Error");
+});
+
 // Respond voice
 router.route("/read/:id").post((req, res) => {
 	if (req.body.key === API_KEY) {
 		Voice.findById(req.params.id)
 			.then((one) => {
-				one.status = "read";
+				one.status = "readcheck";
 
 				one
 					.save()
@@ -114,6 +171,21 @@ router.route("/delete/:id").post((req, res) => {
 	if (req.body.key === API_KEY) {
 		Voice.findByIdAndDelete(req.params.id)
 			.then(() => res.json("Voice deleted."))
+			.catch((err) => res.status(400).json("Error: " + err));
+	} else return res.status(400).json("Error");
+});
+
+router.route("/deletecheck/:id").post((req, res) => {
+	if (req.body.key === API_KEY) {
+		Voice.findById(req.params.id)
+			.then((one) => {
+				one.isDeleted = true;
+
+				one
+					.save()
+					.then(() => res.json("Voice updated!"))
+					.catch((err) => res.status(400).json("Error: " + err));
+			})
 			.catch((err) => res.status(400).json("Error: " + err));
 	} else return res.status(400).json("Error");
 });

@@ -25,7 +25,12 @@ const SubmenuBlock = ({ menu }) => {
 			"/community/voice/main",
 		],
 		["/enterprise/hansup"],
-		["/manager/order", "/manager/schedule", "/manager/menu", "/manager/voice"],
+		[
+			"/manager/order",
+			"/manager/schedule",
+			"/manager/menu",
+			"/manager/voice/all",
+		],
 		[""],
 	];
 	return (

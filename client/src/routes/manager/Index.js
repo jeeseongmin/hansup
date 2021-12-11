@@ -13,8 +13,12 @@ const Index = () => {
 				<Route exact path="/manager/order" component={Order} />
 				<Route exact path="/manager/schedule" component={Schedule} />
 				<Route exact path="/manager/menu" component={Menu} />
-				<Route exact path="/manager/voice" component={Voice} />
-				<Route exact path="/manager/voice/:id" component={VoiceDetailBlock} />
+				<Route exact path="/manager/voice/:type" component={Voice} />
+				<Route
+					exact
+					path="/manager/voicedetail/:id"
+					component={VoiceDetailBlock}
+				/>
 			</switch>
 		</div>
 	);

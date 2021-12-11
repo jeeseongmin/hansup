@@ -29,6 +29,10 @@ const voiceSchema = new Schema(
 			type: String,
 			required: false,
 		},
+		isDeleted: {
+			type: Boolean,
+			required: false,
+		},
 	},
 	{
 		timestamps: true,
