@@ -1,25 +1,20 @@
-import React, { useEffect, useState, useRef } from "react";
-import { Link, useLocation, useHistory } from "react-router-dom";
-import styled, { css } from "styled-components";
 import Menu from "components/navs/Menu";
 import Submenu from "components/navs/Submenu";
 import logoImg from "image/logo.png";
+import ProfileImg from "image/profileDefault.png";
+import React, { useEffect, useRef, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
-import Drawer from "@mui/material/Drawer";
 import { useDispatch, useSelector } from "react-redux";
-import Modal from "@mui/material/Modal";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import {
-	setMenu,
-	setSubmenu,
-	setSidebar,
-	setProfile,
 	setCurrentEmail,
 	setCurrentPassword,
 	setLoginToken,
-	setSelected,
+	setProfile,
+	setSidebar,
+	setSubmenu,
 } from "reducers/setting";
-import ProfileImg from "image/profileDefault.png";
-import Notification from "image/notification.png";
+import styled, { css } from "styled-components";
 
 const Nav = styled.div`
 	width: 100%;
