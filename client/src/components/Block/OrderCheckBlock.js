@@ -4,6 +4,8 @@ import InfoBlock from "components/Block/InfoBlock";
 import Subtitle from "components/Subtitle";
 import React from "react";
 import { MdClose } from "react-icons/md";
+import { setRefreshOrder } from "reducers/common";
+import { useDispatch, useSelector } from "react-redux";
 
 const OrderCheckBlock = ({
 	info,
@@ -12,7 +14,9 @@ const OrderCheckBlock = ({
 	allMenuList,
 	listLoading,
 }) => {
+	const dispatch = useDispatch();
 	const [checked, setChecked] = React.useState(info.payed);
+	const refresh_order = useSelector((state) => state.common.refresh_order);
 
 	const deleteOrder = async () => {
 		await axios
@@ -31,7 +35,11 @@ const OrderCheckBlock = ({
 			.then((response) => {
 				toggleChange();
 				alert("삭제되었습니다.");
+				if (refresh_order === "delete") {
+					dispatch(setRefreshOrder("redelete"));
+				} else dispatch(setRefreshOrder("delete"));
 				handleClose();
+
 				// const cp = [...menuList];
 				// if (newMenu.type === "mainMenu") {
 				// 	cp[0].menu = cp[0].menu.filter(function (element, index) {
@@ -82,6 +90,9 @@ const OrderCheckBlock = ({
 				}
 			)
 			.then(async (Response) => {
+				if (refresh_order === "decide") {
+					dispatch(setRefreshOrder("redecide"));
+				} else dispatch(setRefreshOrder("decide"));
 				await alert(
 					Response.data.payed
 						? "예약이 확정되었습니다."

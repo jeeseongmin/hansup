@@ -17,7 +17,7 @@ import {
 	setCurrentPassword,
 	setMenu,
 	setSubmenu,
-} from "./reducers/setting";
+} from "reducers/setting";
 import Logo from "image/logo.png";
 import Close from "image/close.png";
 import Sidebar from "components/navs/Sidebar";

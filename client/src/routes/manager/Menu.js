@@ -375,7 +375,7 @@ const Menu = () => {
 	return (
 		<>
 			<PageLayout>
-				<ContentLayout subtitle={""}>
+				<ContentLayout subtitle={"메뉴 관리"}>
 					<div class="flex flex-col">
 						<div class="w-full h-12 text-lg font-semibold flex flex-row justify-center items-center mb-2">
 							<div
@@ -383,7 +383,7 @@ const Menu = () => {
 								ref={clickRef}
 								class="cursor-pointer w-full md:w-2/3 lg:w-1/2 h-full transition delay-50 duration-150 bg-hansupBrown hover:opacity-70 text-white flex justify-center items-center"
 							>
-								메뉴 추가
+								케이터링 메뉴 추가
 							</div>
 						</div>
 						{listLoading &&

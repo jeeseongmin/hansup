@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
-import setting from "./setting";
+import setting from "reducers/setting";
+import common from "reducers/common";
 
 export const USER_LOGOUT = "USER_LOGOUT";
 export const settingLogOut = () => ({
@@ -8,6 +9,7 @@ export const settingLogOut = () => ({
 
 const appReducer = combineReducers({
 	setting,
+	common,
 });
 
 const rootReducer = (state, action) => {
