@@ -1,14 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
-import PageLayout from "components/Layout/PageLayout";
-import ContentLayout from "components/Layout/ContentLayout";
-import VoiceListBlock from "components/Block/VoiceListBlock";
-import Subtitle from "components/Subtitle";
-import { VscArrowRight } from "react-icons/vsc";
-import { Link, useHistory } from "react-router-dom";
-import Paging from "components/Paging";
-import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
-import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
+import axios from "axios";
+import VoiceListBlock from "components/Block/VoiceListBlock";
+import PageLayout from "components/Layout/PageLayout";
+import Paging from "components/Paging";
+import Subtitle from "components/Subtitle";
+import React, { useEffect, useRef, useState } from "react";
+import { IoIosArrowDown } from "react-icons/io";
+import { useHistory } from "react-router-dom";
 
 const Voice = ({ match }) => {
 	const history = useHistory();
@@ -42,7 +40,6 @@ const Voice = ({ match }) => {
 
 	useEffect(() => {
 		setNewMenu(match.params.type);
-		console.log("type", match.params.type);
 	}, [match.params.type]);
 
 	useEffect(() => {
@@ -116,7 +113,7 @@ const Voice = ({ match }) => {
 							</div>
 							<div
 								class={
-									"z-50 absolute shadow-xl font-bold w-full h-36 left-0 top-12 border-l-2 border-r-2 border-t-2 border-hansupBrown grid-rows-3 " +
+									"z-30 absolute shadow-xl font-bold w-full h-36 left-0 top-12 border-l-2 border-r-2 border-t-2 border-hansupBrown grid-rows-3 " +
 									(modalMenu ? "grid" : "hidden")
 								}
 							>

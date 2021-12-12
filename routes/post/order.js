@@ -52,6 +52,30 @@ router.route("/:id").post((req, res) => {
 	} else return res.status(400).json("Error");
 });
 
+// Read voice (type)
+router.route("/type/:type").post((req, res) => {
+	if (req.body.key === API_KEY) {
+		if (req.params.type === "all") {
+			Order.find({
+				$and: [{ isDeleted: false }],
+			})
+				.sort({ createdAt: -1 })
+				.then((all) => res.json(all))
+				.catch((err) => res.status(400).json("Error: " + err));
+		} else {
+			Order.find({
+				$and: [
+					{ isDeleted: false },
+					{ payed: req.params.type === "undecided" ? false : true },
+				],
+			})
+				.sort({ createdAt: -1 })
+				.then((all) => res.json(all))
+				.catch((err) => res.status(400).json("Error: " + err));
+		}
+	} else return res.status(400).json("Error");
+});
+
 // paging
 router.route("/page/:page").post((req, res) => {
 	if (req.body.key === API_KEY) {
@@ -61,6 +85,34 @@ router.route("/page/:page").post((req, res) => {
 			.limit(10)
 			.then((all) => res.json(all))
 			.catch((err) => res.status(400).json("Error: " + err));
+	} else return res.status(400).json("Error");
+});
+
+// paging
+router.route("/page/:page/:type").post((req, res) => {
+	if (req.body.key === API_KEY) {
+		if (req.params.type === "all") {
+			Order.find({
+				$and: [{ isDeleted: false }],
+			})
+				.sort({ createdAt: -1, status: 1 })
+				.skip((req.params.page - 1) * 10)
+				.limit(10)
+				.then((all) => res.json(all))
+				.catch((err) => res.status(400).json("Error: " + err));
+		} else {
+			Order.find({
+				$and: [
+					{ isDeleted: false },
+					{ payed: req.params.type === "undecided" ? false : true },
+				],
+			})
+				.sort({ createdAt: -1, status: 1 })
+				.skip((req.params.page - 1) * 10)
+				.limit(10)
+				.then((all) => res.json(all))
+				.catch((err) => res.status(400).json("Error: " + err));
+		}
 	} else return res.status(400).json("Error");
 });
 

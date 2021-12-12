@@ -8,6 +8,10 @@ export const SET_PROFILE = "SET_PROFILE";
 export const SET_UID = "SET_UID";
 export const SET_SELECTED = "SET_SELECTED";
 export const SET_MODAL = "SET_MODAL";
+export const SET_REFRESH_VOICE = "SET_REFRESH_VOICE";
+export const SET_REFRESH_ORDER = "SET_REFRESH_ORDER";
+// export const SET_REFRESH = "SET_REFRESH";
+// export const SET_REFRESH = "SET_REFRESH";
 
 export const setLoginToken = (loginToken) => ({
 	type: SET_LOGIN_TOKEN,
@@ -57,6 +61,16 @@ export const setSelected = (selected) => ({
 export const setModal = (modal) => ({
 	type: SET_MODAL,
 	payload: modal,
+});
+
+export const setRefreshVoice = (voice) => ({
+	type: SET_REFRESH_VOICE,
+	payload: voice,
+});
+
+export const setRefreshOrder = (order) => ({
+	type: SET_REFRESH_ORDER,
+	payload: order,
 });
 
 const initialState = {
@@ -125,21 +139,21 @@ const setting = (state = initialState, action) => {
 		case SET_UID: {
 			return {
 				...state,
-				uid: action.uid,
+				uid: action.payload,
 			};
 		}
 
 		case SET_SELECTED: {
 			return {
 				...state,
-				selected: action.selected,
+				selected: action.payload,
 			};
 		}
 
 		case SET_MODAL: {
 			return {
 				...state,
-				modal: action.modal,
+				modal: action.payload,
 			};
 		}
 

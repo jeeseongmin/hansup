@@ -4,8 +4,11 @@ import ContentLayout from "components/Layout/ContentLayout";
 import React, { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { setRefreshVoice } from "reducers/common";
+import { useDispatch, useSelector } from "react-redux";
 
 const CreateVoice = () => {
+	const dispatch = useDispatch();
 	const history = useHistory();
 	const titleRef = useRef(null);
 	const nameRef = useRef(null);
@@ -15,6 +18,7 @@ const CreateVoice = () => {
 	const phoneRef3 = useRef(null);
 	const emailRef1 = useRef(null);
 	const emailRef2 = useRef(null);
+	const refresh_voice = useSelector((state) => state.common.refresh_voice);
 
 	const goPage = () => {
 		history.push("/community/voice/create");
@@ -68,6 +72,7 @@ const CreateVoice = () => {
 			alert("올바른 휴대폰 번호를 입력해주세요.");
 			phoneRef3.current.focus();
 		} else {
+			console.log("refresh_voice", refresh_voice);
 			axios
 				.post(
 					"/api/voice/create",
@@ -97,6 +102,11 @@ const CreateVoice = () => {
 				.then((response) => {
 					alert("업로드 되었습니다.");
 					history.push("/community/voice/main");
+					if (refresh_voice === "create") {
+						dispatch(setRefreshVoice("recreate"));
+					} else {
+						dispatch(setRefreshVoice("create"));
+					}
 					document.getElementById("scrollRef").scrollTo(0, 0);
 				})
 				.catch((response) => {

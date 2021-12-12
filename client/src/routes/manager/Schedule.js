@@ -38,7 +38,6 @@ const Schedule = () => {
 					return !element.isDeleted;
 				});
 				await setOrderInfo(filtered);
-				console.log("orderInfo", Response.data);
 				setLoading(true);
 			})
 			.catch((Error) => {

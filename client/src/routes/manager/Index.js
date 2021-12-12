@@ -10,8 +10,8 @@ const Index = () => {
 	return (
 		<div class="w-full h-auto">
 			<switch>
-				<Route exact path="/manager/order" component={Order} />
-				<Route exact path="/manager/schedule" component={Schedule} />
+				<Route exact path="/manager/order/list/:type" component={Order} />
+				<Route exact path="/manager/order/calendar" component={Schedule} />
 				<Route exact path="/manager/menu" component={Menu} />
 				<Route exact path="/manager/voice/:type" component={Voice} />
 				<Route

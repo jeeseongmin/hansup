@@ -15,6 +15,7 @@ import {
 	setSubmenu,
 } from "reducers/setting";
 import styled, { css } from "styled-components";
+import axios from "axios";
 
 const Nav = styled.div`
 	width: 100%;
@@ -165,6 +166,8 @@ const Navbar = ({ currentMenu }) => {
 	const loginToken = useSelector((state) => state.setting.loginToken);
 	const currentEmail = useSelector((state) => state.setting.currentEmail);
 	const currentPassword = useSelector((state) => state.setting.currentPassword);
+	const refresh_voice = useSelector((state) => state.common.refresh_voice);
+	const refresh_order = useSelector((state) => state.common.refresh_order);
 
 	const profileRef = useRef(null);
 	const subProfileRef = useRef(null);
@@ -175,6 +178,56 @@ const Navbar = ({ currentMenu }) => {
 		position: "",
 		email: "",
 	});
+
+	const [unreadCount, setUnreadCount] = useState(0);
+	const [undecidedCount, setUndecidedCount] = useState(0);
+
+	const [voiceLoading, setVoiceLoading] = useState(false);
+	const [orderLoading, setOrderLoading] = useState(false);
+
+	useEffect(() => {
+		setVoiceLoading(false);
+		axios
+			.post(
+				"/api/voice/type/unread",
+				{ key: process.env.REACT_APP_API_KEY },
+				{
+					headers: {
+						"Content-type": "application/json",
+						Accept: "application/json",
+					},
+				}
+			)
+			.then((Response) => {
+				setUnreadCount(Response.data.length);
+				setVoiceLoading(true);
+			})
+			.catch((Error) => {
+				console.log(Error);
+			});
+	}, [refresh_voice]);
+
+	useEffect(() => {
+		setOrderLoading(false);
+		axios
+			.post(
+				"/api/order/type/undecided",
+				{ key: process.env.REACT_APP_API_KEY },
+				{
+					headers: {
+						"Content-type": "application/json",
+						Accept: "application/json",
+					},
+				}
+			)
+			.then((Response) => {
+				setUndecidedCount(Response.data.length);
+				setOrderLoading(true);
+			})
+			.catch((Error) => {
+				console.log(Error);
+			});
+	}, [refresh_order]);
 
 	const onToggleProfile = () => {
 		if (profile === "on") {
@@ -202,6 +255,11 @@ const Navbar = ({ currentMenu }) => {
 		// dispatch(setMenu(0));
 		// dispatch(setSubmenu(1));
 		// history.push("/admin/edit");
+	};
+
+	const goPage = (url) => {
+		history.push(url);
+		onToggleProfile();
 	};
 
 	const toggleMenu = (e, num) => {
@@ -358,7 +416,7 @@ const Navbar = ({ currentMenu }) => {
 								// toggleMenu={toggleMenu}
 								menu={6}
 								title={"관리자"}
-								url={"/manager/schedule"}
+								url={"/manager/order/calendar"}
 								current={menu}
 								currentMenu={currentMenu}
 								// empty={true}
@@ -379,8 +437,19 @@ const Navbar = ({ currentMenu }) => {
 									onClick={onToggleProfile}
 									class="cursor-pointer z-30 w-10 h-8 absolute"
 								>
-									<div class="w-4 h-4 rounded-full bg-red-500 absolute -right-1 -top-1 flex justify-center items-center text-white text-xs font-bold">
-										1
+									<div
+										class={
+											"w-4 h-4 rounded-full bg-red-500 absolute -right-1 -top-1 justify-center items-center text-white text-xs font-bold " +
+											(orderLoading &&
+											voiceLoading &&
+											unreadCount + undecidedCount === 0
+												? "hidden"
+												: "flex")
+										}
+									>
+										{orderLoading && voiceLoading
+											? unreadCount + undecidedCount
+											: 0}
 									</div>
 								</div>
 								{profile === "on" ? (
@@ -391,21 +460,21 @@ const Navbar = ({ currentMenu }) => {
 												<p class="text-gray-500">ID : {loginInfo.email}</p>
 											</div>
 											<div
-												onClick={goEditPage}
+												onClick={() => goPage("/manager/order/list/undecided")}
 												class="relative cursor-pointer w-full py-1 border border-hansupBrown text-hansupBrown flex justify-center transition delay-50 duration-300 hover:bg-hansupBrown hover:text-white"
 											>
 												신규 예약
 												<div class="w-4 h-4 rounded-full bg-red-500 absolute -right-1 -top-1 flex justify-center items-center text-white text-xs font-bold">
-													1
+													{orderLoading ? undecidedCount : 0}
 												</div>
 											</div>
 											<div
-												onClick={goEditPage}
+												onClick={() => goPage("/manager/voice/unread")}
 												class="relative cursor-pointer w-full py-1 border border-hansupBrown text-hansupBrown flex justify-center transition delay-50 duration-300 hover:bg-hansupBrown hover:text-white"
 											>
 												신규 고객의 소리
 												<div class="w-4 h-4 rounded-full bg-red-500 absolute -right-1 -top-1 flex justify-center items-center text-white text-xs font-bold">
-													1
+													{voiceLoading ? unreadCount : 0}
 												</div>
 											</div>
 											<div

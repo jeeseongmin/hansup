@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Route, Link, useHistory } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +15,10 @@ const Index = () => {
 	const history = useHistory();
 	const emailRef = useRef(null);
 	const passwordRef = useRef(null);
+
+	useEffect(() => {
+		emailRef.current.focus();
+	}, []);
 
 	const [info, setInfo] = useState({
 		email: "",

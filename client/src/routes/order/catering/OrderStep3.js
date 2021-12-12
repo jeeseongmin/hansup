@@ -13,6 +13,8 @@ import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import axios from "axios";
+import { setRefreshOrder } from "reducers/common";
+import { useDispatch, useSelector } from "react-redux";
 
 const OrderStep3 = ({
 	info,
@@ -22,12 +24,14 @@ const OrderStep3 = ({
 	allMenuList,
 	menuList,
 }) => {
+	const dispatch = useDispatch();
 	const [selected, setSelected] = useState(false);
 	const [selected2, setSelected2] = useState(false);
 	const prevStep = () => {
 		setStep(2);
 		document.getElementById("scrollRef").scrollTo(0, 0);
 	};
+	const refresh_order = useSelector((state) => state.common.refresh_order);
 
 	const handleChange = (e) => {
 		const cp = { ...info };
@@ -78,6 +82,9 @@ const OrderStep3 = ({
 			.then((response) => {
 				setStep(4);
 				document.getElementById("scrollRef").scrollTo(0, 0);
+				if (refresh_order === "create") {
+					dispatch(setRefreshOrder("recreate"));
+				} else dispatch(setRefreshOrder("create"));
 			})
 			.catch((response) => {
 				console.log("Error!");

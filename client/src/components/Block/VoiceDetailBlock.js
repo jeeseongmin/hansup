@@ -6,19 +6,18 @@ import ContentLayout from "components/Layout/ContentLayout";
 import CircularProgress from "@mui/material/CircularProgress";
 import PageLayout from "components/Layout/PageLayout";
 import Subtitle from "components/Subtitle";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setRefreshVoice } from "reducers/common";
 
 const VoiceDetailBlock = ({ match }) => {
 	const history = useHistory();
+	const dispatch = useDispatch();
 	const [loading, setLoading] = useState(false);
 	const [imgLoading, setImgLoading] = useState(false);
 	const [voice, setVoice] = useState({});
 	const currentEmail = useSelector((state) => state.setting.currentEmail);
 	const currentPassword = useSelector((state) => state.setting.currentPassword);
-
-	useEffect(() => {
-		console.log("voiceDetailBlock");
-	}, []);
+	const refresh_voice = useSelector((state) => state.common.refresh_voice);
 
 	useEffect(() => {
 		axios
@@ -59,6 +58,11 @@ const VoiceDetailBlock = ({ match }) => {
 				)
 				.then((response) => {
 					alert("삭제되었습니다.");
+					if (refresh_voice === "delete") {
+						dispatch(setRefreshVoice("redelete"));
+					} else {
+						dispatch(setRefreshVoice("delete"));
+					}
 					history.push("/manager/voice/all");
 					document.getElementById("scrollRef").scrollTo(0, 0);
 				})
