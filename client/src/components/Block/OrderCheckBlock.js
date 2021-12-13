@@ -99,6 +99,7 @@ const OrderCheckBlock = ({
 						: "예약이 미확정되었습니다."
 				);
 				toggleChange();
+				handleClose();
 			})
 			.catch((Error) => {
 				console.log(Error);
