@@ -15,6 +15,11 @@ const Order = ({ match }) => {
 	const [totalPage, setTotalPage] = useState(0);
 	const [orderList, setOrderList] = useState([]);
 	const modalMenuRef = useRef();
+	const [change, setChange] = useState(false);
+
+	const toggleChange = () => {
+		setChange(!change);
+	};
 
 	useEffect(() => {
 		axios
@@ -34,7 +39,7 @@ const Order = ({ match }) => {
 			.catch((Error) => {
 				console.log(Error);
 			});
-	}, [page, match.params.type]);
+	}, [page, match.params.type, change]);
 
 	const [newMenu, setNewMenu] = useState("all");
 
@@ -61,7 +66,7 @@ const Order = ({ match }) => {
 			.catch((Error) => {
 				console.log(Error);
 			});
-	}, [orderList, match.params.type]);
+	}, [orderList, match.params.type, change]);
 
 	const [modalMenu, setModalMenu] = useState(false);
 	const onToggleMenu = () => {
@@ -177,7 +182,11 @@ const Order = ({ match }) => {
 							)}
 						</div>
 					) : (
-						<OrderListBlock orderList={orderList} type={match.params.type} />
+						<OrderListBlock
+							orderList={orderList}
+							type={match.params.type}
+							toggleChange={toggleChange}
+						/>
 					)
 				) : (
 					<div class="w-full h-24 flex justify-center items-center">

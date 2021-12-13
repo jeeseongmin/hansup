@@ -186,7 +186,6 @@ const Navbar = ({ currentMenu }) => {
 	const [orderLoading, setOrderLoading] = useState(false);
 
 	useEffect(() => {
-		setVoiceLoading(false);
 		axios
 			.post(
 				"/api/voice/type/unread",
@@ -208,7 +207,6 @@ const Navbar = ({ currentMenu }) => {
 	}, [refresh_voice]);
 
 	useEffect(() => {
-		setOrderLoading(false);
 		axios
 			.post(
 				"/api/order/type/undecided",
@@ -464,7 +462,14 @@ const Navbar = ({ currentMenu }) => {
 												class="relative cursor-pointer w-full py-1 border border-hansupBrown text-hansupBrown flex justify-center transition delay-50 duration-300 hover:bg-hansupBrown hover:text-white"
 											>
 												신규 예약
-												<div class="w-4 h-4 rounded-full bg-red-500 absolute -right-1 -top-1 flex justify-center items-center text-white text-xs font-bold">
+												<div
+													class={
+														"w-4 h-4 rounded-full bg-red-500 absolute -right-1 -top-1 justify-center items-center text-white text-xs font-bold " +
+														(orderLoading && undecidedCount === 0
+															? "hidden"
+															: "flex")
+													}
+												>
 													{orderLoading ? undecidedCount : 0}
 												</div>
 											</div>
@@ -473,7 +478,14 @@ const Navbar = ({ currentMenu }) => {
 												class="relative cursor-pointer w-full py-1 border border-hansupBrown text-hansupBrown flex justify-center transition delay-50 duration-300 hover:bg-hansupBrown hover:text-white"
 											>
 												신규 고객의 소리
-												<div class="w-4 h-4 rounded-full bg-red-500 absolute -right-1 -top-1 flex justify-center items-center text-white text-xs font-bold">
+												<div
+													class={
+														"w-4 h-4 rounded-full bg-red-500 absolute -right-1 -top-1 flex justify-center items-center text-white text-xs font-bold " +
+														(voiceLoading && unreadCount === 0
+															? "hidden"
+															: "flex")
+													}
+												>
 													{voiceLoading ? unreadCount : 0}
 												</div>
 											</div>
