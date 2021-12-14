@@ -1,11 +1,19 @@
+import Modal from "@mui/material/Modal";
+import InfoBlock from "components/Block/InfoBlock";
+import PopupPostCodeBlock from "components/Block/PopupPostCodeBlock";
 import Switch from "@mui/material/Switch";
 import axios from "axios";
-import InfoBlock from "components/Block/InfoBlock";
+import DatePicker from "react-datepicker";
+import { useHistory, Link } from "react-router-dom";
+import "react-datepicker/dist/react-datepicker.css";
+import { AiTwotoneCalendar } from "react-icons/ai";
 import Subtitle from "components/Subtitle";
-import React from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { MdClose } from "react-icons/md";
 import { setRefreshOrder } from "reducers/common";
 import { useDispatch, useSelector } from "react-redux";
+import dayjs from "dayjs";
+import InputBox from "components/Box/InputBox";
 
 const OrderCheckBlock = ({
 	info,
@@ -13,10 +21,23 @@ const OrderCheckBlock = ({
 	toggleChange,
 	allMenuList,
 	listLoading,
+	setIsEdit,
 }) => {
+	const history = useHistory();
 	const dispatch = useDispatch();
 	const [checked, setChecked] = React.useState(info.payed);
 	const refresh_order = useSelector((state) => state.common.refresh_order);
+	const [newInfo, setNewInfo] = useState({});
+
+	const [open, setOpen] = useState(false);
+	const addressModalOpen = () => setOpen(true);
+	const addressModalClose = () => setOpen(false);
+
+	const goEdit = async () => {
+		await handleClose();
+		window.scrollTo(0, 0);
+		history.push("/manager/order/update/" + info._id);
+	};
 
 	const deleteOrder = async () => {
 		await axios
@@ -39,39 +60,11 @@ const OrderCheckBlock = ({
 					dispatch(setRefreshOrder("redelete"));
 				} else dispatch(setRefreshOrder("delete"));
 				handleClose();
-
-				// const cp = [...menuList];
-				// if (newMenu.type === "mainMenu") {
-				// 	cp[0].menu = cp[0].menu.filter(function (element, index) {
-				// 		// return element._id !== id;
-				// 		return element.isDeleted;
-				// 	});
-				// } else if (newMenu.type === "subMenu") {
-				// 	cp[1].menu = cp[1].menu.filter(function (element, index) {
-				// 		// return element._id !== id;
-				// 		return element.isDeleted;
-				// 	});
-				// } else if (newMenu.type === "soup") {
-				// 	cp[2].menu = cp[2].menu.filter(function (element, index) {
-				// 		// return element._id !== id;
-				// 		return element.isDeleted;
-				// 	});
-				// } else if (newMenu.type === "dessert") {
-				// 	cp[3].menu = cp[3].menu.filter(function (element, index) {
-				// 		// return element._id !== id;
-				// 		return element.isDeleted;
-				// 	});
-				// }
-				// setMenuList(cp);
-				// handleClose();
-				// init();
 			})
 			.catch((response) => {
 				console.log("Error!");
 			});
 	};
-
-	const editOrder = async () => {};
 
 	const handleChange = async (event) => {
 		setChecked(event.target.checked);
@@ -344,7 +337,7 @@ const OrderCheckBlock = ({
 			</InfoBlock>
 			<div class="h-24 md:h-10 w-full flex justify-between flex-col md:flex-row">
 				<div
-					onClick={editOrder}
+					onClick={goEdit}
 					class="h-10 md:h-full cursor-pointer flex justify-center items-center w-full md:w-36 border border-hansupBrown transition delay-50 duration-150 hover:bg-hansupBrown hover:text-white text-hansupBrown mb-4 md:mb-0"
 				>
 					수정하기
