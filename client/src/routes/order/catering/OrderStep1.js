@@ -9,29 +9,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import { AiTwotoneCalendar } from "react-icons/ai";
 import styled from "styled-components";
 
-// const style = {
-// 	position: "absolute",
-// 	top: "50%",
-// 	left: "50%",
-// 	transform: "translate(-50%, -50%)",
-// 	width: 400,
-// 	bgcolor: "background.paper",
-// 	border: "2px solid #000",
-// 	boxShadow: 24,
-// 	p: 4,
-// };
-
-const Container = styled.div`
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 400;
-	border: 2px solid #000;
-	/* boxshadow: 24;
-	p: 4; */
-`;
-
 const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
 	const history = useHistory();
 	const [open, setOpen] = useState(false);

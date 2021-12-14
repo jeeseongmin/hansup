@@ -16,6 +16,7 @@ const Order = ({ match }) => {
 	const [orderList, setOrderList] = useState([]);
 	const modalMenuRef = useRef();
 	const [change, setChange] = useState(false);
+	const [isEdit, setIsEdit] = useState(false);
 
 	const toggleChange = () => {
 		setChange(!change);

@@ -14,6 +14,7 @@ const OrderBlock = ({ order, type, toggleChange }) => {
 	const handleClose = () => setOpen(false);
 	const modalRef = useRef();
 	const clickRef = useRef();
+	const [isEdit, setIsEdit] = useState(false);
 
 	useEffect(() => {
 		if (!open) return;
@@ -112,23 +113,10 @@ const OrderBlock = ({ order, type, toggleChange }) => {
 				console.log(Error);
 			});
 	};
+
 	useEffect(() => {
 		getList();
 	}, []);
-
-	function leftPad(value) {
-		if (value >= 10) {
-			return value;
-		}
-		return `0${value}`;
-	}
-
-	function toStringByFormatting(source, delimiter = "-") {
-		const year = source.getFullYear();
-		const month = leftPad(source.getMonth() + 1);
-		const day = leftPad(source.getDate());
-		return [year, month, day].join(delimiter);
-	}
 
 	return (
 		<>
@@ -161,6 +149,7 @@ const OrderBlock = ({ order, type, toggleChange }) => {
 					<div class="w-full h-full flex flex-col justify-center items-center py-16 px-4 lg:px-16">
 						<div
 							ref={modalRef}
+							id="modalScrollRef"
 							class="select-none bg-white w-full md:w-2/3 lg:w-1/2 max-h-full overflow-auto h-full p-8"
 						>
 							<OrderCheckBlock
