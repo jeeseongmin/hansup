@@ -53,7 +53,6 @@ const OrderBlock = ({ order, type, toggleChange }) => {
 				}
 			)
 			.then((Response) => {
-				// console.log("refresh_voice", refresh_voice);
 				if (refresh_voice === "read") {
 					dispatch(setRefreshVoice("reread"));
 				} else {

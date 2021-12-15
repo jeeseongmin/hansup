@@ -3,6 +3,7 @@ import ManageMenuBlock from "components/Block/ManageMenuBlock";
 import Example from "image/example.png";
 import React from "react";
 import styled from "styled-components";
+import Ready from "image/ready.png";
 
 const MenuTitle = styled.div`
 	color: #6c4d3f;
@@ -17,38 +18,43 @@ const Line = styled.div`
 `;
 const MenuListLayout = ({ info, col, type, use, updateMenu, deleteMenu }) => {
 	const colStyle = "grid-cols-" + col;
-	return (
-		<div class="mb-16">
-			<MenuTitle>{info.title}</MenuTitle>
-			<Line></Line>
-			{type === "manager" && (
-				<div class={"w-full grid grid-cols-2 gap-5 lg:grid-cols-5"}>
-					{info.menu.map((element, index) => {
-						return (
-							<ManageMenuBlock
-								menu={element}
-								use={use}
-								updateMenu={updateMenu}
-								deleteMenu={deleteMenu}
-							/>
-						);
-					})}
-				</div>
-			)}
-			{type === "view" && (
-				<div class={"w-full grid grid-cols-2 gap-5 lg:grid-cols-5"}>
-					{info.menu.map((element, index) => {
-						return (
-							<FoodMenuBlock
-								url={Example}
-								title={element.name}
-								price={element.price + "원"}
-							/>
-						);
-					})}
-				</div>
-			)}
-		</div>
+	const readyBox = {};
+	return info.menu.length !== 0 ? (
+		<>
+			<div class="mb-16">
+				<MenuTitle>{info.title}</MenuTitle>
+				<Line></Line>
+				{type === "manager" && (
+					<div class={"w-full grid grid-cols-2 gap-5 lg:grid-cols-5"}>
+						{info.menu.map((element, index) => {
+							return (
+								<ManageMenuBlock
+									menu={element}
+									use={use}
+									updateMenu={updateMenu}
+									deleteMenu={deleteMenu}
+								/>
+							);
+						})}
+					</div>
+				)}
+				{type === "view" && (
+					<div class={"w-full grid grid-cols-2 gap-5 lg:grid-cols-5"}>
+						{info.menu.map((element, index) => {
+							return (
+								<FoodMenuBlock
+									url={Example}
+									title={element.name}
+									price={element.price + "원"}
+								/>
+							);
+						})}
+					</div>
+				)}
+			</div>
+		</>
+	) : (
+		<></>
 	);
 };
 

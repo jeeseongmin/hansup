@@ -74,7 +74,7 @@ const Menu = () => {
 					menuList.map((element, index) => {
 						return (
 							<OrderListLayout
-								key={orderList[element]}
+								key={element}
 								info={element}
 								col={5}
 								type={"view"}

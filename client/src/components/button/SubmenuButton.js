@@ -34,7 +34,6 @@ const Submenu = ({ text, current }) => {
 	const location = useLocation();
 	const [selected, setSelected] = useState(false);
 	useEffect(() => {
-		console.log(location.pathname, current);
 		if (location.pathname.includes("voice") && current.includes("voice"))
 			setSelected(true);
 		else if (location.pathname.includes("notice") && current.includes("notice"))
@@ -51,6 +50,16 @@ const Submenu = ({ text, current }) => {
 		} else if (
 			location.pathname.includes("/manager/order/update") &&
 			current === "/manager/order/list/all"
+		) {
+			setSelected(true);
+		} else if (
+			location.pathname.includes("/manager/order/list/undecided") &&
+			current === "/manager/order/list/all"
+		) {
+			setSelected(true);
+		} else if (
+			location.pathname.includes("/manager/menu/restaurant") &&
+			current === "/manager/menu/catering"
 		) {
 			setSelected(true);
 		} else if (location.pathname === current) setSelected(true);

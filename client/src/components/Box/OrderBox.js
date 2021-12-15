@@ -88,7 +88,12 @@ const OrderBox = ({ dayOrder, toggleChange, focusDate }) => {
 				</p>
 				<div class="pt-2 w-full grid grid-cols-3 gap-2">
 					<p class="text-lg">
-						{dayOrder.date.substr(11, 2)}:{dayOrder.date.substr(14, 2)}
+						{/* {dayOrder.date.substr(11, 2)}:{dayOrder.date.substr(14, 2)} */}
+						{new Date(dayOrder.date).getHours() +
+							":" +
+							(new Date(dayOrder.date).getMinutes() === 0
+								? "00"
+								: new Date(dayOrder.date).getMinutes())}
 					</p>
 					<p class="text-lg text-center">{dayOrder.count}인분</p>
 					<p class="text-lg text-center">

@@ -10,8 +10,9 @@ import { useHistory } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
+import Subtitle from "components/Subtitle";
 
-const Menu = () => {
+const Menu = ({ match }) => {
 	const history = useHistory();
 	const [modalMenu, setModalMenu] = useState(false);
 	const onToggleMenu = () => {
@@ -26,7 +27,9 @@ const Menu = () => {
 
 	const [isEdit, setIsEdit] = useState(false);
 	const [open, setOpen] = useState(false);
-	const handleOpen = () => setOpen(true);
+	const handleOpen = () => {
+		setOpen(true);
+	};
 	const handleClose = () => {
 		setIsEdit(false);
 		setOpen(false);
@@ -34,22 +37,30 @@ const Menu = () => {
 	const modalRef = useRef();
 	const clickRef = useRef();
 	const nameRef = useRef();
+	const priceRef = useRef();
 	const modalMenuRef = useRef();
 	const fileRef = useRef();
 
 	const [menuList, setMenuList] = useState([]);
-	const typeList = [
-		{ title: "메인메뉴 (택 4)", type: "mainMenu" },
-		{ title: "식사메뉴 (택 4)", type: "subMenu" },
-		{ title: "국 (택 1)", type: "soup" },
-		{ title: "디저트 (택 5)", type: "dessert" },
-	];
+	const typeList =
+		match.params.type === "catering"
+			? [
+					{ title: "메인메뉴 (택 4)", type: "mainMenu" },
+					{ title: "식사메뉴 (택 4)", type: "subMenu" },
+					{ title: "국 (택 1)", type: "soup" },
+					{ title: "디저트 (택 5)", type: "dessert" },
+			  ]
+			: [
+					{ title: "파스타 & 필라프", type: "pasta" },
+					{ title: "한식", type: "korean" },
+					{ title: "피자", type: "pizza" },
+			  ];
 
 	const getList = async () => {
 		setListLoading(false);
 		await axios
 			.post(
-				"/api/menu/search/catering",
+				"/api/menu/search/" + match.params.type,
 				{ key: process.env.REACT_APP_API_KEY },
 				{
 					headers: {
@@ -77,15 +88,16 @@ const Menu = () => {
 				console.log(Error);
 			});
 	};
+
 	useEffect(() => {
 		getList();
-	}, []);
+	}, [match.params.type]);
 
 	const [newMenu, setNewMenu] = useState({
-		category: "catering",
+		category: match.params.type,
 		type: "mainMenu",
 		name: "",
-		price: 0,
+		price: "",
 		imgList: [],
 	});
 
@@ -141,17 +153,17 @@ const Menu = () => {
 
 	const init = () => {
 		setNewMenu({
-			category: "catering",
-			type: "mainMenu",
+			category: match.params.type === "catering" ? "catering" : "restaurant",
+			type: match.params.type === "catering" ? "mainMenu" : "pasta",
 			name: "",
-			price: 0,
+			price: "",
 			imgList: [],
 		});
 	};
 
 	useEffect(() => {
-		init();
-	}, []);
+		if (!isEdit) init();
+	}, [isEdit]);
 
 	//  메뉴 추가 모달
 	useEffect(() => {
@@ -230,22 +242,18 @@ const Menu = () => {
 								const cp = [...menuList];
 								if (newMenu.type === "mainMenu") {
 									cp[0].menu = cp[0].menu.filter(function (element, index) {
-										// return element._id !== id;
 										return element.isDeleted;
 									});
 								} else if (newMenu.type === "subMenu") {
 									cp[1].menu = cp[1].menu.filter(function (element, index) {
-										// return element._id !== id;
 										return element.isDeleted;
 									});
 								} else if (newMenu.type === "soup") {
 									cp[2].menu = cp[2].menu.filter(function (element, index) {
-										// return element._id !== id;
 										return element.isDeleted;
 									});
 								} else if (newMenu.type === "dessert") {
 									cp[3].menu = cp[3].menu.filter(function (element, index) {
-										// return element._id !== id;
 										return element.isDeleted;
 									});
 								}
@@ -269,6 +277,12 @@ const Menu = () => {
 		if (newMenu.name === "") {
 			alert("메뉴명을 입력해주세요.");
 			nameRef.current.focus();
+		} else if (match.params.type === "restaurant" && newMenu.price === "") {
+			alert("가격을 입력해주세요.");
+			priceRef.current.focus();
+		} else if (match.params.type === "restaurant" && isNaN(newMenu.price)) {
+			alert("숫자만 입력해주세요.");
+			priceRef.current.focus();
 		} else if (includeImg || newMenu.imgList.length === 0) {
 			alert("이미지를 업로드 해주세요.");
 		} else {
@@ -293,8 +307,6 @@ const Menu = () => {
 					)
 					.then((response) => {
 						alert("업데이트되었습니다.");
-						// history.push("/community/notice/list");
-						// document.getElementById("scrollRef").scrollTo(0, 0);
 						const cp = [...menuList];
 						if (newMenu.type === "mainMenu") {
 							cp[0].menu = cp[0].menu.map((element, index) => {
@@ -352,14 +364,25 @@ const Menu = () => {
 						// history.push("/community/notice/list");
 						// document.getElementById("scrollRef").scrollTo(0, 0);
 						const cp = [...menuList];
-						if (newMenu.type === "mainMenu") {
-							cp[0].menu.push(response.data);
-						} else if (newMenu.type === "subMenu") {
-							cp[1].menu.push(response.data);
-						} else if (newMenu.type === "soup") {
-							cp[2].menu.push(response.data);
-						} else if (newMenu.type === "dessert") {
-							cp[3].menu.push(response.data);
+
+						if (match.params.type === "catering") {
+							if (newMenu.type === "mainMenu") {
+								cp[0].menu.push(response.data);
+							} else if (newMenu.type === "subMenu") {
+								cp[1].menu.push(response.data);
+							} else if (newMenu.type === "soup") {
+								cp[2].menu.push(response.data);
+							} else if (newMenu.type === "dessert") {
+								cp[3].menu.push(response.data);
+							}
+						} else if (match.params.type === "restaurant") {
+							if (newMenu.type === "pasta") {
+								cp[0].menu.push(response.data);
+							} else if (newMenu.type === "korean") {
+								cp[1].menu.push(response.data);
+							} else if (newMenu.type === "pizza") {
+								cp[2].menu.push(response.data);
+							}
 						}
 						setMenuList(cp);
 						handleClose();
@@ -372,10 +395,94 @@ const Menu = () => {
 		}
 	};
 
+	const [modalMenu2, setModalMenu2] = useState(false);
+	const modalMenuRef2 = useRef();
+	const onToggleMenu2 = () => {
+		setModalMenu2(!modalMenu2);
+	};
+
+	useEffect(() => {
+		if (!modalMenu2) return;
+		function handleClick(e) {
+			if (modalMenuRef2.current === null) {
+				return;
+			} else if (!modalMenuRef2.current.contains(e.target)) {
+				setModalMenu2(false);
+			}
+		}
+		window.addEventListener("click", handleClick);
+
+		return () => window.removeEventListener("click", handleClick);
+	}, [modalMenu2]);
+
+	const onChangeMenu2 = (name) => {
+		history.push("/manager/menu/" + name);
+		onToggleMenu2();
+	};
+
 	return (
 		<>
 			<PageLayout>
-				<ContentLayout subtitle={"메뉴 관리"}>
+				<div class={"w-full flex flex-col mb-16 lg:mb-24 px-8 xl:px-40 "}>
+					<div class="w-full flex flex-row justify-between items-center mb-4">
+						<div class="inline-flex flex-col md:flex-row w-full justify-between items-start md:items-center mb-6">
+							<Subtitle
+								subtitle={
+									match.params.type === "catering"
+										? "케이터링 메뉴 관리"
+										: "수화식당 메뉴 관리"
+								}
+							/>
+							<div
+								ref={modalMenuRef2}
+								class="relative cursor-pointer mt-4 md:mt-0 w-full md:w-48 h-12 border-2 border-hansupBrown"
+							>
+								<div
+									onClick={onToggleMenu2}
+									class="w-full h-full flex justify-between items-center text-hansupBrown font-bold"
+								>
+									<div class=" w-12 h-full"></div>
+									{match.params.type === "catering" && <p>케이터링</p>}
+									{match.params.type === "restaurant" && <p>수화식당</p>}
+
+									<div class=" w-12 h-full flex justify-center items-center">
+										<IoIosArrowDown size={28} />
+										{/* <IoIosArrowUp size={28} /> */}
+									</div>
+								</div>
+								<div
+									class={
+										"z-30 absolute shadow-xl font-bold w-full h-24 left-0 top-12 border-l-2 border-r-2 border-t-2 border-hansupBrown grid-rows-2 " +
+										(modalMenu2 ? "grid" : "hidden")
+									}
+								>
+									<div
+										onClick={() => onChangeMenu2("catering")}
+										class={
+											"flex justify-center items-center border-b-2 border-hansupBrown " +
+											(match.params.type === "catering"
+												? "bg-hansupBrown text-white"
+												: "bg-white text-hansupBrown")
+										}
+									>
+										케이터링
+									</div>
+									<div
+										onClick={() => onChangeMenu2("restaurant")}
+										class={
+											"flex justify-center items-center border-b-2 border-hansupBrown " +
+											(match.params.type === "restaurant"
+												? "bg-hansupBrown text-white"
+												: "bg-white text-hansupBrown")
+										}
+									>
+										{" "}
+										수화식당
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 					<div class="flex flex-col">
 						<div class="w-full h-12 text-lg font-semibold flex flex-row justify-center items-center mb-2">
 							<div
@@ -383,7 +490,9 @@ const Menu = () => {
 								ref={clickRef}
 								class="cursor-pointer w-full md:w-2/3 lg:w-1/2 h-full transition delay-50 duration-150 bg-hansupBrown hover:opacity-70 text-white flex justify-center items-center"
 							>
-								케이터링 메뉴 추가
+								{match.params.type === "catering"
+									? "케이터링 메뉴 추가"
+									: "수화식당 메뉴 추가"}
 							</div>
 						</div>
 						{listLoading &&
@@ -401,8 +510,9 @@ const Menu = () => {
 								);
 							})}{" "}
 					</div>
-				</ContentLayout>
+				</div>
 			</PageLayout>
+
 			<Modal
 				open={open}
 				onClose={handleClose}
@@ -422,83 +532,151 @@ const Menu = () => {
 							/> */}
 							<div class="w-full h-full flex flex-col ">
 								<div class="w-full font-bold text-hansupBrown text-2xl">
-									메뉴 추가
+									{match.params.type === "catering"
+										? isEdit
+											? "케이터링 메뉴 수정"
+											: "케이터링 메뉴 추가"
+										: isEdit
+										? "수화식당 메뉴 수정"
+										: "수화식당 메뉴 추가"}
 								</div>
 								<div
 									ref={modalMenuRef}
 									class="w-full h-auto py-6 border-b-2 border-t-2 border-hansupBrown my-2"
 								>
-									<div class="relative cursor-pointer w-full h-12 mb-4 border-2 border-hansupBrown">
-										<div
-											onClick={onToggleMenu}
-											class="w-full h-full flex justify-between items-center text-hansupBrown font-bold"
-										>
-											<div class=" w-12 h-full"></div>
-											{newMenu.type === "mainMenu" && <p>메인메뉴</p>}
-											{newMenu.type === "subMenu" && <p>식사메뉴</p>}
-											{newMenu.type === "soup" && <p>국</p>}
-											{newMenu.type === "dessert" && <p>디저트</p>}
+									{match.params.type === "catering" && (
+										<div class="relative cursor-pointer w-full h-12 mb-4 border-2 border-hansupBrown">
+											<div
+												onClick={onToggleMenu}
+												class="w-full h-full flex justify-between items-center text-hansupBrown font-bold"
+											>
+												<div class=" w-12 h-full"></div>
+												{newMenu.type === "mainMenu" && <p>메인메뉴</p>}
+												{newMenu.type === "subMenu" && <p>식사메뉴</p>}
+												{newMenu.type === "soup" && <p>국</p>}
+												{newMenu.type === "dessert" && <p>디저트</p>}
 
-											<div class=" w-12 h-full flex justify-center items-center">
-												<IoIosArrowDown size={28} />
-												{/* <IoIosArrowUp size={28} /> */}
+												<div class=" w-12 h-full flex justify-center items-center">
+													<IoIosArrowDown size={28} />
+													{/* <IoIosArrowUp size={28} /> */}
+												</div>
+											</div>
+											<div
+												class={
+													"z-50 absolute shadow-xl font-bold w-full h-48 left-0 top-12 border-l-2 border-r-2 border-t-2 border-hansupBrown grid-rows-4 " +
+													(modalMenu ? "grid" : "hidden")
+												}
+											>
+												<div
+													onClick={() => onChangeMenu("mainMenu")}
+													class={
+														"flex justify-center items-center border-b-2 border-hansupBrown " +
+														(newMenu.type === "mainMenu"
+															? "bg-hansupBrown text-white"
+															: "bg-white text-hansupBrown")
+													}
+												>
+													메인메뉴
+												</div>
+												<div
+													onClick={() => onChangeMenu("subMenu")}
+													class={
+														"flex justify-center items-center border-b-2 border-hansupBrown " +
+														(newMenu.type === "subMenu"
+															? "bg-hansupBrown text-white"
+															: "bg-white text-hansupBrown")
+													}
+												>
+													{" "}
+													식사메뉴
+												</div>
+												<div
+													onClick={() => onChangeMenu("soup")}
+													class={
+														"flex justify-center items-center border-b-2 border-hansupBrown " +
+														(newMenu.type === "soup"
+															? "bg-hansupBrown text-white"
+															: "bg-white text-hansupBrown")
+													}
+												>
+													{" "}
+													국
+												</div>
+												<div
+													onClick={() => onChangeMenu("dessert")}
+													class={
+														"flex justify-center items-center border-b-2 border-hansupBrown " +
+														(newMenu.type === "dessert"
+															? "bg-hansupBrown text-white"
+															: "bg-white text-hansupBrown")
+													}
+												>
+													{" "}
+													디저트
+												</div>
 											</div>
 										</div>
-										<div
-											class={
-												"z-50 absolute shadow-xl font-bold w-full h-48 left-0 top-12 border-l-2 border-r-2 border-t-2 border-hansupBrown grid-rows-4 " +
-												(modalMenu ? "grid" : "hidden")
-											}
-										>
+									)}
+									{match.params.type === "restaurant" && (
+										<div class="relative cursor-pointer w-full h-12 mb-4 border-2 border-hansupBrown">
 											<div
-												onClick={() => onChangeMenu("mainMenu")}
-												class={
-													"flex justify-center items-center border-b-2 border-hansupBrown " +
-													(newMenu.type === "mainMenu"
-														? "bg-hansupBrown text-white"
-														: "bg-white text-hansupBrown")
-												}
+												onClick={onToggleMenu}
+												class="w-full h-full flex justify-between items-center text-hansupBrown font-bold"
 											>
-												메인메뉴
+												<div class=" w-12 h-full"></div>
+												{newMenu.type === "pasta" && <p>파스타 & 필라프</p>}
+												{newMenu.type === "korean" && <p>한식</p>}
+												{newMenu.type === "pizza" && <p>피자</p>}
+
+												<div class=" w-12 h-full flex justify-center items-center">
+													<IoIosArrowDown size={28} />
+													{/* <IoIosArrowUp size={28} /> */}
+												</div>
 											</div>
 											<div
-												onClick={() => onChangeMenu("subMenu")}
 												class={
-													"flex justify-center items-center border-b-2 border-hansupBrown " +
-													(newMenu.type === "subMenu"
-														? "bg-hansupBrown text-white"
-														: "bg-white text-hansupBrown")
+													"z-50 absolute shadow-xl font-bold w-full h-36 left-0 top-12 border-l-2 border-r-2 border-t-2 border-hansupBrown grid-rows-3 " +
+													(modalMenu ? "grid" : "hidden")
 												}
 											>
-												{" "}
-												식사메뉴
-											</div>
-											<div
-												onClick={() => onChangeMenu("soup")}
-												class={
-													"flex justify-center items-center border-b-2 border-hansupBrown " +
-													(newMenu.type === "soup"
-														? "bg-hansupBrown text-white"
-														: "bg-white text-hansupBrown")
-												}
-											>
-												{" "}
-												국
-											</div>
-											<div
-												onClick={() => onChangeMenu("dessert")}
-												class={
-													"flex justify-center items-center border-b-2 border-hansupBrown " +
-													(newMenu.type === "dessert"
-														? "bg-hansupBrown text-white"
-														: "bg-white text-hansupBrown")
-												}
-											>
-												{" "}
-												디저트
+												<div
+													onClick={() => onChangeMenu("pasta")}
+													class={
+														"flex justify-center items-center border-b-2 border-hansupBrown " +
+														(newMenu.type === "pasta"
+															? "bg-hansupBrown text-white"
+															: "bg-white text-hansupBrown")
+													}
+												>
+													파스타 & 필라프
+												</div>
+												<div
+													onClick={() => onChangeMenu("korean")}
+													class={
+														"flex justify-center items-center border-b-2 border-hansupBrown " +
+														(newMenu.type === "korean"
+															? "bg-hansupBrown text-white"
+															: "bg-white text-hansupBrown")
+													}
+												>
+													{" "}
+													한식
+												</div>
+												<div
+													onClick={() => onChangeMenu("pizza")}
+													class={
+														"flex justify-center items-center border-b-2 border-hansupBrown " +
+														(newMenu.type === "pizza"
+															? "bg-hansupBrown text-white"
+															: "bg-white text-hansupBrown")
+													}
+												>
+													{" "}
+													피자
+												</div>
 											</div>
 										</div>
-									</div>
+									)}
 									<input
 										placeholder="음식 이름 입력"
 										value={newMenu.name}
@@ -511,6 +689,21 @@ const Menu = () => {
 												: "border-hansupBrown text-hansupBrown")
 										}
 									/>
+
+									{match.params.type === "restaurant" && (
+										<input
+											placeholder="음식 가격 입력"
+											value={newMenu.price}
+											onChange={(e) => onChange(e, "price")}
+											ref={priceRef}
+											class={
+												"h-12 mb-4 w-full border-2 border-gray-300 focus:border-hansupBrown focus:text-hansupBrown transition delay-50 duration-150 flex justify-center items-center font-bold text-center " +
+												(newMenu.price === ""
+													? "border-gray-300 text-gray-300"
+													: "border-hansupBrown text-hansupBrown")
+											}
+										/>
+									)}
 
 									{newMenu.imgList.length === 0 && loading ? (
 										<div

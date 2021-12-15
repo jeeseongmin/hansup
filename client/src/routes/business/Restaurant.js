@@ -3,12 +3,14 @@ import Description from "components/Description";
 import Subtitle from "components/Subtitle";
 import Example from "image/example.png";
 import Test from "image/test.png";
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import PageLayout from "components/Layout/PageLayout";
 import ContentLayout from "components/Layout/ContentLayout";
 import MenuListLayout from "components/Layout/MenuListLayout";
 import menuList from "routes/business/data/menuList";
+import OrderListLayout from "components/Layout/OrderListLayout";
+import axios from "axios";
 
 const Label = styled.div`
 	background-color: rgba(252, 244, 237, 1);
@@ -37,6 +39,53 @@ const Line = styled.div`
 `;
 
 const Restaurant = () => {
+	const [menuList, setMenuList] = useState([]);
+	const [listLoading, setListLoading] = useState(true);
+
+	const typeList = [
+		{ title: "파스타 & 필라프", type: "pasta" },
+		{ title: "한식", type: "korean" },
+		{ title: "피자", type: "pizza" },
+	];
+
+	const getList = async () => {
+		setListLoading(false);
+		console.log("getList");
+		await axios
+			.post(
+				"/api/menu/search/restaurant",
+				{ key: process.env.REACT_APP_API_KEY },
+				{
+					headers: {
+						"Content-type": "application/json",
+						Accept: "application/json",
+					},
+				}
+			)
+			.then((Response) => {
+				console.log(Response.data);
+				const tmpList = [];
+				for (let one of typeList) {
+					const cp = Response.data.filter(function (element, index) {
+						return element.type === one.type;
+					});
+					tmpList.push({
+						title: one.title,
+						type: one.type,
+						menu: [...cp],
+					});
+				}
+				setMenuList(tmpList);
+				setListLoading(true);
+			})
+			.catch((Error) => {
+				console.log(Error);
+			});
+	};
+	useEffect(() => {
+		getList();
+	}, []);
+
 	return (
 		<PageLayout>
 			<ContentLayout subtitle={"수화식당"}>
@@ -63,16 +112,17 @@ const Restaurant = () => {
 				</div>
 			</ContentLayout>
 			<ContentLayout subtitle={"수화식당 메뉴"}>
-				{[0, 1, 2, 3].map((element, index) => {
-					return (
-						<MenuListLayout
-							key={menuList[element]}
-							info={menuList[element]}
-							col={4}
-							type={"view"}
-						/>
-					);
-				})}
+				{listLoading &&
+					menuList.map((element, index) => {
+						return (
+							<OrderListLayout
+								key={element}
+								info={element}
+								col={5}
+								type={"view"}
+							/>
+						);
+					})}{" "}
 			</ContentLayout>
 		</PageLayout>
 	);

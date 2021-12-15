@@ -56,7 +56,7 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
 		} else if (info.check2 === "") {
 			alert("핸드폰 번호 확인란을 입력해주세요.");
 			check2Ref.current.focus();
-		} else if (info.check3Ref === "") {
+		} else if (info.check3 === "") {
 			alert("핸드폰 번호 확인란을 입력해주세요.");
 			check3Ref.current.focus();
 		} else if (

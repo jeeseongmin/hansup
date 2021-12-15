@@ -99,6 +99,22 @@ const OrderCheckBlock = ({
 			});
 	};
 
+	const dateToString = (date) => {
+		if (date) {
+			return (
+				date.getFullYear() +
+				"-" +
+				(date.getMonth() + 1).toString().padStart(2, "0") +
+				"-" +
+				date.getDate().toString().padStart(2, "0") +
+				" " +
+				date.getHours().toString().padStart(2, "0") +
+				":" +
+				date.getMinutes().toString().padStart(2, "0")
+			);
+		}
+	};
+
 	return (
 		<>
 			<div class="w-full inline-flex mb-8 flex-row justify-between items-center">
@@ -160,8 +176,9 @@ const OrderCheckBlock = ({
 						</div>
 						{info.date && (
 							<div class="w-full md:flex-1 text-xl">
-								{info.date.substr(0, 4)}년 {info.date.substr(5, 2)}월{" "}
-								{info.date.substr(8, 2)}일
+								{new Date(info.date).getFullYear()}-
+								{new Date(info.date).getMonth() + 1}-
+								{new Date(info.date).getDate()}
 							</div>
 						)}
 					</div>
@@ -171,7 +188,11 @@ const OrderCheckBlock = ({
 						</div>
 						{info.date && (
 							<div class="w-full md:flex-1 text-xl">
-								{info.date.substr(11, 2)}시 {info.date.substr(14, 2)}분
+								{new Date(info.date).getHours() +
+									":" +
+									(new Date(info.date).getMinutes() === 0
+										? "00"
+										: new Date(info.date).getMinutes())}{" "}
 							</div>
 						)}
 					</div>

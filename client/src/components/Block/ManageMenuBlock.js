@@ -8,7 +8,7 @@ const Container = styled.div`
 	width: 100%;
 `;
 
-const ManageMenuBlock = ({ use, menu, updateMenu, deleteMenu }) => {
+const ManageMenuBlock = ({ use, menu, updateMenu, deleteMenu, match }) => {
 	if (use === "control") {
 		return (
 			<Container>
@@ -40,6 +40,9 @@ const ManageMenuBlock = ({ use, menu, updateMenu, deleteMenu }) => {
 					</div>
 				</div>
 				<div class="text-lg mb-2">{menu.name}</div>
+				{menu.category === "restaurant" && (
+					<div class="text-lg mb-2">{menu.price.toLocaleString()}원</div>
+				)}
 			</Container>
 		);
 	} else if (use === "view") {
@@ -55,6 +58,9 @@ const ManageMenuBlock = ({ use, menu, updateMenu, deleteMenu }) => {
 					/>
 				</div>
 				<div class="text-lg mb-2">{menu.name}</div>
+				{menu.category === "restaurant" && (
+					<div class="text-lg mb-2">{menu.price.toLocaleString()}원</div>
+				)}
 			</Container>
 		);
 	}
