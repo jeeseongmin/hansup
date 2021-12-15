@@ -28,7 +28,7 @@ const SubmenuBlock = ({ menu }) => {
 		[
 			"/manager/order/calendar",
 			"/manager/order/list/all",
-			"/manager/menu",
+			"/manager/menu/catering",
 			"/manager/voice/all",
 		],
 		[""],

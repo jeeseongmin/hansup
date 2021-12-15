@@ -442,10 +442,14 @@ const Navbar = ({ currentMenu }) => {
 											voiceLoading &&
 											unreadCount + undecidedCount === 0
 												? "hidden"
+												: unreadCount + undecidedCount === 0
+												? "hidden"
 												: "flex")
 										}
 									>
 										{orderLoading && voiceLoading
+											? unreadCount + undecidedCount
+											: unreadCount + undecidedCount !== 0
 											? unreadCount + undecidedCount
 											: 0}
 									</div>
@@ -467,6 +471,8 @@ const Navbar = ({ currentMenu }) => {
 														"w-4 h-4 rounded-full bg-red-500 absolute -right-1 -top-1 justify-center items-center text-white text-xs font-bold " +
 														(orderLoading && undecidedCount === 0
 															? "hidden"
+															: undecidedCount === 0
+															? " hidden "
 															: "flex")
 													}
 												>
@@ -482,6 +488,8 @@ const Navbar = ({ currentMenu }) => {
 													class={
 														"w-4 h-4 rounded-full bg-red-500 absolute -right-1 -top-1 flex justify-center items-center text-white text-xs font-bold " +
 														(voiceLoading && unreadCount === 0
+															? "hidden"
+															: unreadCount === 0
 															? "hidden"
 															: "flex")
 													}

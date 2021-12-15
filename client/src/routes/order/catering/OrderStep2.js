@@ -69,18 +69,6 @@ const OrderStep2 = ({ info, setInfo, setStep, menuList, listLoading }) => {
 	return (
 		<div class="w-full flex flex-col justify-center items-center">
 			<div class="w-full mb-8">
-				{/* {[0, 1, 2, 3].map((element, index) => {
-					return (
-						<OrderListLayout
-							key={index}
-							info={orderList[element]}
-							col={5}
-							type={"select"}
-							setMenu={setMenu}
-							menu={menu}
-						/>
-					);
-				})}{" "} */}
 				<div class="w-full flex flex-col text-center justify-center text-lg text-hansupBrown border-b border-hansupBrown pb-4 mb-4">
 					<p>
 						한숲의 메뉴는 메인 메뉴, 식사 메뉴, 국, 디저트로 구성되어있습니다.
