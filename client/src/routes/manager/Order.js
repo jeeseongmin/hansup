@@ -98,7 +98,7 @@ const Order = ({ match }) => {
 			<div class={"w-full flex flex-col mb-16 lg:mb-24 px-8 xl:px-40 "}>
 				<div class="w-full flex flex-col justify-between items-start mb-4">
 					<div class="inline-flex flex-col md:flex-row w-full justify-between items-start md:items-center mb-6">
-						<Subtitle subtitle={"예약 관리"} />
+						<Subtitle subtitle={"케이터링 예약 관리"} />
 						<div
 							ref={modalMenuRef}
 							class="relative cursor-pointer mt-4 md:mt-0 w-full md:w-48 h-12 border-2 border-hansupBrown"

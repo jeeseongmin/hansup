@@ -41,13 +41,7 @@ const MenuListLayout = ({ info, col, type, use, updateMenu, deleteMenu }) => {
 				{type === "view" && (
 					<div class={"w-full grid grid-cols-2 gap-5 lg:grid-cols-5"}>
 						{info.menu.map((element, index) => {
-							return (
-								<FoodMenuBlock
-									url={Example}
-									title={element.name}
-									price={element.price + "원"}
-								/>
-							);
+							return <FoodMenuBlock menu={element} />;
 						})}
 					</div>
 				)}

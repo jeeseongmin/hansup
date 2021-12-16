@@ -66,13 +66,13 @@ const MonthView = ({
 			</div>
 			<div class="w-full flex flex-col">
 				<div class="grid grid-cols-7 border-t-2 border-b-2 border-hansupBrown py-3">
+					<div class="text-center text-hansupBrown font-bold">일</div>
 					<div class="text-center text-hansupBrown font-bold">월</div>
 					<div class="text-center text-hansupBrown font-bold">화</div>
 					<div class="text-center text-hansupBrown font-bold">수</div>
 					<div class="text-center text-hansupBrown font-bold">목</div>
 					<div class="text-center text-hansupBrown font-bold">금</div>
 					<div class="text-center text-hansupBrown font-bold">토</div>
-					<div class="text-center text-hansupBrown font-bold">일</div>
 				</div>
 				{firstOfWeek.length > 0 &&
 					loading &&

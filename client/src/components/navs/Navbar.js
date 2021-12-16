@@ -204,7 +204,7 @@ const Navbar = ({ currentMenu }) => {
 			.catch((Error) => {
 				console.log(Error);
 			});
-	}, [refresh_voice]);
+	}, [currentEmail, refresh_voice]);
 
 	useEffect(() => {
 		axios
@@ -225,7 +225,7 @@ const Navbar = ({ currentMenu }) => {
 			.catch((Error) => {
 				console.log(Error);
 			});
-	}, [refresh_order]);
+	}, [currentEmail, refresh_order]);
 
 	const onToggleProfile = () => {
 		if (profile === "on") {

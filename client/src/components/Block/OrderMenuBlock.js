@@ -94,6 +94,9 @@ const OrderMenuBlock = ({
 			</div>
 			<div class="text-lg mb-2">{menu.name}</div>
 			{/* <div class="">{price}</div> */}
+			{menu.category === "restaurant" && (
+				<div class="text-lg mb-2">{menu.price.toLocaleString()}원</div>
+			)}
 		</Container>
 	);
 };

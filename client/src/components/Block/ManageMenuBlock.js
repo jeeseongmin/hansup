@@ -51,7 +51,9 @@ const ManageMenuBlock = ({ use, menu, updateMenu, deleteMenu, match }) => {
 				<div class="h-48 mb-2 relative">
 					<img
 						src={
-							"http://localhost:5000/api/image/view/" + menu.imgList[0].filename
+							window.location.origin +
+							"/api/image/view/" +
+							menu.imgList[0].filename
 						}
 						class="h-full w-full object-cover "
 						alt="menu"

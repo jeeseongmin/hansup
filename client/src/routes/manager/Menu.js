@@ -1,16 +1,14 @@
-import React, { useState, useEffect, useRef } from "react";
-import PageLayout from "components/Layout/PageLayout";
-import ContentLayout from "components/Layout/ContentLayout";
-import MenuListLayout from "components/Layout/MenuListLayout";
-import orderList from "routes/order/catering/data/orderList";
+import CircularProgress from "@mui/material/CircularProgress";
 import Modal from "@mui/material/Modal";
 import axios from "axios";
-import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
-import { useHistory } from "react-router-dom";
-import CircularProgress from "@mui/material/CircularProgress";
+import MenuListLayout from "components/Layout/MenuListLayout";
+import PageLayout from "components/Layout/PageLayout";
+import Subtitle from "components/Subtitle";
+import React, { useEffect, useRef, useState } from "react";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-confirm-alert/src/react-confirm-alert.css"; // Import css
-import Subtitle from "components/Subtitle";
+import { IoIosArrowDown } from "react-icons/io";
+import { useHistory } from "react-router-dom";
 
 const Menu = ({ match }) => {
 	const history = useHistory();
