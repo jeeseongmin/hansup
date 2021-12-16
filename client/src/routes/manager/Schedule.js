@@ -108,7 +108,7 @@ const Schedule = () => {
 			<PageLayout>
 				<div class={"w-full flex flex-col mb-16 lg:mb-24 px-8 xl:px-40"}>
 					<div class="inline-flex w-full mb-6 justify-between items-center">
-						<Subtitle subtitle={"예약확인"} />
+						<Subtitle subtitle={"케이터링 예약확인"} />
 						<div class="h-8 px-3  flex flex-row justify-center items-center">
 							<p class="mr-2">확정 :</p>{" "}
 							<div class="w-4 h-4 rounded-full bg-red-400 mr-4"></div>

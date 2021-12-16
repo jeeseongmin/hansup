@@ -152,7 +152,7 @@ const NoticeFormBlock = ({
 								{/* localhost */}
 								<a
 									class="text-blue-500 underline"
-									href={"http://localhost:5000/uploads/" + element.filename}
+									href={window.location.origin + "/uploads/" + element.filename}
 									target="_blank"
 									download
 								>

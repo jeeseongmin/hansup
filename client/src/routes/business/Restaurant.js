@@ -115,11 +115,18 @@ const Restaurant = () => {
 				{listLoading &&
 					menuList.map((element, index) => {
 						return (
-							<OrderListLayout
-								key={element}
+							// <OrderListLayout
+							// 	key={element}
+							// 	info={element}
+							// 	col={5}
+							// 	type={"view"}
+							// />
+							<MenuListLayout
+								key={index}
 								info={element}
 								col={5}
 								type={"view"}
+								use={"view"}
 							/>
 						);
 					})}{" "}
