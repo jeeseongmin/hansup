@@ -15,6 +15,12 @@ const Home = () => {
 	const [loading, setLoading] = useState(false);
 	const [reviewList, setReviewList] = useState([]);
 
+	const goPage = (url) => {
+		history.push(url);
+		window.scrollTo(0, 0);
+		document.getElementById("scrollRef").scrollTo(0, 0);
+	};
+
 	useEffect(() => {
 		axios
 			.post(
@@ -57,7 +63,10 @@ const Home = () => {
 								</div>
 							</div>
 							<div class="h-12 md:h-16 lg:h-full flex-none lg:flex-1 grid grid-cols-3 gap-8 lg:gap-0 lg:flex flex-row lg:flex-col justify-end pl-0 lg:pl-24">
-								<div class="text-xs md:text-base h-8 md:h-16 flex flex-row justify-between items-center cursor-pointer px-2 lg:px-8 mb-0 md:mb-3 transition delay-50 duration-300 w-full relative text-white font-bold bg-opacity-80 bg-hansupBrown hover:bg-white hover:text-hansupBrown">
+								<div
+									onClick={() => goPage("/intro/introduction")}
+									class="text-xs md:text-base h-8 md:h-16 flex flex-row justify-between items-center cursor-pointer px-2 lg:px-8 mb-0 md:mb-3 transition delay-50 duration-300 w-full relative text-white font-bold bg-opacity-80 bg-hansupBrown hover:bg-white hover:text-hansupBrown"
+								>
 									<span class="hidden md:block">한숲의 인사말</span>
 									<span class="block md:hidden">인사말</span>
 									<div class="">
@@ -67,7 +76,10 @@ const Home = () => {
 										/>
 									</div>
 								</div>
-								<div class="text-xs md:text-base h-8 md:h-16 flex flex-row justify-between items-center cursor-pointer px-2 lg:px-8 mb-0 md:mb-3 transition delay-50 duration-300 w-full relative text-white font-bold bg-opacity-80 bg-hansupBrown hover:bg-white hover:text-hansupBrown">
+								<div
+									onClick={() => goPage("/intro/story")}
+									class="text-xs md:text-base h-8 md:h-16 flex flex-row justify-between items-center cursor-pointer px-2 lg:px-8 mb-0 md:mb-3 transition delay-50 duration-300 w-full relative text-white font-bold bg-opacity-80 bg-hansupBrown hover:bg-white hover:text-hansupBrown"
+								>
 									<span class="hidden md:block">한숲 스토리</span>
 									<span class="block md:hidden">이야기</span>
 									<div class="">
@@ -77,7 +89,11 @@ const Home = () => {
 										/>
 									</div>
 								</div>
-								<div class="text-xs md:text-base h-8 md:h-16 flex flex-row justify-between items-center cursor-pointer px-2 lg:px-8 mb-0 md:mb-3 transition delay-50 duration-300 w-full relative text-white font-bold bg-opacity-80 bg-hansupBrown hover:bg-white hover:text-hansupBrown">
+								<div
+									// onClick={() => goPage()}
+									onClick={() => alert("준비중입니다.")}
+									class="text-xs md:text-base h-8 md:h-16 flex flex-row justify-between items-center cursor-pointer px-2 lg:px-8 mb-0 md:mb-3 transition delay-50 duration-300 w-full relative text-white font-bold bg-opacity-80 bg-hansupBrown hover:bg-white hover:text-hansupBrown"
+								>
 									<span class="hidden md:block">한숲은 꿈꿔요</span>
 									<span class="block md:hidden">꿈꿔요</span>
 									<div class="">
@@ -118,7 +134,10 @@ const Home = () => {
 								</p>
 								<div class="relative pb-4">
 									<div class="absolute top-0 lg:top-10 w-full md:w-2/3 max-w-xl ">
-										<div class="text-xs md:text-base h-10 md:h-16 flex flex-row justify-between items-center cursor-pointer px-2 md:px-4 lg:px-8 mb-3 transition delay-50 duration-300 w-full relative text-white font-bold bg-opacity-80 bg-hansupBrown hover:bg-white hover:text-hansupBrown">
+										<div
+											onClick={() => goPage("/business/restaurant")}
+											class="text-xs md:text-base h-10 md:h-16 flex flex-row justify-between items-center cursor-pointer px-2 md:px-4 lg:px-8 mb-3 transition delay-50 duration-300 w-full relative text-white font-bold bg-opacity-80 bg-hansupBrown hover:bg-white hover:text-hansupBrown"
+										>
 											<span class="hidden md:block">자세히보기</span>
 											<span class="block md:hidden">자세히</span>
 											<div class="">
@@ -147,7 +166,10 @@ const Home = () => {
 								</p>
 								<div class="relative pb-4">
 									<div class="absolute top-0 lg:top-10 w-full md:w-2/3 max-w-xl ">
-										<div class="text-xs md:text-base h-10 md:h-16 flex flex-row justify-between items-center cursor-pointer px-2 md:px-4 lg:px-8 mb-3 transition delay-50 duration-300 w-full relative text-white font-bold bg-opacity-80 bg-hansupBrown hover:bg-white hover:text-hansupBrown">
+										<div
+											onClick={() => goPage("/business/catering")}
+											class="text-xs md:text-base h-10 md:h-16 flex flex-row justify-between items-center cursor-pointer px-2 md:px-4 lg:px-8 mb-3 transition delay-50 duration-300 w-full relative text-white font-bold bg-opacity-80 bg-hansupBrown hover:bg-white hover:text-hansupBrown"
+										>
 											<span class="hidden md:block">자세히보기</span>
 											<span class="block md:hidden">자세히</span>
 											<div class="">
@@ -190,7 +212,10 @@ const Home = () => {
 								</p>
 								<div class="relative pb-4">
 									<div class="absolute top-0 lg:top-10 w-full md:w-2/3 max-w-xl ">
-										<div class="text-xs md:text-base h-10 md:h-16 flex flex-row justify-between items-center cursor-pointer px-2 md:px-4 lg:px-8 mb-3 transition delay-50 duration-300 w-full relative text-white font-bold bg-opacity-80 bg-hansupBrown hover:bg-white hover:text-hansupBrown">
+										<div
+											onClick={() => goPage("/business/box")}
+											class="text-xs md:text-base h-10 md:h-16 flex flex-row justify-between items-center cursor-pointer px-2 md:px-4 lg:px-8 mb-3 transition delay-50 duration-300 w-full relative text-white font-bold bg-opacity-80 bg-hansupBrown hover:bg-white hover:text-hansupBrown"
+										>
 											<span class="hidden md:block">자세히보기</span>
 											<span class="block md:hidden">자세히</span>
 											<div class="">
@@ -217,7 +242,7 @@ const Home = () => {
 					</p>
 					<div
 						class="text-sm lg:text-md ml-auto cursor-pointer hover:opacity-50 flex items-center"
-						onClick={() => history.push("/community/review/list")}
+						onClick={() => goPage("/community/review/list")}
 					>
 						<span class="hidden md:block mr-2">다른 후기 보러가기</span>
 						<span class="block md:hidden mr-2">더보기</span>

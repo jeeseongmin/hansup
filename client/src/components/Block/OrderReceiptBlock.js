@@ -5,11 +5,6 @@ import Subtitle from "components/Subtitle";
 import { MdClose } from "react-icons/md";
 
 const OrderReceiptBlock = ({ info, handleClose, allMenuList }) => {
-	useEffect(() => {
-		console.log(info);
-	}, []);
-
-	const style = { color: "#6C4D3F" };
 	return (
 		<>
 			<div class="w-full inline-flex mb-8 flex-row justify-between items-center">
