@@ -48,6 +48,11 @@ const Submenu = ({ text, current }) => {
 		) {
 			setSelected(true);
 		} else if (
+			location.pathname.includes("/manager/order/create") &&
+			current === "/manager/order/list/all"
+		) {
+			setSelected(true);
+		} else if (
 			location.pathname.includes("/manager/order/update") &&
 			current === "/manager/order/list/all"
 		) {

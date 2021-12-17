@@ -23,15 +23,10 @@ import RadioButton from "components/Button/RadioButton";
 import { BsArrowRight, BsArrowLeft } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 
-const UpdateOrderPage = ({ match }) => {
+const CreateOrderPage = ({ match }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const [loading, setLoading] = useState(false);
-	const [page, setPage] = useState(1);
-	const [totalPage, setTotalPage] = useState(0);
-	const [orderList, setOrderList] = useState([]);
-	const modalMenuRef = useRef();
-	const [change, setChange] = useState(false);
 	const refresh_order = useSelector((state) => state.common.refresh_order);
 	const [info, setInfo] = useState({
 		name: "",
@@ -44,13 +39,13 @@ const UpdateOrderPage = ({ match }) => {
 		count: "",
 		request: "",
 		date: new Date(),
-		delivery: "",
+		delivery: "delivery",
 		address: "",
 		mainMenu: [],
 		subMenu: [],
 		soup: [],
 		dessert: [],
-		payment: "",
+		payment: "card",
 		cashReceipt: {
 			status: false,
 			type: "personal",
@@ -82,7 +77,7 @@ const UpdateOrderPage = ({ match }) => {
 	const getInfo = async () => {
 		await axios
 			.post(
-				"/api/order/" + match.params.id,
+				"/api/menu/search/catering",
 				{ key: process.env.REACT_APP_API_KEY },
 				{
 					headers: {
@@ -91,82 +86,39 @@ const UpdateOrderPage = ({ match }) => {
 					},
 				}
 			)
-			.then(async (Response) => {
-				const cp = {
-					id: Response.data._id,
-					name: Response.data.name,
-					phone1: Response.data.phone.slice(0, 3),
-					phone2: Response.data.phone.slice(4, 8),
-					phone3: Response.data.phone.slice(9, 13),
-					check1: Response.data.phone.slice(0, 3),
-					check2: Response.data.phone.slice(4, 8),
-					check3: Response.data.phone.slice(9, 13),
-					count: Response.data.count,
-					request: Response.data.request,
-					date: new Date(Response.data.date),
-					delivery: Response.data.delivery,
-					address: Response.data.address,
-					mainMenu: Response.data.mainMenu,
-					subMenu: Response.data.subMenu,
-					soup: Response.data.soup,
-					dessert: Response.data.dessert,
-					payment: Response.data.payment,
-					cashReceipt: Response.data.cashReceipt,
-					payed: Response.data.payed,
-					isDeleted: Response.data.isDeleted,
-				};
-				setSelected(cp.cashReceipt.status);
-				setInfo(cp);
-
-				setListLoading(false);
-				await axios
-					.post(
-						"/api/menu/search/catering",
-						{ key: process.env.REACT_APP_API_KEY },
-						{
-							headers: {
-								"Content-type": "application/json",
-								Accept: "application/json",
-							},
-						}
-					)
-					.then(async (Response2) => {
-						const tmpList = [];
-						for (let one of typeList) {
-							const cp = Response2.data.filter(function (element, index) {
-								return element.type === one.type;
-							});
-							tmpList.push({
-								title: one.title,
-								type: one.type,
-								menu: [...cp],
-							});
-						}
-						let cp2 = {};
-						for (let i = 0; i < Response2.data.length; i++) {
-							cp2[Response2.data[i]._id] = Response2.data[i];
-						}
-						setAllMenuList(cp2);
-						setMenuList(tmpList);
-						const cp = {
-							mainMenu: [...tmpList[0].menu].map((element, index) => {
-								return element._id;
-							}),
-							subMenu: [...tmpList[1].menu].map((element, index) => {
-								return element._id;
-							}),
-							soup: [...Response.data.soup],
-							dessert: [...tmpList[3].menu].map((element, index) => {
-								return element._id;
-							}),
-						};
-						setMenu(cp);
-						setLoading(true);
-						setListLoading(true);
-					})
-					.catch((Error) => {
-						console.log(Error);
+			.then(async (Response2) => {
+				const tmpList = [];
+				for (let one of typeList) {
+					const cp = Response2.data.filter(function (element, index) {
+						return element.type === one.type;
 					});
+					tmpList.push({
+						title: one.title,
+						type: one.type,
+						menu: [...cp],
+					});
+				}
+				let cp2 = {};
+				for (let i = 0; i < Response2.data.length; i++) {
+					cp2[Response2.data[i]._id] = Response2.data[i];
+				}
+				setAllMenuList(cp2);
+				setMenuList(tmpList);
+				const cp = {
+					mainMenu: [...tmpList[0].menu].map((element, index) => {
+						return element._id;
+					}),
+					subMenu: [...tmpList[1].menu].map((element, index) => {
+						return element._id;
+					}),
+					soup: [],
+					dessert: [...tmpList[3].menu].map((element, index) => {
+						return element._id;
+					}),
+				};
+				setMenu(cp);
+				setLoading(true);
+				setListLoading(true);
 			})
 			.catch((Error) => {
 				console.log(Error);
@@ -194,6 +146,12 @@ const UpdateOrderPage = ({ match }) => {
 	const [selected, setSelected] = useState(false);
 	const [selected2, setSelected2] = useState(false);
 
+	useEffect(() => {
+		const cp = { ...info };
+		cp["cashReceipt"].status = selected;
+		cp["cashReceipt"].type = selected2 ? "business" : "personal";
+	}, [selected, selected2]);
+
 	const handleChange = (e) => {
 		const cp = { ...info };
 		cp["payment"] = e.target.value;
@@ -204,12 +162,6 @@ const UpdateOrderPage = ({ match }) => {
 		cp["cashReceipt"].number = e.target.value;
 		setInfo(cp);
 	};
-
-	useEffect(() => {
-		const cp = { ...info };
-		cp["cashReceipt"].status = selected;
-		cp["cashReceipt"].type = selected2 ? "business" : "personal";
-	}, [selected, selected2]);
 
 	const changeInfo = (e, type) => {
 		if (type === "date" || type === "delivery") {
@@ -276,7 +228,7 @@ const UpdateOrderPage = ({ match }) => {
 			document.getElementById("scrollRef").scrollTo(0, 0);
 			await axios
 				.post(
-					"/api/order/update/" + info.id,
+					"/api/order/create",
 					{
 						key: process.env.REACT_APP_API_KEY,
 						name: info.name,
@@ -291,7 +243,7 @@ const UpdateOrderPage = ({ match }) => {
 						soup: menu.soup,
 						dessert: menu.dessert,
 						payment: info.payment,
-						cashReceipt: info.cashReceipt,
+						cashReceipt: { ...info.cashReceipt, status: selected },
 						payed: info.payed,
 						isDeleted: info.isDeleted,
 					},
@@ -303,7 +255,7 @@ const UpdateOrderPage = ({ match }) => {
 					}
 				)
 				.then((response) => {
-					alert("수정되었습니다.");
+					alert("추가되었습니다.");
 					document.getElementById("scrollRef").scrollTo(0, 0);
 					if (refresh_order === "create") {
 						dispatch(setRefreshOrder("recreate"));
@@ -693,4 +645,4 @@ const UpdateOrderPage = ({ match }) => {
 	);
 };
 
-export default UpdateOrderPage;
+export default CreateOrderPage;

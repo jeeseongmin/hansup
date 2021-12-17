@@ -99,64 +99,72 @@ const Order = ({ match }) => {
 				<div class="w-full flex flex-col justify-between items-start mb-4">
 					<div class="inline-flex flex-col md:flex-row w-full justify-between items-start md:items-center mb-6">
 						<Subtitle subtitle={"케이터링 예약 관리"} />
-						<div
-							ref={modalMenuRef}
-							class="relative cursor-pointer mt-4 md:mt-0 w-full md:w-48 h-12 border-2 border-hansupBrown"
-						>
+						<div class="w-full md:w-auto flex flex-col-reverse md:flex-row h-auto">
 							<div
-								onClick={onToggleMenu}
-								class="w-full h-full flex justify-between items-center text-hansupBrown font-bold"
+								onClick={() => history.push("/manager/order/create")}
+								class="mt-4 md:mt-0 cursor-pointer w-full md:w-48 h-12 mr-2 border border-hansupBrown hover:bg-hansupBrown hover:text-white transition delay-50 duration-150 flex justify-center items-center"
 							>
-								<div class=" w-12 h-full"></div>
-								{newMenu === "all" && <p>전체보기</p>}
-								{newMenu === "undecided" && <p>미확정</p>}
-								{newMenu === "decided" && <p>확정</p>}
-
-								<div class=" w-12 h-full flex justify-center items-center">
-									<IoIosArrowDown size={28} />
-									{/* <IoIosArrowUp size={28} /> */}
-								</div>
+								작성하기
 							</div>
 							<div
-								class={
-									"z-30 absolute shadow-xl font-bold w-full h-36 left-0 top-12 border-l-2 border-r-2 border-t-2 border-hansupBrown grid-rows-3 " +
-									(modalMenu ? "grid" : "hidden")
-								}
+								ref={modalMenuRef}
+								class="relative cursor-pointer mt-4 md:mt-0 w-full md:w-48 h-12 border-2 border-hansupBrown"
 							>
 								<div
-									onClick={() => onChangeMenu("all")}
-									class={
-										"flex justify-center items-center border-b-2 border-hansupBrown " +
-										(newMenu === "all"
-											? "bg-hansupBrown text-white"
-											: "bg-white text-hansupBrown")
-									}
+									onClick={onToggleMenu}
+									class="w-full h-full flex justify-between items-center text-hansupBrown font-bold"
 								>
-									전체보기
+									<div class=" w-12 h-full"></div>
+									{newMenu === "all" && <p>전체보기</p>}
+									{newMenu === "undecided" && <p>미확정</p>}
+									{newMenu === "decided" && <p>확정</p>}
+
+									<div class=" w-12 h-full flex justify-center items-center">
+										<IoIosArrowDown size={28} />
+										{/* <IoIosArrowUp size={28} /> */}
+									</div>
 								</div>
 								<div
-									onClick={() => onChangeMenu("undecided")}
 									class={
-										"flex justify-center items-center border-b-2 border-hansupBrown " +
-										(newMenu === "undecided"
-											? "bg-hansupBrown text-white"
-											: "bg-white text-hansupBrown")
+										"z-30 absolute shadow-xl font-bold w-full h-36 left-0 top-12 border-l-2 border-r-2 border-t-2 border-hansupBrown grid-rows-3 " +
+										(modalMenu ? "grid" : "hidden")
 									}
 								>
-									{" "}
-									미확정
-								</div>
-								<div
-									onClick={() => onChangeMenu("decided")}
-									class={
-										"flex justify-center items-center border-b-2 border-hansupBrown " +
-										(newMenu === "decided"
-											? "bg-hansupBrown text-white"
-											: "bg-white text-hansupBrown")
-									}
-								>
-									{" "}
-									확정
+									<div
+										onClick={() => onChangeMenu("all")}
+										class={
+											"flex justify-center items-center border-b-2 border-hansupBrown " +
+											(newMenu === "all"
+												? "bg-hansupBrown text-white"
+												: "bg-white text-hansupBrown")
+										}
+									>
+										전체보기
+									</div>
+									<div
+										onClick={() => onChangeMenu("undecided")}
+										class={
+											"flex justify-center items-center border-b-2 border-hansupBrown " +
+											(newMenu === "undecided"
+												? "bg-hansupBrown text-white"
+												: "bg-white text-hansupBrown")
+										}
+									>
+										{" "}
+										미확정
+									</div>
+									<div
+										onClick={() => onChangeMenu("decided")}
+										class={
+											"flex justify-center items-center border-b-2 border-hansupBrown " +
+											(newMenu === "decided"
+												? "bg-hansupBrown text-white"
+												: "bg-white text-hansupBrown")
+										}
+									>
+										{" "}
+										확정
+									</div>
 								</div>
 							</div>
 						</div>

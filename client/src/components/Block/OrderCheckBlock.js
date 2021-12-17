@@ -36,6 +36,8 @@ const OrderCheckBlock = ({
 	const printRef = useRef();
 	const printBtnRef = useRef();
 
+	const dayArr = ["일", "월", "화", "수", "목", "금", "토"];
+
 	const [open, setOpen] = useState(false);
 	const addressModalOpen = () => setOpen(true);
 	const addressModalClose = () => setOpen(false);
@@ -351,12 +353,6 @@ const OrderCheckBlock = ({
 							})}
 						</div>
 						<div class="my-4 h-8 w-full flex justify-end">
-							{/* <div
-								onClick={printSubmit}
-								class="cursor-pointer px-2 py-1 text-hansupBrown border border-hansupBrown flex justify-center items-center"
-							>
-								출력하기
-							</div> */}
 							<ReactToPrint
 								ref={printBtnRef}
 								trigger={() => (
@@ -380,7 +376,7 @@ const OrderCheckBlock = ({
 										{printInfo.price !== "" &&
 										!isNaN(printInfo.price) &&
 										printInfo.bonusMenu
-											? "출력하기"
+											? "출력 미리보기"
 											: "출력 불가"}
 									</button>
 								)}
@@ -390,6 +386,7 @@ const OrderCheckBlock = ({
 					</div>
 				</div>
 			</div>
+
 			<InfoBlock title={"예약자 정보"}>
 				<div class="flex flex-col -mt-4">
 					<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-center border-b-2 border-gray-200">
@@ -622,17 +619,26 @@ const OrderCheckBlock = ({
 					삭제하기
 				</div>
 			</div>
-			<p class="w-full text-xl font-bold my-4 pt-2 border-t-2 border-hansupBrown">
+			<p
+				class={
+					"w-full text-xl font-bold my-4 pt-2 border-t-2 border-hansupBrown " +
+					(checkedPrint ? "grid" : "hidden")
+				}
+			>
 				출력 미리보기 (실제 인쇄되는 화면과 다릅니다.)
 			</p>
 			<div
 				ref={printRef}
-				class="w-full h-full border border-black grid grid-cols-2"
+				class={
+					"w-full h-full border border-black grid-cols-2 " +
+					(checkedPrint ? "grid" : "hidden")
+				}
 			>
 				<div class="w-full p-8 border border-black">
 					<p class="text-3xl font-bold mb-4">
 						케이터링 ({new Date(info.date).getMonth() + 1}/
-						{new Date(info.date).getDate()})
+						{new Date(info.date).getDate()},{" "}
+						{dayArr[dayjs(new Date(info.date)).get("day")]})
 					</p>
 					<div class="flex justify-between">
 						<p class="text-2xl font-bold mb-4">
@@ -650,7 +656,7 @@ const OrderCheckBlock = ({
 					</div>
 					<div class="flex justify-between">
 						<p class="text-2xl font-bold mb-4">{info.phone}</p>
-						<p class="text-2xl font-bold mb-4 text-red-500">
+						<p class="text-xl font-bold mb-4 text-red-500">
 							{info.payment === "card"
 								? "카드결제"
 								: info.payment === "cash"
@@ -662,18 +668,21 @@ const OrderCheckBlock = ({
 						<>
 							<div class="flex flex-col justify-between border-2 border-gray-200 p-4 mb-4">
 								<div class="flex flex-row justify-between">
-									<p class="text-2xl font-bold mb-4">현금영수증 : </p>
-									<p class="text-2xl font-bold mb-2">
+									<p class="text-xl font-bold mb-4">현금영수증 : </p>
+									<p class="text-xl font-bold mb-2">
 										{info.cashReceipt.type === "business"
 											? "사업자증빙"
 											: "개인소득공제"}
 									</p>
 								</div>
-								<p class="text-2xl font-bold">{info.cashReceipt.number}</p>
+								<p class="text-xl font-bold">{info.cashReceipt.number}</p>
 							</div>
 						</>
 					)}
-					<p class="text-2xl font-bold mb-2">
+					<div class="text-red-500 font-bold mb-2">
+						- {info.delivery === "delivery" ? info.address : "직접 수령"}
+					</div>
+					<p class="text-xl font-bold mb-2">
 						{info.request === "" ? "고객 요청사항 없음" : "- " + info.request}
 					</p>
 					{printInfo.description.length === 0 ||
@@ -692,7 +701,15 @@ const OrderCheckBlock = ({
 								})}
 					<div class="w-full mt-4">
 						<div class="border-l border-r border-t border-black flex flex-col">
-							<div class="flex flex-row h-10 text-xl font-bold border-b border-black">
+							<div
+								class={
+									"flex flex-row text-xl font-bold border-b border-black " +
+									(info.mainMenu.concat(info.subMenu, info.soup, info.dessert)
+										.length < 16
+										? "h-10"
+										: "h-8")
+								}
+							>
 								<div class="w-16 flex justify-center items-center border-r border-black">
 									NO
 								</div>
@@ -705,7 +722,18 @@ const OrderCheckBlock = ({
 									.concat(info.subMenu, info.soup, info.dessert)
 									.map((element, index) => {
 										return allMenuList[element] ? (
-											<div class="flex flex-row h-10 text-xl font-bold border-b border-black">
+											<div
+												class={
+													"flex flex-row text-xl font-bold border-b border-black " +
+													(info.mainMenu.concat(
+														info.subMenu,
+														info.soup,
+														info.dessert
+													).length < 16
+														? "h-10"
+														: "h-8")
+												}
+											>
 												<div class="w-16 flex justify-center items-center border-r border-black">
 													{index + 1}
 												</div>
@@ -725,7 +753,8 @@ const OrderCheckBlock = ({
 				<div class="w-full p-8 border border-black">
 					<p class="text-3xl font-bold mb-4">
 						케이터링 ({new Date(info.date).getMonth() + 1}/
-						{new Date(info.date).getDate()})
+						{new Date(info.date).getDate()},{" "}
+						{dayArr[dayjs(new Date(info.date)).get("day")]})
 					</p>
 					<div class="flex justify-between">
 						<p class="text-2xl font-bold mb-4">
@@ -743,7 +772,7 @@ const OrderCheckBlock = ({
 					</div>
 					<div class="flex justify-between">
 						<p class="text-2xl font-bold mb-4">{info.phone}</p>
-						<p class="text-2xl font-bold mb-4 text-red-500">
+						<p class="text-xl font-bold mb-4 text-red-500">
 							{info.payment === "card"
 								? "카드결제"
 								: info.payment === "cash"
@@ -755,18 +784,21 @@ const OrderCheckBlock = ({
 						<>
 							<div class="flex flex-col justify-between border-2 border-gray-200 p-4 mb-4">
 								<div class="flex flex-row justify-between">
-									<p class="text-2xl font-bold mb-4">현금영수증 : </p>
-									<p class="text-2xl font-bold mb-2">
+									<p class="text-xl font-bold mb-4">현금영수증 : </p>
+									<p class="text-xl font-bold mb-2">
 										{info.cashReceipt.type === "business"
 											? "사업자증빙"
 											: "개인소득공제"}
 									</p>
 								</div>
-								<p class="text-2xl font-bold">{info.cashReceipt.number}</p>
+								<p class="text-xl font-bold">{info.cashReceipt.number}</p>
 							</div>
 						</>
 					)}
-					<p class="text-2xl font-bold mb-2">
+					<div class="text-red-500 font-bold mb-2">
+						- {info.delivery === "delivery" ? info.address : "직접 수령"}
+					</div>
+					<p class="text-xl font-bold mb-2">
 						{info.request === "" ? "고객 요청사항 없음" : "- " + info.request}
 					</p>
 					{printInfo.description.length === 0 ||
@@ -785,7 +817,15 @@ const OrderCheckBlock = ({
 								})}
 					<div class="w-full mt-4">
 						<div class="border-l border-r border-t border-black flex flex-col">
-							<div class="flex flex-row h-10 text-xl font-bold border-b border-black">
+							<div
+								class={
+									"flex flex-row text-xl font-bold border-b border-black " +
+									(info.mainMenu.concat(info.subMenu, info.soup, info.dessert)
+										.length < 16
+										? "h-10"
+										: "h-8")
+								}
+							>
 								<div class="w-16 flex justify-center items-center border-r border-black">
 									NO
 								</div>
@@ -798,7 +838,18 @@ const OrderCheckBlock = ({
 									.concat(info.subMenu, info.soup, info.dessert)
 									.map((element, index) => {
 										return allMenuList[element] ? (
-											<div class="flex flex-row h-10 text-xl font-bold border-b border-black">
+											<div
+												class={
+													"flex flex-row text-xl font-bold border-b border-black " +
+													(info.mainMenu.concat(
+														info.subMenu,
+														info.soup,
+														info.dessert
+													).length < 16
+														? "h-10"
+														: "h-8")
+												}
+											>
 												<div class="w-16 flex justify-center items-center border-r border-black">
 													{index + 1}
 												</div>
