@@ -455,7 +455,7 @@ const Navbar = ({ currentMenu }) => {
 									</div>
 								</div>
 								{profile === "on" ? (
-									<div class="z-30 px-4 py-2 flex flex-col justify-center items-center -right-4 top-14 w-72 h-60 bg-white border border-gray-300 rounded-lg absolute">
+									<div class="z-30 px-4 py-2 flex flex-col justify-center items-center -right-4 top-14 w-72 h-48 bg-white border border-gray-300 rounded-lg absolute">
 										<div class="w-full h-full flex flex-col justify-around">
 											<div class="w-full flex flex-col">
 												<p class="font-bold w-auto">{loginInfo.position}</p>
@@ -497,12 +497,12 @@ const Navbar = ({ currentMenu }) => {
 													{voiceLoading ? unreadCount : 0}
 												</div>
 											</div>
-											<div
+											{/* <div
 												onClick={goEditPage}
 												class="cursor-pointer w-full py-1 border border-hansupBrown text-hansupBrown flex justify-center transition delay-50 duration-300 hover:bg-hansupBrown hover:text-white"
 											>
 												정보 변경
-											</div>
+											</div> */}
 											<div
 												onClick={logout}
 												class="cursor-pointer w-full py-1 border border-hansupBrown text-hansupBrown flex justify-center transition delay-50 duration-300 hover:bg-hansupBrown hover:text-white"
@@ -658,12 +658,12 @@ const Navbar = ({ currentMenu }) => {
 							<Submenu title={""} url={"#"} empty={true} />
 							<Submenu title={""} url={"#"} empty={true} />
 							<Submenu title={""} url={"#"} empty={true} />
+							<Submenu title={""} url={"#"} empty={true} />
 							<Submenu
 								title={"한숲맛이야기"}
 								url={"/enterprise/hansup"}
 								empty={false}
 							/>
-							<Submenu title={""} url={"#"} empty={true} />
 							{isLogin ? (
 								<div class="h-full w-auto flex justify-end items-center relative invisible">
 									<img
