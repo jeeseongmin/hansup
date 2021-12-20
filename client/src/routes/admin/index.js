@@ -1,12 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
-import { Route, Link, useHistory } from "react-router-dom";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import {
-	setLoginToken,
 	setCurrentEmail,
 	setCurrentPassword,
+	setLoginToken,
 	setProfile,
 } from "reducers/setting";
 
@@ -48,7 +47,6 @@ const Index = () => {
 				}
 			)
 			.then((response) => {
-				console.log(response.data);
 				if (response.data.loginToken) {
 					dispatch(setLoginToken("login"));
 					dispatch(setCurrentEmail(info.email));
@@ -76,7 +74,7 @@ const Index = () => {
 	return (
 		<div class="w-full flex-1 flex justify-center items-center">
 			<div class="">
-				<div class="w-96 h-auto flex flex-col px-4 py-2 justify-center items-center border border-hansupBrown bg-white shadow-xl">
+				<div class="w-96 my-16 h-auto flex flex-col px-4 py-2 justify-center items-center border border-hansupBrown bg-white shadow-xl">
 					<input
 						ref={emailRef}
 						type="text"
