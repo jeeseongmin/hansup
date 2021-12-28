@@ -130,7 +130,7 @@ const NoticeFormBlock = ({
 					<p class="text-xs font-bold text-red-500">파일 별 크기는 10MB 이하</p>
 				</div>
 				<button
-					class="text-sm outline-none w-full md:w-auto cursor-pointer px-0 md:px-8 py-2 md:py-1 justify-center border border-purple-300 bg-purple-300 text-white flex flex-row items-center hover:bg-purple-500 hover:text-white hover:font-bold"
+					class="text-sm outline-none w-full md:w-auto cursor-pointer px-0 md:px-8 py-2 md:py-1 justify-center border border-hansupBrown bg-white text-hansupBrown transition delay-50 duration-150 flex flex-row items-center hover:bg-hansupBrown hover:text-white hover:font-bold"
 					onClick={buttonClick}
 				>
 					파일 업로드
