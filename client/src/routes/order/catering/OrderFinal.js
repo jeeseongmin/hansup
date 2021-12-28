@@ -6,6 +6,11 @@ import { useHistory } from "react-router-dom";
 const OrderFinal = ({ info, allMenuList }) => {
 	const history = useHistory();
 
+	const goPage = (url) => {
+		history.push(url);
+		document.getElementById("scrollRef").scrollTo(0, 0);
+	};
+
 	return (
 		<div class="w-full flex flex-col justify-center items-center">
 			<h1 class="text-4xl font-bold text-hansupBrown mb-16">
@@ -149,6 +154,8 @@ const OrderFinal = ({ info, allMenuList }) => {
 									? "신용카드"
 									: info.payment === "cash"
 									? "현금"
+									: info.payment === "giftCard"
+									? "상품권 결제"
 									: "계좌이체"}
 							</div>
 						</div>
@@ -212,7 +219,7 @@ const OrderFinal = ({ info, allMenuList }) => {
 			</div>
 			<div class="h-12 w-full md:w-2/3 flex justify-center items-center">
 				<div
-					onClick={() => history.push("/")}
+					onClick={() => goPage("/")}
 					class="mt-4 cursor-pointer w-full lg:w-60 h-full flex justify-center items-center outline-none bg-hansupBrown text-white font-bold text-xl"
 				>
 					홈으로

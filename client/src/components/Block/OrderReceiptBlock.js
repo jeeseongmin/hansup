@@ -152,6 +152,8 @@ const OrderReceiptBlock = ({ info, handleClose, allMenuList }) => {
 								? "후불 결제(카드)"
 								: info.payment === "cash"
 								? "후불 결제(현금)"
+								: info.payment === "giftCard"
+								? "상품권 결제"
 								: "계좌이체"}
 						</div>
 					</div>

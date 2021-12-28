@@ -50,7 +50,6 @@ const Restaurant = () => {
 
 	const getList = async () => {
 		setListLoading(false);
-		console.log("getList");
 		await axios
 			.post(
 				"/api/menu/search/restaurant",
@@ -63,7 +62,6 @@ const Restaurant = () => {
 				}
 			)
 			.then((Response) => {
-				console.log(Response.data);
 				const tmpList = [];
 				for (let one of typeList) {
 					const cp = Response.data.filter(function (element, index) {

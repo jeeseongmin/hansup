@@ -36,8 +36,8 @@ const Introduction = () => {
 			</ContentLayout>
 			<ContentLayout subtitle={"한숲비전"}>
 				<div class="flex w-full h-auto lg:h-auto flex-col lg:flex-row items-center mb-8">
-					<div class="w-full lg:w-3/5 pl-0 pr-0 lg:pl-0 lg:pr-8 h-60 lg:h-96 mb-4 lg:mb-0 flex flex-col justify-center items-center">
-						<p class="w-full h-auto text-4xl md:text-5xl leading-normal md:leading-relaxed font-thin">
+					<div class="w-full lg:w-3/5 pl-0 pr-0 lg:pl-0 lg:pr-8 h-48 sm:h-60 lg:h-96 mb-4 lg:mb-0 flex flex-col justify-center items-center">
+						<p class="w-full h-auto text-2xl sm:text-3xl md:text-5xl leading-normal md:leading-relaxed font-thin">
 							한숲푸드는<br></br>
 							<span class="bg-yellow-50 py-1">장애인과 비장애인이 함께</span>
 							<br></br>
@@ -58,17 +58,16 @@ const Introduction = () => {
 				<div class="mb-6">
 					<Description>
 						<div class="w-full flex justify-center items-center text-center md:text-left py-4 px-4 text-lg lg:text-xl font-bold">
-							첫째, 베리어프리(장애극복)문화를 구축하는{" "}
-							<br class="block md:hidden"></br>장애친화적 기업 한숲이 되고
-							싶습니다.
+							첫째, 베리어프리(장애극복)문화를 구축하는 장애친화적 기업 한숲이
+							되고 싶습니다.
 						</div>
 					</Description>
 				</div>
 				<div>
 					<Description>
 						<div class="w-full flex justify-center items-center text-center md:text-left py-4 px-4 text-lg lg:text-xl font-bold">
-							둘째, 포항지역사회에 건강하고 맛있는 음식을{" "}
-							<br class="block md:hidden"></br>제공하는 한숲이 되고 싶습니다.
+							둘째, 포항지역사회에 건강하고 맛있는 음식을 제공하는 한숲이 되고
+							싶습니다.
 						</div>
 					</Description>
 				</div>

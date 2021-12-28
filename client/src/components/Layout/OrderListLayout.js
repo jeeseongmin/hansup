@@ -7,6 +7,7 @@ import Example from "image/example.png";
 const MenuTitle = styled.div`
 	color: #6c4d3f;
 	font-size: 1.5rem;
+	font-weight: bold;
 `;
 
 const Line = styled.div`
@@ -28,7 +29,7 @@ const OrderListLayout = ({ info, col, type, setMenu, menuList }) => {
 						return (
 							<CateringMenuBlock
 								url={
-									"http://hansup.cafe24app.com/api/image/view/" +
+									"http://hansupfood.com/api/image/view/" +
 									element.imgList[0].filename
 								}
 								title={element.name}

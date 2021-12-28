@@ -4,11 +4,12 @@ import CateringIntro from "image/catering-intro.png";
 import React from "react";
 import PageLayout from "components/Layout/PageLayout";
 import ContentLayout from "components/Layout/ContentLayout";
+import BoxSliderBlock from "components/Block/BoxSliderBlock";
 
 const Box = () => {
 	return (
 		<PageLayout>
-			<ContentLayout subtitle={"도시락 사업"}>
+			<ContentLayout subtitle={"한숲 도시락"}>
 				<div class="flex w-full h-auto flex-col items-center mb-4 ">
 					<Description>
 						<div class="py-6 px-4 font-bold flex justify-center items-center text-base lg:text-lg">
@@ -17,12 +18,8 @@ const Box = () => {
 						</div>
 					</Description>
 
-					<div class="mt-8 w-full lg:w-3/5 px-12 lg:pl-0 lg:pr-12 h-96 mb-4 lg:mb-0 flex justify-start items-start ">
-						<img
-							src={CateringIntro}
-							class="h-full w-full object-cover"
-							alt="img"
-						/>
+					<div class="w-full px-16 lg:px-72 my-16 h-96">
+						<BoxSliderBlock type={"box"} />
 					</div>
 				</div>
 			</ContentLayout>

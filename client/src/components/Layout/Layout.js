@@ -25,7 +25,7 @@ const Layout = ({ children }) => {
 			setTitle("한숲사업");
 		} else if (location.pathname.includes("/order")) {
 			setMenu(2);
-			setTitle("예약안내");
+			setTitle("케이터링 예약");
 		} else if (location.pathname.includes("/community")) {
 			setMenu(3);
 			setTitle("커뮤니티");

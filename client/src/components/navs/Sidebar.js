@@ -84,7 +84,7 @@ const Sidebar = ({ isLogin }) => {
 					{isLogin && (
 						<div class="w-full text-center mb-8">
 							<p
-								onClick={() => selectMenu("/manager/schedule")}
+								onClick={() => selectMenu("/manager/order/calendar")}
 								class="cursor-pointer"
 							>
 								관리자

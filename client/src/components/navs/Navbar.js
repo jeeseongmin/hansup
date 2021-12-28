@@ -572,7 +572,7 @@ const Navbar = ({ currentMenu }) => {
 								empty={false}
 							/>
 							<Submenu
-								title={"도시락 사업"}
+								title={"한숲 도시락"}
 								url={"/business/box"}
 								empty={false}
 							/>

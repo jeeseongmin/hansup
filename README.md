@@ -1,76 +1,120 @@
-# Pohang Hansup Restaurant
+# 🍱 Hansup Food
 
-## Get Started
+## 🎈 프로젝트 소개
 
-### Install (fetch or pull)
+한숲푸드는 경북 포항시에서 케이터링 및 도시락, 반찬 사업을 운영하고 있는 장애친화적 예비 사회적기업입니다.
+<br>
+<br>
+이번 프로젝트에서는 한숲푸드에 대한 소개 및 각종 설명, 공지사항과 리뷰, 고객의 소리와 같은 유저들의 이야기를 적을 수 있는 CRUD 기능들과 더불어 인터넷으로 특정 날짜를 예약할 수 있는 시스템과 관리자가 예약란을 빠르게 확인할 수 있는 기능을 포함하여 개발하였습니다.
 
-1. at root folder ('/')
+<div style="width:100%; display:flex; justify-content:center;">
+   <b>👉 <a href="http://hansupfood.com">hansupfood</a> 👈</b>
+</div>
 
-   `npm install`
-
-2. at clinet folder ('/client')
-
-   `npm install`
-
-3. Open two terminals
-
-   1. at root folder
-
-      `nodemon start`
-
-   2. at client folder
-
-      `npm start`
-
-   Then, it appears as follows.
-
-   ![image](https://user-images.githubusercontent.com/47960777/135401523-4fe1a81f-dbd0-48f9-bd0e-17d25e53bfe0.png)
-
-   If it does not appear as above, NPM installation is wrong.
-
-## Project URL
-
-- hansup (not yet)
-
-## Project Description
-
-This project was created to create a site for Hansup Restaurant in Pohang, Gyeongsangbuk-do, Korea.
-
-## Project Stack
+## 🧱 기술 스택
 
 ### Client
 
-Following items are core frontend technologies used in this project:
-
 - React
-- React Router
 - Redux
 - tailwind css
 
 ### Server
 
-Following items are core backend technologies used in this project:
-
+- Node.js
+- Express
 - mongo DB
 - cafe24 hosting
 
-## Data Schema
+## 📰 Data Schema
 
 ### Mongo DB
 
-### Redux Schema
+```
+User {
+  id : string,
+  email : string,
+  password : string
+}
+Review {
+	content : (string),
+	email : (string),
+	response : (string),
+	password : (string),
+	imgList : [object],
+}
+Notice {
+	title : (string),
+	content : (string),
+	fileList: [object],
+	read : (Number)
+}
+Voice {
+	status : (String : unread, read),
+	title : (string),
+	content : (string),
+	name : (string),
+	phone : (string),
+	email : (string),
+	isDeleted : (Boolean)
+}
+Order : {
+	name : (string),
+	phone : (string),
+	count: (string),
+	request : (string),
+	date : (Date),
+	delivery : (String : delivery, self),
+	address : (string)
+	mainMenu: (array),
+	subMenu : (array),
+	soup : (array),
+	dessert : (array),
+	payment : (string),
+	cashReceipt : (Object) - {
+		method : (type- personal, business, none)
+		number : (string - phoneNumber or businessNumber),
+	},
+	payed : (Boolean),
+	isDeleted : (Boolean)
+}
+Menu : {
+	category: (String : restaurant, catering),
+	type : (String : mainMenu, subMenu, soup, dessert),
+	name : (string),
+	price : (string),
+	imgList : [object)]
+	isDeleted : (Boolean)
+}
 
-## Paidd Architecture
+```
 
-### Page
+## ⚒ 프로젝트 기능 요약
 
-1. Home
-2. Introducdtion
+### 사용자
 
-### Functions
+- [리뷰] 페이지에서 음식에 대한 사진과 함께 리뷰를 작성할 수 있습니다.
+- [마음의 소리] 페이지에서
 
-## Manager
+### 관리자
+
+1. CRUD
+
+- 공지사항
+- 리뷰
+- 고객의 소리
+- 예약하기
+
+2. 이미지 업로드
+
+-
 
 ## User
 
+- Everybody can read all posts.
+- Anyone write posts about counseling, support document, volunteer in participation page.
+
 ## part to be supplemented
+
+- UI/UX
+- paging Check
