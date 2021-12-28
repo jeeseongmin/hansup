@@ -177,26 +177,30 @@ const OrderFinal = ({ info, allMenuList }) => {
 							</div>
 						) : (
 							<>
-								<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start">
-									<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
-										현금영수증
+								{info.payment !== "card" && (
+									<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start">
+										<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
+											현금영수증
+										</div>
+										<div class="w-full md:flex-1 text-xl">
+											{info.cashReceipt.type === "business"
+												? "사업자증빙용"
+												: "개인소득공제용"}
+										</div>
 									</div>
-									<div class="w-full md:flex-1 text-xl">
-										{info.cashReceipt.type === "business"
-											? "사업자증빙용"
-											: "개인소득공제용"}
+								)}
+								{info.payment !== "card" && (
+									<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start">
+										<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
+											{info.cashReceipt.type === "business"
+												? "사업자번호"
+												: "핸드폰번호"}
+										</div>
+										<div class="w-full md:flex-1 text-xl">
+											{info.cashReceipt.number}
+										</div>
 									</div>
-								</div>
-								<div class="px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start">
-									<div class="w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0">
-										{info.cashReceipt.type === "business"
-											? "사업자번호"
-											: "핸드폰번호"}
-									</div>
-									<div class="w-full md:flex-1 text-xl">
-										{info.cashReceipt.number}
-									</div>
-								</div>
+								)}
 							</>
 						)}
 					</div>

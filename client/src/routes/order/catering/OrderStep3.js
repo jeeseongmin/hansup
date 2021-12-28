@@ -307,45 +307,47 @@ const OrderStep3 = ({
 								</div>
 							</div>
 						)}
-						<div
-							class={
-								"py-4 w-full h-full mb-12 flex flex-col transition delay-100 duration-200  " +
-								(selected ? "block" : "hidden")
-							}
-						>
-							{/* 
+						{info.payment !== "card" && (
+							<div
+								class={
+									"py-4 w-full h-full mb-12 flex flex-col transition delay-100 duration-200  " +
+									(selected ? "block" : "hidden")
+								}
+							>
+								{/* 
 								selected2가 false이면 개인소득공제용 
 								selected2가 true이면 사업자증빙용
 							*/}
-							<div class="flex flex-col h-auto mb-4">
-								<div class="w-full h-8">
-									<RadioButton
-										text={"개인소득공제용"}
-										setSelected={setSelected2}
-										current={selected2}
-										clicked={false}
+								<div class="flex flex-col h-auto mb-4">
+									<div class="w-full h-8">
+										<RadioButton
+											text={"개인소득공제용"}
+											setSelected={setSelected2}
+											current={selected2}
+											clicked={false}
+										/>
+									</div>
+								</div>
+								<div class="flex flex-col mb-4">
+									<div class="w-fuill h-8">
+										<RadioButton
+											text={"사업자증빙용"}
+											setSelected={setSelected2}
+											current={selected2}
+											clicked={true}
+										/>
+									</div>
+								</div>
+								<div class="h-12 my-2">
+									<InputBox
+										value={info.cashReceipt["number"]}
+										placeholder={!selected2 ? "휴대폰 번호" : "사업자등록번호"}
+										type=""
+										onChange={onChangeNumber}
 									/>
 								</div>
 							</div>
-							<div class="flex flex-col mb-4">
-								<div class="w-fuill h-8">
-									<RadioButton
-										text={"사업자증빙용"}
-										setSelected={setSelected2}
-										current={selected2}
-										clicked={true}
-									/>
-								</div>
-							</div>
-							<div class="h-12 my-2">
-								<InputBox
-									value={info.cashReceipt["number"]}
-									placeholder={!selected2 ? "휴대폰 번호" : "사업자등록번호"}
-									type=""
-									onChange={onChangeNumber}
-								/>
-							</div>
-						</div>
+						)}
 						<div class="w-full h-12 -mb-8">
 							{/* <SubmitButton text={"결제"} onSubmit={(e) => onSubmit(e)} /> */}
 							<div class="w-full h-12 flex flex-row justify-between">

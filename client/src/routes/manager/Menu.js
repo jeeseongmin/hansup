@@ -238,7 +238,6 @@ const Menu = ({ match }) => {
 							.then((response) => {
 								alert("삭제되었습니다.");
 								const cp = [...menuList];
-								console.log("menuList", cp, type);
 								if (type === "mainMenu") {
 									cp[0].menu = cp[0].menu.filter(function (element, index) {
 										return element._id !== id;

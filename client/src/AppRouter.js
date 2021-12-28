@@ -1,6 +1,16 @@
 import Layout from "components/Layout/Layout";
-import React, { useState, useEffect } from "react";
-import { Route, Switch, useHistory } from "react-router-dom";
+import Sidebar from "components/navs/Sidebar";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Route, Switch } from "react-router-dom";
+import {
+	setCurrentEmail,
+	setCurrentPassword,
+	setLoginToken,
+	setMenu,
+	setSubmenu,
+} from "reducers/setting";
+import Admin from "routes/admin/index";
 import Business from "routes/business/Index";
 import Community from "routes/community/Index";
 import Enterprise from "routes/enterprise/Index";
@@ -8,25 +18,10 @@ import Home from "routes/Home";
 import Intro from "routes/intro/Index";
 import Manager from "routes/manager/Index";
 import Order from "routes/order/Index";
-import { useDispatch, useSelector } from "react-redux";
-import Admin from "routes/admin/index";
-import {
-	setSidebar,
-	setLoginToken,
-	setCurrentEmail,
-	setCurrentPassword,
-	setMenu,
-	setSubmenu,
-} from "reducers/setting";
-import Logo from "image/logo.png";
-import Close from "image/close.png";
-import Sidebar from "components/navs/Sidebar";
 
 const App = () => {
-	const history = useHistory();
 	const dispatch = useDispatch();
 	const sidebar = useSelector((state) => state.setting.sidebar);
-	const loginToken = useSelector((state) => state.setting.loginToken);
 	const currentEmail = useSelector((state) => state.setting.currentEmail);
 	const currentPassword = useSelector((state) => state.setting.currentPassword);
 
