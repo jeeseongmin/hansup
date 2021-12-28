@@ -67,7 +67,7 @@ const Ordering = () => {
 				const tmpList = [];
 				for (let one of typeList) {
 					const cp = Response.data.filter(function (element, index) {
-						return element.type === one.type;
+						return element.type === one.type && !element.isDeleted;
 					});
 					tmpList.push({
 						title: one.title,
@@ -117,8 +117,8 @@ const Ordering = () => {
 					cp[type] = newDate;
 					setInfo(cp);
 					return;
-				} else if (e.getHours() < 9 || e.getHours() > 22) {
-					alert("오전 9시 ~ 오후 10시 사이에만 가능합니다.");
+				} else if (e.getHours() < 11 || e.getHours() > 20) {
+					alert("오전 11시 ~ 오후 8시 사이에만 가능합니다.");
 					selected.set("hour", 14);
 					let newDate = new Date(
 						selected.get("year"),

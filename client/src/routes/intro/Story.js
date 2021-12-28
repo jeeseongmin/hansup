@@ -1,8 +1,9 @@
 import React from "react";
 import PageLayout from "components/Layout/PageLayout";
 import ContentLayout from "components/Layout/ContentLayout";
-import StoryImg1 from "image/intro-story-img1.png";
-import StoryImg2 from "image/intro-story-img2.png";
+import StoryImg1 from "image/intro-story-img1.jpg";
+import StoryImg2 from "image/intro-story-img2.jpg";
+import StoryImg3 from "image/intro-story-img3.jpg";
 import Description from "components/Description";
 
 const Story = () => {
@@ -93,7 +94,7 @@ const Story = () => {
 						<div class="w-full h-auto flex lg:hidden flex-col mb-16">
 							<div class="h-72 w-full mb-4">
 								<img
-									src={StoryImg2}
+									src={StoryImg3}
 									class="w-full h-full object-cover"
 									alt="img1"
 								/>
@@ -113,7 +114,7 @@ const Story = () => {
 								여기 모인 대부분은 청각장애인이거나 청각장애인을 가족으로 두고 있는 사람들입니다.
 								수어를 하는 사람들도 있으며, 수어를 하지 못하는 사람들도 있습니다.
 								말하는 사람도 있으며, 듣지 못하는 사람도 있습니다.
-								하지만 놀랍게도 식당을 잘 돌아갑니다.
+								하지만 놀랍게도 식당은 잘 돌아갑니다.
 							</div>
 						</div>
 						<div class="w-full h-auto hidden lg:grid grid-cols-2 gap-8 mb-16">
@@ -132,11 +133,11 @@ const Story = () => {
 								여기 모인 대부분은 청각장애인이거나 청각장애인을 가족으로 두고 있는 사람들입니다.
 								수어를 하는 사람들도 있으며, 수어를 하지 못하는 사람들도 있습니다.
 								말하는 사람도 있으며, 듣지 못하는 사람도 있습니다.
-								하지만 놀랍게도 식당을 잘 돌아갑니다.
+								하지만 놀랍게도 식당은 잘 돌아갑니다.
 							</div>
 							<div>
 								<img
-									src={StoryImg2}
+									src={StoryImg3}
 									class="w-full h-full object-cover"
 									alt="img1"
 								/>
@@ -144,7 +145,7 @@ const Story = () => {
 						</div>
 					</div>
 				</ContentLayout>
-				<div class="w-full">
+				<div class="w-full -mt-16 mb-16">
 					<Description>
 						<span class="w-full flex justify-center items-center text-center md:text-left mt-2 pt-4 pb-2 px-4 text-md lg:text-xl font-bold">
 							우리는 더 많은 청각장애인과 함께 <br class="block md:hidden"></br>
@@ -157,7 +158,7 @@ const Story = () => {
 
 						<div class="w-full flex justify-center items-center text-center md:text-left pt-2 pb-2 px-4 text-md lg:text-xl font-bold">
 							우리 한숲푸드는 청각장애인들이 일하기에{" "}
-							<br class="block md:hidden"></br>친화적 환경을 조성하며,
+							<br class="block md:hidden"></br>편안한 환경을 만들고,
 						</div>
 						<div class="w-full flex justify-center items-center text-center md:text-left mb-2 pt-2 pb-4 px-4 text-md lg:text-xl font-bold">
 							손님들에겐 색다르고 특색있는 음식과 경험을{" "}

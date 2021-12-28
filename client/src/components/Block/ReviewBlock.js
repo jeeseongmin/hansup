@@ -97,7 +97,7 @@ const ReviewBlock = ({ review, reviewList, setReviewList }) => {
 					<img
 						class="w-full h-full object-cover"
 						src={
-							"http://hansup.cafe24app.com/api/image/view/" +
+							"http://hansupfood.com/api/image/view/" +
 							review.imgList[0].filename
 						}
 						alt="imgList"
@@ -140,7 +140,7 @@ const ReviewBlock = ({ review, reviewList, setReviewList }) => {
 								<img
 									class="w-1/2 lg:w-full h-full object-cover"
 									src={
-										"http://hansup.cafe24app.com/api/image/view/" +
+										"http://hansupfood.com/api/image/view/" +
 										review.imgList[0].filename
 									}
 									alt="imgList"

@@ -35,9 +35,11 @@ const Guide = () => {
 			<ContentLayout subtitle={"오시는 길"}>
 				<div class="flex flex-col">
 					<p class="text-2xl mb-6 ">
-						<b>한숲푸드</b>{" "}
+						<b>한숲푸드 (수화식당)</b>{" "}
 						<span class="text-lg">
-							| 경상북도 포항시 북구 불종로 67-4 (여천동), 1층
+							<br class="block md:hidden"></br>
+							<span class="hidden md:block">|</span> 경상북도 포항시 북구 불종로
+							67-4 (여천동), 1층
 						</span>
 					</p>
 					<div class="shadow-lg">

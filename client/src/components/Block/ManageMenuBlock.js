@@ -15,8 +15,7 @@ const ManageMenuBlock = ({ use, menu, updateMenu, deleteMenu, match }) => {
 				<div class="h-48 mb-2 relative">
 					<img
 						src={
-							"http://hansup.cafe24app.com/api/image/view/" +
-							menu.imgList[0].filename
+							"http://hansupfood.com/api/image/view/" + menu.imgList[0].filename
 						}
 						class="h-full w-full object-cover "
 						alt="menu"
@@ -31,7 +30,7 @@ const ManageMenuBlock = ({ use, menu, updateMenu, deleteMenu, match }) => {
 							</span>{" "}
 							/{" "}
 							<span
-								onClick={() => deleteMenu(menu._id)}
+								onClick={() => deleteMenu(menu._id, menu.type)}
 								class="cursor-pointer ml-2"
 							>
 								삭제

@@ -43,10 +43,10 @@ const Menu = ({ match }) => {
 	const typeList =
 		match.params.type === "catering"
 			? [
-					{ title: "메인메뉴 (택 4)", type: "mainMenu" },
-					{ title: "식사메뉴 (택 4)", type: "subMenu" },
+					{ title: "메인메뉴(고정)", type: "mainMenu" },
+					{ title: "식사메뉴(고정)", type: "subMenu" },
 					{ title: "국 (택 1)", type: "soup" },
-					{ title: "디저트 (택 5)", type: "dessert" },
+					{ title: "디저트(고정)", type: "dessert" },
 			  ]
 			: [
 					{ title: "파스타 & 필라프", type: "pasta" },
@@ -215,7 +215,7 @@ const Menu = ({ match }) => {
 		}
 	}, [isEdit]);
 
-	const deleteMenu = async (id) => {
+	const deleteMenu = async (id, type) => {
 		confirmAlert({
 			message: "정말 삭제하시겠습니까?",
 			buttons: [
@@ -238,21 +238,22 @@ const Menu = ({ match }) => {
 							.then((response) => {
 								alert("삭제되었습니다.");
 								const cp = [...menuList];
-								if (newMenu.type === "mainMenu") {
+								console.log("menuList", cp, type);
+								if (type === "mainMenu") {
 									cp[0].menu = cp[0].menu.filter(function (element, index) {
-										return element.isDeleted;
+										return element._id !== id;
 									});
-								} else if (newMenu.type === "subMenu") {
+								} else if (type === "subMenu") {
 									cp[1].menu = cp[1].menu.filter(function (element, index) {
-										return element.isDeleted;
+										return element._id !== id;
 									});
-								} else if (newMenu.type === "soup") {
+								} else if (type === "soup") {
 									cp[2].menu = cp[2].menu.filter(function (element, index) {
-										return element.isDeleted;
+										return element._id !== id;
 									});
-								} else if (newMenu.type === "dessert") {
+								} else if (type === "dessert") {
 									cp[3].menu = cp[3].menu.filter(function (element, index) {
-										return element.isDeleted;
+										return element._id !== id;
 									});
 								}
 								setMenuList(cp);
@@ -347,7 +348,7 @@ const Menu = ({ match }) => {
 							category: newMenu.category,
 							type: newMenu.type,
 							name: newMenu.name,
-							price: newMenu.price,
+							price: match.params.type === "catering" ? 0 : newMenu.price,
 							imgList: newMenu.imgList,
 						},
 						{

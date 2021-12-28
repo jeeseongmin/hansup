@@ -265,6 +265,7 @@ const OrderStep3 = ({
 									<MenuItem value={"card"}>후불 결제 (카드)</MenuItem>
 									<MenuItem value={"cash"}>후불 결제 (현금)</MenuItem>
 									<MenuItem value={"transfer"}>계좌이체</MenuItem>
+									<MenuItem value={"giftCard"}>상품권 결제</MenuItem>
 								</Select>
 							</FormControl>
 

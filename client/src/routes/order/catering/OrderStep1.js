@@ -69,15 +69,18 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
 		} else if (info.count === "" || info.current === 0) {
 			alert("인원수를 입력해주세요.");
 			countRef.current.focus();
-		} else if (info.delivery === "delivery") {
-			if (info.address1 === "") {
-				alert("도로명 주소를 입력해주세요.");
-				// address1Ref.current.focus();
-				addressBtnRef.current.click();
-			} else if (info.address2 === "") {
-				alert("상세 주소를 입력해주세요.");
-				address2Ref.current.focus();
-			}
+		} else if (info.count < 8) {
+			alert(
+				"배달 주문 시 최소 10인까지, 직접 방문 시 최소 8인까지 가능합니다. 인원 수를 변경해주세요."
+			);
+			countRef.current.focus();
+		} else if (info.delivery === "delivery" && info.address1 === "") {
+			alert("도로명 주소를 입력해주세요.");
+			// address1Ref.current.focus();
+			addressBtnRef.current.click();
+		} else if (info.delivery === "delivery" && info.address2 === "") {
+			alert("상세 주소를 입력해주세요.");
+			address2Ref.current.focus();
 		} else {
 			setStep(2);
 			document.getElementById("scrollRef").scrollTo(0, 0);
@@ -114,9 +117,9 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
 				<div class="w-full md:w-2/3 lg:w-1/2">
 					<InfoBlock title={"예약자 정보"}>
 						<div class="px-4 flex flex-col">
-							<div class="h-12 mb-4 flex flex-row justify-between items-center">
-								<div class="w-1/4 text-xl">이름</div>
-								<div class="flex-1 h-full">
+							<div class="h-auto md:h-12 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center">
+								<div class="w-full md:w-1/4 mb-2 md:mb-0 text-xl">이름</div>
+								<div class="w-full md:flex-1 h-12 md:h-full">
 									<InputBox
 										value={info.name}
 										refName={nameRef}
@@ -126,9 +129,9 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
 									/>
 								</div>
 							</div>
-							<div class="h-12 mb-4 flex flex-row justify-between items-center">
-								<div class="w-1/4 text-xl">연락처</div>
-								<div class="flex-1 h-full grid grid-cols-3 gap-2">
+							<div class="h-auto md:h-12 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center">
+								<div class="w-full md:w-1/4 mb-2 md:mb-0 text-xl">연락처</div>
+								<div class="w-full md:flex-1 h-12 md:h-full grid grid-cols-3 gap-2">
 									<InputBox
 										value={info.phone1}
 										refName={phone1Ref}
@@ -152,9 +155,11 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
 									/>
 								</div>
 							</div>
-							<div class="h-12 mb-4 flex flex-row justify-between items-center">
-								<div class="w-1/4 text-xl">연락처 확인</div>
-								<div class="flex-1 h-full grid grid-cols-3 gap-2">
+							<div class="h-auto md:h-12 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center">
+								<div class="w-full md:w-1/4 mb-2 md:mb-0 text-xl">
+									연락처 확인
+								</div>
+								<div class="w-full md:flex-1 h-12 md:h-full grid grid-cols-3 gap-2">
 									<InputBox
 										value={info.check1}
 										refName={check1Ref}
@@ -178,9 +183,13 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
 									/>
 								</div>
 							</div>
-							<div class="h-12 mb-4 flex flex-row justify-between items-center">
-								<div class="w-1/4 text-xl">인원수</div>
-								<div class="flex-1 h-full">
+							<div class="mb-0 text-xs font-bold text-red-500">
+								{" "}
+								직접 방문시, 최소 8인까지 가능
+							</div>
+							<div class="h-auto md:h-12 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center">
+								<div class="w-full md:w-1/4 mb-2 md:mb-0 text-xl">인원수</div>
+								<div class="w-full md:flex-1 h-12 md:h-full">
 									<InputBox
 										value={info.count}
 										refName={countRef}
@@ -190,9 +199,13 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
 									/>
 								</div>
 							</div>
-							<div class="h-12 mb-4 flex flex-row justify-between items-center">
-								<div class="w-1/4 text-xl">요청사항</div>
-								<div class="flex-1 h-full">
+							<div class="mb-0 text-xs font-bold text-red-500">
+								{" "}
+								요청 메뉴 등이 있다면 기입 가능
+							</div>
+							<div class="h-auto md:h-12 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center">
+								<div class="w-full md:w-1/4 mb-2 md:mb-0 text-xl">요청사항</div>
+								<div class="w-full md:flex-1 h-12 md:h-full">
 									<InputBox
 										value={info.request}
 										refName={requestRef}
@@ -209,12 +222,12 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
 							배달을 원하는 시간과 장소를 입력해주세요. <br></br>
 							날짜는 오늘({dateToString(new Date())}) 기준 2일 이후부터 2개월
 							전까지만 선택가능합니다. <br></br>
-							시간은 오전 9시 이후부터 오후 10시까지만 선택가능합니다.
+							시간은 오전 11시 이후부터 오후 8시까지만 선택가능합니다.
 						</p>
 						<div class="px-4 flex flex-col">
-							<div class="h-12 mb-4 flex flex-row justify-between items-center">
-								<div class="w-1/4 text-xl">날짜</div>
-								<div class="flex-1 h-full flex justify-between items-center">
+							<div class="h-auto md:h-12 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center">
+								<div class="w-full md:w-1/4 mb-2 md:mb-0 text-xl">날짜</div>
+								<div class="w-full md:flex-1 h-12 md:h-full flex justify-between items-center">
 									<div class="flex-1 h-12 px-4 outline-none border-2 border-gray-200 focus:border-hansupBrown transition delay-100 duration-200 flex items-center">
 										{dateToString(info.date)}
 									</div>
@@ -228,31 +241,14 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
 									</div>
 								</div>
 							</div>
-							{/* <div class="h-12 mb-4 flex flex-row justify-between items-center">
-							<div class="w-1/4 text-xl">시간</div>
-							<div class="flex-1 h-full grid grid-cols-2 gap-2">
-								<InputBox
-									value=""
-									type=""
-									placeholder="시"
-									changeInfo={changeInfo}
-								/>
-								<InputBox
-									value=""
-									type=""
-									placeholder="분"
-									changeInfo={changeInfo}
-								/>
-							</div>
-						</div> */}
 							<div
 								class={
-									"h-12 flex flex-row justify-between items-center " +
+									"h-auto md:h-12 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center " +
 									(info.delivery === "self" ? "mb-8" : "mb-4")
 								}
 							>
-								<div class="w-1/4 text-xl">수령방식</div>
-								<div class="flex-1 h-full grid grid-cols-2">
+								<div class="w-full md:w-1/4 mb-2 md:mb-0 text-xl">수령방식</div>
+								<div class="w-full md:flex-1 h-12 md:h-full grid grid-cols-2">
 									<div
 										onClick={() => changeInfo("delivery", "delivery")}
 										class={
@@ -278,19 +274,23 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
 									</div>
 								</div>
 							</div>
+							<div class="mb-0 text-xs font-bold text-red-500">
+								{" "}
+								배달비 : 포항시내 1만원, 시외 3만원
+							</div>
 							<div
 								class={
-									"h-28 mb-8 flex-row justify-between items-start " +
+									"h-auto md:h-28 mb-8 flex-col md:flex-row justify-start md:justify-between items-start " +
 									(info.delivery === "self" ? "hidden" : "flex")
 								}
 							>
-								<div class="w-1/4 text-xl h-full grid grid-rows-2 gap-2 ">
+								<div class="w-full md:w-1/4 mb-0 text-xl h-12 md:h-full flex md:grid grid-rows-2 gap-2 ">
 									<p class="w-full h-full flex items-center">배달장소</p>
 									<p></p>
 								</div>
 
-								<div class="flex-1 h-full grid grid-rows-2 gap-2">
-									<div class="h-full w-full flex flex-row justify-between items-center ">
+								<div class="w-full md:flex-1 h-28 md:h-full grid grid-rows-2 gap-2">
+									<div class="h-full w-full flex flex-row md: justify-between items-center ">
 										<InputBox
 											value={info.address1}
 											refName={address1Ref}
@@ -315,16 +315,16 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
 									/>
 								</div>
 							</div>
-							<div class="w-full h-28 md:h-12 flex flex-col md:flex-row justify-between">
+							<div class="w-full h-28 md:h-12 flex flex-col md:flex-row md: justify-between">
 								<div
 									onClick={prevStep}
-									class="mb-4 md:mb-0 cursor-pointer w-full md:w-48 lg:w-60 h-full flex justify-center items-center outline-none bg-hansupBrown text-white font-bold text-xl"
+									class="mb-4 md:mb-0 cursor-pointer hover:bg-white hover:text-hansupBrown border border-hansupBrown transition delay-50 duration-150 w-full md:w-48 lg:w-60 h-full flex justify-center items-center outline-none bg-hansupBrown text-white font-bold text-xl"
 								>
 									뒤로
 								</div>
 								<div
 									onClick={nextStep}
-									class="cursor-pointer w-full md:w-48 lg:w-60 h-full flex justify-center items-center outline-none bg-hansupBrown text-white font-bold text-xl"
+									class="cursor-pointer w-full md:w-48 hover:bg-white hover:text-hansupBrown border border-hansupBrown transition delay-50 duration-150 lg:w-60 h-full flex justify-center items-center outline-none bg-hansupBrown text-white font-bold text-xl"
 								>
 									다음
 								</div>

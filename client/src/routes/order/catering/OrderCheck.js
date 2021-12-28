@@ -140,10 +140,10 @@ const OrderCheck = () => {
 	const [listLoading, setListLoading] = useState(true);
 
 	const typeList = [
-		{ title: "메인메뉴 (택 4)", type: "mainMenu" },
-		{ title: "식사메뉴 (택 4)", type: "subMenu" },
+		{ title: "메인메뉴 (확정)", type: "mainMenu" },
+		{ title: "식사메뉴 (확정)", type: "subMenu" },
 		{ title: "국 (택 1)", type: "soup" },
-		{ title: "디저트 (택 5)", type: "dessert" },
+		{ title: "디저트 (확정)", type: "dessert" },
 	];
 
 	const getList = async () => {

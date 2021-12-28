@@ -2,7 +2,7 @@
   "name": "hansup",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://hansup.cafe24app.com",
+  "proxy": "http://hansupfood.com",
   "dependencies": {
     "@craco/craco": "^6.3.0",
     "@emotion/react": "^11.5.0",
@@ -39,9 +39,11 @@
     "react-redux": "^7.2.5",
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
+    "react-slick": "^0.28.1",
     "react-to-print": "^2.14.2",
     "redux-devtools-extension": "^2.13.9",
     "redux-persist": "^6.0.0",
+    "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.1",
     "tailwind-scrollbar-hide": "^1.0.3",
     "web-vitals": "^1.0.1"

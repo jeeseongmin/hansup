@@ -74,8 +74,7 @@ const OrderMenuBlock = ({
 			<div class="h-48 mb-2 relative">
 				<img
 					src={
-						"http://hansup.cafe24app.com/api/image/view/" +
-						menu.imgList[0].filename
+						"http://hansupfood.com/api/image/view/" + menu.imgList[0].filename
 					}
 					class="h-full w-full object-cover shadow-lg"
 					alt="menuList"
