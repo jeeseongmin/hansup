@@ -110,9 +110,13 @@ Menu : {
 ### **사용자**
 
 - [커뮤니티] - [리뷰] 페이지에서 음식에 대한 사진과 함께 리뷰를 작성할 수 있습니다.
+
   ![img](https://user-images.githubusercontent.com/47960777/147586094-ae4e5c13-4e1e-4a86-9ea8-039cd69ad437.png)
+
 - [커뮤니티] - [고객의 소리] 페이지에서 건의사항을 작성할 수 있습니다.
+
   ![img](https://user-images.githubusercontent.com/47960777/147586095-9d7cc31f-6493-4903-a79a-c00e6aee9831.png)
+
 - [케이터링 예약] 페이지에서 특정 날짜를 지정하여 예약할 수 있습니다.
 <div style="display:grid; grid-template-columns: 1fr 1fr; gap:4px;">
 <div>
@@ -156,10 +160,15 @@ Menu : {
 ### **관리자**
 
 - [특정 url](http://hansupfood.com/admin)을 통해 관리자 페이지로 접속할 수 있습니다.
+
   ![img](https://user-images.githubusercontent.com/47960777/147586073-a8f918d3-6bc8-4849-9086-c75588c2b379.png)
+
 - [공지사항] 페이지에서 파일 업로드 기능을 포함하여 텍스트 에디터([draft.js](https://draftjs.org/))를 통해 공지사항을 작성할 수 있습니다.
+
   ![img](https://user-images.githubusercontent.com/47960777/147586083-255506ee-60b8-406f-94ee-2c51d24d05b2.png)
+
 - 공지사항, 리뷰, 고객의 소리, 예약 관리를 진행할 수 있습니다. (CRUD)
+
 <div style="display:grid; grid-template-columns: 1fr 1fr; gap:4px;">
 <div>
 <img src="https://user-images.githubusercontent.com/47960777/147586083-255506ee-60b8-406f-94ee-2c51d24d05b2.png" alt="img">
