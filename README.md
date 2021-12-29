@@ -163,9 +163,13 @@ Menu : {
 
   ![img](https://user-images.githubusercontent.com/47960777/147586073-a8f918d3-6bc8-4849-9086-c75588c2b379.png)
 
+---
+
 - [공지사항] 페이지에서 파일 업로드 기능을 포함하여 텍스트 에디터([draft.js](https://draftjs.org/))를 통해 공지사항을 작성할 수 있습니다.
 
   ![img](https://user-images.githubusercontent.com/47960777/147586083-255506ee-60b8-406f-94ee-2c51d24d05b2.png)
+
+---
 
 - 공지사항, 리뷰, 고객의 소리, 예약 관리를 진행할 수 있습니다. (CRUD)
 
@@ -188,6 +192,8 @@ Menu : {
 </div>
 </div>
 
+---
+
 - [관리자] - [예약확인] 페이지에서 캘린더를 통해 월 별 예약 현황을 확인할 수 있습니다. 또한 예약 세부 페이지에서는 예약을 확정 여부를 결정할 수 있습니다.
 <div style="display:grid; grid-template-columns: 1fr 1fr; gap:4px;">
 <div>
@@ -209,6 +215,8 @@ Menu : {
 </div>
 </div>
 
+---
+
 - [관리자] - [예약확인] 페이지에서 예약 별로 필요한 정보가 요약된 영수증을 출력할 수 있습니다. (클라이언트 요청 사항 - 주방과 배달원에게 각각 제공되어야 할 영수증이 필요합니다.)
 <div style="display:grid; grid-template-columns: 1fr 1fr; gap:4px;">
 <div>
@@ -229,6 +237,8 @@ Menu : {
 </div>
 </div>
 
+---
+
 - [관리자] - [메뉴관리] 페이지에서 보여지는 메뉴를 관리할 수 있습니다.
 <div style="display:grid; grid-template-columns: 1fr 1fr; gap:4px;">
 <div>
@@ -239,6 +249,8 @@ Menu : {
 <img src="https://user-images.githubusercontent.com/47960777/147589370-8ea5084f-4a99-451e-b23b-8b15d56b0b5d.png" alt="img">
 </div>
 </div>
+
+---
 
 - 신규 [예약], [고객의 소리]에 대한 알림을 실시간으로 확인할 수 있습니다. <br></br>(redux 사용)
   [예약]과 [고객의 소리]의 CRUD가 발생할 때마다 redux로 상태 변화를 감지해서 우측 상단에 알람이 나타나게 해서 관리자가 실시간으로 예약을 확인할 수 있도록 합니다.
