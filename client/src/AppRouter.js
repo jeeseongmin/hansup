@@ -65,30 +65,7 @@ const App = () => {
 		}
 	}, []);
 
-	return isIe ? (
-		<>
-			<div class="h-full">
-				haha
-				{/* <div class="w-full h-full flex flex-col justify-center items-center">
-					<h1 class="font-bold text-4xl mb-8">다른 브라우저를 이용해주세요.</h1>
-					<div class="w-full h-96 flex justify-center items-center mb-8">
-						<img
-							src="/image/home-img2.png"
-							class="h-full object-contain"
-							alt="main-img2"
-						/>
-					</div>
-					<p>한숲푸드 홈페이지는</p>
-					<p>
-						<b>Internet Explorer</b>를 지원하지 않습니다.
-					</p>
-					<p>
-						<b>Chrome, Edge, Safari</b>를 이용해주시기 바랍니다.
-					</p>
-				</div> */}
-			</div>
-		</>
-	) : (
+	return (
 		<>
 			<div
 				id="scrollRef"
@@ -115,6 +92,55 @@ const App = () => {
 			<Sidebar isLogin={isLogin} />
 		</>
 	);
+	// return isIe ? (
+	// 	<>
+	// 		<div class="h-full">
+	// 			<div class="w-full h-full flex flex-col justify-center items-center">
+	// 				<h1 class="font-bold text-4xl mb-8">다른 브라우저를 이용해주세요.</h1>
+	// 				<div class="w-full h-96 flex justify-center items-center mb-8">
+	// 					<img
+	// 						src="/image/home-img2.png"
+	// 						class="h-full object-contain"
+	// 						alt="main-img2"
+	// 					/>
+	// 				</div>
+	// 				<p>한숲푸드 홈페이지는</p>
+	// 				<p>
+	// 					<b>Internet Explorer</b>를 지원하지 않습니다.
+	// 				</p>
+	// 				<p>
+	// 					<b>Chrome, Edge, Safari</b>를 이용해주시기 바랍니다.
+	// 				</p>
+	// 			</div>
+	// 		</div>
+	// 	</>
+	// ) : (
+	// 	<>
+	// 		<div
+	// 			id="scrollRef"
+	// 			class={
+	// 				"h-screen min-h-screen select-none w-full flex flex-col scrollbar-hide relative " +
+	// 				(sidebar === "off" ? "overflow-y-scroll" : "overflow-y-hidden")
+	// 			}
+	// 		>
+	// 			<>
+	// 				<Layout>
+	// 					<Switch>
+	// 						<Route exact path="/admin" component={Admin} />
+	// 						<Route exact path="/" component={Home} />
+	// 						<Route path="/intro/:submenu" component={Intro} />
+	// 						<Route path="/business/:submenu" component={Business} />
+	// 						<Route path="/community/:submenu" component={Community} />
+	// 						<Route path="/order/:type/:submenu" component={Order} />
+	// 						<Route path="/enterprise/:submenu" component={Enterprise} />
+	// 						<Route path="/manager/:submenu" component={Manager} />
+	// 					</Switch>
+	// 				</Layout>
+	// 			</>
+	// 		</div>
+	// 		<Sidebar isLogin={isLogin} />
+	// 	</>
+	// );
 };
 
 export default App;
