@@ -1,23 +1,18 @@
-import Modal from "@mui/material/Modal";
-import InfoBlock from "components/Block/InfoBlock";
-import PopupPostCodeBlock from "components/Block/PopupPostCodeBlock";
 import Switch from "@mui/material/Switch";
 import axios from "axios";
-import DatePicker from "react-datepicker";
-import { useHistory, Link } from "react-router-dom";
-import "react-datepicker/dist/react-datepicker.css";
-import { AiTwotoneCalendar } from "react-icons/ai";
+import InfoBlock from "components/Block/InfoBlock";
 import Subtitle from "components/Subtitle";
-import React, { useState, useRef, useEffect } from "react";
-import { MdClose } from "react-icons/md";
-import { setRefreshOrder } from "reducers/common";
-import { useDispatch, useSelector } from "react-redux";
 import dayjs from "dayjs";
-import InputBox from "components/Box/InputBox";
-import ReactToPrint from "react-to-print";
-import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
-import { GrAddCircle, GrSubtractCircle } from "react-icons/gr";
+import React, { useRef, useState } from "react";
 import { confirmAlert } from "react-confirm-alert"; // Import
+import "react-datepicker/dist/react-datepicker.css";
+import { GrAddCircle, GrSubtractCircle } from "react-icons/gr";
+import { MdClose } from "react-icons/md";
+import { RiArrowDropDownLine } from "react-icons/ri";
+import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import ReactToPrint from "react-to-print";
+import { setRefreshOrder } from "reducers/common";
 
 const OrderCheckBlock = ({
 	info,
@@ -32,15 +27,11 @@ const OrderCheckBlock = ({
 	const [checked, setChecked] = React.useState(info.payed);
 	const [checkedPrint, setCheckedPrint] = React.useState(false);
 	const refresh_order = useSelector((state) => state.common.refresh_order);
-	const [newInfo, setNewInfo] = useState({});
 	const printRef = useRef();
 	const printBtnRef = useRef();
 
 	const dayArr = ["일", "월", "화", "수", "목", "금", "토"];
 
-	const [open, setOpen] = useState(false);
-	const addressModalOpen = () => setOpen(true);
-	const addressModalClose = () => setOpen(false);
 	const [tmp, setTmp] = useState("");
 	const [printInfo, setPrintInfo] = useState({
 		price: "",

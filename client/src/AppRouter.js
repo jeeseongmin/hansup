@@ -67,8 +67,9 @@ const App = () => {
 
 	return isIe ? (
 		<>
-			<div class="h-screen">
-				<div class="w-full h-full flex flex-col justify-center items-center">
+			<div class="h-full">
+				haha
+				{/* <div class="w-full h-full flex flex-col justify-center items-center">
 					<h1 class="font-bold text-4xl mb-8">다른 브라우저를 이용해주세요.</h1>
 					<div class="w-full h-96 flex justify-center items-center mb-8">
 						<img
@@ -84,7 +85,7 @@ const App = () => {
 					<p>
 						<b>Chrome, Edge, Safari</b>를 이용해주시기 바랍니다.
 					</p>
-				</div>
+				</div> */}
 			</div>
 		</>
 	) : (
