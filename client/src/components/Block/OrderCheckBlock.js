@@ -6,13 +6,19 @@ import dayjs from "dayjs";
 import React, { useRef, useState } from "react";
 import { confirmAlert } from "react-confirm-alert"; // Import
 import "react-datepicker/dist/react-datepicker.css";
-import { GrAddCircle, GrSubtractCircle } from "react-icons/gr";
+import {
+	GrAddCircle,
+	GrSubtractCircle,
+	GrFormEdit,
+	GrSave,
+} from "react-icons/gr";
 import { MdClose } from "react-icons/md";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import ReactToPrint from "react-to-print";
 import { setRefreshOrder } from "reducers/common";
+import OrderBillBlock from "components/Block/OrderBillBlock";
 
 const OrderCheckBlock = ({
 	info,
@@ -29,7 +35,56 @@ const OrderCheckBlock = ({
 	const refresh_order = useSelector((state) => state.common.refresh_order);
 	const printRef = useRef();
 	const printBtnRef = useRef();
-
+	const [printMenu, setPrintMenu] = useState(
+		info.mainMenu
+			.concat(info.subMenu, info.soup, info.dessert)
+			.map((element, index) => {
+				return {
+					name: allMenuList[element].name,
+					isEdit: false,
+					isDeleted: false,
+				};
+			})
+	);
+	const reset = () => {
+		setPrintMenu(
+			info.mainMenu
+				.concat(info.subMenu, info.soup, info.dessert)
+				.map((element, index) => {
+					return {
+						name: allMenuList[element].name,
+						isEdit: false,
+						isDeleted: false,
+					};
+				})
+		);
+	};
+	const changePrintMenu = (e, index) => {
+		const cp = [...printMenu];
+		cp[index].name = e.target.value;
+		setPrintMenu(cp);
+	};
+	const deletePrintMenu = (index) => {
+		console.log("deletePrintMEnu", index);
+		const cp = [...printMenu];
+		cp[index].isDeleted = true;
+		setPrintMenu(cp);
+	};
+	const createPrintMenu = (index) => {
+		const cp = [...printMenu];
+		cp.splice(index + 1, 0, {
+			name: "",
+			isEdit: false,
+			isDeleted: false,
+		}); // index 2 ('c')의 위치에 요소를 추가
+		// cp.push({
+		// 	name: "",
+		// 	isEdit: false,
+		// 	isDeleted: false,
+		// });
+		setPrintMenu(cp);
+		console.log("new", cp);
+	};
 	const dayArr = ["일", "월", "화", "수", "목", "금", "토"];
 
 	const [tmp, setTmp] = useState("");
@@ -262,7 +317,8 @@ const OrderCheckBlock = ({
 							/>
 						</div>
 					</div>
-					<div class="w-full flex flex-col justify-start mb-4">
+					{/* 자율 메뉴 입력 - 현재는 전체 메뉴 수정이 있기 때문에 필요 없음 */}
+					{/* <div class="w-full flex flex-col justify-start mb-2">
 						<p class="h-8 w-auto font-bold text-hansupBrown mr-2">
 							자율 메뉴 :{" "}
 						</p>
@@ -285,6 +341,75 @@ const OrderCheckBlock = ({
 								class="flex-1 h-full px-4 outline-none border-2 border-gray-200 focus:border-hansupBrown transition delay-100 duration-200 "
 								placeholder={"자율 메뉴"}
 							/>
+						</div>
+					</div> */}
+					{/* 메뉴 수정란 */}
+					<div class="w-full">
+						<p class="h-8 w-auto font-bold text-hansupBrown mr-2">
+							메뉴 수정 :{" "}
+						</p>
+						<p class={"w-auto text-red-500 text-xs font-bold mb-2"}>
+							프린트될 항목 추가, 수정, 삭제 가능 <br></br>[프린트 미리 보기]를
+							고려해서 메뉴란 수정바랍니다.<br></br>초기화 버튼을 통해 처음으로
+							돌아갈 수 있습니다.
+						</p>
+						<div class="border-l border-r border-t border-black flex flex-col mb-2">
+							<div
+								class={"flex flex-row font-bold text-lg border-b border-black "}
+							>
+								<div class="w-16 flex justify-center items-center border-r border-black">
+									NO
+								</div>
+								<div class="flex-1 flex justify-center items-center">
+									음식명
+								</div>
+								<div
+									onClick={reset}
+									class="w-16 border-l border-black text-center"
+								>
+									<span class="text-sm text-red-500 cursor-pointer">
+										초기화
+									</span>
+								</div>
+							</div>
+							{listLoading &&
+								printMenu.map((element, index) => {
+									return (
+										<div
+											key={element}
+											class={
+												"flex-row text-lg font-bold border-b border-black " +
+												(element.isDeleted ? " hidden " : " flex ")
+											}
+										>
+											<div class="w-16 flex justify-center items-center border-r border-black">
+												{index + 1}
+											</div>
+
+											<div class="flex-1 flex justify-center items-center">
+												<input
+													value={element.name}
+													class="w-full outline-none text-center px-2"
+													onChange={(e) => changePrintMenu(e, index)}
+												/>
+											</div>
+											<div class="w-16 border-l border-black flex flex-row justify-around items-center">
+												<div
+													class="cursor-pointer"
+													onClick={() => deletePrintMenu(index)}
+												>
+													<GrSubtractCircle size={20} />
+												</div>
+												<div
+													class="cursor-pointer"
+													onClick={() => createPrintMenu(index)}
+												>
+													<GrAddCircle size={20} />{" "}
+												</div>
+											</div>
+										</div>
+									);
+								})}{" "}
 						</div>
 					</div>
 					<div class="w-full flex flex-col justify-start">
@@ -618,6 +743,7 @@ const OrderCheckBlock = ({
 			>
 				출력 미리보기 (실제 인쇄되는 화면과 다릅니다.)
 			</p>
+			{/* 메뉴 관리 */}
 			<div
 				ref={printRef}
 				class={
@@ -625,238 +751,20 @@ const OrderCheckBlock = ({
 					(checkedPrint ? "grid" : "hidden")
 				}
 			>
-				<div class="w-full p-8 border border-black">
-					<p class="text-3xl font-bold mb-4">
-						케이터링 ({new Date(info.date).getMonth() + 1}/
-						{new Date(info.date).getDate()},{" "}
-						{dayArr[dayjs(new Date(info.date)).get("day")]})
-					</p>
-					<div class="flex justify-between">
-						<p class="text-2xl font-bold mb-4">
-							<span class="text-red-500">{info.count}명</span> X{" "}
-							{Number(printInfo.price).toLocaleString()}원
-						</p>
-						<p class="text-2xl font-bold mb-4 text-blue-500">
-							{new Date(info.date).getHours() +
-								"시 " +
-								(new Date(info.date).getMinutes() === 0
-									? "00"
-									: new Date(info.date).getMinutes()) +
-								"분"}{" "}
-						</p>
-					</div>
-					<div class="flex justify-between">
-						<p class="text-2xl font-bold mb-4">{info.phone}</p>
-						<p class="text-xl font-bold mb-4 text-red-500">
-							{info.payment === "card"
-								? "카드결제"
-								: info.payment === "cash"
-								? "현금결제"
-								: "계좌이체"}
-						</p>
-					</div>
-					{info.payment !== "card" && info.cashReceipt.status && (
-						<>
-							<div class="flex flex-col justify-between border-2 border-gray-200 p-4 mb-4">
-								<div class="flex flex-row justify-between">
-									<p class="text-xl font-bold mb-4">현금영수증 : </p>
-									<p class="text-xl font-bold mb-2">
-										{info.cashReceipt.type === "business"
-											? "사업자증빙"
-											: "개인소득공제"}
-									</p>
-								</div>
-								<p class="text-xl font-bold">{info.cashReceipt.number}</p>
-							</div>
-						</>
-					)}
-					<div class="text-red-500 font-bold mb-2">
-						- {info.delivery === "delivery" ? info.address : "직접 수령"}
-					</div>
-					<p class="text-xl font-bold mb-2">
-						{info.request === "" ? "고객 요청사항 없음" : "- " + info.request}
-					</p>
-					{printInfo.description.length === 0 ||
-					printInfo.description.filter(function (element, index) {
-						return !element.isDeleted;
-					}).length === 0
-						? ""
-						: printInfo.description
-								.filter(function (element, index) {
-									return !element.isDeleted;
-								})
-								.map((element, index) => {
-									return (
-										<p class="text-2xl font-bold mb-2">- {element.text}</p>
-									);
-								})}
-					<div class="w-full mt-4">
-						<div class="border-l border-r border-t border-black flex flex-col">
-							<div
-								class={
-									"flex flex-row text-xl font-bold border-b border-black " +
-									(info.mainMenu.concat(info.subMenu, info.soup, info.dessert)
-										.length < 16
-										? "h-10"
-										: "h-8")
-								}
-							>
-								<div class="w-16 flex justify-center items-center border-r border-black">
-									NO
-								</div>
-								<div class="flex-1 flex justify-center items-center">
-									음식명
-								</div>
-							</div>
-							{listLoading &&
-								info.mainMenu
-									.concat(info.subMenu, info.soup, info.dessert)
-									.map((element, index) => {
-										return allMenuList[element] ? (
-											<div
-												class={
-													"flex flex-row text-xl font-bold border-b border-black " +
-													(info.mainMenu.concat(
-														info.subMenu,
-														info.soup,
-														info.dessert
-													).length < 16
-														? "h-10"
-														: "h-8")
-												}
-											>
-												<div class="w-16 flex justify-center items-center border-r border-black">
-													{index + 1}
-												</div>
-												<div class="flex-1 flex justify-center items-center">
-													{allMenuList[element].name === "자율 메뉴"
-														? printInfo.bonusMenu
-														: allMenuList[element].name}
-												</div>
-											</div>
-										) : (
-											""
-										);
-									})}{" "}
-						</div>
-					</div>
-				</div>
-				<div class="w-full p-8 border border-black">
-					<p class="text-3xl font-bold mb-4">
-						케이터링 ({new Date(info.date).getMonth() + 1}/
-						{new Date(info.date).getDate()},{" "}
-						{dayArr[dayjs(new Date(info.date)).get("day")]})
-					</p>
-					<div class="flex justify-between">
-						<p class="text-2xl font-bold mb-4">
-							<span class="text-red-500">{info.count}명</span> X{" "}
-							{Number(printInfo.price).toLocaleString()}원
-						</p>
-						<p class="text-2xl font-bold mb-4 text-blue-500">
-							{new Date(info.date).getHours() +
-								"시 " +
-								(new Date(info.date).getMinutes() === 0
-									? "00"
-									: new Date(info.date).getMinutes()) +
-								"분"}{" "}
-						</p>
-					</div>
-					<div class="flex justify-between">
-						<p class="text-2xl font-bold mb-4">{info.phone}</p>
-						<p class="text-xl font-bold mb-4 text-red-500">
-							{info.payment === "card"
-								? "카드결제"
-								: info.payment === "cash"
-								? "현금결제"
-								: "계좌이체"}
-						</p>
-					</div>
-					{info.payment !== "card" && info.cashReceipt.status && (
-						<>
-							<div class="flex flex-col justify-between border-2 border-gray-200 p-4 mb-4">
-								<div class="flex flex-row justify-between">
-									<p class="text-xl font-bold mb-4">현금영수증 : </p>
-									<p class="text-xl font-bold mb-2">
-										{info.cashReceipt.type === "business"
-											? "사업자증빙"
-											: "개인소득공제"}
-									</p>
-								</div>
-								<p class="text-xl font-bold">{info.cashReceipt.number}</p>
-							</div>
-						</>
-					)}
-					<div class="text-red-500 font-bold mb-2">
-						- {info.delivery === "delivery" ? info.address : "직접 수령"}
-					</div>
-					<p class="text-xl font-bold mb-2">
-						{info.request === "" ? "고객 요청사항 없음" : "- " + info.request}
-					</p>
-					{printInfo.description.length === 0 ||
-					printInfo.description.filter(function (element, index) {
-						return !element.isDeleted;
-					}).length === 0
-						? ""
-						: printInfo.description
-								.filter(function (element, index) {
-									return !element.isDeleted;
-								})
-								.map((element, index) => {
-									return (
-										<p class="text-2xl font-bold mb-2">- {element.text}</p>
-									);
-								})}
-					<div class="w-full mt-4">
-						<div class="border-l border-r border-t border-black flex flex-col">
-							<div
-								class={
-									"flex flex-row text-xl font-bold border-b border-black " +
-									(info.mainMenu.concat(info.subMenu, info.soup, info.dessert)
-										.length < 16
-										? "h-10"
-										: "h-8")
-								}
-							>
-								<div class="w-16 flex justify-center items-center border-r border-black">
-									NO
-								</div>
-								<div class="flex-1 flex justify-center items-center">
-									음식명
-								</div>
-							</div>
-							{listLoading &&
-								info.mainMenu
-									.concat(info.subMenu, info.soup, info.dessert)
-									.map((element, index) => {
-										return allMenuList[element] ? (
-											<div
-												class={
-													"flex flex-row text-xl font-bold border-b border-black " +
-													(info.mainMenu.concat(
-														info.subMenu,
-														info.soup,
-														info.dessert
-													).length < 16
-														? "h-10"
-														: "h-8")
-												}
-											>
-												<div class="w-16 flex justify-center items-center border-r border-black">
-													{index + 1}
-												</div>
-												<div class="flex-1 flex justify-center items-center">
-													{allMenuList[element].name === "자율 메뉴"
-														? printInfo.bonusMenu
-														: allMenuList[element].name}
-												</div>
-											</div>
-										) : (
-											""
-										);
-									})}{" "}
-						</div>
-					</div>
-				</div>
+				<OrderBillBlock
+					listLoading={listLoading}
+					info={info}
+					printInfo={printInfo}
+					dayArr={dayArr}
+					printMenu={printMenu}
+				/>
+				<OrderBillBlock
+					listLoading={listLoading}
+					info={info}
+					printInfo={printInfo}
+					dayArr={dayArr}
+					printMenu={printMenu}
+				/>
 			</div>
 		</>
 	);
