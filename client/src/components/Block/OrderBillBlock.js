@@ -88,36 +88,6 @@ const OrderBillBlock = ({
 						</div>
 						<div class="flex-1 flex justify-center items-center">음식명</div>
 					</div>
-					{/* {listLoading &&
-                    info.mainMenu
-                        .concat(info.subMenu, info.soup, info.dessert)
-                        .map((element, index) => {
-                            return allMenuList[element] ? (
-                                <div
-                                    class={
-                                        "flex flex-row font-bold border-b border-black " +
-                                        (info.mainMenu.concat(
-                                            info.subMenu,
-                                            info.soup,
-                                            info.dessert
-                                        ).length < 16
-                                            ? "h-8 text-lg"
-                                            : "h-6 text-md")
-                                    }
-                                >
-                                    <div class="w-16 flex justify-center items-center border-r border-black">
-                                        {index + 1}
-                                    </div>
-                                    <div class="flex-1 flex justify-center items-center">
-                                        {allMenuList[element].name === "자율 메뉴"
-                                            ? printInfo.bonusMenu
-                                            : allMenuList[element].name}
-                                    </div>
-                                </div>
-                            ) : (
-                                ""
-                            );
-                        })}{" "} */}
 					{listLoading &&
 						printMenu.map((element, index) => {
 							return (

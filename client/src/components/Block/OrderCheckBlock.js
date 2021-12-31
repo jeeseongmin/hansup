@@ -90,7 +90,7 @@ const OrderCheckBlock = ({
 	const [tmp, setTmp] = useState("");
 	const [printInfo, setPrintInfo] = useState({
 		price: "",
-		bonusMenu: "",
+		bonusMenu: "something",
 		description: [],
 	});
 	const priceRef = useRef();
