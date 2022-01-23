@@ -237,12 +237,12 @@ const NoticeDetailBlock = ({ match }) => {
 					>
 						뒤로 가기
 					</Link>
-					{/* <button
+					{/* <Button
 							onClick={submit}
 							class="outline-none w-full md:w-auto cursor-pointer px-0 md:px-16 py-2 justify-center border border-hansupBrown text-hansupBrown flex flex-row items-center hover:bg-hansupBrown hover:text-white hover:font-bold"
 						>
 							제출하기
-						</button> */}
+						</Button> */}
 				</div>
 			</ContentLayout>
 		</>

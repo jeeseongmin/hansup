@@ -55,15 +55,15 @@ const PopupPostCodeBlock = (props) => {
 			<MobileView>
 				<DaumPostcode style={postCodeMobileStyle} onComplete={handlePostCode} />
 			</MobileView> */}
-			{/* <button
-				type="button"
+			{/* <Button
+				type="Button"
 				onClick={() => {
 					props.onClose();
 				}}
 				className="postCode_btn"
 			>
 				닫기
-			</button> */}
+			</Button> */}
 		</div>
 	);
 };
