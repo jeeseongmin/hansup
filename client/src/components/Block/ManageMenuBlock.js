@@ -17,7 +17,7 @@ const ManageMenuBlock = ({ use, menu, updateMenu, deleteMenu, match }) => {
 						src={
 							"http://hansupfood.com/api/image/view/" + menu.imgList[0].filename
 						}
-						class="h-full w-full object-cover "
+						class="h-full w-full object-cover"
 						alt="menu"
 					/>
 					<div class="z-20 w-full h-full absolute left-0 top-0 transition delay-50 duration-150 bg-black bg-opacity-0 hover:bg-opacity-30 opacity-0 hover:opacity-100 flex justify-center items-center">

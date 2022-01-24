@@ -44,15 +44,15 @@ const App = () => {
 		}
 	}, [sessionStorage.getItem("loginToken")]);
 
-	useEffect(() => {
-		if (
-			navigator.userAgent.indexOf("MSIE") !== -1 ||
-			!!document.documentMode === true
-		) {
-			setIsIe(true);
-			console.log("Internet Explorer");
-		}
-	}, []);
+	// useEffect(() => {
+	// 	if (
+	// 		navigator.userAgent.indexOf("MSIE") !== -1 ||
+	// 		!!document.documentMode === true
+	// 	) {
+	// 		setIsIe(true);
+	// 		console.log("Internet Explorer");
+	// 	}
+	// }, []);
 
 	useEffect(() => {
 		let loginToken = sessionStorage.getItem("loginToken");
@@ -70,7 +70,7 @@ const App = () => {
 			<div
 				id="scrollRef"
 				class={
-					"h-screen min-h-screen select-none w-full flex flex-col scrollbar-hide relative " +
+					"h-screen min-h-screen w-full flex flex-col scrollbar-hide relative " +
 					(sidebar === "off" ? "overflow-y-scroll" : "overflow-y-hidden")
 				}
 			>
