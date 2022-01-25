@@ -37,8 +37,8 @@ const Guide = () => {
 					<p class="text-2xl mb-6 ">
 						<b>한숲푸드 (수화식당)</b>{" "}
 						<span class="text-lg">
-							<br class="block md:hidden"></br>
-							<span class="hidden md:block">|</span> 경상북도 포항시 북구 불종로
+							<br class="inline-block md:hidden"></br>
+							<span class="hidden md:inline-block">|</span> 경상북도 포항시 북구 불종로
 							67-4 (여천동), 1층
 						</span>
 					</p>

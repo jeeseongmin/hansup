@@ -346,7 +346,7 @@ const Navbar = ({ currentMenu }) => {
 				<ResponsiveContainer>
 					<Logo>
 						<Link to="/">
-							<img src={logoImg} class="object-cover h-8" alt="logo" />
+							<img src={logoImg} class="object-cover h-8" alt="한숲푸드 로고" />
 						</Link>
 					</Logo>
 					<div
@@ -365,7 +365,7 @@ const Navbar = ({ currentMenu }) => {
 				<NavContainer onMouseOver={onMouseOver}>
 					<Logo>
 						<Link to="/">
-							<img src={logoImg} class="object-cover h-8" alt="logo" />
+							<img src={logoImg} class="object-cover h-8" alt="한숲푸드 로고" />
 						</Link>
 					</Logo>
 					<MenuContainer>
@@ -429,7 +429,7 @@ const Navbar = ({ currentMenu }) => {
 									src={ProfileImg}
 									onClick={onToggleProfile}
 									class="z-30 p-1 w-10 h-10 rounded-full cursor-pointer object-cover"
-									alt="profile"
+									alt="관리자 이미지"
 								/>
 								<div
 									onClick={onToggleProfile}
@@ -522,7 +522,7 @@ const Navbar = ({ currentMenu }) => {
 							<img
 								src="/image/logo.png"
 								class="object-cover h-8 invisible"
-								alt="logo"
+								alt="한숲푸드 로고"
 							/>
 						</Link>
 					</Logo>
@@ -552,7 +552,7 @@ const Navbar = ({ currentMenu }) => {
 									<img
 										src={ProfileImg}
 										class="z-30 p-1 w-10 h-10 rounded-full cursor-pointer object-cover"
-										alt="profile"
+										alt="관리자 이미지"
 									/>
 								</div>
 							) : null}
@@ -583,7 +583,7 @@ const Navbar = ({ currentMenu }) => {
 									<img
 										src={ProfileImg}
 										class="z-30 p-1 w-10 h-10 rounded-full cursor-pointer object-cover"
-										alt="profile"
+										alt="관리자 이미지"
 									/>
 								</div>
 							) : null}
@@ -614,7 +614,7 @@ const Navbar = ({ currentMenu }) => {
 									<img
 										src={ProfileImg}
 										class="z-30 p-1 w-10 h-10 rounded-full cursor-pointer object-cover"
-										alt="profile"
+										alt="관리자 이미지"
 									/>
 								</div>
 							) : null}
@@ -645,7 +645,7 @@ const Navbar = ({ currentMenu }) => {
 									<img
 										src={ProfileImg}
 										class="z-30 p-1 w-10 h-10 rounded-full cursor-pointer object-cover"
-										alt="profile"
+										alt="관리자 이미지"
 									/>
 								</div>
 							) : null}
@@ -669,7 +669,7 @@ const Navbar = ({ currentMenu }) => {
 									<img
 										src={ProfileImg}
 										class="z-30 p-1 w-10 h-10 rounded-full cursor-pointer object-cover"
-										alt="profile"
+										alt="관리자 이미지"
 									/>
 								</div>
 							) : null}
