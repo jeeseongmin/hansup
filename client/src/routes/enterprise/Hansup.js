@@ -10,7 +10,11 @@ const Hansup = () => {
 			<ContentLayout subtitle={"한숲맛이야기"}>
 				<div class="flex h-full md:h-72 flex-col md:flex-row">
 					<div class="w-full md:w-auto h-full mr-4 flex justify-center items-center">
-						<img src={HansupImg} class="w-96 h-72 object-cover " alt="img" />
+						<img
+							src={HansupImg}
+							class="w-96 h-72 object-cover "
+							alt="한숲맛이야기 로고 이미지"
+						/>
 					</div>
 					<div class="w-full md:flex-1 flex flex-col justify-between py-2 ">
 						<div class="px-8 py-4 md:p-0">

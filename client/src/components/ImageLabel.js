@@ -71,7 +71,7 @@ const ImageLabel = ({ imgUrl, text, url }) => {
 			<img
 				src={imgUrl}
 				class="z-30 h-full w-full object-cover absolute left-0 top-0"
-				alt="img"
+				alt={text}
 			/>
 			<div class="z-50 font-bold text-xl">{text}</div>
 			<div class="z-50 hidden lg:block">

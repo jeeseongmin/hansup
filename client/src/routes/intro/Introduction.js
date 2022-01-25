@@ -49,7 +49,7 @@ const Introduction = () => {
 						<img
 							src={IntroImg2}
 							class="absolute right-0 h-full w-full object-contain"
-							alt="img"
+							alt="종이비행기 사진"
 						/>
 					</div>
 				</div>

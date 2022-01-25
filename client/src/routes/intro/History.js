@@ -9,7 +9,7 @@ const History = () => {
 			<ContentLayout subtitle={"한숲의 역사"}>
 				<div class="flex flex-row">
 					<div class="w-full lg:w-2/3">
-						<img src={HistoryImg} alt="img1" />
+						<img src={HistoryImg} alt="한숲 푸드의 역사" />
 					</div>
 				</div>
 			</ContentLayout>

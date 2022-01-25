@@ -89,7 +89,11 @@ const Restaurant = () => {
 			<ContentLayout subtitle={"수화식당"}>
 				<div class="flex w-full h-auto lg:h-auto flex-col lg:flex-row items-center mb-8 relative">
 					<div class="w-full lg:w-3/5 px-12 lg:pl-0 lg:pr-12 h-96 mb-4 lg:mb-0 flex justify-start items-start ">
-						<img src={Test} class="h-full w-full object-cover" alt="img" />
+						<img
+							src={Test}
+							class="h-full w-full object-cover"
+							alt="수화하고 있는 사진"
+						/>
 					</div>
 					<div class="h-auto lg:h-96">
 						<Description>

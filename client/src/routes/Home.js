@@ -235,7 +235,7 @@ const Home = () => {
 						<div class="w-full h-72 lg:h-96 px-4 md:px-8 lg:px-24 flex flex-col justify-center">
 							<img
 								src={Lunchbox}
-								alt="도시락"
+								alt="도시락 사진"
 								class="object-cover w-full h-48 md:h-96"
 							/>
 						</div>

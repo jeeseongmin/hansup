@@ -18,7 +18,7 @@ const Story = () => {
 								<img
 									src={StoryImg1}
 									class="w-full h-full object-cover"
-									alt="img1"
+									alt="농아인과 청인이 대화하는 사진 1"
 								/>
 							</div>
 							<div class="w-full h-full text-md leading-loose text-justify">
@@ -44,7 +44,11 @@ const Story = () => {
 								</b>
 							</div>
 							<div class="h-full w-full">
-								<img src={StoryImg1} class="h-full object-cover" alt="img1" />
+								<img
+									src={StoryImg1}
+									class="h-full object-cover"
+									alt="농아인과 청인이 대화하는 사진 1"
+								/>
 							</div>
 						</div>
 						{/* 반응형 & 원본 */}
@@ -54,7 +58,7 @@ const Story = () => {
 								<img
 									src={StoryImg2}
 									class="w-full h-full object-cover"
-									alt="img1"
+									alt="여자가 활짝 웃고있는 사진"
 								/>
 							</div>
 							<div class="w-full h-full text-md leading-loose text-justify">
@@ -74,7 +78,7 @@ const Story = () => {
 								<img
 									src={StoryImg2}
 									class="w-full h-full object-cover"
-									alt="img1"
+									alt="여자가 활짝 웃고있는 사진"
 								/>
 							</div>
 							<div class="h-full text-lg leading-loose text-justify">
@@ -96,7 +100,7 @@ const Story = () => {
 								<img
 									src={StoryImg3}
 									class="w-full h-full object-cover"
-									alt="img1"
+									alt="농아인에게 청인이 수화로 설명하는 모습"
 								/>
 							</div>
 							<div class="h-full text-md leading-loose text-justify">
@@ -139,7 +143,7 @@ const Story = () => {
 								<img
 									src={StoryImg3}
 									class="w-full h-full object-cover"
-									alt="img1"
+									alt="농아인에게 청인이 수화로 설명하는 모습"
 								/>
 							</div>
 						</div>

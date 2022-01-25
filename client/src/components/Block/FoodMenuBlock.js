@@ -19,7 +19,7 @@ const FoodMenuBlock = ({ menu }) => {
 						menu.imgList[0].filename
 					}
 					class="h-full w-full object-cover "
-					alt="menu"
+					alt={"수화식당의 음식, " + menu.name}
 				/>
 			</div>
 			<div class="text-lg mb-2">{menu.name}</div>
