@@ -77,7 +77,7 @@ const OrderMenuBlock = ({
 						"http://hansupfood.com/api/image/view/" + menu.imgList[0].filename
 					}
 					class="h-full w-full object-cover shadow-lg"
-					alt="menuList"
+					alt={menu.name + " 메뉴 사진"}
 				/>
 				<div
 					class={

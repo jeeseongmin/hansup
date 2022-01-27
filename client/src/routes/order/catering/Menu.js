@@ -66,7 +66,11 @@ const Menu = () => {
 						케이터링의 메뉴 구성은 메인메뉴 5개, 식사메뉴 5개, 디저트 5개로,
 						달마다 구성이 조금씩 달라집니다.
 					</p>
-					<img src={CateringMenu} alt="img1" class="w-full object-cover" />
+					<img
+						src={CateringMenu}
+						alt="케이터링에 대한 메뉴 구성 사진"
+						class="w-full object-cover"
+					/>
 				</div>
 			</ContentLayout>
 			<ContentLayout subtitle={"케이터링 이달의 메뉴"}>

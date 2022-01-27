@@ -40,7 +40,11 @@ const BoxSliderBlock = ({ type }) => {
 							<img
 								src={element}
 								class="w-full h-full object-contain"
-								alt="img"
+								alt={
+									type === "catering"
+										? "케이터링 대표 음식 사진"
+										: "도시락 대표 음식 사진"
+								}
 							/>{" "}
 						</div>
 					);

@@ -100,7 +100,7 @@ const ReviewBlock = ({ review, reviewList, setReviewList }) => {
 							"http://hansupfood.com/api/image/view/" +
 							review.imgList[0].filename
 						}
-						alt="imgList"
+						alt="리뷰 음식 사진"
 					/>
 					<div
 						class={

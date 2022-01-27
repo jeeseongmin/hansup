@@ -22,7 +22,7 @@ const CateringMenuBlock = ({ url, title, price }) => {
 				<img
 					src={url}
 					class="h-full w-full object-cover shadow-lg"
-					alt="menu"
+					alt={title + " 메뉴 사진"}
 				/>
 				<div
 					class={
