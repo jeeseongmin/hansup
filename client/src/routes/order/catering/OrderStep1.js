@@ -102,11 +102,11 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
   };
   const DateInput = ({ value, onClick }) => {
     return (
-      <div
+      <button
         onClick={onClick}
         class='w-full h-full flex justify-center items-center cursor-pointer'>
         <AiTwotoneCalendar size={24} />
-      </div>
+      </button>
     );
   };
 
@@ -247,7 +247,7 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                 }>
                 <div class='w-full md:w-1/4 mb-2 md:mb-0 text-xl'>수령방식</div>
                 <div class='w-full md:flex-1 h-12 md:h-full grid grid-cols-2'>
-                  <div
+                  <button
                     onClick={() => changeInfo("delivery", "delivery")}
                     class={
                       "w-full h-full flex justify-center items-center transition delay-50 duration-100 border-2 cursor-pointer " +
@@ -256,8 +256,8 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                         : "border-gray-200 text-gray-400")
                     }>
                     배달
-                  </div>
-                  <div
+                  </button>
+                  <button
                     onClick={() => changeInfo("self", "delivery")}
                     class={
                       "w-full h-full flex justify-center items-center transition delay-50 duration-100 border-t-2 border-b-2 border-r-2 cursor-pointer " +
@@ -267,7 +267,7 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                     }>
                     {" "}
                     직접방문
-                  </div>
+                  </button>
                 </div>
               </div>
               <div class='mb-0 text-xs font-bold text-red-500'>
@@ -310,16 +310,16 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                 </div>
               </div>
               <div class='w-full h-28 md:h-12 flex flex-col md:flex-row md: justify-between'>
-                <div
+                <button
                   onClick={prevStep}
                   class='mb-4 md:mb-0 cursor-pointer hover:bg-white hover:text-hansupBrown border border-hansupBrown transition delay-50 duration-150 w-full md:w-48 lg:w-60 h-full flex justify-center items-center outline-none bg-hansupBrown text-white font-bold text-xl'>
                   뒤로
-                </div>
-                <div
+                </button>
+                <button
                   onClick={nextStep}
                   class='cursor-pointer w-full md:w-48 hover:bg-white hover:text-hansupBrown border border-hansupBrown transition delay-50 duration-150 lg:w-60 h-full flex justify-center items-center outline-none bg-hansupBrown text-white font-bold text-xl'>
                   다음
-                </div>
+                </button>
               </div>
             </div>
           </InfoBlock>

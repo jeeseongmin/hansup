@@ -349,16 +349,16 @@ const Navbar = ({ currentMenu }) => {
               <img src={logoImg} class='object-cover h-8' alt='한숲푸드 로고' />
             </Link>
           </Logo>
-          <div
+          <button
             onClick={() => dispatch(setSidebar("on"))}
             class='text-white hidden md:block cursor-pointer z-50'>
             <GiHamburgerMenu size={28} />
-          </div>
-          <div
+          </button>
+          <button
             onClick={() => dispatch(setSidebar("on"))}
             class='text-white block md:hidden cursor-pointer z-50'>
             <GiHamburgerMenu size={24} />
-          </div>
+          </button>
         </ResponsiveContainer>
         <NavContainer onMouseOver={onMouseOver}>
           <Logo>
@@ -472,7 +472,7 @@ const Navbar = ({ currentMenu }) => {
                           {orderLoading ? undecidedCount : 0}
                         </div>
                       </div>
-                      <div
+                      <button
                         onClick={() => goPage("/manager/voice/unread")}
                         class='relative cursor-pointer w-full py-1 border border-hansupBrown text-hansupBrown flex justify-center transition delay-50 duration-300 hover:bg-hansupBrown hover:text-white'>
                         신규 고객의 소리
@@ -487,18 +487,18 @@ const Navbar = ({ currentMenu }) => {
                           }>
                           {voiceLoading ? unreadCount : 0}
                         </div>
-                      </div>
+                      </button>
                       {/* <div
 												onClick={goEditPage}
 												class="cursor-pointer w-full py-1 border border-hansupBrown text-hansupBrown flex justify-center transition delay-50 duration-300 hover:bg-hansupBrown hover:text-white"
 											>
 												정보 변경
 											</div> */}
-                      <div
+                      <button
                         onClick={logout}
                         class='cursor-pointer w-full py-1 border border-hansupBrown text-hansupBrown flex justify-center transition delay-50 duration-300 hover:bg-hansupBrown hover:text-white'>
                         로그아웃
-                      </div>
+                      </button>
                     </div>
                   </div>
                 ) : null}

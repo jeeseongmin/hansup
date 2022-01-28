@@ -130,11 +130,11 @@ const OrderCheck = () => {
   };
   const DateInput = ({ value, onClick }) => {
     return (
-      <div
+      <button
         onClick={onClick}
         class='w-full h-full flex justify-center items-center cursor-pointer'>
         <AiTwotoneCalendar size={24} />
-      </div>
+      </button>
     );
   };
 
