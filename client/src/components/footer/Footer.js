@@ -90,7 +90,7 @@ const Footer = () => {
           {/* responsiveFootLogoBox */}
           <button onClick={goHome} class='w-1/4 cursor-pointer '>
             {/* responsiveFootLogo */}
-            <img src={Logo} class='h-full object-cover' alt='logo' />
+            <img src={Logo} class='h-full object-cover' alt='' />
           </button>
           {/* responsiveFootTextBox */}
           <div class='w-1/2 flex flex-col'>

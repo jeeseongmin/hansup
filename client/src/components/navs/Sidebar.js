@@ -36,7 +36,7 @@ const Sidebar = ({ isLogin }) => {
           <img
             src={Close}
             class='h-full object-cover cursor-pointer'
-            alt='logo'
+            alt='close'
           />
         </button>
         <div class='flex-1 w-full flex flex-col font-bold text-lg sm:text-xl'>
@@ -88,11 +88,7 @@ const Sidebar = ({ isLogin }) => {
         <button
           onClick={() => selectMenu("/")}
           class='w-full h-auto flex flex-col justify-end px-0 sm:px-4'>
-          <img
-            src={Logo}
-            class='w-full object-cover cursor-pointer'
-            alt='logo'
-          />
+          <img src={Logo} class='w-full object-cover cursor-pointer' alt='' />
         </button>
       </div>
     </div>
