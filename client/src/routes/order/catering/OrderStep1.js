@@ -21,6 +21,19 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  // const [info, setinfo] = useState({
+  //   year: 2022,
+  //   month: null,
+  //   date: null,
+  //   hour: null,
+  //   minute: 0,
+  // });
+
+  // const changeInfo = (e, type) => {
+  //   const cp = { ...info };
+  //   cp[type] = e.target.value;
+  //   setinfo(cp);
+  // };
 
   const nameRef = useRef();
   const phone1Ref = useRef();
@@ -34,6 +47,11 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
   const address1Ref = useRef();
   const address2Ref = useRef();
   const addressBtnRef = useRef();
+  const yearRef = useRef();
+  const monthRef = useRef();
+  const dateRef = useRef();
+  const hourRef = useRef();
+  const minuteRef = useRef();
 
   const clickAddress = (address) => {
     const cp = { ...info };
@@ -81,6 +99,7 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
         "배달 주문 시 최소 10인까지, 직접 방문 시 최소 8인까지 가능합니다. 인원 수를 변경해주세요."
       );
       countRef.current.focus();
+    } else if (!dateCheck()) {
     } else if (info.delivery === "delivery" && info.address1 === "") {
       alert("도로명 주소를 입력해주세요.");
       // address1Ref.current.focus();
@@ -89,9 +108,50 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
       alert("상세 주소를 입력해주세요.");
       address2Ref.current.focus();
     } else {
+      const d = new Date();
+      d.setFullYear(info.year);
+      d.setMonth(info.month * 1 - 1);
+      d.setDate(info.day);
+      d.setHours(info.hour);
+      d.setMinutes(info.minute);
+      const cp = { ...info };
+      cp.date = d;
+      setInfo(cp);
+      console.log(d);
       setStep(2);
       document.getElementById("scrollRef").scrollTo(0, 0);
     }
+  };
+
+  const dateCheck = () => {
+    if (2021 > info.year || info.year > 2030) {
+      alert("올바른 년도를 입력해주세요.");
+      yearRef.current.focus();
+      return false;
+    } else if (1 > info.month || info.month > 12) {
+      alert("올바른 월을 입력해주세요(1~12)");
+      monthRef.current.focus();
+      return false;
+    } else if (
+      1 > info.day ||
+      info.day > new Date(info.year, info.month + 1, 0).getDate()
+    ) {
+      alert(
+        "올바른 일자를 입력해주세요(1~" +
+          new Date(info.year, info.month + 1, 0).getDate()
+      );
+      dateRef.current.focus();
+      return false;
+    } else if (11 > info.hour || info.hour > 20) {
+      alert("올바른 시간을 입력해주세요(11~20) : 오전 11시부터 오후 8시");
+      hourRef.current.focus();
+      return false;
+    } else if (info.minute !== 0 && info.minute !== 30) {
+      console.log(info.minute);
+      alert("올바른 분을 입력해주세요(30분 단위로 가능합니다. 0 또는 30)");
+      minuteRef.current.focus();
+      return false;
+    } else return true;
   };
 
   const dateToString = (date) => {
@@ -113,7 +173,7 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
         title='날짜선택'
         onClick={onClick}
         class='w-full h-full flex justify-center items-center cursor-pointer'>
-        <AiTwotoneCalendar size={24} />
+        <AiTwotoneCalendar size={24} title='날짜선택' />
       </button>
     );
   };
@@ -237,13 +297,15 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
             <p class='w-full text-center mb-4 font-bold text-hansupBrown'>
               배달을 원하는 시간과 장소를 입력해주세요. <br></br>
               날짜는 오늘({dateToString(new Date())}) 기준 2일 이후부터 2개월
-              전까지만 선택가능합니다. <br></br>
-              시간은 오전 11시 이후부터 오후 8시까지만 선택가능합니다.
+              전까지만 입력해주세요. <br></br>
+              시간은 오전 11시 이후부터 오후 8시(11 ~ 20)까지만 가능합니다.{" "}
+              <br></br>
+              분은 30분 단위로 입력 가능합니다.
             </p>
             <div class='px-4 flex flex-col'>
               <div class='h-auto md:h-12 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center'>
                 <div class='w-full md:w-1/4 mb-2 md:mb-0 text-xl'>날짜</div>
-                <div class='w-full md:flex-1 h-12 md:h-full flex justify-between items-center'>
+                {/* <div class='w-full md:flex-1 h-12 md:h-full flex justify-between items-center'>
                   <div class='flex-1 h-12 px-4 border-2 border-gray-200 focus:border-hansupBrown transition delay-100 duration-200 flex items-center'>
                     {dateToString(info.date)}
                   </div>
@@ -255,6 +317,66 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                       customInput={<DateInput />}
                     />
                   </div>
+                </div> */}
+                <div class='w-full md:flex-1 h-12 md:h-full grid grid-cols-3 gap-2'>
+                  <InputBox
+                    value={info.year}
+                    refName={yearRef}
+                    title='연도'
+                    type='year'
+                    placeholder='연도'
+                    onChange={changeInfo}
+                  />
+                  <InputBox
+                    value={info.month}
+                    refName={monthRef}
+                    title='월'
+                    type='month'
+                    placeholder='월'
+                    onChange={changeInfo}
+                  />
+                  <InputBox
+                    value={info.day}
+                    refName={dateRef}
+                    title='일자'
+                    type='day'
+                    placeholder='일'
+                    onChange={changeInfo}
+                  />
+                </div>
+              </div>
+              <div class='h-auto md:h-12 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center'>
+                <div class='w-full md:w-1/4 mb-2 md:mb-0 text-xl'></div>
+                {/* <div class='w-full md:flex-1 h-12 md:h-full flex justify-between items-center'>
+                  <div class='flex-1 h-12 px-4 border-2 border-gray-200 focus:border-hansupBrown transition delay-100 duration-200 flex items-center'>
+                    {dateToString(info.date)}
+                  </div>
+                  <div class='w-12'>
+                    <DatePicker
+                      selected={info.date}
+                      onChange={(date) => changeInfo(date, "date")}
+                      showTimeSelect
+                      customInput={<DateInput />}
+                    />
+                  </div>
+                </div> */}
+                <div class='w-full md:flex-1 h-12 md:h-full grid grid-cols-2 gap-2'>
+                  <InputBox
+                    value={info.hour}
+                    refName={hourRef}
+                    title='시간(11 ~ 20)'
+                    type='hour'
+                    placeholder='시간(11 ~ 20)'
+                    onChange={changeInfo}
+                  />
+                  <InputBox
+                    value={info.minute}
+                    refName={minuteRef}
+                    title='분'
+                    type='minute'
+                    placeholder='분'
+                    onChange={changeInfo}
+                  />
                 </div>
               </div>
               <div
@@ -289,7 +411,11 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                   </button>
                 </div>
               </div>
-              <div class='mb-0 text-xs font-bold text-red-500'>
+              <div
+                class={
+                  "mb-0 text-xs font-bold text-red-500 " +
+                  (info.delivery === "self" ? "hidden" : "flex")
+                }>
                 {" "}
                 배달비 : 포항시내 1만원, 시외 3만원
               </div>

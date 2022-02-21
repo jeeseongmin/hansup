@@ -36,6 +36,11 @@ const Ordering = () => {
       number: "",
     },
     payed: false,
+    year: 2022,
+    month: null,
+    day: null,
+    hour: null,
+    minute: 0,
   });
 
   // 메뉴 리스트 불러오기

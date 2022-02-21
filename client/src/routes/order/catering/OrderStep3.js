@@ -137,6 +137,9 @@ const OrderStep3 = ({
                 {info.date.getFullYear()}년 {info.date.getMonth() + 1}월{" "}
                 {info.date.getDate()}일
               </div>
+              {/* <div class='w-full md:flex-1 text-xl'>
+                {info.year}년 {info.month}월 {info.day}일
+              </div> */}
             </div>
             <div class='px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-center border-b-2 border-gray-200'>
               <div class='w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0'>
@@ -145,6 +148,9 @@ const OrderStep3 = ({
               <div class='w-full md:flex-1 text-xl'>
                 {info.date.getHours()}시 {info.date.getMinutes()}분
               </div>
+              {/* <div class='w-full md:flex-1 text-xl'>
+                {info.hour}시 {info.minute}분
+              </div> */}
             </div>
             <div class='px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-center border-b-2 border-gray-200'>
               <div class='w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0'>
@@ -155,13 +161,19 @@ const OrderStep3 = ({
               </div>
             </div>
             <div class='px-4 py-4 flex flex-col md:flex-row justify-start md:justify-between items-start'>
-              <div class='w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0'>
-                배달장소
-              </div>
-              <div class='w-full md:flex-1 text-xl'>
-                {info.address1} <br></br>
-                {info.address2}
-              </div>
+              {info.delivery === "self" ? (
+                <></>
+              ) : (
+                <>
+                  <div class='w-full md:w-1/4 text-xl font-bold md:font-normal mb-4 md:mb-0'>
+                    배달장소
+                  </div>
+                  <div class='w-full md:flex-1 text-xl'>
+                    {info.address1} <br></br>
+                    {info.address2}
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </InfoBlock>
