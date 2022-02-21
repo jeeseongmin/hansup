@@ -47,6 +47,7 @@ const Paging = (props) => {
     return (
       <button
         onClick={() => setPage(current)}
+        title={page === current ? "현재 페이지" : ""}
         class={
           "mr-2 w-8 h-8 transition delay-50 duration-300 flex justify-center items-center cursor-pointer " +
           (page === current

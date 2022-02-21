@@ -11,7 +11,7 @@ const OrderReceiptBlock = ({ info, handleClose, allMenuList }) => {
         <Subtitle subtitle='예약 내역 확인' />
         <button
           onClick={handleClose}
-          class=' cursor-pointer h-full flex flex-row justify-end items-center outline-none transtion delay-50 duration-300 text-hansupBrown font-bold text-xl'>
+          class=' cursor-pointer h-full flex flex-row justify-end items-center transtion delay-50 duration-300 text-hansupBrown font-bold text-xl'>
           <MdClose size={32} color='#6C4D3F' />
         </button>
       </div>

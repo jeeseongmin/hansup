@@ -3,8 +3,13 @@ import React, { useState, useEffect, useRef } from "react";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 // import orderList from "routes/order/catering/data/orderList";
 import axios from "axios";
-
+import useTitle from "hooks/useTitle";
 const OrderStep2 = ({ info, setInfo, setStep, menuList, listLoading }) => {
+  const updateTitle = useTitle("Loading...");
+  setTimeout(
+    () => updateTitle("한숲푸드 - 케이터링 예약하기 - 메뉴 선택"),
+    1000
+  );
   const [menu, setMenu] = useState({
     mainMenu: [...menuList[0].menu].map((element, index) => {
       return element._id;
@@ -103,12 +108,12 @@ const OrderStep2 = ({ info, setInfo, setStep, menuList, listLoading }) => {
           <div class='w-full h-12 flex flex-row justify-between'>
             <button
               onClick={prevStep}
-              class='w-36 md:w-60 cursor-pointer hover:bg-white hover:text-hansupBrown border border-hansupBrown transition delay-50 duration-150 h-full flex justify-center items-center outline-none bg-hansupBrown text-white font-bold text-xl'>
+              class='w-36 md:w-60 cursor-pointer hover:bg-white hover:text-hansupBrown border border-hansupBrown transition delay-50 duration-150 h-full flex justify-center items-center bg-hansupBrown text-white font-bold text-xl'>
               <BsArrowLeft class='mr-2' /> 이전
             </button>
             <button
               onClick={nextStep}
-              class='w-36 md:w-60 cursor-pointer hover:bg-white hover:text-hansupBrown border border-hansupBrown transition delay-50 duration-150 h-full flex justify-center items-center outline-none bg-hansupBrown text-white font-bold text-xl'>
+              class='w-36 md:w-60 cursor-pointer hover:bg-white hover:text-hansupBrown border border-hansupBrown transition delay-50 duration-150 h-full flex justify-center items-center bg-hansupBrown text-white font-bold text-xl'>
               다음 <BsArrowRight class='ml-2' />
             </button>
           </div>

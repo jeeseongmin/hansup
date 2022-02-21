@@ -121,7 +121,7 @@ const EditAdmin = () => {
               <input
                 ref={emailRef}
                 type='text'
-                class='select-none w-36 md:w-72 px-4 py-2 border- bg-gray-200 border-gray-300 outline-none focus:border-purple-700 '
+                class=' w-36 md:w-72 px-4 py-2 border- bg-gray-200 border-gray-300 focus:border-purple-700 '
                 onChange={(e) => changeInfo(e, "email")}
                 placeholder='관리자 ID'
                 value={info.email}
@@ -133,7 +133,7 @@ const EditAdmin = () => {
               <input
                 ref={passwordRef}
                 type='text'
-                class='w-36 md:w-72 px-4 py-2 border-2 border-gray-300 outline-none focus:border-purple-700'
+                class='w-36 md:w-72 px-4 py-2 border-2 border-gray-300 focus:border-purple-700'
                 onChange={(e) => changeInfo(e, "password")}
                 placeholder='현재 password'
               />
@@ -143,7 +143,7 @@ const EditAdmin = () => {
               <input
                 ref={newPasswordRef}
                 type='text'
-                class='w-36 md:w-72 px-4 py-2 border-2 border-gray-300 outline-none focus:border-purple-700'
+                class='w-36 md:w-72 px-4 py-2 border-2 border-gray-300 focus:border-purple-700'
                 onChange={(e) => changeInfo(e, "newPassword")}
                 placeholder='변경 password'
               />

@@ -15,7 +15,7 @@ import FormControl from "@mui/material/FormControl";
 import axios from "axios";
 import { setRefreshOrder } from "reducers/common";
 import { useDispatch, useSelector } from "react-redux";
-
+import useTitle from "hooks/useTitle";
 const OrderStep3 = ({
   info,
   setInfo,
@@ -24,6 +24,8 @@ const OrderStep3 = ({
   allMenuList,
   menuList,
 }) => {
+  const updateTitle = useTitle("Loading...");
+  setTimeout(() => updateTitle("한숲푸드 - 케이터링 예약하기 - 결제"), 1000);
   const dispatch = useDispatch();
   const [selected, setSelected] = useState(false);
   const [selected2, setSelected2] = useState(false);
@@ -253,11 +255,24 @@ const OrderStep3 = ({
             <div class='flex flex-col mb-4'>
               {/* <p class="text-lg mb-4">결제수단</p> */}
               <FormControl sx={{ m: 1, minWidth: 80 }}>
-                <InputLabel id='demo-simple-select-autowidth-label'>
+                {/* <InputLabel id='demo-simple-select-autowidth-label'>
                   결제수단
-                </InputLabel>
-
-                <Select
+                </InputLabel> */}
+                <p class='text-lg h-full flex justify-left items-center mb-4'>
+                  결제 수단 선택
+                </p>
+                <select
+                  value={info.payment}
+                  class='border border-gray-400 py-2 px-2'
+                  // label='결제 수단'
+                  onChange={handleChange}>
+                  <option value={"card"}>후불 결제 (카드)</option>
+                  <option value={"cash"}>후불 결제 (현금)</option>
+                  <option value={"transfer"}>계좌이체</option>
+                  <option value={"giftCard"}>상품권 결제</option>
+                </select>
+              </FormControl>
+              {/* <Select
                   value={info.payment}
                   label='결제 수단'
                   onChange={handleChange}>
@@ -266,14 +281,14 @@ const OrderStep3 = ({
                   <MenuItem value={"transfer"}>계좌이체</MenuItem>
                   <MenuItem value={"giftCard"}>상품권 결제</MenuItem>
                 </Select>
-              </FormControl>
+              </FormControl> */}
 
               {/* <input
 								type="text"
 								placeholder="ex) 신용카드, 현금, 계좌이체"
 								value={info.payment}
 								onChange={(e) => changeInfo(e, "payment")}
-								class="px-4 text-lg border-2 border-gray-300 outline-none w-full h-12 flex justify-center items-center"
+								class="px-4 text-lg border-2 border-gray-300 w-full h-12 flex justify-center items-center"
 							/> */}
             </div>
             {info.payment !== "card" && (
@@ -289,6 +304,7 @@ const OrderStep3 = ({
                   <div class='mr-3'>
                     <RadioButton
                       text={"미신청"}
+                      title={selected === false ? "선택됨" : ""}
                       setSelected={setSelected}
                       current={selected}
                       clicked={false}
@@ -298,6 +314,7 @@ const OrderStep3 = ({
                     <RadioButton
                       text={"신청"}
                       setSelected={setSelected}
+                      title={selected === true ? "선택됨" : ""}
                       current={selected}
                       clicked={true}
                     />
@@ -320,6 +337,7 @@ const OrderStep3 = ({
                     <RadioButton
                       text={"개인소득공제용"}
                       setSelected={setSelected2}
+                      title={selected === false ? "선택됨" : ""}
                       current={selected2}
                       clicked={false}
                     />
@@ -330,6 +348,7 @@ const OrderStep3 = ({
                     <RadioButton
                       text={"사업자증빙용"}
                       setSelected={setSelected2}
+                      title={selected === true ? "선택됨" : ""}
                       current={selected2}
                       clicked={true}
                     />
@@ -338,6 +357,7 @@ const OrderStep3 = ({
                 <div class='h-12 my-2'>
                   <InputBox
                     value={info.cashReceipt["number"]}
+                    title={!selected2 ? "휴대폰 번호" : "사업자등록번호"}
                     placeholder={!selected2 ? "휴대폰 번호" : "사업자등록번호"}
                     type=''
                     onChange={onChangeNumber}
@@ -350,12 +370,12 @@ const OrderStep3 = ({
               <div class='w-full h-12 flex flex-row justify-between'>
                 <button
                   onClick={prevStep}
-                  class='w-36 md:w-48 cursor-pointer h-full flex justify-center items-center outline-none bg-hansupBrown text-white font-bold text-xl'>
+                  class='w-36 md:w-48 cursor-pointer h-full flex justify-center items-center bg-hansupBrown text-white font-bold text-xl'>
                   <BsArrowLeft class='mr-2' /> 이전
                 </button>
                 <button
                   onClick={nextStep}
-                  class='w-36 md:w-48 cursor-pointer h-full flex justify-center items-center outline-none bg-hansupBrown text-white font-bold text-xl'>
+                  class='w-36 md:w-48 cursor-pointer h-full flex justify-center items-center bg-hansupBrown text-white font-bold text-xl'>
                   다음 <BsArrowRight class='ml-2' />
                 </button>
               </div>

@@ -513,7 +513,7 @@ const Menu = ({ match }) => {
           <div class='w-full h-full flex flex-col justify-center items-center py-0 px-4 lg:px-16'>
             <div
               ref={modalRef}
-              class='select-none bg-white w-full md:w-2/3 lg:w-1/2 max-h-full overflow-auto h-auto px-8 py-6'>
+              class=' bg-white w-full md:w-2/3 lg:w-1/2 max-h-full overflow-auto h-auto px-8 py-6'>
               {/* <OrderCheckBlock
 								info={dayOrder}
 								handleClose={handleClose}

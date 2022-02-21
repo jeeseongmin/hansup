@@ -78,7 +78,7 @@ const Index = () => {
           <input
             ref={emailRef}
             type='text'
-            class='w-full p-4 border-b-2 border-gray-300 outline-none focus:border-hansupBrown'
+            class='w-full p-4 border-b-2 border-gray-300 focus:border-hansupBrown'
             onChange={(e) => changeInfo(e, "email")}
             placeholder='관리자 ID'
           />
@@ -86,7 +86,7 @@ const Index = () => {
             ref={passwordRef}
             onKeyUp={enterkey}
             type='text'
-            class='w-full p-4 border-b-2 border-gray-300 outline-none focus:border-hansupBrown'
+            class='w-full p-4 border-b-2 border-gray-300 focus:border-hansupBrown'
             onChange={(e) => changeInfo(e, "password")}
             placeholder='관리자 password'
           />

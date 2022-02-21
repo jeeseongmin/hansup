@@ -7,8 +7,12 @@ import { VscArrowRight } from "react-icons/vsc";
 import { Link, Switch, Route, useHistory } from "react-router-dom";
 import CreateVoice from "routes/community/Voice/CreateVoice";
 import DefaultButton from "components/Button/DefaultButton";
+import useTitle from "hooks/useTitle";
 
 const OrderMain = () => {
+  const updateTitle = useTitle("Loading...");
+  setTimeout(() => updateTitle("한숲푸드 - 케이터링 예약"), 1000);
+
   const history = useHistory();
 
   const goPage = (url) => {
@@ -17,6 +21,7 @@ const OrderMain = () => {
   };
   return (
     <PageLayout>
+      <button id='shortcut' title=''></button>
       <ContentLayout subtitle={"케이터링 예약하기"}>
         <div class='h-full w-full flex flex-col justify-center items-center'>
           <div class='w-full h-48 flex justify-center items-center border-b border-hansupBrown mb-8'>

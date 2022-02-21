@@ -14,44 +14,47 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 const BoxSliderBlock = ({ type }) => {
-	const dispatch = useDispatch();
-	const imgList =
-		type === "box" ? [box1, box2, box3] : [catering1, catering2, catering3];
-	const [hoverBtn, setHoverBtn] = useState(false);
+  const dispatch = useDispatch();
+  const imgList =
+    type === "box" ? [box1, box2, box3] : [catering1, catering2, catering3];
+  const [hoverBtn, setHoverBtn] = useState(false);
 
-	const settings = {
-		dots: true,
-		infinite: true,
-		speed: 500,
-		slidesToShow: 1,
-		slidesToScroll: 1,
-	};
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
 
-	const goSubPage = (main, sub) => {
-		window.scrollTo(0, 0);
-		document.getElementById("scrollRef").scrollTo(0, 0);
-	};
-	return (
-		<>
-			<Slider {...settings}>
-				{imgList.map((element, index) => {
-					return (
-						<div class="h-96 w-full flex items-center justify-center">
-							<img
-								src={element}
-								class="w-full h-full object-contain"
-								alt={
-									type === "catering"
-										? "케이터링 대표 음식 사진"
-										: "도시락 대표 음식 사진"
-								}
-							/>{" "}
-						</div>
-					);
-				})}
-			</Slider>
-		</>
-	);
+  const goSubPage = (main, sub) => {
+    window.scrollTo(0, 0);
+    document.getElementById("scrollRef").scrollTo(0, 0);
+  };
+  return (
+    <>
+      {/* 일단 임시로 index === 0 */}
+      <Slider {...settings}>
+        {imgList.map((element, index) => {
+          if (index === 0) {
+            return (
+              <div class='h-96 w-full flex items-center justify-center'>
+                <img
+                  src={element}
+                  class='w-full h-full object-contain'
+                  alt={
+                    type === "catering"
+                      ? "케이터링 대표 음식 사진"
+                      : "도시락 대표 음식 사진"
+                  }
+                />{" "}
+              </div>
+            );
+          }
+        })}
+      </Slider>
+    </>
+  );
 };
 
 export default BoxSliderBlock;

@@ -29,7 +29,7 @@ const Sidebar = ({ isLogin }) => {
       <button
         onClick={() => dispatch(setSidebar("off"))}
         class='flex-1 h-screen bg-black opacity-50'></button>
-      <div class='select-none w-36 sm:w-60 bg-hansupBrown h-screen top-0 left-0 flex flex-col justify-between px-8 py-8 text-white'>
+      <div class=' w-36 sm:w-60 bg-hansupBrown h-screen top-0 left-0 flex flex-col justify-between px-8 py-8 text-white'>
         <button
           onClick={() => dispatch(setSidebar("off"))}
           class='w-full h-6 flex flex-row justify-end mb-16'>

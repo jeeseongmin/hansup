@@ -250,7 +250,7 @@ const OrderCheckBlock = ({
           </div>
           <button
             onClick={handleClose}
-            class=' cursor-pointer h-full flex flex-row justify-end items-center outline-none transtion delay-50 duration-300 text-hansupBrown font-bold text-xl'>
+            class=' cursor-pointer h-full flex flex-row justify-end items-center transtion delay-50 duration-300 text-hansupBrown font-bold text-xl'>
             <MdClose size={32} color='#6C4D3F' />
           </button>
         </div>
@@ -305,7 +305,7 @@ const OrderCheckBlock = ({
                 type='price'
                 value={printInfo.price}
                 onChange={(e) => onChange(e, "price")}
-                class='flex-1 h-full px-4 outline-none border-2 border-gray-200 focus:border-hansupBrown transition delay-100 duration-200 '
+                class='flex-1 h-full px-4  border-2 border-gray-200 focus:border-hansupBrown transition delay-100 duration-200 '
                 placeholder={"단가"}
               />
             </div>
@@ -331,7 +331,7 @@ const OrderCheckBlock = ({
 								type="bonusMenu"
 								value={printInfo.bonusMenu}
 								onChange={(e) => onChange(e, "bonusMenu")}
-								class="flex-1 h-full px-4 outline-none border-2 border-gray-200 focus:border-hansupBrown transition delay-100 duration-200 "
+								class="flex-1 h-full px-4 border-2 border-gray-200 focus:border-hansupBrown transition delay-100 duration-200 "
 								placeholder={"자율 메뉴"}
 							/>
 						</div>
@@ -381,7 +381,7 @@ const OrderCheckBlock = ({
                       <div class='flex-1 flex justify-center items-center'>
                         <input
                           value={element.name}
-                          class='w-full outline-none text-center px-2'
+                          class='w-full text-center px-2'
                           onChange={(e) => changePrintMenu(e, index)}
                         />
                       </div>
@@ -412,7 +412,7 @@ const OrderCheckBlock = ({
                 type='description'
                 value={tmp}
                 onChange={(e) => onChange(e, "description")}
-                class='mr-2 flex-1 h-full px-4 outline-none border-2 border-gray-200 focus:border-hansupBrown transition delay-100 duration-200 '
+                class='mr-2 flex-1 h-full px-4 border-2 border-gray-200 focus:border-hansupBrown transition delay-100 duration-200 '
                 placeholder={"메모 입력"}
               />
 
@@ -442,7 +442,7 @@ const OrderCheckBlock = ({
                     <p>- </p>
                     <input
                       value={element.text}
-                      class='mx-2 flex-1 h-full px-4 outline-none border-2 border-gray-200 focus:border-hansupBrown transition delay-100 duration-200 '
+                      class='mx-2 flex-1 h-full px-4 border-2 border-gray-200 focus:border-hansupBrown transition delay-100 duration-200 '
                       readOnly={true}
                     />
 

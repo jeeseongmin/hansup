@@ -73,6 +73,7 @@ const EditNotice = (props) => {
 
   return (
     <div class={"w-full flex flex-col mb-16 lg:mb-24 px-8 xl:px-40 "}>
+      <button id='shortcut' title=''></button>
       <div class='inline-flex w-full justify-between mb-6'>
         <Subtitle subtitle={"공지사항 작성하기"} />
       </div>
@@ -93,7 +94,7 @@ const EditNotice = (props) => {
         </Link>
         <button
           onClick={editSave}
-          class='outline-none w-full md:w-auto cursor-pointer px-0 md:px-16 py-2 justify-center border border-hansupBrown text-hansupBrown flex flex-row items-center hover:bg-hansupBrown hover:text-white hover:font-bold'>
+          class=' w-full md:w-auto cursor-pointer px-0 md:px-16 py-2 justify-center border border-hansupBrown text-hansupBrown flex flex-row items-center hover:bg-hansupBrown hover:text-white hover:font-bold'>
           제출하기
         </button>
       </div>

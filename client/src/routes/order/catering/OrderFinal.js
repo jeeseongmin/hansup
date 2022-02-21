@@ -224,7 +224,7 @@ const OrderFinal = ({ info, allMenuList }) => {
       <div class='h-12 w-full md:w-2/3 flex justify-center items-center'>
         <button
           onClick={() => goPage("/")}
-          class='mt-4 cursor-pointer w-full lg:w-60 h-full flex justify-center items-center outline-none bg-hansupBrown text-white font-bold text-xl'>
+          class='mt-4 cursor-pointer w-full lg:w-60 h-full flex justify-center items-center bg-hansupBrown text-white font-bold text-xl'>
           홈으로
         </button>
       </div>

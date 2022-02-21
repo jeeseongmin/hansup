@@ -10,8 +10,14 @@ import React, { useEffect, useRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import { AiTwotoneCalendar } from "react-icons/ai";
 import { useHistory } from "react-router-dom";
-
+import useTitle from "hooks/useTitle";
 const OrderCheck = () => {
+  const updateTitle = useTitle("Loading...");
+  setTimeout(
+    () => updateTitle("한숲푸드 - 케이터링 예약 - 예약 내역 확인"),
+    1000
+  );
+
   const [loading, setLoading] = useState(false);
   const [empty, setEmpty] = useState(false);
   const [open, setOpen] = useState(false);
@@ -192,6 +198,7 @@ const OrderCheck = () => {
   return (
     <>
       <PageLayout>
+        <button id='shortcut' title=''></button>
         <div class='w-full flex flex-col justify-center items-center '>
           <div class='w-full md:w-2/3 lg:w-2/3'>
             <ContentLayout subtitle={"예약 내역 확인"}>
@@ -206,6 +213,7 @@ const OrderCheck = () => {
                       <InputBox
                         value={searchInfo.name}
                         refName={nameRef}
+                        title='예약자 이름'
                         type='name'
                         placeholder='이름을 입력하세요'
                         onChange={changeInfo}
@@ -220,6 +228,7 @@ const OrderCheck = () => {
                         refName={phone1Ref}
                         type='phone1'
                         placeholder='010'
+                        title='연락처 1'
                         onChange={changeInfo}
                       />
                       <InputBox
@@ -227,12 +236,14 @@ const OrderCheck = () => {
                         refName={phone2Ref}
                         type='phone2'
                         placeholder=''
+                        title='연락처 2'
                         onChange={changeInfo}
                       />
                       <InputBox
                         value={searchInfo.phone3}
                         refName={phone3Ref}
                         type='phone3'
+                        title='연락처 3'
                         placeholder=''
                         onChange={changeInfo}
                       />
@@ -243,7 +254,7 @@ const OrderCheck = () => {
                     <div class='flex-1 h-full flex justify-between items-center'>
                       <button
                         onClick={selectDate}
-                        class='flex-1 h-12 px-4 outline-none border-2 border-gray-200 focus:border-hansupBrown transition delay-100 duration-200 flex items-center'>
+                        class='flex-1 h-12 px-4 border-2 border-gray-200 focus:border-hansupBrown transition delay-100 duration-200 flex items-center'>
                         {dateToString(searchInfo.date)}
                       </button>
                       <div class='w-12'>
@@ -274,14 +285,14 @@ const OrderCheck = () => {
                   <div class='w-full md:w-48 lg:w-60 h-12 mb-4 md:mb-0'>
                     <button
                       onClick={() => goPage("/order/catering/orderMain")}
-                      class='cursor-pointer w-full h-full flex justify-center items-center outline-none transtion delay-50 duration-300 bg-hansupBrown hover:bg-white text-white hover:text-hansupBrown border hover:border-hansupBrown font-bold text-xl'>
+                      class='cursor-pointer w-full h-full flex justify-center items-center transtion delay-50 duration-300 bg-hansupBrown hover:bg-white text-white hover:text-hansupBrown border hover:border-hansupBrown font-bold text-xl'>
                       뒤로가기
                     </button>
                   </div>
                   <div class='w-full md:w-48 lg:w-60 h-12'>
                     <button
                       onClick={orderCheck}
-                      class='cursor-pointer w-full h-full flex justify-center items-center outline-none transtion delay-50 duration-300 bg-hansupBrown hover:bg-white text-white hover:text-hansupBrown border hover:border-hansupBrown font-bold text-xl'>
+                      class='cursor-pointer w-full h-full flex justify-center items-center transtion delay-50 duration-300 bg-hansupBrown hover:bg-white text-white hover:text-hansupBrown border hover:border-hansupBrown font-bold text-xl'>
                       확인하기
                     </button>
                   </div>
@@ -300,7 +311,7 @@ const OrderCheck = () => {
           <div class='w-full h-full flex flex-col justify-center items-center py-16 px-4 lg:px-16'>
             <div
               ref={modalRef}
-              class='select-none bg-white w-full md:w-2/3 lg:w-1/2 max-h-full overflow-auto h-full p-8'>
+              class=' bg-white w-full md:w-2/3 lg:w-1/2 max-h-full overflow-auto h-full p-8'>
               <OrderReceiptBlock
                 info={orderInfo}
                 handleClose={handleClose}

@@ -131,7 +131,7 @@ const ReviewBlock = ({ review, reviewList, setReviewList }) => {
           <div class='w-full h-full flex flex-col justify-center items-center py-16 px-4 lg:px-16'>
             <div
               ref={modalRef}
-              class='select-none bg-white w-full md:w-2/3 lg:w-2/3 h-full lg:h-96 p-8 flex flex-col lg:flex-row'>
+              class=' bg-white w-full md:w-2/3 lg:w-2/3 h-full lg:h-96 p-8 flex flex-col lg:flex-row'>
               <div class='w-full lg:w-1/2 h-1/3 lg:h-full flex justify-center'>
                 <img
                   class='w-1/2 lg:w-full h-full object-cover'
@@ -139,7 +139,7 @@ const ReviewBlock = ({ review, reviewList, setReviewList }) => {
                     "http://hansupfood.com/api/image/view/" +
                     review.imgList[0].filename
                   }
-                  alt='imgList'
+                  alt=''
                 />
               </div>
               <div
@@ -147,11 +147,19 @@ const ReviewBlock = ({ review, reviewList, setReviewList }) => {
                   "w-full lg:w-1/2 h-1/2 lg:h-full flex-1 flex flex-col px-4 relative " +
                   (loginToken === "login" ? "pb-8" : "")
                 }>
+                <div class='w-full flex flex-row-reverse'>
+                  <button
+                    title='창 닫기'
+                    onClick={handleClose}
+                    class='font-bold'>
+                    창 닫기
+                  </button>
+                </div>
                 <div class='h-auto w-full border-b-2 border-hansupBrown flex flex-row justify-between items-center py-2'>
                   <p class='w-3/4 h-auto break-words text-base overflow-ellipsis resize-none'>
                     {review.email}
                   </p>
-                  <div class='w-1/4  text-gray-400 text-md text-right'>
+                  <div class='w-1/4  text-black text-md text-right'>
                     {dataToText(review.createdAt)}
                   </div>
                 </div>

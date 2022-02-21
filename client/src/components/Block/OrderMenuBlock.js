@@ -71,13 +71,15 @@ const OrderMenuBlock = ({
 
   return (
     <Container onClick={onToggle}>
-      <div class='h-48 mb-2 relative'>
+      <div
+        class='h-48 mb-2 relative'
+        title={menuList[type].includes(menu._id) ? "선택됨" : ""}>
         <img
           src={
             "http://hansupfood.com/api/image/view/" + menu.imgList[0].filename
           }
           class='h-full w-full object-cover shadow-lg'
-          alt={menu.name + " 메뉴 사진"}
+          alt={menu.name}
         />
         <div
           class={

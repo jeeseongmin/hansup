@@ -109,7 +109,7 @@ const OrderBox = ({ dayOrder, toggleChange, focusDate }) => {
           <div class='w-full h-full flex flex-col justify-center items-center py-16 px-4 lg:px-16'>
             <div
               ref={modalRef}
-              class='select-none bg-white w-full md:w-2/3 lg:w-1/2 max-h-full overflow-auto h-full p-8'>
+              class=' bg-white w-full md:w-2/3 lg:w-1/2 max-h-full overflow-auto h-full p-8'>
               <OrderCheckBlock
                 info={dayOrder}
                 handleClose={handleClose}

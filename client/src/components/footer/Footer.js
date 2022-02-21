@@ -24,13 +24,15 @@ const Footer = () => {
   return (
     <Foot>
       {/* FootLayout */}
-      <div class='w-full h-full bg-hansupBrown px-8 xl:px-24 py-8 hidden md:flex flex-row text-white '>
+      <div
+        class='w-full h-full bg-hansupBrown px-8 xl:px-24 py-8 hidden md:flex flex-row text-white '
+        title='footer'>
         {/* FootContainer */}
         <div class='w-1/2 h-auto flex flex-col justify-between'>
           {/* FootLogoBox */}
           <button onClick={goHome} class='cursor-pointer h-8 mb-8'>
             {/* FootLogo */}
-            <img src={Logo} class='h-full object-cover' alt='logo' />
+            <img src={Logo} class='h-full object-cover' alt='한숲푸드' />
           </button>
           {/* FootTextBox */}
           <div class='w-full flex flex-row mb-1'>

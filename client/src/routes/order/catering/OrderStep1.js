@@ -8,8 +8,15 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { AiTwotoneCalendar } from "react-icons/ai";
 import styled from "styled-components";
+import useTitle from "hooks/useTitle";
 
 const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
+  const updateTitle = useTitle("Loading...");
+  setTimeout(
+    () => updateTitle("한숲푸드 - 케이터링 예약하기 - 예약정보 입력"),
+    1000
+  );
+
   const history = useHistory();
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -103,6 +110,7 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
   const DateInput = ({ value, onClick }) => {
     return (
       <button
+        title='날짜선택'
         onClick={onClick}
         class='w-full h-full flex justify-center items-center cursor-pointer'>
         <AiTwotoneCalendar size={24} />
@@ -112,7 +120,7 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
 
   return (
     <>
-      <div class='w-full flex flex-col justify-center items-center select-none'>
+      <div class='w-full flex flex-col justify-center items-center'>
         <div class='w-full md:w-2/3 lg:w-1/2'>
           <InfoBlock title={"예약자 정보"}>
             <div class='px-4 flex flex-col'>
@@ -123,6 +131,7 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                     value={info.name}
                     refName={nameRef}
                     type='name'
+                    title='작성자 이름'
                     placeholder='이름을 입력하세요'
                     onChange={changeInfo}
                   />
@@ -135,6 +144,7 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                     value={info.phone1}
                     refName={phone1Ref}
                     type='phone1'
+                    title='연락처 1'
                     placeholder='010'
                     onChange={changeInfo}
                   />
@@ -142,6 +152,7 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                     value={info.phone2}
                     refName={phone2Ref}
                     type='phone2'
+                    title='연락처 2'
                     placeholder=''
                     onChange={changeInfo}
                   />
@@ -149,6 +160,7 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                     value={info.phone3}
                     refName={phone3Ref}
                     type='phone3'
+                    title='연락처 3'
                     placeholder=''
                     onChange={changeInfo}
                   />
@@ -164,12 +176,14 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                     refName={check1Ref}
                     type='check1'
                     placeholder='010'
+                    title='연락처 1 확인'
                     onChange={changeInfo}
                   />
                   <InputBox
                     value={info.check2}
                     refName={check2Ref}
                     type='check2'
+                    title='연락처 2 확인'
                     placeholder=''
                     onChange={changeInfo}
                   />
@@ -177,6 +191,7 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                     value={info.check3}
                     refName={check3Ref}
                     type='check3'
+                    title='연락처 3 확인'
                     placeholder=''
                     onChange={changeInfo}
                   />
@@ -193,6 +208,7 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                     value={info.count}
                     refName={countRef}
                     type='count'
+                    title='주문할 양(3인분이면 3)'
                     placeholder='ex) 10 (최소 10인분)'
                     onChange={changeInfo}
                   />
@@ -208,6 +224,7 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                   <InputBox
                     value={info.request}
                     refName={requestRef}
+                    title='요청사항'
                     type='request'
                     placeholder='최대 50자까지 입력 가능'
                     onChange={changeInfo}
@@ -227,7 +244,7 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
               <div class='h-auto md:h-12 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center'>
                 <div class='w-full md:w-1/4 mb-2 md:mb-0 text-xl'>날짜</div>
                 <div class='w-full md:flex-1 h-12 md:h-full flex justify-between items-center'>
-                  <div class='flex-1 h-12 px-4 outline-none border-2 border-gray-200 focus:border-hansupBrown transition delay-100 duration-200 flex items-center'>
+                  <div class='flex-1 h-12 px-4 border-2 border-gray-200 focus:border-hansupBrown transition delay-100 duration-200 flex items-center'>
                     {dateToString(info.date)}
                   </div>
                   <div class='w-12'>
@@ -249,6 +266,7 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                 <div class='w-full md:flex-1 h-12 md:h-full grid grid-cols-2'>
                   <button
                     onClick={() => changeInfo("delivery", "delivery")}
+                    title={info.delivery === "delivery" ? "선택됨" : ""}
                     class={
                       "w-full h-full flex justify-center items-center transition delay-50 duration-100 border-2 cursor-pointer " +
                       (info.delivery === "delivery"
@@ -259,6 +277,7 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                   </button>
                   <button
                     onClick={() => changeInfo("self", "delivery")}
+                    title={info.delivery === "self" ? "선택됨" : ""}
                     class={
                       "w-full h-full flex justify-center items-center transition delay-50 duration-100 border-t-2 border-b-2 border-r-2 cursor-pointer " +
                       (info.delivery === "self"
@@ -290,6 +309,7 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                       value={info.address1}
                       refName={address1Ref}
                       type='address1'
+                      title='도로명 주소'
                       placeholder='도로명 주소'
                       onChange={changeInfo}
                     />
@@ -304,6 +324,7 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                     value={info.address2}
                     refName={address2Ref}
                     type='address2'
+                    title='상세 주소'
                     placeholder='상세 주소'
                     onChange={changeInfo}
                   />
@@ -312,12 +333,12 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
               <div class='w-full h-28 md:h-12 flex flex-col md:flex-row md: justify-between'>
                 <button
                   onClick={prevStep}
-                  class='mb-4 md:mb-0 cursor-pointer hover:bg-white hover:text-hansupBrown border border-hansupBrown transition delay-50 duration-150 w-full md:w-48 lg:w-60 h-full flex justify-center items-center outline-none bg-hansupBrown text-white font-bold text-xl'>
+                  class='mb-4 md:mb-0 cursor-pointer hover:bg-white hover:text-hansupBrown border border-hansupBrown transition delay-50 duration-150 w-full md:w-48 lg:w-60 h-full flex justify-center items-center bg-hansupBrown text-white font-bold text-xl'>
                   뒤로
                 </button>
                 <button
                   onClick={nextStep}
-                  class='cursor-pointer w-full md:w-48 hover:bg-white hover:text-hansupBrown border border-hansupBrown transition delay-50 duration-150 lg:w-60 h-full flex justify-center items-center outline-none bg-hansupBrown text-white font-bold text-xl'>
+                  class='cursor-pointer w-full md:w-48 hover:bg-white hover:text-hansupBrown border border-hansupBrown transition delay-50 duration-150 lg:w-60 h-full flex justify-center items-center bg-hansupBrown text-white font-bold text-xl'>
                   다음
                 </button>
               </div>

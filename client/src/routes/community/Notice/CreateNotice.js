@@ -4,10 +4,13 @@ import NoticeFormBlock from "components/Block/NoticeFormBlock";
 import Subtitle from "components/Subtitle";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-
+import useTitle from "hooks/useTitle";
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 const CreateNotice = () => {
+  const updateTitle = useTitle("Loading...");
+  setTimeout(() => updateTitle("한숲푸드 - 공지사항 - 작성하기"), 1000);
+
   const history = useHistory();
   const contentRef = useRef(null);
   const titleRef = useRef(null);
@@ -70,6 +73,7 @@ const CreateNotice = () => {
 
   return (
     <div class={"w-full flex flex-col mb-16 lg:mb-24 px-8 xl:px-40 "}>
+      <button id='shortcut' title=''></button>
       <div class='inline-flex w-full justify-between mb-6'>
         <Subtitle subtitle={"공지사항 작성하기"} />
       </div>
@@ -90,7 +94,7 @@ const CreateNotice = () => {
         </Link>
         <button
           onClick={submit}
-          class='outline-none w-full md:w-auto cursor-pointer px-0 md:px-16 py-2 justify-center border border-hansupBrown text-hansupBrown flex flex-row items-center hover:bg-hansupBrown hover:text-white hover:font-bold'>
+          class=' w-full md:w-auto cursor-pointer px-0 md:px-16 py-2 justify-center border border-hansupBrown text-hansupBrown flex flex-row items-center hover:bg-hansupBrown hover:text-white hover:font-bold'>
           제출하기
         </button>
       </div>

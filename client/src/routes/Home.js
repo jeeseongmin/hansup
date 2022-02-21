@@ -10,8 +10,11 @@ import Lunchbox from "image/homeLunchbox.png";
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import RestaurantImg from "image/intro-story-img3.jpg";
-
+import useTitle from "hooks/useTitle";
 const Home = () => {
+  const updateTitle = useTitle("Loading...");
+  setTimeout(() => updateTitle("한숲푸드"), 1000);
+
   const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [reviewList, setReviewList] = useState([]);
@@ -50,22 +53,18 @@ const Home = () => {
         {/* HomeBanner */}
         <div class='w-full relative'>
           {/* bannerImage */}
-          <img
-            src={Forest}
-            alt='한숲을 상징하는 숲 이미지'
-            class='object-cover w-full h-full'
-          />
+          <img src={Forest} alt='' class='object-cover w-full h-full' />
           {/* bannerContents */}
           <div class='absolute w-full h-full left-0 top-0'>
             {/* bannerInner */}
             <div class='h-full flex flex-col lg:flex-row justify-center px-4 md:px-8 lg:px-24'>
               {/* bannerLeft */}
-              <div class='h-auto lg:h-full w-full lg:w-3/5 flex flex-col justify-end '>
+              <div class='h-auto lg:h-full w-full lg:w-3/5 flex flex-col justify-end'>
                 {/* bannerLogo */}
                 <img
                   src={Emoji}
                   class='hidden lg:block h-24 lg:h-48 w-48 object-cover'
-                  alt='한숲푸드 로고'
+                  alt=''
                 />
                 {/* bannerText */}
                 <div class='text-xs md:text-xl lg:text-3xl text-white pt-2 lg:pt-8 mb-4 sm:mb-8 lg:mb-16'>
@@ -78,6 +77,7 @@ const Home = () => {
               <div class='h-12 md:h-16 lg:h-full flex-none lg:flex-1 grid grid-cols-3 gap-8 lg:gap-0 lg:flex flex-row lg:flex-col justify-end pl-0 lg:pl-24'>
                 {/* bannerButton */}
                 <button
+                  id='shortcut'
                   onClick={() => goPage("/intro/introduction")}
                   class='text-xs md:text-base h-8 md:h-16 flex flex-row justify-between items-center cursor-pointer px-2 lg:px-8 mb-0 md:mb-3 transition delay-50 duration-300 w-full relative text-white font-bold bg-opacity-80 bg-hansupBrown hover:bg-white hover:text-hansupBrown'>
                   {/* mainButton */}
@@ -142,7 +142,7 @@ const Home = () => {
               {/* ImageBox */}
               <img
                 src={RestaurantImg}
-                alt='수화식당 이미지'
+                alt=''
                 class='object-cover w-full h-48 md:h-96'
               />
             </div>
@@ -217,7 +217,7 @@ const Home = () => {
             <div class='w-full h-72 lg:h-96 px-4 md:px-8 lg:px-24 flex flex-col justify-center'>
               <img
                 src={Catering}
-                alt='케이터링 및 출장뷔페'
+                alt=''
                 class='object-cover w-full h-48 md:h-96'
               />
             </div>
@@ -229,7 +229,7 @@ const Home = () => {
             <div class='w-full h-72 lg:h-96 px-4 md:px-8 lg:px-24 flex flex-col justify-center'>
               <img
                 src={Lunchbox}
-                alt='도시락 사진'
+                alt=''
                 class='object-cover w-full h-48 md:h-96'
               />
             </div>
