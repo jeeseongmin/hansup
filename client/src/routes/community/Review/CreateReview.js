@@ -44,8 +44,6 @@ const CreateReview = () => {
     } else if (info.imgList.length === 0) {
       alert("1개 이상의 이미지를 업로드 해주세요.");
     } else {
-      console.log("info", info);
-
       axios
         .post(
           "/api/review/create",

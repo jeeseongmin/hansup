@@ -117,7 +117,6 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
       const cp = { ...info };
       cp.date = d;
       setInfo(cp);
-      console.log(d);
       setStep(2);
       document.getElementById("scrollRef").scrollTo(0, 0);
     }
@@ -147,7 +146,6 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
       hourRef.current.focus();
       return false;
     } else if (info.minute !== 0 && info.minute !== 30) {
-      console.log(info.minute);
       alert("올바른 분을 입력해주세요(30분 단위로 가능합니다. 0 또는 30)");
       minuteRef.current.focus();
       return false;

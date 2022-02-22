@@ -5,9 +5,6 @@ const FastLink = () => {
   const location = useLocation();
   const [focusTab, setFocusTab] = useState(false);
   const [viewTab, setViewTab] = useState(false);
-  useEffect(() => {
-    console.log(focusTab);
-  }, [focusTab]);
 
   useEffect(() => {
     const tabEvent = async (e) => {
@@ -39,7 +36,6 @@ const FastLink = () => {
   };
 
   const fastGo = () => {
-    console.log("shortcut Go");
     document.getElementById("shortcut").focus();
   };
 

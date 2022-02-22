@@ -63,7 +63,6 @@ const Menu = ({ title, url, menu, current, empty }) => {
   const goPage = () => {
     // window.scrollTo(0, 0);
     // document.getElementById("scrollRef").scrollTo(0, 0);
-    console.log(title, " goPage");
   };
 
   return (

@@ -75,7 +75,6 @@ const CreateVoice = () => {
       alert("올바른 휴대폰 번호를 입력해주세요.");
       phoneRef3.current.focus();
     } else {
-      console.log("refresh_voice", refresh_voice);
       axios
         .post(
           "/api/voice/create",

@@ -65,7 +65,6 @@ const OrderCheckBlock = ({
     setPrintMenu(cp);
   };
   const deletePrintMenu = (index) => {
-    console.log("deletePrintMEnu", index);
     const cp = [...printMenu];
     cp[index].isDeleted = true;
     setPrintMenu(cp);
@@ -83,7 +82,6 @@ const OrderCheckBlock = ({
     // 	isDeleted: false,
     // });
     setPrintMenu(cp);
-    console.log("new", cp);
   };
   const dayArr = ["일", "월", "화", "수", "목", "금", "토"];
 
@@ -107,7 +105,6 @@ const OrderCheckBlock = ({
     }
   };
   const removeDescription = (index) => {
-    console.log("index", index);
     const cp = { ...printInfo };
     cp["description"][index].isDeleted = true;
     setPrintInfo(cp);

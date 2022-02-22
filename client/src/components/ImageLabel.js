@@ -42,11 +42,9 @@ const ImageLabel = ({ imgUrl, text, url }) => {
   const [isHover, setIsHover] = useState(false);
 
   const onMouseOver = () => {
-    console.log("onMouseOver", url);
     setIsHover(true);
   };
   const onMouseOut = () => {
-    console.log("onMouseOut", url);
     setIsHover(false);
   };
 

@@ -32,7 +32,6 @@ const VoiceDetailBlock = ({ match }) => {
         }
       )
       .then((Response) => {
-        // console.log(Response);
         setVoice(Response.data);
         setLoading(true);
       })
