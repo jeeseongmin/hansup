@@ -5,7 +5,10 @@ import useTitle from "hooks/useTitle";
 
 const Intro = () => {
   const updateTitle = useTitle("Loading...");
-  setTimeout(() => updateTitle("한숲푸드 - 케이터링 안내"), 1000);
+  setTimeout(
+    () => updateTitle("한숲푸드 - 케이터링 예약 - 케이터링 안내"),
+    1000
+  );
 
   return (
     <PageLayout>

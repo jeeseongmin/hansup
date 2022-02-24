@@ -9,7 +9,10 @@ const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 const CreateNotice = () => {
   const updateTitle = useTitle("Loading...");
-  setTimeout(() => updateTitle("한숲푸드 - 공지사항 - 작성하기"), 1000);
+  setTimeout(
+    () => updateTitle("한숲푸드 - 커뮤니티 - 공지사항 - 작성하기"),
+    1000
+  );
 
   const history = useHistory();
   const contentRef = useRef(null);

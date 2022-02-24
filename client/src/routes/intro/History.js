@@ -5,7 +5,7 @@ import HistoryImg from "image/intro-history-img1.png";
 import useTitle from "hooks/useTitle";
 const History = () => {
   const updateTitle = useTitle("Loading...");
-  setTimeout(() => updateTitle("한숲푸드 - 한숲의 역사"), 1000);
+  setTimeout(() => updateTitle("한숲푸드 - 회사소개 - 한숲의 역사"), 1000);
 
   return (
     <PageLayout>

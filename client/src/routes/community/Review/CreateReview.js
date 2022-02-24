@@ -6,7 +6,7 @@ import axios from "axios";
 import useTitle from "hooks/useTitle";
 const CreateReview = () => {
   const updateTitle = useTitle("Loading...");
-  setTimeout(() => updateTitle("한숲푸드 - 리뷰 - 작성하기"), 1000);
+  setTimeout(() => updateTitle("한숲푸드 - 커뮤니티 - 리뷰 - 작성하기"), 1000);
 
   const history = useHistory();
   const contentRef = useRef(null);

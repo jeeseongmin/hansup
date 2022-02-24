@@ -89,7 +89,10 @@ const ReviewFormBlock = ({
         ) : loading ? (
           info.imgList.map((element, index) => {
             return (
-              <div class='w-24 mb-4 border border-gray-300 rounded-md relative mx-4'>
+              <button
+                title={index + "번째 파일 삭제"}
+                onClick={() => removeImg(index)}
+                class='w-24 mb-4 border border-gray-300 rounded-md relative mx-4'>
                 <img
                   class='w-full h-24 object-contain'
                   src={
@@ -100,11 +103,11 @@ const ReviewFormBlock = ({
                   alt='imgList'
                 />
                 <MdCancel
-                  onClick={() => removeImg(index)}
+                  // onClick={() => removeImg(index)}
                   size={24}
                   class='cursor-pointer rounded-full bg-white absolute -top-2 -right-2'
                 />
-              </div>
+              </button>
             );
           })
         ) : (

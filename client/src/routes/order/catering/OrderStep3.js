@@ -25,7 +25,10 @@ const OrderStep3 = ({
   menuList,
 }) => {
   const updateTitle = useTitle("Loading...");
-  setTimeout(() => updateTitle("한숲푸드 - 케이터링 예약하기 - 결제"), 1000);
+  setTimeout(
+    () => updateTitle("한숲푸드 - 케이터링 예약 - 예약하기 - 결제"),
+    1000
+  );
   const dispatch = useDispatch();
   const [selected, setSelected] = useState(false);
   const [selected2, setSelected2] = useState(false);
@@ -349,7 +352,7 @@ const OrderStep3 = ({
                     <RadioButton
                       text={"개인소득공제용"}
                       setSelected={setSelected2}
-                      title={selected === false ? "선택됨" : ""}
+                      title={selected2 === false ? "선택됨" : ""}
                       current={selected2}
                       clicked={false}
                     />
@@ -360,7 +363,7 @@ const OrderStep3 = ({
                     <RadioButton
                       text={"사업자증빙용"}
                       setSelected={setSelected2}
-                      title={selected === true ? "선택됨" : ""}
+                      title={selected2 === true ? "선택됨" : ""}
                       current={selected2}
                       clicked={true}
                     />
@@ -369,7 +372,11 @@ const OrderStep3 = ({
                 <div class='h-12 my-2'>
                   <InputBox
                     value={info.cashReceipt["number"]}
-                    title={!selected2 ? "휴대폰 번호" : "사업자등록번호"}
+                    title={
+                      !selected2
+                        ? "개인소득공제용 휴대폰 번호"
+                        : "사용자 증빙용 사업자등록번호"
+                    }
                     placeholder={!selected2 ? "휴대폰 번호" : "사업자등록번호"}
                     type=''
                     onChange={onChangeNumber}

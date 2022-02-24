@@ -7,7 +7,7 @@ import useTitle from "hooks/useTitle";
 const OrderStep2 = ({ info, setInfo, setStep, menuList, listLoading }) => {
   const updateTitle = useTitle("Loading...");
   setTimeout(
-    () => updateTitle("한숲푸드 - 케이터링 예약하기 - 메뉴 선택"),
+    () => updateTitle("한숲푸드 - 케이터링 예약 - 예약하기 - 메뉴 선택"),
     1000
   );
   const [menu, setMenu] = useState({
@@ -84,7 +84,10 @@ const OrderStep2 = ({ info, setInfo, setStep, menuList, listLoading }) => {
           </p>
           <p>식사 메뉴는 고정 메뉴로 5가지로 구성됩니다.</p>
           <p class='text-red-500'>
-            국은 원하시는 종류의 국을 하나 선택해주셔야 합니다.
+            메인 메뉴, 식사 메뉴와 디저트는 현재 모든 메뉴가 제공되므로
+            기본적으로 선택이 되어있습니다.
+            <br></br>
+            단, 국은 원하시는 종류의 국을 하나만 선택해주셔야 합니다.
           </p>
           <p>
             디저트는 서비스 차원으로 제공되므로, 타 메뉴와의 교체는 불가한 점

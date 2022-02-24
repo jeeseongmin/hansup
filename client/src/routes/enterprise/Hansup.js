@@ -7,7 +7,7 @@ import useTitle from "hooks/useTitle";
 
 const Hansup = () => {
   const updateTitle = useTitle("Loading...");
-  setTimeout(() => updateTitle("한숲푸드 협력기업 - 한숲맛이야기"), 1000);
+  setTimeout(() => updateTitle("한숲푸드 - 협력기업 - 한숲맛이야기"), 1000);
 
   const goPage = () => {};
 

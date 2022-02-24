@@ -71,7 +71,6 @@ const Menu = ({ title, url, menu, current, empty }) => {
       menu={menu}
       to={url}
       empty={empty}
-      role='tab'
       onClick={goPage}>
       <Title current={current} menu={menu}>
         {title}

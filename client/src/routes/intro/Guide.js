@@ -5,7 +5,7 @@ import useTitle from "hooks/useTitle";
 const { kakao } = window;
 const Guide = () => {
   const updateTitle = useTitle("Loading...");
-  setTimeout(() => updateTitle("한숲푸드 - 오시는 길"), 1000);
+  setTimeout(() => updateTitle("한숲푸드 - 회사소개 - 오시는 길"), 1000);
 
   useEffect(() => {
     const container = document.getElementById("map");

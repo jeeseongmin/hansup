@@ -9,7 +9,10 @@ import { useDispatch, useSelector } from "react-redux";
 import useTitle from "hooks/useTitle";
 const CreateVoice = () => {
   const updateTitle = useTitle("Loading...");
-  setTimeout(() => updateTitle("한숲푸드 - 고객의 소리 - 작성하기"), 1000);
+  setTimeout(
+    () => updateTitle("한숲푸드 - 커뮤니티 - 고객의 소리 - 작성하기"),
+    1000
+  );
 
   const dispatch = useDispatch();
   const history = useHistory();

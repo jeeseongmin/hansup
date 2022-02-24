@@ -72,7 +72,10 @@ const Submenu = ({ text, current }) => {
   }, [location.pathname]);
 
   return (
-    <SubmenuBtn to={current} selected={selected}>
+    <SubmenuBtn
+      to={current}
+      selected={selected}
+      title={selected ? "선택됨" : ""}>
       {text}
     </SubmenuBtn>
   );

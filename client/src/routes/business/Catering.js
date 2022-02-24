@@ -13,7 +13,7 @@ import catering3 from "image/boxslider-catering3.jpg";
 import useTitle from "hooks/useTitle";
 const Catering = () => {
   const updateTitle = useTitle("Loading...");
-  setTimeout(() => updateTitle("한숲푸드 - 케이터링"), 1000);
+  setTimeout(() => updateTitle("한숲푸드 - 한숲사업 - 케이터링"), 1000);
 
   return (
     <PageLayout>

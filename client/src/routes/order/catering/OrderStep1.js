@@ -13,7 +13,7 @@ import useTitle from "hooks/useTitle";
 const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
   const updateTitle = useTitle("Loading...");
   setTimeout(
-    () => updateTitle("한숲푸드 - 케이터링 예약하기 - 예약정보 입력"),
+    () => updateTitle("한숲푸드 - 케이터링 예약 - 예약하기 - 예약정보 입력"),
     1000
   );
 
@@ -183,13 +183,18 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
           <InfoBlock title={"예약자 정보"}>
             <div class='px-4 flex flex-col'>
               <div class='h-auto md:h-12 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center'>
-                <div class='w-full md:w-1/4 mb-2 md:mb-0 text-xl'>이름</div>
+                <label
+                  for='작성자 이름'
+                  class='w-full md:w-1/4 mb-2 md:mb-0 text-xl'>
+                  이름
+                </label>
                 <div class='w-full md:flex-1 h-12 md:h-full'>
                   <InputBox
                     value={info.name}
                     refName={nameRef}
                     type='name'
                     title='작성자 이름'
+                    label='작성자 이름'
                     placeholder='이름을 입력하세요'
                     onChange={changeInfo}
                   />
@@ -202,7 +207,7 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                     value={info.phone1}
                     refName={phone1Ref}
                     type='phone1'
-                    title='연락처 1'
+                    title='연락처 첫번째 자리'
                     placeholder='010'
                     onChange={changeInfo}
                   />
@@ -210,7 +215,7 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                     value={info.phone2}
                     refName={phone2Ref}
                     type='phone2'
-                    title='연락처 2'
+                    title='연락처 가운데 자리'
                     placeholder=''
                     onChange={changeInfo}
                   />
@@ -218,7 +223,7 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                     value={info.phone3}
                     refName={phone3Ref}
                     type='phone3'
-                    title='연락처 3'
+                    title='연락처 마지막 자리'
                     placeholder=''
                     onChange={changeInfo}
                   />
@@ -233,15 +238,15 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                     value={info.check1}
                     refName={check1Ref}
                     type='check1'
+                    title='연락처 첫번째 자리 재확인'
                     placeholder='010'
-                    title='연락처 1 확인'
                     onChange={changeInfo}
                   />
                   <InputBox
                     value={info.check2}
                     refName={check2Ref}
                     type='check2'
-                    title='연락처 2 확인'
+                    title='연락처 가운데 자리 재확인'
                     placeholder=''
                     onChange={changeInfo}
                   />
@@ -249,7 +254,7 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                     value={info.check3}
                     refName={check3Ref}
                     type='check3'
-                    title='연락처 3 확인'
+                    title='연락처 마지막 자리 재확인'
                     placeholder=''
                     onChange={changeInfo}
                   />
@@ -260,13 +265,18 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                 직접 방문시, 최소 8인까지 가능
               </div>
               <div class='h-auto md:h-12 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center'>
-                <div class='w-full md:w-1/4 mb-2 md:mb-0 text-xl'>인원수</div>
+                <label
+                  for='인원수'
+                  class='w-full md:w-1/4 mb-2 md:mb-0 text-xl'>
+                  인원수
+                </label>
                 <div class='w-full md:flex-1 h-12 md:h-full'>
                   <InputBox
                     value={info.count}
                     refName={countRef}
                     type='count'
                     title='주문할 양(3인분이면 3)'
+                    label='인원수'
                     placeholder='ex) 10 (최소 10인분)'
                     onChange={changeInfo}
                   />
@@ -277,12 +287,17 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                 요청 메뉴 등이 있다면 기입 가능
               </div>
               <div class='h-auto md:h-12 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center'>
-                <div class='w-full md:w-1/4 mb-2 md:mb-0 text-xl'>요청사항</div>
+                <label
+                  for='요청사항'
+                  class='w-full md:w-1/4 mb-2 md:mb-0 text-xl'>
+                  요청사항
+                </label>
                 <div class='w-full md:flex-1 h-12 md:h-full'>
                   <InputBox
                     value={info.request}
                     refName={requestRef}
                     title='요청사항'
+                    label='요청사항'
                     type='request'
                     placeholder='최대 50자까지 입력 가능'
                     onChange={changeInfo}

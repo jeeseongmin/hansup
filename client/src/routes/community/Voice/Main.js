@@ -11,7 +11,7 @@ import useTitle from "hooks/useTitle";
 
 const Main = () => {
   const updateTitle = useTitle("Loading...");
-  setTimeout(() => updateTitle("한숲푸드 - 고객의 소리"), 1000);
+  setTimeout(() => updateTitle("한숲푸드 - 커뮤니티 - 고객의 소리"), 1000);
 
   const history = useHistory();
 

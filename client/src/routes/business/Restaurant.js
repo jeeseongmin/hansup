@@ -40,7 +40,7 @@ const Line = styled.div`
 
 const Restaurant = () => {
   const updateTitle = useTitle("Loading...");
-  setTimeout(() => updateTitle("한숲푸드 - 수화식당"), 1000);
+  setTimeout(() => updateTitle("한숲푸드 - 한숲사업 - 수화식당"), 1000);
 
   const [menuList, setMenuList] = useState([]);
   const [listLoading, setListLoading] = useState(true);

@@ -9,7 +9,7 @@ import useTitle from "hooks/useTitle";
 
 const Introduction = () => {
   const updateTitle = useTitle("Loading...");
-  setTimeout(() => updateTitle("한숲푸드 - 인사말"), 1000);
+  setTimeout(() => updateTitle("한숲푸드 - 회사소개 - 인사말"), 1000);
   return (
     <PageLayout>
       <ContentLayout subtitle={"인사말"}>

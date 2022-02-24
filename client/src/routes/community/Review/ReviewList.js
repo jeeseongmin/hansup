@@ -11,7 +11,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import useTitle from "hooks/useTitle";
 const ReviewList = () => {
   const updateTitle = useTitle("Loading...");
-  setTimeout(() => updateTitle("한숲푸드 - 리뷰"), 1000);
+  setTimeout(() => updateTitle("한숲푸드 - 커뮤니티 - 리뷰"), 1000);
 
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);

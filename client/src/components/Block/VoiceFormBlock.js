@@ -31,7 +31,7 @@ const VoiceFormBlock = ({
           value={info.name}
           type={"name"}
           placeholder={"이름"}
-          title='제목'
+          title='이름'
           onChange={changeInfo}
           refName={nameRef}
         />
@@ -50,26 +50,26 @@ const VoiceFormBlock = ({
         <p class='w-24 text-xl font-bold'>연락처</p>
         <div class='h-full flex-1 grid grid-cols-3 gap-2 '>
           <InputBox
+            title='연락처 첫번째 자리'
             value={info.phone1}
             type={"phone1"}
             placeholder={"010"}
-            title='연락처1'
             onChange={changeInfo}
             refName={phoneRef1}
           />
           <InputBox
+            title='연락처 가운데 자리'
             value={info.phone2}
             type={"phone2"}
             placeholder={""}
-            title='연락처2'
             onChange={changeInfo}
             refName={phoneRef2}
           />
           <InputBox
+            title='연락처 마지막 자리'
             value={info.phone3}
             type={"phone3"}
             placeholder={""}
-            title='연락처3'
             onChange={changeInfo}
             refName={phoneRef3}
           />

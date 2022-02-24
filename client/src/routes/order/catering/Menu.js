@@ -11,7 +11,10 @@ import axios from "axios";
 import useTitle from "hooks/useTitle";
 const Menu = () => {
   const updateTitle = useTitle("Loading...");
-  setTimeout(() => updateTitle("한숲푸드 - 케이터링 메뉴"), 1000);
+  setTimeout(
+    () => updateTitle("한숲푸드 - 케이터링 예약 - 케이터링 메뉴"),
+    1000
+  );
 
   const [menuList, setMenuList] = useState([]);
   const [listLoading, setListLoading] = useState(true);

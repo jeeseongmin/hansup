@@ -8,7 +8,7 @@ import Description from "components/Description";
 import useTitle from "hooks/useTitle";
 const Story = () => {
   const updateTitle = useTitle("Loading...");
-  setTimeout(() => updateTitle("한숲푸드 - 한숲의 이야기"), 1000);
+  setTimeout(() => updateTitle("한숲푸드 - 회사소개 - 한숲의 이야기"), 1000);
 
   return (
     <>

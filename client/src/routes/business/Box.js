@@ -8,7 +8,7 @@ import BoxSliderBlock from "components/Block/BoxSliderBlock";
 import useTitle from "hooks/useTitle";
 const Box = () => {
   const updateTitle = useTitle("Loading...");
-  setTimeout(() => updateTitle("한숲 - 도시락"), 1000);
+  setTimeout(() => updateTitle("한숲푸드 - 한숲사업 - 한숲 도시락"), 1000);
 
   return (
     <PageLayout>

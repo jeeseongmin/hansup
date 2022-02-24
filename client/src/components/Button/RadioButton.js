@@ -1,9 +1,10 @@
 import React from "react";
 
-const RadioButton = ({ text, setSelected, current, clicked }) => {
+const RadioButton = ({ text, setSelected, current, clicked, title }) => {
   return (
     <button
       onClick={() => setSelected(clicked)}
+      title={title}
       class='flex flex-row h-full cursor-pointer items-center'>
       <div class='h-6 w-6 rounded-full border border-hansupBrown mr-2 relative'>
         <div class='absolute w-full h-full flex justify-center items-center'>

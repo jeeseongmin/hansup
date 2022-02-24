@@ -12,7 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import useTitle from "hooks/useTitle";
 const NoticeList = () => {
   const updateTitle = useTitle("Loading...");
-  setTimeout(() => updateTitle("한숲푸드 - 공지사항"), 1000);
+  setTimeout(() => updateTitle("한숲푸드 - 커뮤니티 - 공지사항"), 1000);
 
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
