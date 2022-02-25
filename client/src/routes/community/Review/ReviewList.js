@@ -62,9 +62,8 @@ const ReviewList = () => {
 
   return (
     <div class={"w-full flex flex-col mb-16 lg:mb-24 px-8 xl:px-40 "}>
-      <button id='shortcut' title=''></button>
       <div class='w-full flex flex-row justify-between items-center mb-8'>
-        <div class='inline-flex w-auto '>
+        <div id='main' class='inline-flex w-auto '>
           <Subtitle subtitle={"리뷰"} />
         </div>
         <Link

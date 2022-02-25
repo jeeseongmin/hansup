@@ -24,7 +24,6 @@ const OrderMain = () => {
   };
   return (
     <PageLayout>
-      <button id='shortcut' title=''></button>
       <ContentLayout subtitle={"케이터링 예약하기"}>
         <div class='h-full w-full flex flex-col justify-center items-center'>
           <div class='w-full h-48 flex justify-center items-center border-b border-hansupBrown mb-8'>

@@ -198,8 +198,9 @@ const OrderCheck = () => {
   return (
     <>
       <PageLayout>
-        <button id='shortcut' title=''></button>
-        <div class='w-full flex flex-col justify-center items-center '>
+        <div
+          id='main'
+          class='w-full flex flex-col justify-center items-center '>
           <div class='w-full md:w-2/3 lg:w-2/3'>
             <ContentLayout subtitle={"예약 내역 확인"}>
               <p class='w-full text-left text-xl mb-4 font-bold text-hansupBrown'>

@@ -16,9 +16,8 @@ const Hansup = () => {
   };
   return (
     <PageLayout>
-      <button id='shortcut' title=''></button>
       <ContentLayout subtitle={"한숲맛이야기"}>
-        <div class='flex h-full md:h-72 flex-col md:flex-row'>
+        <div id='main' class='flex h-full md:h-72 flex-col md:flex-row'>
           <div class='w-full md:w-auto h-full mr-4 flex justify-center items-center'>
             <img
               src={HansupImg}

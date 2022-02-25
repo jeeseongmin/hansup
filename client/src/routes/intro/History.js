@@ -8,11 +8,9 @@ const History = () => {
   setTimeout(() => updateTitle("한숲푸드 - 회사소개 - 한숲의 역사"), 1000);
 
   return (
-    <PageLayout>
+    <PageLayout main={true}>
       <ContentLayout subtitle={"한숲의 역사"}>
-        <button id='shortcut' title=''></button>
-
-        <div class='flex flex-row'>
+        <div id='main' class='flex flex-row'>
           <div class='w-full lg:w-2/3'>
             <img
               src={HistoryImg}

@@ -20,8 +20,9 @@ const Main = () => {
   };
   return (
     <ContentLayout subtitle={"고객의 소리"}>
-      <button id='shortcut' title=''></button>
-      <div class='h-full w-full flex flex-col justify-center items-center'>
+      <div
+        id='main'
+        class='h-full w-full flex flex-col justify-center items-center'>
         <div class='w-full h-48 flex justify-center items-center border-b border-hansupBrown mb-8'>
           <p class='text-center font-bold text-lg mb-12 leading-loose'>
             칭찬, 불만, 건의사항 등이 있으시면<br></br>언제든지 말씀

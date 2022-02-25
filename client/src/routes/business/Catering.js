@@ -16,8 +16,7 @@ const Catering = () => {
   setTimeout(() => updateTitle("한숲푸드 - 한숲사업 - 케이터링"), 1000);
 
   return (
-    <PageLayout>
-      <button id='shortcut' title=''></button>
+    <PageLayout main={true}>
       <ContentLayout subtitle={"케이터링"}>
         <div class='flex w-full h-auto lg:h-auto flex-col items-center mb-4 '>
           <div class='w-full px-16 lg:px-24 my-16 h-96'>

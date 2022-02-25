@@ -12,9 +12,8 @@ const Story = () => {
 
   return (
     <>
-      <PageLayout>
+      <PageLayout main={true}>
         <ContentLayout subtitle={"한숲 스토리"}>
-          <button id='shortcut' title=''></button>
           <div class='flex flex-col'>
             {/* 반응형 & 원본 */}
             <div class='w-full h-auto flex lg:hidden flex-col mb-16'>

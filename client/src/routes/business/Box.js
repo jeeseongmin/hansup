@@ -11,8 +11,7 @@ const Box = () => {
   setTimeout(() => updateTitle("한숲푸드 - 한숲사업 - 한숲 도시락"), 1000);
 
   return (
-    <PageLayout>
-      <button id='shortcut' title=''></button>
+    <PageLayout main={true}>
       <ContentLayout subtitle={"한숲 도시락"}>
         <div class='flex w-full h-auto flex-col items-center mb-4 '>
           <Description>

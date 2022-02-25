@@ -150,8 +150,9 @@ const Ordering = () => {
   };
   return (
     <PageLayout>
-      <button id='shortcut' title=''></button>
-      <div class='z-30 w-full flex flex-col mb-16 lg:mb-24 px-8 xl:px-40 '>
+      <div
+        id='main'
+        class='z-30 w-full flex flex-col mb-16 lg:mb-24 px-8 xl:px-40 '>
         <div class='grid-cols-3 gap-8 mb-8 hidden lg:grid'>
           <StepBox
             step={step}

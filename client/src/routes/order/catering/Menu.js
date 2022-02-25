@@ -64,9 +64,8 @@ const Menu = () => {
 
   return (
     <PageLayout>
-      <button id='shortcut' title=''></button>
       <ContentLayout subtitle={"메뉴 구성"}>
-        <div class='flex flex-col'>
+        <div id='main' class='flex flex-col'>
           <p class='text-hansupBrown text-lg mb-8 font-semibold'>
             케이터링의 메뉴 구성은 메인메뉴 5개, 식사메뉴 5개, 디저트 5개로,
             달마다 구성이 조금씩 달라집니다.

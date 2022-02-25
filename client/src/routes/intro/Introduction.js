@@ -11,11 +11,10 @@ const Introduction = () => {
   const updateTitle = useTitle("Loading...");
   setTimeout(() => updateTitle("한숲푸드 - 회사소개 - 인사말"), 1000);
   return (
-    <PageLayout>
+    <PageLayout main={true}>
       <ContentLayout subtitle={"인사말"}>
         <div class='flex w-full h-auto lg:h-auto flex-col lg:flex-row items-center mb-8 relative'>
           <div class='w-full md:w-auto h-auto mb-4 lg:mb-0 flex justify-center lg:justify-start items-start'>
-            <button id='shortcut' title=''></button>
             {/* <img src={IntroImg1} class="h-full w-full object-cover" alt="img" /> */}
             <ReactPlayer
               url='https://youtu.be/hSoTS14DhTA'

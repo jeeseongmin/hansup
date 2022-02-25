@@ -55,7 +55,7 @@ const Home = () => {
           {/* bannerImage */}
           <img src={Forest} alt='' class='object-cover w-full h-full' />
           {/* bannerContents */}
-          <div class='absolute w-full h-full left-0 top-0'>
+          <div id='main' class='absolute w-full h-full left-0 top-0'>
             {/* bannerInner */}
             <div class='h-full flex flex-col lg:flex-row justify-center px-4 md:px-8 lg:px-24'>
               {/* bannerLeft */}
@@ -77,7 +77,6 @@ const Home = () => {
               <div class='h-12 md:h-16 lg:h-full flex-none lg:flex-1 grid grid-cols-3 gap-8 lg:gap-0 lg:flex flex-row lg:flex-col justify-end pl-0 lg:pl-24'>
                 {/* bannerButton */}
                 <button
-                  id='shortcut'
                   onClick={() => goPage("/intro/introduction")}
                   class='text-xs md:text-base h-8 md:h-16 flex flex-row justify-between items-center cursor-pointer px-2 lg:px-8 mb-0 md:mb-3 transition delay-50 duration-300 w-full relative text-white font-bold bg-opacity-80 bg-hansupBrown hover:bg-white hover:text-hansupBrown'>
                   {/* mainButton */}

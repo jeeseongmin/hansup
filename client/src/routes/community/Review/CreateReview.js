@@ -75,8 +75,7 @@ const CreateReview = () => {
 
   return (
     <div class={"w-full flex flex-col mb-16 lg:mb-24 px-8 xl:px-40 "}>
-      <button id='shortcut' title=''></button>
-      <div class='inline-flex w-full mb-6'>
+      <div id='main' class='inline-flex w-full mb-6'>
         <Subtitle subtitle={"리뷰 작성하기"} />
       </div>
       <ReviewFormBlock

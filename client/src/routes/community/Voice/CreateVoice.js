@@ -121,8 +121,7 @@ const CreateVoice = () => {
   };
   return (
     <ContentLayout subtitle={"고객의 소리 작성하기"}>
-      <button id='shortcut' title=''></button>
-      <p class='font-bold text-sm lg:text-lg mb-4'>
+      <p id='main' class='font-bold text-sm lg:text-lg mb-4'>
         고객의 소리는 여러분의 고충과 피드백, 조언을 담아내는 공간입니다. 지나친
         인신 공격과 비방은 삼가주시면 감사하겠습니다.
       </p>

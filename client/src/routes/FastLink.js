@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 const FastLink = () => {
   const location = useLocation();
@@ -21,11 +21,6 @@ const FastLink = () => {
     };
   });
 
-  /**
-   * 1. focus가 발생하더라도 tab 이벤트일 때만 보이도록 해야한다.
-   * 2. 따라서 focusTab으로 판단하면 안되고, viewTab로 판단해야 한다.
-   */
-
   useEffect(() => {
     setViewTab(focusTab);
   }, [focusTab]);
@@ -35,24 +30,19 @@ const FastLink = () => {
     url: "/",
   };
 
-  const fastGo = () => {
-    document.getElementById("shortcut").focus();
-  };
-
   return (
     <div class={"mt-0 absolute z-50 top-0 left-0 w-full "}>
-      <button
-        id='fastlink'
-        title={fastLinkObject.text}
+      <a
+        title='본문 바로가기'
         class={
           "absolute left-0 top-0 bg-black text-gray-200 py-2 px-2 font-bold  " +
           (viewTab ? "h-auto" : "w-0 h-0 overflow-hidden px-0 py-0 -top-4")
         }
-        onClick={fastGo}
+        href='#main'
         onFocus={() => setFocusTab(true)}
         onBlur={() => setFocusTab(false)}>
-        {fastLinkObject.text}
-      </button>
+        본문 바로가기
+      </a>
     </div>
   );
 };
