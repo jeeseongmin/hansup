@@ -52,7 +52,7 @@ const Title = styled.span`
     `}
   ${(props) =>
     props.menu !== 6 &&
-    props.current === props.menu &&
+    props.selected &&
     css`
       border-top: 4px solid #6c4d3f;
       border-bottom: 4px solid #d3d3d3;
@@ -67,7 +67,7 @@ const Menu = ({ title, url, menu, current, empty }) => {
 
   return (
     <MenuButton
-      current={current}
+      selected={current === menu}
       menu={menu}
       to={url}
       empty={empty}
