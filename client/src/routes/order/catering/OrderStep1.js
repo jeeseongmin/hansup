@@ -145,8 +145,14 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
       alert("올바른 시간을 입력해주세요(11~20) : 오전 11시부터 오후 8시");
       hourRef.current.focus();
       return false;
-    } else if (info.minute !== 0 && info.minute !== 30) {
-      alert("올바른 분을 입력해주세요(30분 단위로 가능합니다. 0 또는 30)");
+    }
+    // else if (info.minute !== 0 && info.minute !== 30) {
+    //   alert("올바른 분을 입력해주세요(30분 단위로 가능합니다. 0 또는 30)");
+    //   minuteRef.current.focus();
+    //   return false;
+    // }
+    else if (0 > info.minute || info.minute > 59) {
+      alert("올바른 분을 입력해주세요");
       minuteRef.current.focus();
       return false;
     } else return true;
