@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 const MenuButton = styled(Link)`
+  height: 4rem;
   width: 9rem;
   text-decoration: none;
   color: white;
@@ -15,6 +16,7 @@ const MenuButton = styled(Link)`
   padding: 1rem 0;
   /* border-top: 1px solid #6c4d3f;
 	border-bottom: 1px solid rgba(#d3d3d3, 0, 0, 0.5); */
+  background-color: #6c4d3f;
 
   ${(props) =>
     props.empty &&

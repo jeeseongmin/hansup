@@ -151,29 +151,21 @@ const MenuContainer = styled.div`
 const Navbar = ({ currentMenu }) => {
   const dispatch = useDispatch();
   const history = useHistory();
+
+  // State
   const [isLogin, setIsLogin] = useState(false);
 
   const location = useLocation();
   const subRef = useRef();
   const [menu, setMenu] = useState(0);
-  const [current, setCurrent] = useState(0);
 
-  const modalRef = useRef();
-  const clickRef = useRef();
-
-  const sidebar = useSelector((state) => state.setting.sidebar);
   const profile = useSelector((state) => state.setting.profile);
-  const loginToken = useSelector((state) => state.setting.loginToken);
   const currentEmail = useSelector((state) => state.setting.currentEmail);
   const currentPassword = useSelector((state) => state.setting.currentPassword);
   const refresh_voice = useSelector((state) => state.common.refresh_voice);
   const refresh_order = useSelector((state) => state.common.refresh_order);
 
   const profileRef = useRef(null);
-  const subProfileRef = useRef(null);
-
-  const [overMenu, setOverMenu] = useState([false, false, false, false, false]);
-
   const [loginInfo, setLoginInfo] = useState({
     position: "",
     email: "",
@@ -184,6 +176,9 @@ const Navbar = ({ currentMenu }) => {
 
   const [voiceLoading, setVoiceLoading] = useState(false);
   const [orderLoading, setOrderLoading] = useState(false);
+  const [focusedMenu, setFocusedMenu] = useState(0);
+
+  // Hooks
 
   useEffect(() => {
     axios
@@ -226,6 +221,16 @@ const Navbar = ({ currentMenu }) => {
         console.log(Error);
       });
   }, [currentEmail, refresh_order]);
+
+  useEffect(() => {
+    /**
+     * 1. 주 메뉴에 hover 될 때
+     * 2. 주 메뉴에 focus 이벤트 생길 때
+     * => setFocusedMenu(해당 메뉴);
+     */
+  }, []);
+
+  // Functions
 
   const onToggleProfile = () => {
     if (profile === "on") {
@@ -342,9 +347,18 @@ const Navbar = ({ currentMenu }) => {
     return () => window.removeEventListener("mouseover", handleClick);
   }, [menu]);
 
+  const focusEvent = (num) => {
+    console.log("num", num);
+    setFocusedMenu(num);
+  };
+
+  const blurEvent = () => {
+    setFocusedMenu(0);
+  };
+
   return (
     <>
-      <Nav ref={subRef} onMouseLeave={onMouseOut}>
+      <Nav ref={subRef}>
         <ResponsiveContainer>
           <Logo>
             <Link to='/'>
@@ -369,47 +383,150 @@ const Navbar = ({ currentMenu }) => {
               <img src={logoImg} class='object-cover h-8' alt='한숲푸드' />
             </Link>
           </Logo>
+          {/* 
+          1. 인사말, 한숲 이야기, 한숲의 역사, 오시는 길
+          2. 수화식당, 케이터링, 한숲 도시락 
+          3. 케이터링 메뉴, 케이터링 안내, 케이터링 예약
+          4. 공지사항, 리뷰, 고객의 소리
+          5. 한숲맛이야기
+          */}
           <MenuContainer>
-            <Menu
-              toggleMenu={toggleMenu}
-              menu={1}
-              title={"회사소개"}
-              url={"/intro/introduction"}
-              current={menu}
-              currentMenu={currentMenu}
-            />
-            <Menu
-              toggleMenu={toggleMenu}
-              menu={2}
-              title={"한숲사업"}
-              url={"/business/restaurant"}
-              current={menu}
-              currentMenu={currentMenu}
-            />
-            <Menu
-              toggleMenu={toggleMenu}
-              menu={3}
-              title={"케이터링 예약"}
-              url={"/order/catering/menu"}
-              current={menu}
-              currentMenu={currentMenu}
-            />
-            <Menu
-              toggleMenu={toggleMenu}
-              menu={4}
-              title={"커뮤니티"}
-              url={"/community/notice/list"}
-              current={menu}
-              currentMenu={currentMenu}
-            />
-            <Menu
-              toggleMenu={toggleMenu}
-              menu={5}
-              title={"협력기업"}
-              url={"/enterprise/hansup"}
-              current={menu}
-              currentMenu={currentMenu}
-            />
+            <div class='w-36 h-auto relative' onMouseOver={() => focusEvent(1)}>
+              <Menu
+                toggleMenu={toggleMenu}
+                menu={1}
+                title={"회사소개"}
+                url={"/intro/introduction"}
+                current={menu}
+                currentMenu={currentMenu}
+              />
+              {/* sideMenu */}
+              <div class={focusedMenu === 1 ? "block" : "hidden"}>
+                <Submenu
+                  title={"인사말"}
+                  url={"/intro/introduction"}
+                  empty={false}
+                />
+                <Submenu
+                  title={"한숲 이야기"}
+                  url={"/intro/story"}
+                  empty={false}
+                />
+                <Submenu
+                  title={"한숲의 역사"}
+                  url={"/intro/history"}
+                  empty={false}
+                />
+                <Submenu
+                  title={"오시는 길"}
+                  url={"/intro/guide"}
+                  isLast={true}
+                  empty={false}
+                />
+              </div>
+            </div>
+            <div class='w-36 h-auto relative' onFocus={() => focusEvent(2)}>
+              <Menu
+                toggleMenu={toggleMenu}
+                menu={2}
+                title={"한숲사업"}
+                url={"/business/restaurant"}
+                current={menu}
+                currentMenu={currentMenu}
+              />
+              {/* sideMenu */}
+              <div class=''>
+                <Submenu
+                  title={"수화식당"}
+                  url={"/intro/introduction"}
+                  empty={false}
+                />
+                <Submenu
+                  title={"케이터링"}
+                  url={"/intro/story"}
+                  empty={false}
+                />
+                <Submenu
+                  title={"한숲 도시락"}
+                  url={"/intro/history"}
+                  empty={false}
+                  isLast={true}
+                />
+              </div>
+            </div>{" "}
+            <div class='w-36 h-auto relative' onFocus={() => focusEvent(3)}>
+              <Menu
+                toggleMenu={toggleMenu}
+                menu={3}
+                title={"케이터링 예약"}
+                url={"/order/catering/menu"}
+                current={menu}
+                currentMenu={currentMenu}
+              />
+              {/* sideMenu */}
+              <div class=''>
+                <Submenu
+                  title={"케이터링 메뉴"}
+                  url={"/intro/introduction"}
+                  empty={false}
+                />
+                <Submenu
+                  title={"케이터링 안내"}
+                  url={"/intro/story"}
+                  empty={false}
+                />
+                <Submenu
+                  title={"케이터링 예약"}
+                  url={"/intro/history"}
+                  empty={false}
+                  isLast={true}
+                />
+              </div>
+            </div>{" "}
+            <div class='w-36 h-auto relative' onFocus={() => focusEvent(4)}>
+              <Menu
+                toggleMenu={toggleMenu}
+                menu={4}
+                title={"커뮤니티"}
+                url={"/community/notice/list"}
+                current={menu}
+                currentMenu={currentMenu}
+              />
+              {/* sideMenu */}
+              <div class=''>
+                <Submenu
+                  title={"공지사항"}
+                  url={"/intro/introduction"}
+                  empty={false}
+                />
+                <Submenu title={"리뷰"} url={"/intro/story"} empty={false} />
+                <Submenu
+                  title={"고객의 소리"}
+                  url={"/intro/history"}
+                  empty={false}
+                  isLast={true}
+                />
+              </div>
+            </div>{" "}
+            <div class='w-36 h-auto relative' onFocus={() => focusEvent(5)}>
+              <Menu
+                toggleMenu={toggleMenu}
+                menu={5}
+                title={"협력기업"}
+                url={"/enterprise/hansup"}
+                current={menu}
+                currentMenu={currentMenu}
+              />
+              {/* sideMenu */}
+              <div class=''>
+                <Submenu
+                  title={"한숲맛이야기"}
+                  url={"/intro/introduction"}
+                  empty={false}
+                  isLast={true}
+                />
+              </div>
+            </div>
             {isLogin && (
               <Menu
                 // toggleMenu={toggleMenu}
