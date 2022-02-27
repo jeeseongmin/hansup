@@ -2,8 +2,9 @@ import React, { useEffect, useState, useRef } from "react";
 // import "components/navs/nav.css";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
+import { useHistory } from "react-router-dom";
 
-const SubmenuButton = styled(Link)`
+const SubmenuButton = styled.button`
   height: 4rem;
   width: 9rem;
   text-decoration: none;
@@ -38,9 +39,18 @@ const SubmenuButton = styled(Link)`
   @media screen and (max-width: 480px) {
   }
 `;
-const Submenu = ({ title, url, empty, isLast }) => {
+
+const Submenu = ({ title, url, empty, isLast, setFocusedMenu }) => {
+  const history = useHistory();
+  const goPage = () => {
+    history.push(url);
+    // window.location.reload();
+    document.body.scrollIntoView(true);
+
+    setFocusedMenu(0);
+  };
   return (
-    <SubmenuButton to={url} empty={empty} isLast={isLast}>
+    <SubmenuButton empty={empty} isLast={isLast} onClick={goPage}>
       {title}
     </SubmenuButton>
   );

@@ -166,6 +166,7 @@ const Navbar = ({ currentMenu }) => {
   const refresh_order = useSelector((state) => state.common.refresh_order);
 
   const profileRef = useRef(null);
+  const testRef = useRef();
   const [loginInfo, setLoginInfo] = useState({
     position: "",
     email: "",
@@ -221,16 +222,6 @@ const Navbar = ({ currentMenu }) => {
         console.log(Error);
       });
   }, [currentEmail, refresh_order]);
-
-  useEffect(() => {
-    /**
-     * 1. 주 메뉴에 hover 될 때
-     * 2. 주 메뉴에 focus 이벤트 생길 때
-     * => setFocusedMenu(해당 메뉴);
-     */
-  }, []);
-
-  // Functions
 
   const onToggleProfile = () => {
     if (profile === "on") {
@@ -317,6 +308,31 @@ const Navbar = ({ currentMenu }) => {
     }
   };
 
+  //
+  useEffect(() => {
+    const focusEvent = (e) => {
+      let textArr = [
+        "회사소개",
+        "한숲사업",
+        "케이터링 예약",
+        "커뮤니티",
+        "협력기업",
+      ];
+      if (
+        e.target.tagName !== "SPAN" &&
+        !textArr.includes(e.target.innerText)
+      ) {
+        setFocusedMenu(0);
+      }
+    };
+
+    document.addEventListener("click", focusEvent);
+
+    return () => {
+      document.removeEventListener("click", focusEvent);
+    };
+  });
+
   useEffect(() => {
     if (profile === "off") return;
     function handleClick(e) {
@@ -347,12 +363,11 @@ const Navbar = ({ currentMenu }) => {
     return () => window.removeEventListener("mouseover", handleClick);
   }, [menu]);
 
-  const focusEvent = (num) => {
-    console.log("num", num);
+  const mouseOverEvent = (num) => {
     setFocusedMenu(num);
   };
 
-  const blurEvent = () => {
+  const mouseOutEvent = () => {
     setFocusedMenu(0);
   };
 
@@ -391,8 +406,13 @@ const Navbar = ({ currentMenu }) => {
           5. 한숲맛이야기
           */}
           <MenuContainer>
-            <div class='w-36 h-auto relative' onMouseOver={() => focusEvent(1)}>
+            <div
+              title='testBlock'
+              class='w-36 h-auto relative'
+              onMouseOver={() => mouseOverEvent(1)}
+              onMouseOut={mouseOutEvent}>
               <Menu
+                setFocusedMenu={setFocusedMenu}
                 toggleMenu={toggleMenu}
                 menu={1}
                 title={"회사소개"}
@@ -405,28 +425,36 @@ const Navbar = ({ currentMenu }) => {
                 <Submenu
                   title={"인사말"}
                   url={"/intro/introduction"}
+                  setFocusedMenu={setFocusedMenu}
                   empty={false}
                 />
                 <Submenu
                   title={"한숲 이야기"}
                   url={"/intro/story"}
+                  setFocusedMenu={setFocusedMenu}
                   empty={false}
                 />
                 <Submenu
                   title={"한숲의 역사"}
                   url={"/intro/history"}
+                  setFocusedMenu={setFocusedMenu}
                   empty={false}
                 />
                 <Submenu
                   title={"오시는 길"}
                   url={"/intro/guide"}
+                  setFocusedMenu={setFocusedMenu}
                   isLast={true}
                   empty={false}
                 />
               </div>
             </div>
-            <div class='w-36 h-auto relative' onFocus={() => focusEvent(2)}>
+            <div
+              class='w-36 h-auto relative'
+              onMouseOver={() => mouseOverEvent(2)}
+              onMouseOut={mouseOutEvent}>
               <Menu
+                setFocusedMenu={setFocusedMenu}
                 toggleMenu={toggleMenu}
                 menu={2}
                 title={"한숲사업"}
@@ -435,27 +463,34 @@ const Navbar = ({ currentMenu }) => {
                 currentMenu={currentMenu}
               />
               {/* sideMenu */}
-              <div class=''>
+              <div class={focusedMenu === 2 ? "block" : "hidden"}>
                 <Submenu
                   title={"수화식당"}
-                  url={"/intro/introduction"}
+                  url={"/business/restaurant"}
+                  setFocusedMenu={setFocusedMenu}
                   empty={false}
                 />
                 <Submenu
                   title={"케이터링"}
-                  url={"/intro/story"}
+                  url={"/business/catering"}
+                  setFocusedMenu={setFocusedMenu}
                   empty={false}
                 />
                 <Submenu
                   title={"한숲 도시락"}
-                  url={"/intro/history"}
+                  url={"/business/box"}
+                  setFocusedMenu={setFocusedMenu}
                   empty={false}
                   isLast={true}
                 />
               </div>
             </div>{" "}
-            <div class='w-36 h-auto relative' onFocus={() => focusEvent(3)}>
+            <div
+              class='w-36 h-auto relative'
+              onMouseOver={() => mouseOverEvent(3)}
+              onMouseOut={mouseOutEvent}>
               <Menu
+                setFocusedMenu={setFocusedMenu}
                 toggleMenu={toggleMenu}
                 menu={3}
                 title={"케이터링 예약"}
@@ -464,27 +499,34 @@ const Navbar = ({ currentMenu }) => {
                 currentMenu={currentMenu}
               />
               {/* sideMenu */}
-              <div class=''>
+              <div class={focusedMenu === 3 ? "block" : "hidden"}>
                 <Submenu
                   title={"케이터링 메뉴"}
-                  url={"/intro/introduction"}
+                  url={"/order/catering/menu"}
+                  setFocusedMenu={setFocusedMenu}
                   empty={false}
                 />
                 <Submenu
                   title={"케이터링 안내"}
-                  url={"/intro/story"}
+                  url={"/order/catering/intro"}
+                  setFocusedMenu={setFocusedMenu}
                   empty={false}
                 />
                 <Submenu
                   title={"케이터링 예약"}
-                  url={"/intro/history"}
+                  url={"/order/catering/orderMain"}
+                  setFocusedMenu={setFocusedMenu}
                   empty={false}
                   isLast={true}
                 />
               </div>
             </div>{" "}
-            <div class='w-36 h-auto relative' onFocus={() => focusEvent(4)}>
+            <div
+              class='w-36 h-auto relative'
+              onMouseOver={() => mouseOverEvent(4)}
+              onMouseOut={mouseOutEvent}>
               <Menu
+                setFocusedMenu={setFocusedMenu}
                 toggleMenu={toggleMenu}
                 menu={4}
                 title={"커뮤니티"}
@@ -493,23 +535,34 @@ const Navbar = ({ currentMenu }) => {
                 currentMenu={currentMenu}
               />
               {/* sideMenu */}
-              <div class=''>
+              <div class={focusedMenu === 4 ? "block" : "hidden"}>
                 <Submenu
                   title={"공지사항"}
-                  url={"/intro/introduction"}
+                  url={"/community/notice/list"}
+                  setFocusedMenu={setFocusedMenu}
                   empty={false}
                 />
-                <Submenu title={"리뷰"} url={"/intro/story"} empty={false} />
+                <Submenu
+                  title={"리뷰"}
+                  url={"/community/review/list"}
+                  setFocusedMenu={setFocusedMenu}
+                  empty={false}
+                />
                 <Submenu
                   title={"고객의 소리"}
-                  url={"/intro/history"}
+                  url={"/community/voice/main"}
+                  setFocusedMenu={setFocusedMenu}
                   empty={false}
                   isLast={true}
                 />
               </div>
             </div>{" "}
-            <div class='w-36 h-auto relative' onFocus={() => focusEvent(5)}>
+            <div
+              class='w-36 h-auto relative'
+              onMouseOver={() => mouseOverEvent(5)}
+              onMouseOut={mouseOutEvent}>
               <Menu
+                setFocusedMenu={setFocusedMenu}
                 toggleMenu={toggleMenu}
                 menu={5}
                 title={"협력기업"}
@@ -518,10 +571,11 @@ const Navbar = ({ currentMenu }) => {
                 currentMenu={currentMenu}
               />
               {/* sideMenu */}
-              <div class=''>
+              <div class={focusedMenu === 5 ? "block" : "hidden"}>
                 <Submenu
                   title={"한숲맛이야기"}
-                  url={"/intro/introduction"}
+                  url={"/enterprise/hansup"}
+                  setFocusedMenu={setFocusedMenu}
                   empty={false}
                   isLast={true}
                 />

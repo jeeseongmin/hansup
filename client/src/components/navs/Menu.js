@@ -3,7 +3,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import styled, { css } from "styled-components";
 
-const MenuButton = styled(Link)`
+const MenuButton = styled.button`
   height: 4rem;
   width: 9rem;
   text-decoration: none;
@@ -61,19 +61,15 @@ const Title = styled.span`
       transition: all 0.1s ease-out;
     `};
 `;
-const Menu = ({ title, url, menu, current, empty }) => {
-  const goPage = () => {
-    // window.scrollTo(0, 0);
-    // document.getElementById("scrollRef").scrollTo(0, 0);
-  };
 
+const Menu = ({ title, menu, current, empty, setFocusedMenu }) => {
   return (
     <MenuButton
       selected={current === menu}
       menu={menu}
-      to={url}
-      empty={empty}
-      onClick={goPage}>
+      // to={url}
+      onFocus={() => setFocusedMenu(menu)}
+      empty={empty}>
       <Title current={current} menu={menu}>
         {title}
       </Title>
