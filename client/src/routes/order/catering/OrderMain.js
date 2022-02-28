@@ -25,7 +25,9 @@ const OrderMain = () => {
   return (
     <PageLayout>
       <ContentLayout subtitle={"케이터링 예약하기"}>
-        <div class='h-full w-full flex flex-col justify-center items-center'>
+        <div
+          id='main'
+          class='h-full w-full flex flex-col justify-center items-center'>
           <div class='w-full h-48 flex justify-center items-center border-b border-hansupBrown mb-8'>
             <p class='text-center font-bold text-lg mb-12 leading-loose'>
               케이터링 예약과 예약 내역 확인을 진행하실 수 있습니다.

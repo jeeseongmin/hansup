@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route } from "react-router-dom";
 import Guide from "routes/intro/Guide";
 import History from "routes/intro/History";

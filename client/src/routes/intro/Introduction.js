@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PageLayout from "components/Layout/PageLayout";
 import ContentLayout from "components/Layout/ContentLayout";
 import IntroImg1 from "image/intro-intro-img1.png";

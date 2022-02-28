@@ -1,6 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { RiWindowLine } from "react-icons/ri";
 
 const NoticeBlock = ({ notice }) => {
   const history = useHistory();
@@ -19,6 +20,8 @@ const NoticeBlock = ({ notice }) => {
       )
       .then((Response) => {
         history.push("/community/notice/" + id);
+        // 웹접근성
+        window.location.reload();
       })
       .catch((Error) => {
         console.log(Error);

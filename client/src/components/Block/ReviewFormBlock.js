@@ -119,6 +119,7 @@ const ReviewFormBlock = ({
       <h1 class='text-lg font-bold pt-4'>이미지 업로드 후 입력 가능합니다.</h1>
       <div class='cursor-pointer w-full pt-2 pb-0 flex justify-end items-center'>
         <textarea
+          title='음식 리뷰 내용'
           ref={contentRef}
           class='w-full h-24 p-4 border-2 border-gray-300 focus:border-hansupBrown resize-none	'
           onChange={(e) => changeInfo(e, "content")}

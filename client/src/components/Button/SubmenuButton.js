@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import { Link, useLocation, useHistory } from "react-router-dom";
 import styled, { css } from "styled-components";
 
-const SubmenuBtn = styled(Link)`
+const SubmenuBtn = styled.button`
   width: auto;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
@@ -30,9 +30,16 @@ const SubmenuBtn = styled(Link)`
     `}
 `;
 
-const Submenu = ({ text, current }) => {
+const SubmenuButton = ({ text, current }) => {
+  const history = useHistory();
   const location = useLocation();
   const [selected, setSelected] = useState(false);
+  const focusRef = useRef();
+
+  const goPage = () => {
+    history.push(current);
+    window.location.reload();
+  };
   useEffect(() => {
     if (location.pathname.includes("voice") && current.includes("voice"))
       setSelected(true);
@@ -73,12 +80,12 @@ const Submenu = ({ text, current }) => {
 
   return (
     <SubmenuBtn
-      to={current}
       selected={selected}
+      onClick={goPage}
       title={selected ? "선택됨" : ""}>
       {text}
     </SubmenuBtn>
   );
 };
 
-export default Submenu;
+export default SubmenuButton;

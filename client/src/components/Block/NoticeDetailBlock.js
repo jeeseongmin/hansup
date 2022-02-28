@@ -94,7 +94,9 @@ const NoticeDetailBlock = ({ match }) => {
     <>
       {!isEdit ? (
         <ContentLayout subtitle={"자세히보기"}>
-          <div class='flex flex-col w-full h-full border-t-2 border-b-2 border-hansupBrown mb-8 '>
+          <div
+            id='main'
+            class='flex flex-col w-full h-full border-t-2 border-b-2 border-hansupBrown mb-8 '>
             <div class='w-full px-2 lg:px-8 py-4 flex justify-end items-center relative'>
               {!loading ? (
                 <Skeleton animation='wave' />
@@ -183,7 +185,7 @@ const NoticeDetailBlock = ({ match }) => {
             <Link
               class='transition delay-50 duration-100 mb-4 md:mb-0 w-full md:w-auto  cursor-pointer px-0 md:px-16 py-2 justify-center border border-hansupBrown text-hansupBrown flex flex-row items-center hover:bg-hansupBrown hover:text-white hover:font-bold'
               to={"/community/notice/list"}
-              onClick={() => window.scrollTo(0, 0)}>
+              onClick={() => document.body.scrollIntoView(true)}>
               뒤로 가기
             </Link>
             {loading && currentEmail === "master" ? (

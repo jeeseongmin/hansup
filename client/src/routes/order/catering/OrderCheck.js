@@ -22,16 +22,26 @@ const OrderCheck = () => {
   const [empty, setEmpty] = useState(false);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setOpen(false);
+    history.push("/order/catering/orderMain");
+    document.body.scrollIntoView(true);
+  };
   const [searchInfo, setSearchInfo] = useState({
     name: "",
     date: new Date(),
+    year: "",
+    month: "",
+    day: "",
     phone1: "",
     phone2: "",
     phone3: "",
   });
   const modalRef = useRef();
 
+  useEffect(() => {
+    document.body.scrollIntoView(true);
+  }, []);
   useEffect(() => {
     if (!open) return;
     function handleClick(e) {
@@ -98,9 +108,12 @@ const OrderCheck = () => {
             key: process.env.REACT_APP_API_KEY,
             name: searchInfo.name,
             phone: phoneNumber,
-            year: searchInfo.date.getFullYear(),
-            month: searchInfo.date.getMonth(),
-            date: searchInfo.date.getDate(),
+            // year: searchInfo.date.getFullYear(),
+            // month: searchInfo.date.getMonth(),
+            // date: searchInfo.date.getDate(),
+            year: searchInfo.year,
+            month: searchInfo.month * 1 - 1,
+            date: searchInfo.day,
           },
           {
             headers: {
@@ -253,12 +266,35 @@ const OrderCheck = () => {
                   <div class='h-12 flex flex-row justify-between items-center'>
                     <div class='w-1/4 text-xl'>예약 날짜</div>
                     <div class='flex-1 h-full flex justify-between items-center'>
-                      <button
+                      {/* <button
                         onClick={selectDate}
                         class='flex-1 h-12 px-4 border-2 border-gray-200 focus:border-hansupBrown transition delay-100 duration-200 flex items-center'>
                         {dateToString(searchInfo.date)}
-                      </button>
-                      <div class='w-12'>
+                      </button> */}
+                      <div class='w-full md:flex-1 h-12 md:h-full grid grid-cols-3 gap-2'>
+                        <InputBox
+                          value={searchInfo.year}
+                          title='연도'
+                          type='year'
+                          placeholder='연도'
+                          onChange={changeInfo}
+                        />
+                        <InputBox
+                          value={searchInfo.month}
+                          title='월'
+                          type='month'
+                          placeholder='월'
+                          onChange={changeInfo}
+                        />
+                        <InputBox
+                          value={searchInfo.day}
+                          title='일자'
+                          type='day'
+                          placeholder='일'
+                          onChange={changeInfo}
+                        />
+                      </div>
+                      {/* <div class='w-12'>
                         <DatePicker
                           onClick={(e) => console.log(e)}
                           selected={searchInfo.date}
@@ -266,7 +302,7 @@ const OrderCheck = () => {
                           onChange={(date) => changeInfo(date, "date")}
                           customInput={<DateInput />}
                         />
-                      </div>
+                      </div> */}
                     </div>
                   </div>
 

@@ -48,6 +48,10 @@ const Ordering = () => {
   const [allMenuList, setAllMenuList] = useState([]);
   const [listLoading, setListLoading] = useState(true);
 
+  useEffect(() => {
+    document.body.scrollIntoView(true);
+  }, []);
+
   const typeList = [
     { title: "메인메뉴(확정 4) + 자율 메뉴(추후 공지)", type: "mainMenu" },
     { title: "식사메뉴(확정)", type: "subMenu" },

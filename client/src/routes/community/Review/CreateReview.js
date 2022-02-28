@@ -66,6 +66,7 @@ const CreateReview = () => {
           alert("업로드 되었습니다.");
           history.push("/community/review/list");
           document.getElementById("scrollRef").scrollTo(0, 0);
+          document.body.scrollIntoView(true);
         })
         .catch((response) => {
           console.log("Error!");
@@ -91,7 +92,7 @@ const CreateReview = () => {
         <Link
           class='mb-4 md:mb-0 w-full md:w-auto  cursor-pointer px-0 md:px-16 py-2 justify-center border border-hansupBrown text-hansupBrown flex flex-row items-center hover:bg-hansupBrown hover:text-white hover:font-bold'
           to={"/community/review/list"}
-          onClick={() => window.scrollTo(0, 0)}>
+          onClick={() => document.body.scrollIntoView(true)}>
           뒤로 가기
         </Link>
         <button

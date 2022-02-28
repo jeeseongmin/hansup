@@ -375,7 +375,7 @@ const Navbar = ({ currentMenu }) => {
     <>
       <Nav ref={subRef}>
         <ResponsiveContainer>
-          <Logo>
+          <Logo onFocus={() => setFocusedMenu(0)}>
             <Link to='/'>
               <img src={logoImg} class='object-cover h-8' alt='한숲푸드' />
             </Link>
@@ -393,7 +393,7 @@ const Navbar = ({ currentMenu }) => {
         </ResponsiveContainer>
         {/* <NavContainer onMouseOver={onMouseOver}> */}
         <NavContainer>
-          <Logo>
+          <Logo onFocus={() => setFocusedMenu(0)}>
             <Link to='/'>
               <img src={logoImg} class='object-cover h-8' alt='한숲푸드' />
             </Link>

@@ -56,6 +56,7 @@ const App = () => {
   // }, []);
 
   useEffect(() => {
+    console.log("window.location", window.location);
     let loginToken = sessionStorage.getItem("loginToken");
     if (loginToken === null || !loginToken) {
       dispatch(setLoginToken("logout"));

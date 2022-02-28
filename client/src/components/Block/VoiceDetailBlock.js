@@ -76,7 +76,9 @@ const VoiceDetailBlock = ({ match }) => {
   return loading ? (
     <>
       <PageLayout>
-        <div class={"w-full flex flex-col mb-16 lg:mb-24 px-8 xl:px-40 "}>
+        <div
+          id='main'
+          class={"w-full flex flex-col mb-16 lg:mb-24 px-8 xl:px-40 "}>
           <div class='w-full flex flex-row justify-between items-center mb-4'>
             <div class='inline-flex w-full mb-6'>
               <Subtitle subtitle={"자세히보기"} />

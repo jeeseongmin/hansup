@@ -90,7 +90,7 @@ const Index = () => {
             onChange={(e) => changeInfo(e, "password")}
             placeholder='관리자 password'
           />
-          <div class='w-full pt-6 pb-4 justify-center items-center'>
+          <div class='w-full pt-6 pb-4 flex flex-col justify-betnween items-bet'>
             <button
               onClick={loginCheck}
               class='cursor-pointer border py-2 mb-4 text-center border-hansupBrown bg-hansupBrown rounded-sm text-white font-bold shadow-xl hover:opacity-70'>
