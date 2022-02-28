@@ -256,6 +256,12 @@ const Navbar = ({ currentMenu }) => {
     onToggleProfile();
   };
 
+  const goHome = () => {
+    history.push("/");
+
+    window.location.reload();
+  };
+
   const toggleMenu = (e, num) => {
     if (menu === 0) {
       setMenu(num);
@@ -394,9 +400,9 @@ const Navbar = ({ currentMenu }) => {
         {/* <NavContainer onMouseOver={onMouseOver}> */}
         <NavContainer>
           <Logo onFocus={() => setFocusedMenu(0)}>
-            <Link to='/'>
+            <button onClick={goHome}>
               <img src={logoImg} class='object-cover h-8' alt='한숲푸드' />
-            </Link>
+            </button>
           </Logo>
           {/* 
           1. 인사말, 한숲 이야기, 한숲의 역사, 오시는 길

@@ -23,6 +23,7 @@ const Home = () => {
     history.push(url);
     window.scrollTo(0, 0);
     document.getElementById("scrollRef").scrollTo(0, 0);
+    document.body.scrollIntoView(true);
   };
 
   useEffect(() => {
