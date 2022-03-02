@@ -242,7 +242,7 @@ const OrderCheck = () => {
                         refName={phone1Ref}
                         type='phone1'
                         placeholder='010'
-                        title='연락처 1'
+                        title='연락처 첫번째 자리'
                         onChange={changeInfo}
                       />
                       <InputBox
@@ -250,14 +250,14 @@ const OrderCheck = () => {
                         refName={phone2Ref}
                         type='phone2'
                         placeholder=''
-                        title='연락처 2'
+                        title='연락처 가운데 자리'
                         onChange={changeInfo}
                       />
                       <InputBox
                         value={searchInfo.phone3}
                         refName={phone3Ref}
                         type='phone3'
-                        title='연락처 3'
+                        title='연락처 마지막 자리'
                         placeholder=''
                         onChange={changeInfo}
                       />

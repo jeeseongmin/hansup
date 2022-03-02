@@ -128,7 +128,7 @@ const SubContainer = styled.div`
     padding: 0 0rem;
   }
 `;
-const Logo = styled.div`
+const Logo = styled.h1`
   height: auto;
 `;
 
@@ -257,8 +257,6 @@ const Navbar = ({ currentMenu }) => {
   };
 
   const goHome = () => {
-    history.push("/");
-
     window.location.reload();
   };
 
@@ -400,9 +398,13 @@ const Navbar = ({ currentMenu }) => {
         {/* <NavContainer onMouseOver={onMouseOver}> */}
         <NavContainer>
           <Logo onFocus={() => setFocusedMenu(0)}>
-            <button onClick={goHome}>
-              <img src={logoImg} class='object-cover h-8' alt='한숲푸드' />
-            </button>
+            <Link to={"/"} onClick={goHome}>
+              <img
+                src={logoImg}
+                class='object-cover h-8 cursor-pointer'
+                alt='한숲푸드'
+              />
+            </Link>
           </Logo>
           {/* 
           1. 인사말, 한숲 이야기, 한숲의 역사, 오시는 길

@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import Logo from "image/logo.png";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 const Foot = styled.div`
   width: 100%;
@@ -31,10 +31,12 @@ const Footer = () => {
         {/* FootContainer */}
         <div class='w-1/2 h-auto flex flex-col justify-between'>
           {/* FootLogoBox */}
-          <button onClick={goHome} class='cursor-pointer h-8 mb-8'>
+          <h1 class='cursor-pointer h-8 mb-8'>
             {/* FootLogo */}
-            <img src={Logo} class='h-full object-cover' alt='한숲푸드' />
-          </button>
+            <Link to='/' onClick={goHome}>
+              <img src={Logo} class='h-full object-cover' alt='한숲푸드' />
+            </Link>
+          </h1>
           {/* FootTextBox */}
           <div class='w-full flex flex-row mb-1'>
             {/* FootText */}
