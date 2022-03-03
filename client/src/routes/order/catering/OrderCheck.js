@@ -241,7 +241,7 @@ const OrderCheck = () => {
                         value={searchInfo.phone1}
                         refName={phone1Ref}
                         type='phone1'
-                        placeholder='010'
+                        placeholder=''
                         title='연락처 첫번째 자리'
                         onChange={changeInfo}
                       />

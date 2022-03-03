@@ -369,13 +369,15 @@ const UpdateOrderPage = ({ match }) => {
                     <div class='w-1/4 text-xl'>연락처</div>
                     <div class='flex-1 h-full grid grid-cols-3 gap-2'>
                       <InputBox
+                        title='연락처 첫번째 자리'
                         value={info.phone1}
                         refName={phone1Ref}
                         type='phone1'
-                        placeholder='010'
+                        placeholder=''
                         onChange={changeInfo}
                       />
                       <InputBox
+                        title='연락처 가운데 자리'
                         value={info.phone2}
                         refName={phone2Ref}
                         type='phone2'
@@ -383,6 +385,7 @@ const UpdateOrderPage = ({ match }) => {
                         onChange={changeInfo}
                       />
                       <InputBox
+                        title='연락처 마지막 자리'
                         value={info.phone3}
                         refName={phone3Ref}
                         type='phone3'

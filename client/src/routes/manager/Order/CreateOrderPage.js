@@ -323,11 +323,13 @@ const CreateOrderPage = ({ match }) => {
                       <InputBox
                         value={info.phone1}
                         refName={phone1Ref}
+                        title='연락처 첫번째 자리'
                         type='phone1'
-                        placeholder='010'
+                        placeholder=''
                         onChange={changeInfo}
                       />
                       <InputBox
+                        title='연락처 가운데 자리'
                         value={info.phone2}
                         refName={phone2Ref}
                         type='phone2'
@@ -335,6 +337,7 @@ const CreateOrderPage = ({ match }) => {
                         onChange={changeInfo}
                       />
                       <InputBox
+                        title='연락처 마지막 자리'
                         value={info.phone3}
                         refName={phone3Ref}
                         type='phone3'
@@ -350,7 +353,7 @@ const CreateOrderPage = ({ match }) => {
                         value={info.check1}
                         refName={check1Ref}
                         type='check1'
-                        placeholder='010'
+                        placeholder=''
                         onChange={changeInfo}
                       />
                       <InputBox

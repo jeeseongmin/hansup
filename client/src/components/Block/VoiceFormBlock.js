@@ -53,7 +53,7 @@ const VoiceFormBlock = ({
             title='연락처 첫번째 자리'
             value={info.phone1}
             type={"phone1"}
-            placeholder={"010"}
+            placeholder={""}
             onChange={changeInfo}
             refName={phoneRef1}
           />

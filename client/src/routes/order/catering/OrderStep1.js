@@ -214,7 +214,7 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                     refName={phone1Ref}
                     type='phone1'
                     title='연락처 첫번째 자리'
-                    placeholder='010'
+                    placeholder=''
                     onChange={changeInfo}
                   />
                   <InputBox
@@ -245,7 +245,7 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                     refName={check1Ref}
                     type='check1'
                     title='연락처 첫번째 자리 재확인'
-                    placeholder='010'
+                    placeholder=''
                     onChange={changeInfo}
                   />
                   <InputBox
