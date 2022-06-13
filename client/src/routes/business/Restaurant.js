@@ -1,17 +1,12 @@
-import FoodMenuBlock from "components/Block/FoodMenuBlock";
+import axios from "axios";
 import Description from "components/Description";
-import Subtitle from "components/Subtitle";
-import Example from "image/example.png";
-import Test from "image/test.png";
-import React, { useState, useEffect, useRef } from "react";
-import styled from "styled-components";
-import PageLayout from "components/Layout/PageLayout";
 import ContentLayout from "components/Layout/ContentLayout";
 import MenuListLayout from "components/Layout/MenuListLayout";
-import menuList from "routes/business/data/menuList";
-import OrderListLayout from "components/Layout/OrderListLayout";
-import axios from "axios";
+import PageLayout from "components/Layout/PageLayout";
 import useTitle from "hooks/useTitle";
+import Test from "image/test.png";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 const Label = styled.div`
   background-color: rgba(252, 244, 237, 1);
   color: #6c4d3f;
@@ -68,7 +63,7 @@ const Restaurant = () => {
         const tmpList = [];
         for (let one of typeList) {
           const cp = Response.data.filter(function (element, index) {
-            return element.type === one.type;
+            return element.type === one.type && !element.isDeleted;
           });
           tmpList.push({
             title: one.title,

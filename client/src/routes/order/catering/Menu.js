@@ -1,14 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
-import PageLayout from "components/Layout/PageLayout";
-import ContentLayout from "components/Layout/ContentLayout";
-import CateringMenu from "image/order-catering-img1.png";
-import orderList from "routes/order/catering/data/orderList";
+import axios from "axios";
 import ImageLabel from "components/ImageLabel";
+import ContentLayout from "components/Layout/ContentLayout";
+import OrderListLayout from "components/Layout/OrderListLayout";
+import PageLayout from "components/Layout/PageLayout";
+import useTitle from "hooks/useTitle";
+import CateringMenu from "image/order-catering-img1.png";
 import CateringImg2 from "image/order-catering-img2.png";
 import CateringImg3 from "image/order-catering-img3.png";
-import OrderListLayout from "components/Layout/OrderListLayout";
-import axios from "axios";
-import useTitle from "hooks/useTitle";
+import React, { useEffect, useState } from "react";
 const Menu = () => {
   const updateTitle = useTitle("Loading...");
   setTimeout(
@@ -67,7 +66,7 @@ const Menu = () => {
       <ContentLayout subtitle={"메뉴 구성"}>
         <div id='main' class='flex flex-col'>
           <p class='text-hansupBrown text-lg mb-8 font-semibold'>
-            케이터링의 메뉴 구성은 메인메뉴 5개, 식사메뉴 5개, 디저트 5개로,
+            케이터링의 메뉴 구성은 메인메뉴 5개, 식사메뉴 6개, 디저트 4개로,
             달마다 구성이 조금씩 달라집니다.
           </p>
           <img

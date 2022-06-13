@@ -1,9 +1,7 @@
 import FoodMenuBlock from "components/Block/FoodMenuBlock";
 import ManageMenuBlock from "components/Block/ManageMenuBlock";
-import Example from "image/example.png";
 import React from "react";
 import styled from "styled-components";
-import Ready from "image/ready.png";
 
 const MenuTitle = styled.div`
   color: #6c4d3f;
@@ -17,8 +15,6 @@ const Line = styled.div`
   border-top: 1px solid #6c4d3f;
 `;
 const MenuListLayout = ({ info, col, type, use, updateMenu, deleteMenu }) => {
-  const colStyle = "grid-cols-" + col;
-  const readyBox = {};
   return info.menu.length !== 0 ? (
     <>
       <div class='mb-16'>
