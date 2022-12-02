@@ -15,7 +15,7 @@ const Intro = () => {
       <ContentLayout subtitle={"가격 및 주문 최소 인원"}>
         <div id='main' class='flex flex-col'>
           <p class='text-hansupBrown text-lg mb-8 font-semibold'>
-            인당 15,000원 (케이터링 주문 최소 인원 : 10인)
+            인당 20,000원 (케이터링 주문 최소 인원 : 8인, 배달 가능 최소 인원 : 10인)
           </p>
         </div>
       </ContentLayout>
@@ -23,7 +23,7 @@ const Intro = () => {
         <div class='flex flex-col'>
           <p class='text-hansupBrown text-lg mb-8 font-semibold'>
             계좌이체, 카드결제, 상품권결제(온누리.포항사랑), 현금결제 모두
-            가능합니다!
+            가능합니다! <br></br>(단, 카드 결제 시 부과세(10%)가 붙어서 인당 22,000원입니다.)
           </p>
         </div>
       </ContentLayout>
