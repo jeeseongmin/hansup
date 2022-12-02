@@ -8,8 +8,15 @@ import OrderStep3 from "routes/order/catering/OrderStep3";
 import OrderFinal from "routes/order/catering/OrderFinal";
 import axios from "axios";
 import dayjs from "dayjs";
+import {useHistory} from "react-router-dom";
 
 const Ordering = () => {
+  const history = useHistory();
+
+  useEffect(() => {
+    history.push("/order/catering/orderMain")
+    alert("페이지 리뉴얼 중입니다. 전화로 예약 부탁드립니다.")
+  } ,[])
   const [step, setStep] = useState(1);
   const [info, setInfo] = useState({
     name: "",

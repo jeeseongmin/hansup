@@ -1,12 +1,7 @@
 import React from "react";
 import PageLayout from "components/Layout/PageLayout";
 import ContentLayout from "components/Layout/ContentLayout";
-import ReviewListBlock from "components/Block/ReviewListBlock";
-import Subtitle from "components/Subtitle";
-import { VscArrowRight } from "react-icons/vsc";
-import { Link, Switch, Route, useHistory } from "react-router-dom";
-import CreateVoice from "routes/community/Voice/CreateVoice";
-import DefaultButton from "components/Button/DefaultButton";
+import { useHistory } from "react-router-dom";
 import useTitle from "hooks/useTitle";
 
 const OrderMain = () => {
@@ -38,7 +33,8 @@ const OrderMain = () => {
           </div>
           <div class='w-full h-12 flex flex-row justify-around'>
             <button
-              onClick={() => goPage("/order/catering/ordering")}
+              // onClick={() => goPage("/order/catering/ordering")}
+                onClick={() => alert("페이지 리뉴얼중입니다. 전화로 예약 부탁드립니다.")}
               class='cursor-pointer w-48 h-full flex justify-center transition delay-50 duration-150 items-center border border-hansupBrown text-hansupBrown hover:bg-hansupBrown hover:text-white font-bold text-xl'>
               예약하기
             </button>
