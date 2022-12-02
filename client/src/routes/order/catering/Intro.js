@@ -22,8 +22,8 @@ const Intro = () => {
       <ContentLayout subtitle={"결제 방법"}>
         <div class='flex flex-col'>
           <p class='text-hansupBrown text-lg mb-8 font-semibold'>
-            계좌이체, 카드결제, 상품권결제(온누리.포항사랑), 현금결제 모두
-            가능합니다! <br></br>(단, 카드 결제 시 부과세(10%)가 붙어서 인당 22,000원입니다.)
+            계좌이체, 카드결제, 상품권결제(온누리, 포항사랑), 현금결제 모두
+            가능합니다! <br></br>(단, 카드 결제 시 부과세(10%)가 포함되어 인당 22,000원입니다.)
           </p>
         </div>
       </ContentLayout>
