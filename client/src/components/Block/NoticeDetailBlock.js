@@ -6,12 +6,14 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import EditNotice from "routes/community/Notice/EditNotice";
+import useTitle from "../../hooks/useTitle";
 
 const NoticeDetailBlock = ({ match }) => {
   const history = useHistory();
   const [loading, setLoading] = useState(false);
   const [imgLoading, setImgLoading] = useState(false);
   const [notice, setNotice] = useState({});
+  const updateTitle = useTitle("(주)한숲푸드 커뮤니티 공지사항");
   const currentEmail = useSelector((state) => state.setting.currentEmail);
   const currentPassword = useSelector((state) => state.setting.currentPassword);
   const [isEdit, setIsEdit] = useState(false);
@@ -71,6 +73,8 @@ const NoticeDetailBlock = ({ match }) => {
           read: Response.data.read,
           date: dataToText(Response.data.createdAt),
         };
+        updateTitle("(주)한숲푸드 커뮤니티 공지사항 "+Response.data.title);
+
         // console.log(Response);
         setNotice(cp);
         setLoading(true);
