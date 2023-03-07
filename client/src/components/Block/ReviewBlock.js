@@ -99,7 +99,7 @@ const ReviewBlock = ({ review, reviewList, setReviewList }) => {
               "http://hansupfood.com/api/image/view/" +
               review.imgList[0].filename
             }
-            alt='리뷰 음식 사진'
+            alt={review.content}
           />
           <div
             class={
@@ -139,7 +139,7 @@ const ReviewBlock = ({ review, reviewList, setReviewList }) => {
                     "http://hansupfood.com/api/image/view/" +
                     review.imgList[0].filename
                   }
-                  alt=''
+                  alt={review.content}
                 />
               </div>
               <div
