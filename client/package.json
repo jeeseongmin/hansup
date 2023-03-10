@@ -23,6 +23,7 @@
     "draftjs-to-html": "^0.9.1",
     "gh-pages": "^3.2.3",
     "html-to-draftjs": "^1.5.0",
+    "prettier": "^2.8.4",
     "react": "^17.0.2",
     "react-app-polyfill": "^3.0.0",
     "react-calendar": "^3.4.0",
