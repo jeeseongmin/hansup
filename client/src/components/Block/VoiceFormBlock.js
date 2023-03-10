@@ -1,103 +1,82 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import InputBox from "components/Box/InputBox";
 import TextareaBox from "components/Box/TextareaBox";
+
 const VoiceFormBlock = ({
   info,
   changeInfo,
   titleRef,
   nameRef,
   contentRef,
-  phoneRef1,
-  phoneRef2,
-  phoneRef3,
+  phoneRef,
   isEdit,
 }) => {
-  const buttonRef = useRef(null);
-  const [loading, setLoading] = useState(true);
-  const [isImageUpload, setIsImageUpload] = useState(false);
-
   return (
-    <div class='w-full  flex flex-col'>
-      <div class='h-16 grid grid-cols-2 gap-2 mb-2'>
-        <InputBox
-          value={info.title}
-          type={"title"}
-          placeholder={"제목"}
-          title='제목'
-          onChange={changeInfo}
-          refName={titleRef}
-        />
-        <InputBox
-          value={info.name}
-          type={"name"}
-          placeholder={"이름"}
-          title='이름'
-          onChange={changeInfo}
-          refName={nameRef}
-        />
+    <div class="w-full  flex flex-col">
+      <div class="h-24 grid grid-cols-2 gap-2 mb-2">
+        <div class={"flex flex-col gap-2"}>
+          <label class={"font-bold"} for={"title"}>
+            제목
+          </label>
+          <div class={"h-16"}>
+            <InputBox
+              value={info.title}
+              label={"title"}
+              type={"title"}
+              placeholder={"제목"}
+              title="제목"
+              onChange={changeInfo}
+              refName={titleRef}
+            />
+          </div>
+        </div>
+        <div className={"flex flex-col gap-2"}>
+          <label class={"font-bold"} for={"name"}>
+            이름
+          </label>
+          <div className={"h-16"}>
+            <InputBox
+              value={info.name}
+              type={"name"}
+              placeholder={"이름"}
+              title="이름"
+              label={"name"}
+              onChange={changeInfo}
+              refName={nameRef}
+            />
+          </div>
+        </div>
       </div>
-      <div class='h-96 grid grid-cols-1 gap-2 mb-2'>
+      <label class={"font-bold mt-2 mb-2"} for={"content"}>
+        내용
+      </label>
+      <div class="h-96 grid grid-cols-1 gap-2 mb-2">
         <TextareaBox
           value={info.content}
           type={"content"}
           placeholder={"내용"}
-          title='내용'
+          label={"content"}
+          title="내용"
           onChange={changeInfo}
           refName={contentRef}
         />
       </div>
-      <div class='h-16 flex flex-row mb-2 items-center'>
-        <p class='w-24 text-xl font-bold'>연락처</p>
-        <div class='h-full flex-1 grid grid-cols-3 gap-2 '>
+      <div class="h-16 w-full flex flex-row mb-2 items-center">
+        <label class="w-24 text-xl font-bold" for={"phone"}>
+          연락처
+        </label>
+        <div class="h-full flex-1">
           <InputBox
-            title='연락처 첫번째 자리'
-            value={info.phone1}
-            type={"phone1"}
+            title="phone"
+            value={info.phone}
+            type={"phone"}
+            label={"phone"}
             placeholder={""}
             onChange={changeInfo}
-            refName={phoneRef1}
-          />
-          <InputBox
-            title='연락처 가운데 자리'
-            value={info.phone2}
-            type={"phone2"}
-            placeholder={""}
-            onChange={changeInfo}
-            refName={phoneRef2}
-          />
-          <InputBox
-            title='연락처 마지막 자리'
-            value={info.phone3}
-            type={"phone3"}
-            placeholder={""}
-            onChange={changeInfo}
-            refName={phoneRef3}
+            refName={phoneRef}
           />
         </div>
-        <div class='w-96'></div>
       </div>
-      {/* 이메일 생략
-			<div class="h-16 flex flex-row mb-2 items-center">
-				<p class="w-24 text-xl font-bold">이메일</p>
-				<div class="h-full flex-1 grid grid-cols-1 gap-2 items-center">
-					<InputBox
-						value={info.email1}
-						type={"email1"}
-						placeholder={""}
-						onChange={changeInfo}
-					/>
-				</div>
-				<div class="w-12 text-center">@</div>
-				<div class="h-full flex-1 grid grid-cols-1 gap-2 items-center">
-					<InputBox
-						value={info.email2}
-						type={"email2"}
-						placeholder={"naver.com"}
-						onChange={changeInfo}
-					/>
-				</div>
-				<div class="w-96"></div>
-			</div> */}
     </div>
   );
 };
