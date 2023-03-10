@@ -4,10 +4,8 @@ import PopupPostCodeBlock from "components/Block/PopupPostCodeBlock";
 import InputBox from "components/Box/InputBox";
 import React, { useRef, useState } from "react";
 import { useHistory } from "react-router-dom";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { AiTwotoneCalendar } from "react-icons/ai";
-import styled from "styled-components";
 import useTitle from "hooks/useTitle";
 
 const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
@@ -36,9 +34,11 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
   // };
 
   const nameRef = useRef();
+  const phoneRef = useRef();
   const phone1Ref = useRef();
   const phone2Ref = useRef();
   const phone3Ref = useRef();
+  const checkRef = useRef();
   const check1Ref = useRef();
   const check2Ref = useRef();
   const check3Ref = useRef();
@@ -66,31 +66,21 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
     if (info.name === "") {
       alert("이름을 입력해주세요.");
       nameRef.current.focus();
-    } else if (info.phone1 === "") {
+    } else if (info.phone === "") {
       alert("핸드폰 번호를 입력해주세요.");
-      phone1Ref.current.focus();
-    } else if (info.phone2 === "") {
-      alert("핸드폰 번호를 입력해주세요.");
-      phone2Ref.current.focus();
-    } else if (info.phone3 === "") {
-      alert("핸드폰 번호를 입력해주세요.");
-      phone3Ref.current.focus();
-    } else if (info.check1 === "") {
+      phoneRef.current.focus();
+    } else if (!info.phone.includes("-")) {
+      alert("-를 포함해주세요.");
+      phoneRef.current.focus();
+    } else if (info.check === "") {
       alert("핸드폰 번호 확인란을 입력해주세요.");
-      check1Ref.current.focus();
-    } else if (info.check2 === "") {
-      alert("핸드폰 번호 확인란을 입력해주세요.");
-      check2Ref.current.focus();
-    } else if (info.check3 === "") {
-      alert("핸드폰 번호 확인란을 입력해주세요.");
-      check3Ref.current.focus();
-    } else if (
-      info.phone1 !== info.check1 ||
-      info.phone2 !== info.check2 ||
-      info.phone3 !== info.check3
-    ) {
+      checkRef.current.focus();
+    } else if (!info.check.includes("-")) {
+      alert("-를 포함해주세요.");
+      checkRef.current.focus();
+    } else if (info.phone !== info.check) {
       alert("핸드폰 번호와 확인란을 확인해주세요.");
-      phone1Ref.current.focus();
+      phoneRef.current.focus();
     } else if (info.count === "" || info.current === 0) {
       alert("인원수를 입력해주세요.");
       countRef.current.focus();
@@ -174,138 +164,130 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
   const DateInput = ({ value, onClick }) => {
     return (
       <button
-        title='날짜선택'
+        title="날짜선택"
         onClick={onClick}
-        class='w-full h-full flex justify-center items-center cursor-pointer'>
-        <AiTwotoneCalendar size={24} title='날짜선택' />
+        class="w-full h-full flex justify-center items-center cursor-pointer"
+      >
+        <AiTwotoneCalendar size={24} title="날짜선택" />
       </button>
     );
   };
 
   return (
     <>
-      <div class='w-full flex flex-col justify-center items-center'>
-        <div class='w-full md:w-2/3 lg:w-1/2'>
+      <div class="w-full flex flex-col justify-center items-center">
+        <div class="w-full md:w-2/3 lg:w-1/2">
           <InfoBlock title={"예약자 정보"}>
-            <div class='px-4 flex flex-col'>
-              <div class='h-auto md:h-12 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center'>
-                <label
-                  for='작성자 이름'
-                  class='w-full md:w-1/4 mb-2 md:mb-0 text-xl'>
+            <div class="px-4 flex flex-col">
+              <div class="h-auto md:h-12 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center">
+                <label for="name" class="w-full md:w-1/4 mb-2 md:mb-0 text-xl">
                   이름
                 </label>
-                <div class='w-full md:flex-1 h-12 md:h-full'>
+                <div class="w-full md:flex-1 h-12 md:h-full">
                   <InputBox
                     value={info.name}
                     refName={nameRef}
-                    type='name'
-                    title='작성자 이름'
-                    label='작성자 이름'
-                    placeholder='이름을 입력하세요'
+                    type="name"
+                    title="작성자 이름"
+                    label="name"
+                    placeholder="이름을 입력하세요"
                     onChange={changeInfo}
                   />
                 </div>
               </div>
-              <div class='h-auto md:h-12 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center'>
-                <div class='w-full md:w-1/4 mb-2 md:mb-0 text-xl'>연락처</div>
-                <div class='w-full md:flex-1 h-12 md:h-full grid grid-cols-3 gap-2'>
+              <div class="h-auto md:h-12 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center">
+                <label
+                  for={"phone"}
+                  class="w-full md:w-1/4 mb-2 md:mb-0 text-xl"
+                >
+                  연락처
+                </label>
+                <div class="w-full md:flex-1 h-12 md:h-full grid grid-cols-1 gap-2">
                   <InputBox
-                    value={info.phone1}
-                    refName={phone1Ref}
-                    type='phone1'
-                    title='연락처 첫번째 자리'
-                    placeholder=''
+                    value={info.phone}
+                    refName={phoneRef}
+                    label={"phone"}
+                    type="phone"
+                    title="연락처"
+                    placeholder="-를 포함하여 입력해주세요."
                     onChange={changeInfo}
                   />
-                  <InputBox
-                    value={info.phone2}
-                    refName={phone2Ref}
-                    type='phone2'
-                    title='연락처 가운데 자리'
-                    placeholder=''
-                    onChange={changeInfo}
-                  />
-                  <InputBox
-                    value={info.phone3}
-                    refName={phone3Ref}
-                    type='phone3'
-                    title='연락처 마지막 자리'
-                    placeholder=''
-                    onChange={changeInfo}
-                  />
+                  {/*<InputBox*/}
+                  {/*  value={info.phone2}*/}
+                  {/*  refName={phone2Ref}*/}
+                  {/*  type='phone2'*/}
+                  {/*  title='연락처 가운데 자리'*/}
+                  {/*  placeholder=''*/}
+                  {/*  onChange={changeInfo}*/}
+                  {/*/>*/}
+                  {/*<InputBox*/}
+                  {/*  value={info.phone3}*/}
+                  {/*  refName={phone3Ref}*/}
+                  {/*  type='phone3'*/}
+                  {/*  title='연락처 마지막 자리'*/}
+                  {/*  placeholder=''*/}
+                  {/*  onChange={changeInfo}*/}
+                  {/*/>*/}
                 </div>
               </div>
-              <div class='h-auto md:h-12 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center'>
-                <div class='w-full md:w-1/4 mb-2 md:mb-0 text-xl'>
+              <div class="h-auto md:h-12 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center">
+                <label
+                  for="phoneCheck"
+                  class="w-full md:w-1/4 mb-2 md:mb-0 text-xl"
+                >
                   연락처 확인
-                </div>
-                <div class='w-full md:flex-1 h-12 md:h-full grid grid-cols-3 gap-2'>
+                </label>
+                <div class="w-full md:flex-1 h-12 md:h-full grid grid-cols-1 gap-2">
                   <InputBox
-                    value={info.check1}
-                    refName={check1Ref}
-                    type='check1'
-                    title='연락처 첫번째 자리 재확인'
-                    placeholder=''
-                    onChange={changeInfo}
-                  />
-                  <InputBox
-                    value={info.check2}
-                    refName={check2Ref}
-                    type='check2'
-                    title='연락처 가운데 자리 재확인'
-                    placeholder=''
-                    onChange={changeInfo}
-                  />
-                  <InputBox
-                    value={info.check3}
-                    refName={check3Ref}
-                    type='check3'
-                    title='연락처 마지막 자리 재확인'
-                    placeholder=''
+                    value={info.check}
+                    refName={checkRef}
+                    type="check"
+                    label={"phoneCheck"}
+                    title="연락처 재확인"
+                    placeholder="-를 포함하여 입력해주세요."
                     onChange={changeInfo}
                   />
                 </div>
               </div>
-              <div class='mb-0 text-xs font-bold text-red-500'>
+              <div class="mb-0 text-xs font-bold text-red-500">
                 {" "}
                 직접 방문시, 최소 8인까지 가능
               </div>
-              <div class='h-auto md:h-12 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center'>
-                <label
-                  for='인원수'
-                  class='w-full md:w-1/4 mb-2 md:mb-0 text-xl'>
+              <div class="h-auto md:h-12 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center">
+                <label for="count" class="w-full md:w-1/4 mb-2 md:mb-0 text-xl">
                   인원수
                 </label>
-                <div class='w-full md:flex-1 h-12 md:h-full'>
+                <div class="w-full md:flex-1 h-12 md:h-full">
                   <InputBox
                     value={info.count}
                     refName={countRef}
-                    type='count'
-                    title='주문할 양(3인분이면 3)'
-                    label='인원수'
-                    placeholder='ex) 10 (최소 10인분)'
+                    type="count"
+                    title="주문할 양(3인분이면 3)"
+                    label="count"
+                    placeholder="ex) 10 (최소 10인분)"
                     onChange={changeInfo}
                   />
                 </div>
               </div>
-              <div class='mb-0 text-xs font-bold text-red-500'>
+              <div class="mb-0 text-xs font-bold text-red-500">
                 {" "}
                 요청 메뉴 등이 있다면 기입 가능
               </div>
-              <div class='h-auto md:h-12 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center'>
+              <div class="h-auto md:h-12 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center">
                 <label
-                  for='요청사항'
-                  class='w-full md:w-1/4 mb-2 md:mb-0 text-xl'>
+                  for="request"
+                  class="w-full md:w-1/4 mb-2 md:mb-0 text-xl"
+                >
                   요청사항
                 </label>
-                <div class='w-full md:flex-1 h-12 md:h-full'>
+                <div class="w-full md:flex-1 h-12 md:h-full">
                   <InputBox
                     value={info.request}
                     refName={requestRef}
-                    title='요청사항'
-                    label='요청사항'
-                    type='request'
-                    placeholder='최대 50자까지 입력 가능'
+                    title="요청사항"
+                    label="request"
+                    type="request"
+                    placeholder="최대 50자까지 입력 가능"
                     onChange={changeInfo}
                   />
                 </div>
@@ -313,7 +295,7 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
             </div>
           </InfoBlock>
           <InfoBlock title={"예약 일정 정보"}>
-            <p class='w-full text-center mb-4 font-bold text-hansupBrown'>
+            <p class="w-full text-center mb-4 font-bold text-hansupBrown">
               배달을 원하는 시간과 장소를 입력해주세요. <br></br>
               날짜는 오늘({dateToString(new Date())}) 기준 2일 이후부터 2개월
               전까지만 입력해주세요. <br></br>
@@ -321,9 +303,9 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
               <br></br>
               분은 30분 단위로 입력 가능합니다.
             </p>
-            <div class='px-4 flex flex-col'>
-              <div class='h-auto md:h-12 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center'>
-                <div class='w-full md:w-1/4 mb-2 md:mb-0 text-xl'>날짜</div>
+            <label class="px-4 flex flex-col">
+              <div class="h-auto md:h-12 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center">
+                <div class="w-full md:w-1/4 mb-2 md:mb-0 text-xl">날짜</div>
                 {/* <div class='w-full md:flex-1 h-12 md:h-full flex justify-between items-center'>
                   <div class='flex-1 h-12 px-4 border-2 border-gray-200 focus:border-hansupBrown transition delay-100 duration-200 flex items-center'>
                     {dateToString(info.date)}
@@ -337,35 +319,35 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                     />
                   </div>
                 </div> */}
-                <div class='w-full md:flex-1 h-12 md:h-full grid grid-cols-3 gap-2'>
+                <div class="w-full md:flex-1 h-12 md:h-full grid grid-cols-3 gap-2">
                   <InputBox
                     value={info.year}
                     refName={yearRef}
-                    title='연도'
-                    type='year'
-                    placeholder='연도'
+                    title="연도"
+                    type="year"
+                    placeholder="연도"
                     onChange={changeInfo}
                   />
                   <InputBox
                     value={info.month}
                     refName={monthRef}
-                    title='월'
-                    type='month'
-                    placeholder='월'
+                    title="월"
+                    type="month"
+                    placeholder="월"
                     onChange={changeInfo}
                   />
                   <InputBox
                     value={info.day}
                     refName={dateRef}
-                    title='일자'
-                    type='day'
-                    placeholder='일'
+                    title="일자"
+                    type="day"
+                    placeholder="일"
                     onChange={changeInfo}
                   />
                 </div>
               </div>
-              <div class='h-auto md:h-12 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center'>
-                <div class='w-full md:w-1/4 mb-2 md:mb-0 text-xl'></div>
+              <div class="h-auto md:h-12 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center">
+                <div class="w-full md:w-1/4 mb-2 md:mb-0 text-xl"></div>
                 {/* <div class='w-full md:flex-1 h-12 md:h-full flex justify-between items-center'>
                   <div class='flex-1 h-12 px-4 border-2 border-gray-200 focus:border-hansupBrown transition delay-100 duration-200 flex items-center'>
                     {dateToString(info.date)}
@@ -379,21 +361,21 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                     />
                   </div>
                 </div> */}
-                <div class='w-full md:flex-1 h-12 md:h-full grid grid-cols-2 gap-2'>
+                <div class="w-full md:flex-1 h-12 md:h-full grid grid-cols-2 gap-2">
                   <InputBox
                     value={info.hour}
                     refName={hourRef}
-                    title='시간(11 ~ 20)'
-                    type='hour'
-                    placeholder='시간(11 ~ 20)'
+                    title="시간(11 ~ 20)"
+                    type="hour"
+                    placeholder="시간(11 ~ 20)"
                     onChange={changeInfo}
                   />
                   <InputBox
                     value={info.minute}
                     refName={minuteRef}
-                    title='분'
-                    type='minute'
-                    placeholder='분'
+                    title="분"
+                    type="minute"
+                    placeholder="분"
                     onChange={changeInfo}
                   />
                 </div>
@@ -402,9 +384,10 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                 class={
                   "h-auto md:h-12 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center " +
                   (info.delivery === "self" ? "mb-8" : "mb-4")
-                }>
-                <div class='w-full md:w-1/4 mb-2 md:mb-0 text-xl'>수령방식</div>
-                <div class='w-full md:flex-1 h-12 md:h-full grid grid-cols-2'>
+                }
+              >
+                <div class="w-full md:w-1/4 mb-2 md:mb-0 text-xl">수령방식</div>
+                <div class="w-full md:flex-1 h-12 md:h-full grid grid-cols-2">
                   <button
                     onClick={() => changeInfo("delivery", "delivery")}
                     title={info.delivery === "delivery" ? "선택됨" : ""}
@@ -413,7 +396,8 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                       (info.delivery === "delivery"
                         ? "bg-hansupBrown text-white fond-bold"
                         : "border-gray-200 text-gray-400")
-                    }>
+                    }
+                  >
                     배달
                   </button>
                   <button
@@ -424,7 +408,8 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                       (info.delivery === "self"
                         ? "bg-hansupBrown text-white fond-bold"
                         : "border-gray-200 text-gray-400")
-                    }>
+                    }
+                  >
                     {" "}
                     직접방문
                   </button>
@@ -434,7 +419,8 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                 class={
                   "mb-0 text-xs font-bold text-red-500 " +
                   (info.delivery === "self" ? "hidden" : "flex")
-                }>
+                }
+              >
                 {" "}
                 배달비 : 포항시내 1만원, 시외 3만원
               </div>
@@ -442,61 +428,66 @@ const OrderStep1 = ({ info, setInfo, setStep, changeInfo }) => {
                 class={
                   "h-auto md:h-28 mb-8 flex-col md:flex-row justify-start md:justify-between items-start " +
                   (info.delivery === "self" ? "hidden" : "flex")
-                }>
-                <div class='w-full md:w-1/4 mb-0 text-xl h-12 md:h-full flex md:grid grid-rows-2 gap-2 '>
-                  <p class='w-full h-full flex items-center'>배달장소</p>
+                }
+              >
+                <div class="w-full md:w-1/4 mb-0 text-xl h-12 md:h-full flex md:grid grid-rows-2 gap-2 ">
+                  <p class="w-full h-full flex items-center">배달장소</p>
                   <p></p>
                 </div>
 
-                <div class='w-full md:flex-1 h-28 md:h-full grid grid-rows-2 gap-2'>
-                  <div class='h-full w-full flex flex-row md: justify-between items-center '>
+                <div class="w-full md:flex-1 h-28 md:h-full grid grid-rows-2 gap-2">
+                  <div class="h-full w-full flex flex-row md: justify-between items-center ">
                     <InputBox
                       value={info.address1}
                       refName={address1Ref}
-                      type='address1'
-                      title='도로명 주소'
-                      placeholder='도로명 주소'
+                      type="address1"
+                      title="도로명 주소"
+                      placeholder="도로명 주소"
                       onChange={changeInfo}
                     />
                     <button
                       ref={addressBtnRef}
                       onClick={handleOpen}
-                      class='ml-2 w-24 bg-hansupBrown text-white h-full'>
+                      class="ml-2 w-24 bg-hansupBrown text-white h-full"
+                    >
                       검색
                     </button>
                   </div>
                   <InputBox
                     value={info.address2}
                     refName={address2Ref}
-                    type='address2'
-                    title='상세 주소'
-                    placeholder='상세 주소'
+                    type="address2"
+                    title="상세 주소"
+                    placeholder="상세 주소"
                     onChange={changeInfo}
                   />
                 </div>
               </div>
-              <div class='w-full h-28 md:h-12 flex flex-col md:flex-row md: justify-between'>
+              <div class="w-full h-28 md:h-12 flex flex-col md:flex-row md: justify-between">
                 <button
                   onClick={prevStep}
-                  class='mb-4 md:mb-0 cursor-pointer hover:bg-white hover:text-hansupBrown border border-hansupBrown transition delay-50 duration-150 w-full md:w-48 lg:w-60 h-full flex justify-center items-center bg-hansupBrown text-white font-bold text-xl'>
+                  class="mb-4 md:mb-0 cursor-pointer hover:bg-white hover:text-hansupBrown border border-hansupBrown transition delay-50 duration-150 w-full md:w-48 lg:w-60 h-full flex justify-center items-center bg-hansupBrown text-white font-bold text-xl"
+                >
                   뒤로
                 </button>
                 <button
                   onClick={nextStep}
-                  class='cursor-pointer w-full md:w-48 hover:bg-white hover:text-hansupBrown border border-hansupBrown transition delay-50 duration-150 lg:w-60 h-full flex justify-center items-center bg-hansupBrown text-white font-bold text-xl'>
+                  class="cursor-pointer w-full md:w-48 hover:bg-white hover:text-hansupBrown border border-hansupBrown transition delay-50 duration-150 lg:w-60 h-full flex justify-center items-center bg-hansupBrown text-white font-bold text-xl"
+                >
                   다음
                 </button>
               </div>
-            </div>
+            </label>
           </InfoBlock>
         </div>
       </div>
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby='modal-modal-title'
-        aria-describedby='modal-modal-description'>
-        <div class=''>
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <div class="">
           <PopupPostCodeBlock
             onClose={handleClose}
             clickAddress={clickAddress}

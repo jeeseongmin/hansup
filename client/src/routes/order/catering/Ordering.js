@@ -3,20 +3,28 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import dayjs from "dayjs";
 import { useHistory } from "react-router-dom";
+import { AiOutlineCheck } from "react-icons/ai";
+import StepBox from "../../../components/Box/StepBox";
+import OrderStep1 from "./OrderStep1";
+import OrderStep2 from "./OrderStep2";
+import OrderStep3 from "./OrderStep3";
+import OrderFinal from "./OrderFinal";
 
 const Ordering = () => {
   const history = useHistory();
 
-  useEffect(() => {
-    history.push("/order/catering/orderMain");
-    alert("페이지 리뉴얼 중입니다. 전화로 예약 부탁드립니다.");
-  }, []);
+  // useEffect(() => {
+  //   history.push("/order/catering/orderMain");
+  //   alert("페이지 리뉴얼 중입니다. 전화로 예약 부탁드립니다.");
+  // }, []);
   const [step, setStep] = useState(1);
   const [info, setInfo] = useState({
     name: "",
+    phone: "",
     phone1: "",
     phone2: "",
     phone3: "",
+    check: "",
     check1: "",
     check2: "",
     check3: "",
@@ -156,128 +164,132 @@ const Ordering = () => {
   return (
     <PageLayout>
       <></>
-      {/*<div*/}
-      {/*  id='main'*/}
-      {/*  class='z-30 w-full flex flex-col mb-16 lg:mb-24 px-8 xl:px-40 '>*/}
-      {/*  <div class='grid-cols-3 gap-8 mb-8 hidden lg:grid'>*/}
-      {/*    <StepBox*/}
-      {/*      step={step}*/}
-      {/*      current={1}*/}
-      {/*      text={"1. 예약정보 입력"}*/}
-      {/*      setStep={setStep}*/}
-      {/*    />*/}
-      {/*    <StepBox*/}
-      {/*      step={step}*/}
-      {/*      current={2}*/}
-      {/*      text={"2. 메뉴 선택"}*/}
-      {/*      setStep={setStep}*/}
-      {/*    />*/}
-      {/*    <StepBox step={step} current={3} text={"3. 결제"} setStep={setStep} />*/}
-      {/*  </div>*/}
-      {/*  <div class='grid grid-cols-1 gap-8 mb-8 lg:hidden'>*/}
-      {/*    {step === 1 && (*/}
-      {/*      <StepBox*/}
-      {/*        step={step}*/}
-      {/*        current={1}*/}
-      {/*        text={"1. 예약정보 입력"}*/}
-      {/*        setStep={setStep}*/}
-      {/*      />*/}
-      {/*    )}*/}
-      {/*    {step === 2 && (*/}
-      {/*      <StepBox*/}
-      {/*        step={step}*/}
-      {/*        current={2}*/}
-      {/*        text={"2. 메뉴 선택"}*/}
-      {/*        setStep={setStep}*/}
-      {/*      />*/}
-      {/*    )}*/}
-      {/*    {step === 3 && (*/}
-      {/*      <StepBox*/}
-      {/*        step={step}*/}
-      {/*        current={3}*/}
-      {/*        text={"3. 결제"}*/}
-      {/*        setStep={setStep}*/}
-      {/*      />*/}
-      {/*    )}*/}
-      {/*  </div>*/}
-      {/*  <div class='w-full relative border-b border-hansupBrown mb-16'>*/}
-      {/*    <div class='absolute w-full left-0 -bottom-2 grid grid-cols-3 gap-8'>*/}
-      {/*      <div class='flex justify-center items-center'>*/}
-      {/*        <div*/}
-      {/*          class={*/}
-      {/*            "rounded-full transition delay-50 duration-100 h-4 w-4 flex justify-center items-center " +*/}
-      {/*            (step === 0*/}
-      {/*              ? "bg-none"*/}
-      {/*              : step === 1*/}
-      {/*              ? "bg-hansupBrown"*/}
-      {/*              : "bg-white border border-hansupBrown")*/}
-      {/*          }>*/}
-      {/*          {step !== 0 && step !== 1 && (*/}
-      {/*            <AiOutlineCheck class='w-3/4 h-3/4' />*/}
-      {/*          )}*/}
-      {/*        </div>*/}
-      {/*      </div>*/}
-      {/*      <div class='flex justify-center items-center'>*/}
-      {/*        <div*/}
-      {/*          class={*/}
-      {/*            "rounded-full transition delay-50 duration-100 h-4 w-4 flex justify-center items-center " +*/}
-      {/*            (step === 1*/}
-      {/*              ? "bg-none"*/}
-      {/*              : step === 2*/}
-      {/*              ? "bg-hansupBrown"*/}
-      {/*              : "bg-white border border-hansupBrown")*/}
-      {/*          }>*/}
-      {/*          {step !== 1 && step !== 2 && (*/}
-      {/*            <AiOutlineCheck class='w-3/4 h-3/4' />*/}
-      {/*          )}*/}
-      {/*        </div>*/}
-      {/*      </div>*/}
-      {/*      <div class='flex justify-center items-center'>*/}
-      {/*        <div*/}
-      {/*          class={*/}
-      {/*            "rounded-full transition delay-50 duration-100 h-4 w-4 flex justify-center items-center " +*/}
-      {/*            (step === 1 || step === 2*/}
-      {/*              ? "bg-none"*/}
-      {/*              : step === 3*/}
-      {/*              ? "bg-hansupBrown"*/}
-      {/*              : "bg-white border border-hansupBrown")*/}
-      {/*          }>*/}
-      {/*          {step !== 1 && step !== 2 && step !== 3 && (*/}
-      {/*            <AiOutlineCheck class='w-3/4 h-3/4' />*/}
-      {/*          )}*/}
-      {/*        </div>*/}
-      {/*      </div>*/}
-      {/*    </div>*/}
-      {/*  </div>*/}
-      {/*  {step === 1 && (*/}
-      {/*    <OrderStep1*/}
-      {/*      info={info}*/}
-      {/*      setInfo={setInfo}*/}
-      {/*      setStep={setStep}*/}
-      {/*      changeInfo={changeInfo}*/}
-      {/*    />*/}
-      {/*  )}*/}
-      {/*  {step === 2 && (*/}
-      {/*    <OrderStep2*/}
-      {/*      info={info}*/}
-      {/*      setInfo={setInfo}*/}
-      {/*      setStep={setStep}*/}
-      {/*      menuList={menuList}*/}
-      {/*      listLoading={listLoading}*/}
-      {/*    />*/}
-      {/*  )}*/}
-      {/*  {step === 3 && (*/}
-      {/*    <OrderStep3*/}
-      {/*      info={info}*/}
-      {/*      setInfo={setInfo}*/}
-      {/*      setStep={setStep}*/}
-      {/*      changeInfo={changeInfo}*/}
-      {/*      allMenuList={allMenuList}*/}
-      {/*      menuList={menuList}*/}
-      {/*    />*/}
-      {/*  )}*/}
-      {/*  {step === 4 && <OrderFinal info={info} allMenuList={allMenuList} />}*/}
-      {/*</div>*/}
+      <div
+        id="main"
+        class="z-30 w-full flex flex-col mb-16 lg:mb-24 px-8 xl:px-40 "
+      >
+        <div class="grid-cols-3 gap-8 mb-8 hidden lg:grid">
+          <StepBox
+            step={step}
+            current={1}
+            text={"1. 예약정보 입력"}
+            setStep={setStep}
+          />
+          <StepBox
+            step={step}
+            current={2}
+            text={"2. 메뉴 선택"}
+            setStep={setStep}
+          />
+          <StepBox step={step} current={3} text={"3. 결제"} setStep={setStep} />
+        </div>
+        <div class="grid grid-cols-1 gap-8 mb-8 lg:hidden">
+          {step === 1 && (
+            <StepBox
+              step={step}
+              current={1}
+              text={"1. 예약정보 입력"}
+              setStep={setStep}
+            />
+          )}
+          {step === 2 && (
+            <StepBox
+              step={step}
+              current={2}
+              text={"2. 메뉴 선택"}
+              setStep={setStep}
+            />
+          )}
+          {step === 3 && (
+            <StepBox
+              step={step}
+              current={3}
+              text={"3. 결제"}
+              setStep={setStep}
+            />
+          )}
+        </div>
+        <div class="w-full relative border-b border-hansupBrown mb-16">
+          <div class="absolute w-full left-0 -bottom-2 grid grid-cols-3 gap-8">
+            <div class="flex justify-center items-center">
+              <div
+                class={
+                  "rounded-full transition delay-50 duration-100 h-4 w-4 flex justify-center items-center " +
+                  (step === 0
+                    ? "bg-none"
+                    : step === 1
+                    ? "bg-hansupBrown"
+                    : "bg-white border border-hansupBrown")
+                }
+              >
+                {step !== 0 && step !== 1 && (
+                  <AiOutlineCheck class="w-3/4 h-3/4" />
+                )}
+              </div>
+            </div>
+            <div class="flex justify-center items-center">
+              <div
+                class={
+                  "rounded-full transition delay-50 duration-100 h-4 w-4 flex justify-center items-center " +
+                  (step === 1
+                    ? "bg-none"
+                    : step === 2
+                    ? "bg-hansupBrown"
+                    : "bg-white border border-hansupBrown")
+                }
+              >
+                {step !== 1 && step !== 2 && (
+                  <AiOutlineCheck class="w-3/4 h-3/4" />
+                )}
+              </div>
+            </div>
+            <div class="flex justify-center items-center">
+              <div
+                class={
+                  "rounded-full transition delay-50 duration-100 h-4 w-4 flex justify-center items-center " +
+                  (step === 1 || step === 2
+                    ? "bg-none"
+                    : step === 3
+                    ? "bg-hansupBrown"
+                    : "bg-white border border-hansupBrown")
+                }
+              >
+                {step !== 1 && step !== 2 && step !== 3 && (
+                  <AiOutlineCheck class="w-3/4 h-3/4" />
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+        {step === 1 && (
+          <OrderStep1
+            info={info}
+            setInfo={setInfo}
+            setStep={setStep}
+            changeInfo={changeInfo}
+          />
+        )}
+        {step === 2 && (
+          <OrderStep2
+            info={info}
+            setInfo={setInfo}
+            setStep={setStep}
+            menuList={menuList}
+            listLoading={listLoading}
+          />
+        )}
+        {step === 3 && (
+          <OrderStep3
+            info={info}
+            setInfo={setInfo}
+            setStep={setStep}
+            changeInfo={changeInfo}
+            allMenuList={allMenuList}
+            menuList={menuList}
+          />
+        )}
+        {step === 4 && <OrderFinal info={info} allMenuList={allMenuList} />}
+      </div>
     </PageLayout>
   );
 };
