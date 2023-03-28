@@ -5,7 +5,7 @@ import ProfileImg from "image/profileDefault.png";
 import React, { useEffect, useRef, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import {
   setCurrentEmail,
   setCurrentPassword,
@@ -297,7 +297,7 @@ const Navbar = ({ currentMenu }) => {
         setMenu(1);
       } else if (e.target.innerText === "한숲사업") {
         setMenu(2);
-      } else if (e.target.innerText === "케이터링 예약") {
+      } else if (e.target.innerText === "케이터링") {
         setMenu(3);
       } else if (e.target.innerText === "커뮤니티") {
         setMenu(4);
@@ -319,7 +319,7 @@ const Navbar = ({ currentMenu }) => {
       let textArr = [
         "회사소개",
         "한숲사업",
-        "케이터링 예약",
+        "케이터링",
         "커뮤니티",
         "협력기업",
       ];
@@ -382,17 +382,19 @@ const Navbar = ({ currentMenu }) => {
         <ResponsiveContainer>
           <Logo onFocus={() => setFocusedMenu(0)}>
             <button onClick={goHome}>
-              <img src={logoImg} class='object-cover h-8' alt='한숲푸드' />
+              <img src={logoImg} class="object-cover h-8" alt="한숲푸드" />
             </button>
           </Logo>
           <button
             onClick={() => dispatch(setSidebar("on"))}
-            class='text-white hidden md:block cursor-pointer z-50'>
+            class="text-white hidden md:block cursor-pointer z-50"
+          >
             <GiHamburgerMenu size={28} />
           </button>
           <button
             onClick={() => dispatch(setSidebar("on"))}
-            class='text-white block md:hidden cursor-pointer z-50'>
+            class="text-white block md:hidden cursor-pointer z-50"
+          >
             <GiHamburgerMenu size={24} />
           </button>
         </ResponsiveContainer>
@@ -402,23 +404,24 @@ const Navbar = ({ currentMenu }) => {
             <button onClick={goHome}>
               <img
                 src={logoImg}
-                class='object-cover h-8 cursor-pointer'
-                alt='한숲푸드'
+                class="object-cover h-8 cursor-pointer"
+                alt="한숲푸드"
               />
             </button>
           </Logo>
           {/* 
           1. 인사말, 한숲 이야기, 한숲의 역사, 오시는 길
           2. 수화식당, 케이터링, 한숲 도시락 
-          3. 케이터링 메뉴, 케이터링 안내, 케이터링 예약
+          3. 케이터링 메뉴, 케이터링 안내, 케이터링
           4. 공지사항, 리뷰, 고객의 소리
           5. 한숲맛이야기
           */}
           <MenuContainer>
             <div
-              class='w-36 h-auto relative'
+              class="w-36 h-auto relative"
               onMouseOver={() => mouseOverEvent(1)}
-              onMouseOut={mouseOutEvent}>
+              onMouseOut={mouseOutEvent}
+            >
               <Menu
                 setFocusedMenu={setFocusedMenu}
                 toggleMenu={toggleMenu}
@@ -469,9 +472,10 @@ const Navbar = ({ currentMenu }) => {
               </ul>
             </div>
             <div
-              class='w-36 h-auto relative'
+              class="w-36 h-auto relative"
               onMouseOver={() => mouseOverEvent(2)}
-              onMouseOut={mouseOutEvent}>
+              onMouseOut={mouseOutEvent}
+            >
               <Menu
                 setFocusedMenu={setFocusedMenu}
                 toggleMenu={toggleMenu}
@@ -511,17 +515,19 @@ const Navbar = ({ currentMenu }) => {
               </ul>
             </div>{" "}
             <div
-              class='w-36 h-auto relative'
+              class="w-36 h-auto relative"
               onMouseOver={() => mouseOverEvent(3)}
-              onMouseOut={mouseOutEvent}>
+              onMouseOut={mouseOutEvent}
+            >
               <Menu
                 setFocusedMenu={setFocusedMenu}
                 toggleMenu={toggleMenu}
                 menu={3}
-                title={"케이터링 예약"}
+                title={"케이터링"}
                 url={"/order/catering/menu"}
                 current={menu}
                 currentMenu={currentMenu}
+                링
               />
               <ul class={focusedMenu === 3 ? "block" : "hidden"}>
                 <li>
@@ -540,21 +546,22 @@ const Navbar = ({ currentMenu }) => {
                     empty={false}
                   />
                 </li>
-                <li>
-                  <Submenu
-                    title={"케이터링 예약"}
-                    url={"/order/catering/orderMain"}
-                    setFocusedMenu={setFocusedMenu}
-                    empty={false}
-                    isLast={true}
-                  />
-                </li>
+                {/*<li>*/}
+                {/*  <Submenu*/}
+                {/*    title={"케이터링"}*/}
+                {/*    url={"/order/catering/orderMain"}*/}
+                {/*    setFocusedMenu={setFocusedMenu}*/}
+                {/*    empty={false}*/}
+                {/*    isLast={true}*/}
+                {/*  />*/}
+                {/*</li>*/}
               </ul>
             </div>{" "}
             <div
-              class='w-36 h-auto relative'
+              class="w-36 h-auto relative"
               onMouseOver={() => mouseOverEvent(4)}
-              onMouseOut={mouseOutEvent}>
+              onMouseOut={mouseOutEvent}
+            >
               <Menu
                 setFocusedMenu={setFocusedMenu}
                 toggleMenu={toggleMenu}
@@ -593,9 +600,10 @@ const Navbar = ({ currentMenu }) => {
               </ul>
             </div>{" "}
             <div
-              class='w-36 h-auto relative'
+              class="w-36 h-auto relative"
               onMouseOver={() => mouseOverEvent(5)}
-              onMouseOut={mouseOutEvent}>
+              onMouseOut={mouseOutEvent}
+            >
               <Menu
                 setFocusedMenu={setFocusedMenu}
                 toggleMenu={toggleMenu}
@@ -632,16 +640,18 @@ const Navbar = ({ currentMenu }) => {
             {isLogin ? (
               <div
                 ref={profileRef}
-                class='h-full w-auto flex justify-end items-center relative'>
+                class="h-full w-auto flex justify-end items-center relative"
+              >
                 <img
                   src={ProfileImg}
                   onClick={onToggleProfile}
-                  class='z-30 p-1 w-10 h-10 rounded-full cursor-pointer object-cover'
-                  alt='관리자 이미지'
+                  class="z-30 p-1 w-10 h-10 rounded-full cursor-pointer object-cover"
+                  alt="관리자 이미지"
                 />
                 <div
                   onClick={onToggleProfile}
-                  class='cursor-pointer z-30 w-10 h-8 absolute'>
+                  class="cursor-pointer z-30 w-10 h-8 absolute"
+                >
                   <div
                     class={
                       "w-4 h-4 rounded-full bg-red-500 absolute -right-1 -top-1 justify-center items-center text-white text-xs font-bold " +
@@ -652,7 +662,8 @@ const Navbar = ({ currentMenu }) => {
                         : unreadCount + undecidedCount === 0
                         ? "hidden"
                         : "flex")
-                    }>
+                    }
+                  >
                     {orderLoading && voiceLoading
                       ? unreadCount + undecidedCount
                       : unreadCount + undecidedCount !== 0
@@ -661,15 +672,16 @@ const Navbar = ({ currentMenu }) => {
                   </div>
                 </div>
                 {profile === "on" ? (
-                  <div class='z-30 px-4 py-2 flex flex-col justify-center items-center -right-4 top-14 w-72 h-48 bg-white border border-gray-300 rounded-lg absolute'>
-                    <div class='w-full h-full flex flex-col justify-around'>
-                      <div class='w-full flex flex-col'>
-                        <p class='font-bold w-auto'>{loginInfo.position}</p>
-                        <p class='text-gray-500'>ID : {loginInfo.email}</p>
+                  <div class="z-30 px-4 py-2 flex flex-col justify-center items-center -right-4 top-14 w-72 h-48 bg-white border border-gray-300 rounded-lg absolute">
+                    <div class="w-full h-full flex flex-col justify-around">
+                      <div class="w-full flex flex-col">
+                        <p class="font-bold w-auto">{loginInfo.position}</p>
+                        <p class="text-gray-500">ID : {loginInfo.email}</p>
                       </div>
                       <div
                         onClick={() => goPage("/manager/order/list/undecided")}
-                        class='relative cursor-pointer w-full py-1 border border-hansupBrown text-hansupBrown flex justify-center transition delay-50 duration-300 hover:bg-hansupBrown hover:text-white'>
+                        class="relative cursor-pointer w-full py-1 border border-hansupBrown text-hansupBrown flex justify-center transition delay-50 duration-300 hover:bg-hansupBrown hover:text-white"
+                      >
                         신규 예약
                         <div
                           class={
@@ -679,13 +691,15 @@ const Navbar = ({ currentMenu }) => {
                               : undecidedCount === 0
                               ? " hidden "
                               : "flex")
-                          }>
+                          }
+                        >
                           {orderLoading ? undecidedCount : 0}
                         </div>
                       </div>
                       <button
                         onClick={() => goPage("/manager/voice/unread")}
-                        class='relative cursor-pointer w-full py-1 border border-hansupBrown text-hansupBrown flex justify-center transition delay-50 duration-300 hover:bg-hansupBrown hover:text-white'>
+                        class="relative cursor-pointer w-full py-1 border border-hansupBrown text-hansupBrown flex justify-center transition delay-50 duration-300 hover:bg-hansupBrown hover:text-white"
+                      >
                         신규 고객의 소리
                         <div
                           class={
@@ -695,7 +709,8 @@ const Navbar = ({ currentMenu }) => {
                               : unreadCount === 0
                               ? "hidden"
                               : "flex")
-                          }>
+                          }
+                        >
                           {voiceLoading ? unreadCount : 0}
                         </div>
                       </button>
@@ -707,7 +722,8 @@ const Navbar = ({ currentMenu }) => {
 											</div> */}
                       <button
                         onClick={logout}
-                        class='cursor-pointer w-full py-1 border border-hansupBrown text-hansupBrown flex justify-center transition delay-50 duration-300 hover:bg-hansupBrown hover:text-white'>
+                        class="cursor-pointer w-full py-1 border border-hansupBrown text-hansupBrown flex justify-center transition delay-50 duration-300 hover:bg-hansupBrown hover:text-white"
+                      >
                         로그아웃
                       </button>
                     </div>
@@ -717,12 +733,12 @@ const Navbar = ({ currentMenu }) => {
             ) : null}
           </MenuContainer>
         </NavContainer>
-        <SubContainer num={menu} id='check'>
+        <SubContainer num={menu} id="check">
           <Logo>
             <img
-              src='/image/logo.png'
-              class='object-cover h-8 invisible'
-              alt='한숲푸드'
+              src="/image/logo.png"
+              class="object-cover h-8 invisible"
+              alt="한숲푸드"
             />
           </Logo>
 
@@ -747,11 +763,11 @@ const Navbar = ({ currentMenu }) => {
               <Submenu title={""} url={"#"} empty={true} />
               <Submenu title={""} url={"#"} empty={true} />
               {isLogin ? (
-                <div class='h-full w-auto flex justify-end items-center relative invisible'>
+                <div class="h-full w-auto flex justify-end items-center relative invisible">
                   <img
                     src={ProfileImg}
-                    class='z-30 p-1 w-10 h-10 rounded-full cursor-pointer object-cover'
-                    alt='관리자 이미지'
+                    class="z-30 p-1 w-10 h-10 rounded-full cursor-pointer object-cover"
+                    alt="관리자 이미지"
                   />
                 </div>
               ) : null}
@@ -778,11 +794,11 @@ const Navbar = ({ currentMenu }) => {
               <Submenu title={""} url={"#"} empty={true} />
               <Submenu title={""} url={"#"} empty={true} />
               {isLogin ? (
-                <div class='h-full w-auto flex justify-end items-center relative invisible'>
+                <div class="h-full w-auto flex justify-end items-center relative invisible">
                   <img
                     src={ProfileImg}
-                    class='z-30 p-1 w-10 h-10 rounded-full cursor-pointer object-cover'
-                    alt=''
+                    class="z-30 p-1 w-10 h-10 rounded-full cursor-pointer object-cover"
+                    alt=""
                   />
                 </div>
               ) : null}
@@ -803,17 +819,17 @@ const Navbar = ({ currentMenu }) => {
                 empty={false}
               />
               <Submenu
-                title={"케이터링 예약"}
+                title={"케이터링"}
                 url={"/order/catering/orderMain"}
                 empty={false}
               />
               <Submenu title={""} url={"#"} empty={true} />
               {isLogin ? (
-                <div class='h-full w-auto flex justify-end items-center relative invisible'>
+                <div class="h-full w-auto flex justify-end items-center relative invisible">
                   <img
                     src={ProfileImg}
-                    class='z-30 p-1 w-10 h-10 rounded-full cursor-pointer object-cover'
-                    alt='관리자 이미지'
+                    class="z-30 p-1 w-10 h-10 rounded-full cursor-pointer object-cover"
+                    alt="관리자 이미지"
                   />
                 </div>
               ) : null}
@@ -840,11 +856,11 @@ const Navbar = ({ currentMenu }) => {
                 empty={false}
               />
               {isLogin ? (
-                <div class='h-full w-auto flex justify-end items-center relative invisible'>
+                <div class="h-full w-auto flex justify-end items-center relative invisible">
                   <img
                     src={ProfileImg}
-                    class='z-30 p-1 w-10 h-10 rounded-full cursor-pointer object-cover'
-                    alt=''
+                    class="z-30 p-1 w-10 h-10 rounded-full cursor-pointer object-cover"
+                    alt=""
                   />
                 </div>
               ) : null}
@@ -864,11 +880,11 @@ const Navbar = ({ currentMenu }) => {
                 empty={false}
               />
               {isLogin ? (
-                <div class='h-full w-auto flex justify-end items-center relative invisible'>
+                <div class="h-full w-auto flex justify-end items-center relative invisible">
                   <img
                     src={ProfileImg}
-                    class='z-30 p-1 w-10 h-10 rounded-full cursor-pointer object-cover'
-                    alt=''
+                    class="z-30 p-1 w-10 h-10 rounded-full cursor-pointer object-cover"
+                    alt=""
                   />
                 </div>
               ) : null}
